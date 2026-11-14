@@ -652,6 +652,36 @@
   #help details summary { padding: 20px 0 !important; font-size: 17px; }
   #help details p { padding-bottom: 20px; }
   @media (max-width: 900px) { .coil-cap { right: 20px; } .coil-cap p { font-size: 26px; } }
+
+  /* корзина и оформление */
+  .drawer { background: linear-gradient(180deg, #15100c, #0b0806) !important; box-shadow: inset 1px 0 0 rgba(255,236,214,.08), -30px 0 80px rgba(0,0,0,.6) !important; }
+  .qty { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .qty button { width: 26px; height: 26px; border-radius: var(--r-s); box-shadow: inset 0 0 0 1px rgba(251,243,234,.2); color: var(--cream); }
+  .qty button:hover { box-shadow: inset 0 0 0 1px var(--cream); }
+  .drawer .btn:disabled { opacity: .4; pointer-events: none; }
+  .sheet { background: linear-gradient(180deg, #17120e, #0d0907) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.07), inset 0 0 0 1px rgba(255,236,214,.08), 0 40px 100px rgba(0,0,0,.7) !important; border-radius: 14px !important; }
+  .co { max-width: 560px; max-height: calc(100svh - 32px); overflow-y: auto; }
+  .co h3 { font-family: var(--disp); font-size: 34px; color: var(--cream); }
+  .co-sum { margin-top: 18px; border-radius: 10px; background: rgba(255,236,214,.04); padding: 6px 16px; }
+  .co-sum div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; font-size: 15px; }
+  .co-sum div + div { border-top: 1px solid rgba(255,236,214,.08); }
+  .co-sum small { display: block; color: rgba(251,243,234,.5); font-size: 12px; margin-top: 2px; }
+  .co-h { margin-top: 24px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: rgb(var(--accent)); }
+  .co label { display: block; margin-top: 12px; font-size: 13px; color: rgba(251,243,234,.6); }
+  .co label input:not([type=checkbox]) { margin-top: 6px !important; height: 50px !important; background: rgba(255,236,214,.04) !important; box-shadow: inset 0 0 0 1px rgba(255,236,214,.1) !important; font-size: 16px !important; border-radius: var(--r-s) !important; }
+  .co label input:focus { box-shadow: inset 0 0 0 1.5px rgba(var(--glow), .9) !important; }
+  .co-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .co-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .co-seg button { height: 46px; border-radius: var(--r-s); box-shadow: inset 0 0 0 1px rgba(255,236,214,.12); color: rgba(251,243,234,.7); font-size: 15px; }
+  .co-seg button.on { box-shadow: inset 0 0 0 1.5px var(--cream); color: var(--cream); background: rgba(255,236,214,.05); }
+  .co-ok { display: flex !important; gap: 10px; align-items: flex-start; margin-top: 20px !important; }
+  .co-ok input { width: 18px; height: 18px; margin: 1px 0 0 !important; accent-color: rgb(var(--accent)); flex: none; }
+  .co-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 22px; }
+  .co-foot small { display: block; font-size: 12px; color: rgba(251,243,234,.5); }
+  .co-foot .price { font-family: var(--disp); font-size: 32px; }
+  .co-foot .btn { width: auto !important; margin: 0 !important; flex: 1; max-width: 260px; }
+  .co-err { min-height: 20px; margin-top: 12px !important; color: rgb(var(--accent)) !important; }
+  @media (max-width: 600px) { .co-2 { grid-template-columns: 1fr; } .co { padding: 24px 20px !important; } }
 </style>
 </head>
 <body class="in-hero">
@@ -761,11 +791,11 @@
   <div class="label">Подарки</div>
   <h2 style="margin-top:16px">Подарок, который включают каждый вечер</h2>
   <div class="sets">
-    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/b7/81/16/b78116b4b57ea27c1773401aad8b8f5a.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/b78116b4b57ea27c1773401aad8b8f5a.jpg" alt=""></div></div></div>
       <div class="body"><h3>Одна рамка</h3><p>Proswet A3 с постером вашего фильма.</p><div class="row"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="3449">Выбрать фильм</button></div></div></div>
-    <div class="set"><div class="pic"><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/27/23/2e/27232e100735f944dd2289d885ec79ff.jpg" alt=""></div></div><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/7b/d4/bb/7bd4bb6c76199797a8b3641c161e9cb9.jpg" alt=""></div></div><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/49/5b/6e/495b6e3ef207f91398df69899dcf8916.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/27232e100735f944dd2289d885ec79ff.jpg" alt=""></div></div><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/7bd4bb6c76199797a8b3641c161e9cb9.jpg" alt=""></div></div><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/495b6e3ef207f91398df69899dcf8916.jpg" alt=""></div></div></div>
       <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">9&nbsp;490&nbsp;₽<s>10&nbsp;347&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="9490">Выбрать 3 фильма</button></div></div></div>
-    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/a4/4b/6e/a44b6e258c78539ea7212c42c0315da0.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/a44b6e258c78539ea7212c42c0315da0.jpg" alt=""></div></div></div>
       <div class="body"><h3>Подарочный набор</h3><p>Рамка с постером, жёсткая коробка с лентой и открытка с вашим текстом.</p><div class="row"><span class="price">3&nbsp;990&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="3990">Выбрать фильм</button></div></div></div>
   </div>
 </div></section>
@@ -821,13 +851,30 @@
 </div></div>
 <aside class="drawer" id="drawer"><h3>Корзина <button class="x" id="closeCart" aria-label="Закрыть" style="font-size:26px;color:var(--muted)">×</button></h3><div class="cart-items" id="cartItems"></div><div class="total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div><button class="btn" id="checkout">Оформить заказ</button></aside>
 <div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#gifts">Подарки</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
-<div class="mbuy" id="mbuy"><span class="price">3&nbsp;449&nbsp;₽</span><a class="btn" href="#top" id="mbuyBtn">Купить</a></div>
+<div class="mbuy" id="mbuy"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn" id="mbuyBtn">Купить</button></div>
+<div class="overlay" id="coOv"><form class="sheet co" id="coForm" novalidate>
+  <button type="button" class="x" data-close="coOv" aria-label="Закрыть">×</button>
+  <h3>Оформление заказа</h3>
+  <div class="co-sum" id="coSum"></div>
+  <div class="co-h">Получатель</div>
+  <label>Имя и фамилия<input name="name" autocomplete="name" required minlength="2"></label>
+  <div class="co-2"><label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></label>
+  <label>Почта для чека<input name="email" type="email" autocomplete="email" required></label></div>
+  <div class="co-h">Доставка</div>
+  <div class="co-seg" id="coShip"><button type="button" class="on" data-v="ozon">Пункт Ozon</button><button type="button" data-v="yandex">Пункт Яндекса</button></div>
+  <label>Город<input name="city" autocomplete="address-level2" required></label>
+  <label>Адрес пункта выдачи<input name="pvz" required placeholder="Улица, дом — выберем ближайший"></label>
+  <label>Комментарий<input name="note" placeholder="Например, текст для открытки"></label>
+  <label class="co-ok"><input type="checkbox" name="agree" required> <span>Согласен с офертой и обработкой персональных данных</span></label>
+  <div class="co-foot"><div><small>Итого</small><span class="price" id="coTotal"></span></div><button class="btn" type="submit">Перейти к оплате</button></div>
+  <p class="co-err" id="coErr"></p>
+</form></div>
 <div class="toast" id="toast"></div>
 
 <script>
-const P = h => h.includes(".") ? h : "https://i.pinimg.com/736x/" + h + ".jpg";
+const P = h => h.includes(".") ? h : "img/p/" + h.split("/").pop() + ".jpg";
 const films = [
-  { t: "Интерстеллар", q: "Мы найдём способ. Как и всегда.", o: "Interstellar", y: 2014, d: "Кристофер Нолан", c: ["sci"], img: "b7/81/16/b78116b4b57ea27c1773401aad8b8f5a", f: ["Научным консультантом был физик Кип Торн — позже он получил Нобелевскую премию.", "Чёрную дыру считали по настоящим уравнениям, по этой работе вышли научные статьи.", "Кукурузное поле вырастили специально для съёмок, урожай потом продали."] },
+  { t: "Интерстеллар", q: "Мы найдём способ. Как и всегда.", o: "Interstellar", y: 2014, d: "Кристофер Нолан", c: ["sci"], img: "img/interstellar.jpg", f: ["Научным консультантом был физик Кип Торн — позже он получил Нобелевскую премию.", "Чёрную дыру считали по настоящим уравнениям, по этой работе вышли научные статьи.", "Кукурузное поле вырастили специально для съёмок, урожай потом продали."] },
   { t: "Начало", q: "Не бойся мечтать масштабнее, дорогуша.", o: "Inception", y: 2010, d: "Кристофер Нолан", c: ["sci"], img: "eb/4e/01/eb4e01399cd156ca7d8fa87fa09737d2", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Вращающийся коридор построили по-настоящему.", "Музыка Циммера собрана из замедленной песни Эдит Пиаф."] },
   { t: "Ла-Ла Ленд", q: "За тех, кто мечтает.", o: "La La Land", y: 2016, d: "Дэмьен Шазелл", c: ["love"], img: "7b/d4/bb/7bd4bb6c76199797a8b3641c161e9cb9", f: ["14 номинаций на «Оскар» — повторил рекорд «Титаника».", "Первую сцену снимали на настоящей развязке шоссе в Лос-Анджелесе.", "Райан Гослинг несколько месяцев учился играть на пианино."] },
   { t: "Леон", q: "— Жизнь всегда такая трудная? — Всегда.", o: "Léon", y: 1994, d: "Люк Бессон", c: ["cult"], img: "1f/e8/c0/1fe8c07c8f84cf5defc046fc2eac8b63", f: ["Первая роль в кино Натали Портман — ей было 12 лет.", "Режиссёрская версия длиннее прокатной больше чем на 20 минут.", "Цветок Леона стал самым известным растением в кино."] },
@@ -839,10 +886,10 @@ const films = [
   { t: "Шоу Трумана", q: "Доброе утро! И если не увидимся — добрый день, добрый вечер и доброй ночи!", o: "The Truman Show", y: 1998, d: "Питер Уир", c: ["cult"], img: "cb/1b/7e/cb1b7ecf11695328450c6df88f4c218f", f: ["Город снимали в настоящем курортном городке Сисайд во Флориде.", "Джим Керри получил «Золотой глобус».", "Психиатры описали «синдром Трумана» — по названию фильма."] },
   { t: "Малыш на драйве", q: "Погоня в ритме любимой песни.", tag: true, o: "Baby Driver", y: 2017, d: "Эдгар Райт", c: ["action"], img: "e1/c1/2b/e1c12b5a1338076bec9eb23e3140e6e7", f: ["Сцены смонтированы в ритм песен из плеера героя.", "Погони снимали с настоящими машинами и каскадёрами.", "Три номинации на «Оскар», в том числе за монтаж."] },
   { t: "Довод", q: "Не пытайся понять. Почувствуй.", o: "Tenet", y: 2020, d: "Кристофер Нолан", c: ["sci", "action"], img: "dc/0e/43/dc0e4332f5d48a8472a7b8c8022aeee9", f: ["Для сцены с самолётом разбили настоящий Boeing 747.", "«Оскар» за визуальные эффекты.", "Название — палиндром: читается одинаково в обе стороны."] },
-  { t: "Матрица", q: "Красная или синяя — выбор за вами.", tag: true, o: "The Matrix", y: 1999, d: "Лана и Лилли Вачовски", c: ["sci", "action"], img: "88/f5/c4/88f5c4feca05f5900a918e8f043272a5", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Эффект замедленного времени снимали рядом фотокамер, выставленных по дуге.", "Зелёный «код» на экранах, по словам его автора, — отсканированные японские рецепты."] },
+  { t: "Матрица", q: "Красная или синяя — выбор за вами.", tag: true, o: "The Matrix", y: 1999, d: "Лана и Лилли Вачовски", c: ["sci", "action"], img: "img/matrix.jpg", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Эффект замедленного времени снимали рядом фотокамер, выставленных по дуге.", "Зелёный «код» на экранах, по словам его автора, — отсканированные японские рецепты."] },
   { t: "Дюна", q: "Песок помнит всё.", tag: true, o: "Dune", y: 2021, d: "Дени Вильнёв", c: ["sci"], img: "49/2e/1b/492e1b9a70ef337532ca01147bf10b1f", f: ["Шесть «Оскаров» — больше, чем у любого фильма того года.", "Пустыню снимали в Иордании и Абу-Даби.", "Снят по роману Фрэнка Герберта 1965 года."] },
   { t: "Отель «Гранд Будапешт»", q: "Розовый фасад, снег и идеальная симметрия.", tag: true, o: "The Grand Budapest Hotel", y: 2014, d: "Уэс Андерсон", c: ["cult", "winter"], img: "05/c9/37/05c9370fbc05eb206c8c44d8f8d8c2a2", f: ["Четыре «Оскара»: за художников, костюмы, грим и музыку.", "Формат кадра меняется вместе с эпохой действия.", "Интерьеры отеля сняли в старом универмаге в немецком Гёрлице."] },
-  { t: "Бойцовский клуб", q: "Розовое мыло и первое правило.", tag: true, o: "Fight Club", y: 1999, d: "Дэвид Финчер", c: ["cult"], img: "c8/d3/d8/c8d3d84ff6a2e1772de175b736985ab4", f: ["Снят по роману Чака Паланика.", "В прокате провалился — культовым стал позже, на дисках.", "Фильм полон спрятанных кадров, которые мелькают на долю секунды."] },
+  { t: "Бойцовский клуб", q: "Розовое мыло и первое правило.", tag: true, o: "Fight Club", y: 1999, d: "Дэвид Финчер", c: ["cult"], img: "img/fightclub.jpg", f: ["Снят по роману Чака Паланика.", "В прокате провалился — культовым стал позже, на дисках.", "Фильм полон спрятанных кадров, которые мелькают на долю секунды."] },
   { t: "Назад в будущее", q: "Восемьдесят восемь миль в час.", tag: true, o: "Back to the Future", y: 1985, d: "Роберт Земекис", c: ["sci", "family"], img: "a9/df/99/a9df99c69554d9582e53dc6d4db2f76d", f: ["В первых версиях сценария машиной времени был холодильник.", "Для прыжка во времени нужно разогнаться до 88 миль в час.", "Стал самым кассовым фильмом 1985 года."] },
   { t: "Престиж", q: "Каждый фокус — в трёх действиях.", tag: true, o: "The Prestige", y: 2006, d: "Кристофер Нолан", c: ["cult"], img: "56/4e/81/564e8189cd78bd35e16b27992964916e", f: ["Николу Теслу сыграл Дэвид Боуи.", "Снят по роману Кристофера Приста.", "Сценарий братья Нолан писали несколько лет."] },
   { t: "Однажды в… Голливуде", q: "Последнее лето старого Голливуда.", tag: true, o: "Once Upon a Time in Hollywood", y: 2019, d: "Квентин Тарантино", c: ["cult"], img: "e0/64/95/e064956dd2b60af0cd3da47db309acb6", f: ["Брэд Питт получил «Оскар» за роль второго плана.", "Девятый фильм Тарантино.", "Улицы Лос-Анджелеса вернули в 1969 год без компьютерной графики."] },
@@ -850,6 +897,10 @@ const films = [
   { t: "Амели", q: "Маленькие радости ложечкой.", tag: true, o: "Le Fabuleux Destin d'Amélie Poulain", y: 2001, d: "Жан-Пьер Жёне", c: ["love"], img: "cf/7c/6c/cf7c6c284c4554fbe252ea0d771d7636", f: ["Снимали на Монмартре в Париже.", "Красный и зелёный усилили при цветокоррекции — это почерк фильма.", "Пять номинаций на «Оскар»."] },
   { t: "Титаник", q: "Звёзды, лёд и одна ночь.", tag: true, o: "Titanic", y: 1997, d: "Джеймс Кэмерон", c: ["love"], img: "28/11/cf/2811cf1b33666433cdf2424496bfe11c", f: ["Одиннадцать «Оскаров» — рекорд, общий с «Бен-Гуром» и «Властелином колец».", "Корабль для съёмок построили почти в натуральную величину.", "Больше десяти лет был самым кассовым фильмом в истории."] },
   { t: "Драйв", q: "Ночной город, неон и тишина.", tag: true, o: "Drive", y: 2011, d: "Николас Виндинг Рефн", c: ["action"], img: "e5/c2/5a/e5c25a58249b355a4e67d037ddbe227c", f: ["Рефн получил приз за режиссуру в Каннах.", "Синтвейв-саундтрек стал культовым сам по себе.", "Снят по роману Джеймса Саллиса."] },
+  { t: "Волк с Уолл-стрит", q: "Продай мне эту ручку.", o: "The Wolf of Wall Street", y: 2013, d: "Мартин Скорсезе", c: ["cult", "action"], img: "img/wolf.jpg", f: ["Ди Каприо получил «Золотой глобус» за роль Джордана Белфорта.", "Настоящий Белфорт появляется в фильме в камео — в самом конце."] },
+  { t: "Клан Сопрано", q: "Бада Бинг!", tag: true, o: "The Sopranos", y: 1999, d: "Дэвид Чейз", c: ["cult"], img: "img/sopranos.jpg", f: ["Сериал собрал 21 премию «Эмми».", "Финальную сцену в закусочной фанаты разбирают до сих пор."] },
+  { t: "Джентльмены", q: "Когда лев голоден — он ест.", o: "The Gentlemen", y: 2019, d: "Гай Ричи", c: ["cult", "action"], img: "img/gentlemen.jpg", f: ["Мэттью Макконахи играет американца, построившего бизнес в Англии.", "В 2024 году по фильму вышел одноимённый сериал."] },
+  { t: "Гарри Поттер", q: "Торжественно клянусь, что замышляю только шалость.", o: "Harry Potter", y: 2004, d: "Альфонсо Куарон", c: ["sci", "winter"], img: "img/harrypotter.jpg", f: ["«Узник Азкабана» — единственный фильм серии, снятый Альфонсо Куароном.", "Сириуса Блэка сыграл Гэри Олдман."] },
   { t: "Убить Билла", q: "Месть — это блюдо, которое лучше подавать холодным.", o: "Kill Bill", y: 2003, d: "Квентин Тарантино", c: ["cult"], img: "img/killbill.jpg", f: ["Жёлтый костюм Невесты — оммаж Брюсу Ли из «Игры смерти».", "Задумывался как один фильм — его разделили на две части из‑за длины."] },
 ];
 const cats = [["all", "Все"], ["sci", "Фантастика"], ["cult", "Культовое кино"], ["love", "Для двоих"], ["action", "Драйв"], ["winter", "Зима"]];
@@ -874,8 +925,8 @@ function renderHero() {
 document.querySelectorAll(".mat .m").forEach(b => b.onclick = () => { document.querySelectorAll(".mat .m").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.color = b.dataset.color; renderHero(); });
 document.querySelectorAll("#lightSeg button").forEach(b => b.onclick = () => { document.querySelectorAll("#lightSeg button").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.light = b.dataset.light; renderHero(); });
 $("lightToggle").onclick = e => { cfg.on = e.currentTarget.classList.toggle("on"); renderHero(); };
-[films.length - 1, 0, 12, 2].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + P(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
-const more = document.createElement("a"); more.className = "mini more"; more.href = "#posters"; more.textContent = "+" + (films.length - 4); $("minis").appendChild(more);
+[films.length - 1, 0, 12, 15, films.length - 5].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + P(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
+const more = document.createElement("a"); more.className = "mini more"; more.href = "#posters"; more.textContent = "+" + (films.length - 5); $("minis").appendChild(more);
 
 // ---------- день / вечер ----------
 document.querySelectorAll("#mode button").forEach(b => b.onclick = () => { document.querySelectorAll("#mode button").forEach(x => x.classList.toggle("on", x === b)); $("compare").classList.toggle("is-night", b.dataset.m === "night"); });
@@ -919,13 +970,23 @@ $("putInFrame").onclick = () => { cfg.poster = current; renderHero(); toast("«"
 
 
 // ---------- корзина ----------
-const cart = [];
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem("proswet-cart") || "[]"); } catch (e) { cart = []; }
+const saveCart = () => { try { localStorage.setItem("proswet-cart", JSON.stringify(cart)); } catch (e) {} };
+const cartSum = () => cart.reduce((s, c) => s + c.price * (c.qty || 1), 0);
 function renderCart() {
-  $("count").textContent = cart.length; $("count").classList.toggle("on", cart.length > 0);
-  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th">' + (c.img ? '<img decoding="async" alt="" src="' + c.img + '">' : "") + '</div><div><b>' + c.name + '</b><small>' + c.sub + '</small></div><span class="price">' + fmt(c.price) + '</span></div>').join("") : '<div class="empty">Корзина пуста</div>';
-  $("cartTotal").textContent = fmt(cart.reduce((s, c) => s + c.price, 0));
+  const n = cart.reduce((s, c) => s + (c.qty || 1), 0);
+  $("count").textContent = n; $("count").classList.toggle("on", n > 0);
+  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th">' + (c.img ? '<img decoding="async" alt="" src="' + c.img + '">' : "") + '</div><div><b>' + c.name + '</b><small>' + c.sub + '</small><div class="qty"><button data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + (c.qty || 1) + '</span><button data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div></div><span class="price">' + fmt(c.price * (c.qty || 1)) + '</span></div>').join("") : '<div class="empty">Корзина пуста — выберите фильм для рамки</div>';
+  $("cartItems").querySelectorAll(".qty button").forEach(b => b.onclick = () => { const c = cart[+b.dataset.i]; c.qty = (c.qty || 1) + +b.dataset.q; if (c.qty < 1) cart.splice(+b.dataset.i, 1); saveCart(); renderCart(); });
+  $("cartTotal").textContent = fmt(cartSum());
+  $("checkout").disabled = !cart.length;
 }
-function add(item) { cart.push(item); renderCart(); toast("Добавлено: " + item.name); }
+function add(item) {
+  const same = cart.find(c => c.name === item.name && c.sub === item.sub);
+  if (same) same.qty = (same.qty || 1) + 1; else cart.push({ ...item, qty: 1 });
+  saveCart(); renderCart(); openCart();
+}
 $("buyBtn").onclick = () => add({ name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: P(films[cfg.poster].img) });
 // выбор постера для каждой рамки набора
 const pick = { n: 1, name: "", price: 0, sel: [], cur: 0 };
@@ -951,7 +1012,20 @@ $("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList
 const openCart = () => { $("drawer").classList.add("open"); $("cartOv").classList.add("open"); };
 const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").classList.remove("open"); };
 $("cartBtn").onclick = openCart; $("closeCart").onclick = closeCart; $("cartOv").onclick = closeCart;
-$("checkout").onclick = () => toast(cart.length ? "Оплата откроется совсем скоро" : "Корзина пуста");
+$("checkout").onclick = () => { if (!cart.length) return; closeCart(); openCheckout(); };
+function openCheckout() {
+  $("coSum").innerHTML = cart.map(c => '<div><span>' + c.name + (c.qty > 1 ? " × " + c.qty : "") + '<small>' + c.sub + '</small></span><b>' + fmt(c.price * (c.qty || 1)) + '</b></div>').join("");
+  $("coTotal").textContent = fmt(cartSum()); $("coErr").textContent = ""; $("coOv").classList.add("open");
+}
+$("coShip").querySelectorAll("button").forEach(b => b.onclick = () => $("coShip").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)));
+$("coOv").onclick = e => { if (e.target.id === "coOv" || e.target.dataset.close === "coOv") $("coOv").classList.remove("open"); };
+$("coForm").onsubmit = e => {
+  e.preventDefault(); const f = e.target;
+  const bad = [...f.querySelectorAll("[required]")].find(x => !x.checkValidity());
+  if (bad) { bad.focus(); $("coErr").textContent = bad.type === "checkbox" ? "Нужно согласие с офертой" : "Проверьте поле: " + bad.closest("label").firstChild.textContent.trim(); return; }
+  if (!/^\+?[78]?[\s(-]*\d{3}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/.test(f.phone.value.trim())) { f.phone.focus(); $("coErr").textContent = "Телефон в формате +7 900 000-00-00"; return; }
+  $("coErr").textContent = "Оплата подключается к запуску магазина. Данные никуда не отправлены.";
+};
 
 // ---------- вход ----------
 $("loginBtn").onclick = () => $("loginOv").classList.add("open");
@@ -959,7 +1033,7 @@ document.querySelectorAll("[data-close]").forEach(b => b.onclick = () => $(b.dat
 $("loginOv").onclick = e => { if (e.target.id === "loginOv") $("loginOv").classList.remove("open"); };
 $("codeBtn").onclick = () => { $("loginOv").classList.remove("open"); toast("Вход откроется совсем скоро"); };
 
-document.addEventListener("keydown", e => { if (e.key === "Escape") { $("search").classList.remove("open"); $("loginOv").classList.remove("open"); $("pickOv").classList.remove("open"); closeCart(); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { $("search").classList.remove("open"); $("loginOv").classList.remove("open"); $("pickOv").classList.remove("open"); $("coOv").classList.remove("open"); closeCart(); } });
 $("burger").onclick = () => $("search").classList.toggle("open");
 document.querySelectorAll("#menuRes a").forEach(a => a.onclick = () => $("search").classList.remove("open"));
 
@@ -988,6 +1062,7 @@ function openFilm(i) {
   $("mq2").innerHTML = w2 + w2; $("mq2").style.animationDirection = "reverse";
 })();
 renderHero(); renderCart();
+$("mbuyBtn").onclick = () => $("buyBtn").click();
 
 // ---------- диагональная лента фильмов ----------
 (function () {
