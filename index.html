@@ -11,12 +11,12 @@
     --black: #000; --carbon: #0a0a0b; --graphite: #141416; --panel: #1b1b1e; --panel2: #232327;
     --line: rgba(255,255,255,.09); --line2: rgba(255,255,255,.16);
     --white: #f5f5f7; --silver: #b9bcc2; --muted: #8b8d93; --dim: #5d5f65;
-    --warm: 255, 150, 72; --accent: 255, 138, 61; --rail: 0px; --disp: "Oswald", "Arial Narrow", sans-serif; --neutral: 255, 238, 214;
+    --warm: 255, 150, 72; --accent: 255, 138, 61; --rail: 0px; --hh: 78px; --disp: "Oswald", "Arial Narrow", sans-serif; --neutral: 255, 238, 214;
     --glow: var(--warm);
     --pill: 4px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; scroll-padding-top: 116px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
   html, body { background: var(--black); color: var(--white); }
   body { font-family: -apple-system, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; font-size: 17px; }
   img { display: block; }
@@ -35,7 +35,7 @@
   .marquee .mq span.hot { color: rgb(var(--accent)); -webkit-text-stroke: 0; text-shadow: 0 0 40px rgba(var(--accent), .45); }
   @keyframes mq { to { transform: translateX(-50%); } }
   /* светящиеся постеры по краям всего сайта */
-  .rail { display: none; position: fixed; top: 64px; bottom: 0; width: var(--rail); z-index: 5; overflow: hidden; pointer-events: none;
+  .rail { display: none; position: fixed; top: var(--hh); bottom: 0; width: var(--rail); z-index: 5; overflow: hidden; pointer-events: none;
     -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); }
   .rail.l { left: 0; } .rail.r { right: 0; }
   .rail::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 120% 50% at var(--side) 50%, rgba(var(--glow), .16), transparent 70%); }
@@ -65,12 +65,16 @@
   .topline .wrap { height: 100%; display: flex; align-items: center; justify-content: center; gap: 34px; }
   .topline b { color: var(--white); font-weight: 500; }
   header { position: sticky; top: 0; z-index: 40; background: rgba(0,0,0,.96); border-bottom: 1px solid var(--line); }
-  header .wrap { height: 64px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
-  .mainnav { display: flex; gap: 30px; font-size: 15px; color: var(--silver); }
-  .mainnav a { position: relative; padding: 22px 0; transition: color .2s ease; }
+  header .wrap { height: var(--hh); max-width: 1440px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  header { background: linear-gradient(180deg, rgba(14,11,9,.97), rgba(4,3,3,.96)) !important; border-bottom: 0 !important; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+  header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(var(--accent), .55) 30%, rgba(var(--accent), .55) 70%, transparent); }
+  .hdr-cta { height: 42px !important; padding: 0 18px !important; font-size: 14px !important; margin-left: 10px; font-weight: 600 !important; }
+  .hdr-cta .price { font-family: var(--disp); font-size: 16px; margin-left: 4px; }
+  .mainnav { display: flex; gap: 30px; font-family: var(--disp); font-weight: 500; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--silver); }
+  .mainnav a { position: relative; padding: 28px 0; transition: color .2s ease; }
   .mainnav a:hover, .mainnav a.on { color: var(--white); }
-  .mainnav a.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: 14px; height: 1px; background: var(--white); }
-  .wordmark { font-family: var(--disp); font-weight: 600; font-size: 22px; letter-spacing: .38em; padding-left: .38em; text-align: center; }
+  .mainnav a.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: 18px; height: 2px; background: rgb(var(--accent)); box-shadow: 0 0 12px rgba(var(--accent), .7); }
+  .wordmark { font-family: var(--disp); font-weight: 700; font-size: 30px; letter-spacing: .34em; padding-left: .34em; text-shadow: 0 0 24px rgba(var(--accent), .35); text-align: center; }
   .icons { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
   .icon { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; position: relative; color: var(--silver); transition: color .2s ease, background .2s ease; }
   .icon:hover { color: var(--white); background: var(--panel); }
@@ -108,10 +112,10 @@
   .cable { position: absolute; left: 50%; bottom: -70px; width: 2px; height: 70px; background: linear-gradient(#222, #000); }
 
   /* ===== 1. товар: первый экран-конфигуратор ===== */
-  .product { border-top: 0; padding: 32px 0; min-height: calc(100svh - 64px); display: flex; align-items: center; background: radial-gradient(ellipse 55% 70% at 33% 48%, rgba(var(--glow), .16), transparent 72%), linear-gradient(180deg, #070504, #000); transition: background .6s ease; }
+  .product { border-top: 0; padding: 32px 0; min-height: calc(100svh - var(--hh)); display: flex; align-items: center; background: radial-gradient(ellipse 55% 70% at 33% 48%, rgba(var(--glow), .16), transparent 72%), linear-gradient(180deg, #070504, #000); transition: background .6s ease; }
   .product .wrap { width: 100%; max-width: 1320px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 50px; align-items: center; }
-  .stagebox { position: relative; height: min(680px, calc(100svh - 64px - 64px)); min-height: 440px; display: flex; align-items: center; justify-content: center; padding-bottom: 50px; }
-  .stagebox .frame { --w: min(440px, 34vw, calc((100svh - 64px - 64px - 110px) * .715)); }
+  .stagebox { position: relative; height: min(680px, calc(100svh - var(--hh) - 64px)); min-height: 440px; display: flex; align-items: center; justify-content: center; padding-bottom: 50px; }
+  .stagebox .frame { --w: min(440px, 34vw, calc((100svh - var(--hh) - 64px - 110px) * .715)); }
   .floor { position: absolute; left: 10%; right: 10%; bottom: 22px; height: 40px; background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,.06), transparent 70%); }
   .badge-new { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgb(var(--accent)); margin-bottom: 16px; }
   .quote { font-family: var(--disp); font-size: clamp(32px, 3.4vw, 50px); font-weight: 600; line-height: 1.05; letter-spacing: -.005em; text-transform: uppercase; height: 196px; display: flex; flex-direction: column; justify-content: flex-end; }
@@ -227,6 +231,38 @@
   .tabpane { display: none; } .tabpane.on { display: block; }
   .footnote { font-size: 12px; color: var(--dim); margin-top: 16px; }
 
+  /* ===== точные цифры ===== */
+  .specs-pro { background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(var(--glow), .08), transparent 70%), #050404; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .kpis div { padding: 38px 28px 34px; border-left: 1px solid var(--line); }
+  .kpis div:first-child { border-left: 0; padding-left: 0; }
+  .kpis b { display: flex; align-items: baseline; gap: 10px; font-family: var(--disp); font-weight: 600; font-size: clamp(48px, 5.4vw, 84px); line-height: 1; color: var(--white); text-shadow: 0 0 40px rgba(var(--glow), .25); }
+  .kpis b small { font-size: .26em; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--accent)); text-shadow: none; }
+  .kpis span { display: block; margin-top: 14px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .specs3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .sc { position: relative; border-radius: 6px; padding: 30px 28px 18px; background: linear-gradient(180deg, #11100e, #090808); box-shadow: inset 0 0 0 1px rgba(255,255,255,.07), 0 30px 60px rgba(0,0,0,.4); overflow: hidden; }
+  .sc::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, rgba(var(--accent), .9), rgba(var(--accent), 0)); }
+  .sh { font-family: var(--disp); font-size: 22px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; display: flex; gap: 12px; align-items: baseline; }
+  .sh span { font-size: 13px; color: rgb(var(--accent)); letter-spacing: .1em; }
+  .sc table.spec td { font-size: 15px; padding: 14px 0; }
+  .sc table.spec td:first-child { width: 46%; }
+
+  /* ===== выбор постеров для набора ===== */
+  .picker { max-width: 860px !important; max-height: calc(100svh - 40px); overflow-y: auto; }
+  .slots { display: grid; grid-template-columns: repeat(var(--n, 3), 110px); gap: 16px; margin-top: 22px; justify-content: start; }
+  .slot { position: relative; text-align: center; font-size: 12px; color: var(--muted); }
+  .slot .frame { --w: 110px; --g: .35; margin-bottom: 8px; cursor: pointer; outline: 1.5px solid transparent; outline-offset: 5px; transition: outline-color .2s ease; }
+  .slot.on .frame { outline-color: rgb(var(--accent)); }
+  .slot .frame .poster { display: grid; place-items: center; color: var(--dim); font-family: var(--disp); font-size: 30px; }
+  .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 10px; margin-top: 24px; }
+  .pgrid button { aspect-ratio: 297/420; border-radius: 2px; overflow: hidden; opacity: .75; box-shadow: 0 0 0 1px var(--line2); transition: opacity .2s ease, transform .2s ease; }
+  .pgrid button:hover { opacity: 1; transform: translateY(-2px); }
+  .pgrid img { width: 100%; height: 100%; object-fit: cover; }
+  .pickfoot { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+  .pickfoot .price { font-family: var(--disp); font-size: 30px; }
+  .pickfoot .btn { width: auto !important; margin: 0 !important; }
+  .pickfoot .btn:disabled { opacity: .35; cursor: not-allowed; }
+
   /* ===== постеры: тёмная комната ===== */
   .posters { padding-bottom: 0; }
   .posters .head { display: flex; justify-content: space-between; align-items: end; gap: 30px; flex-wrap: wrap; }
@@ -234,10 +270,10 @@
   .filters button { height: 38px; padding: 0 18px; border-radius: var(--pill); font-size: 14px; color: var(--silver); box-shadow: inset 0 0 0 1px var(--line2); transition: all .2s ease; }
   .filters button.on { background: var(--white); color: #000; box-shadow: none; }
   .filters button small { color: inherit; opacity: .5; margin-left: 4px; }
-  .room { position: relative; margin-top: 46px; display: grid; grid-template-columns: 1fr 200px; height: clamp(600px, calc(100svh - 64px), 800px); overflow: hidden; border-top: 1px solid var(--line);
+  .room { position: relative; margin-top: 46px; display: grid; grid-template-columns: 1fr 200px; height: clamp(600px, calc(100svh - var(--hh)), 800px); overflow: hidden; border-top: 1px solid var(--line);
     background: radial-gradient(ellipse 50% 70% at 30% 50%, rgba(var(--glow), .2), rgba(var(--glow), .05) 50%, transparent 75%), #070504; }
   .stage { display: flex; align-items: center; justify-content: center; gap: 64px; padding: 50px 40px; }
-  .stage .frame { --w: min(380px, 27vw, calc((min(100svh, 800px) - 64px - 90px) * .715)); flex: none; }
+  .stage .frame { --w: min(380px, 27vw, calc((min(100svh, 800px) - var(--hh) - 90px) * .715)); flex: none; }
   .stage .frame, .info { transition: opacity .3s ease; }
   .stage .swap { opacity: 0; }
   .info { width: 400px; height: 470px; display: flex; flex-direction: column; flex: none; }
@@ -390,6 +426,8 @@
     .buy { margin-top: 20px; } .buy .btn { height: 48px; }
     .badge-new { margin-bottom: 8px; }
   }
+  @media (min-width: 901px) and (max-width: 1380px) { .mainnav { gap: 18px; letter-spacing: .08em; font-size: 14px; } .wordmark { font-size: 26px; } }
+  @media (min-width: 901px) and (max-width: 1150px) { .mainnav a[href="#help"], .mainnav a[href="#subscription"] { display: none; } .hdr-cta .price { display: none; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .mq, .rail .col { animation: none !important; } }
 
   /* ===== телефон ===== */
@@ -397,7 +435,10 @@
     html { scroll-padding-top: 104px; }
     .wrap { padding: 0 20px; }
     .topline .wrap { gap: 0; } .topline .wrap span:not(:first-child) { display: none; }
-    header .wrap { height: 56px; grid-template-columns: auto 1fr auto; }
+    :root { --hh: 60px; }
+    header .wrap { grid-template-columns: auto 1fr auto; }
+    .hdr-cta { display: none !important; }
+    .wordmark { font-size: 22px !important; }
     .mainnav { display: none; } .burger { display: grid; }
     .wordmark { font-size: 16px; text-align: left; padding-left: 8px; }
     .subnav { top: 56px; } .subnav .wrap { height: 48px; gap: 16px; } .subnav .name { display: none; } .subnav .btn { display: none; }
@@ -416,6 +457,9 @@
     .keys div:first-child, .keys div:nth-child(2) { border-top: 0; }
     .keys div:last-child { grid-column: span 2; }
     .split, .layers, .specs-grid, .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+    .kpis { grid-template-columns: 1fr 1fr; } .kpis div { padding: 26px 16px; } .kpis div:nth-child(3) { border-left: 0; padding-left: 0; } .kpis div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .specs3 { grid-template-columns: 1fr; }
+    .slots { grid-template-columns: repeat(var(--n, 3), 84px); } .slot .frame { --w: 84px; }
     .bullets li { grid-template-columns: 1fr; gap: 4px; }
     .dims { max-width: 260px; margin: 0 auto; }
     .layers svg { max-width: 460px; margin: 0 auto; }
@@ -444,6 +488,7 @@
   <div class="icons">
     <button class="icon" aria-label="Личный кабинет" id="loginBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.4-3.6 4.2-5.2 7.5-5.2s6.1 1.6 7.5 5.2"/></svg></button>
     <button class="icon" aria-label="Корзина" id="cartBtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><i id="count">0</i></button>
+    <a class="btn hdr-cta" href="#top">Купить <span class="price">3&nbsp;449&nbsp;₽</span></a>
   </div>
 </div></header>
 
@@ -489,38 +534,19 @@
 </div></section>
 
 <!-- 4. Характеристики -->
-<section id="specs"><div class="wrap">
+<section id="specs" class="specs-pro"><div class="wrap">
   <div class="label">Характеристики</div>
   <h2 style="margin-top:16px">Точные цифры</h2>
-  <div class="specs-grid" style="grid-template-columns:1fr;max-width:760px">
-    <div>
-      <div class="tabs" id="specTabs"><button class="on" data-tab="frame">Рамка</button><button data-tab="light">Свет и питание</button><button data-tab="box">Комплект</button></div>
-      <div class="tabpane on" data-pane="frame"><table class="spec">
-        <tr><td>Формат постера</td><td>A3, 297 × 420 мм</td></tr>
-        <tr><td>Размер рамки</td><td>≈ 321 × 444 мм</td></tr>
-        <tr><td>Толщина</td><td>≈ 10 мм</td></tr>
-        <tr><td>Профиль</td><td>Анодированный алюминий, чёрный матовый</td></tr>
-        <tr><td>Фронт</td><td>Защитное стекло</td></tr>
-        <tr><td>Смена постера</td><td>Спереди, около минуты, рамку не снимать со стены</td></tr>
-        <tr><td>Крепление</td><td>Настенное, 2 точки; горизонтально или вертикально</td></tr>
-        <tr><td>Вес</td><td>≈ 1,2 кг</td></tr>
-      </table></div>
-      <div class="tabpane" data-pane="light"><table class="spec">
-        <tr><td>Подсветка</td><td>Светодиоды по периметру + рассеиватель</td></tr>
-        <tr><td>Цвет света</td><td>Тёплый, уютный</td></tr>
-        <tr><td>Мощность</td><td>≈ 6–8 Вт</td></tr>
-        <tr><td>Питание</td><td>Адаптер 220 В → 12 В, евровилка</td></tr>
-        <tr><td>Кабель</td><td>2 м, с выключателем</td></tr>
-        <tr><td>Нагрев</td><td>Практически не нагревается</td></tr>
-      </table></div>
-      <div class="tabpane" data-pane="box"><table class="spec">
-        <tr><td>В коробке</td><td>Рамка, постер, адаптер питания, крепёж, инструкция</td></tr>
-        <tr><td>Упаковка</td><td>Жёсткая коробка, защита углов и стекла</td></tr>
-        <tr><td>Документы</td><td>Декларация соответствия ЕАЭС на светильник</td></tr>
-        <tr><td>Гарантия</td><td>1 год на рамку и подсветку</td></tr>
-      </table></div>
-      
-    </div>
+  <div class="kpis">
+    <div><b>10<small>мм</small></b><span>толщина рамки</span></div>
+    <div><b>A3<small>29,7×42</small></b><span>формат постера</span></div>
+    <div><b>1,2<small>кг</small></b><span>вес</span></div>
+    <div><b>6–8<small>Вт</small></b><span>как ночник</span></div>
+  </div>
+  <div class="specs3">
+    <div class="sc"><div class="sh"><span>01</span>Рамка</div><table class="spec"><tr><td>Формат постера</td><td>A3, 297 × 420 мм</td></tr><tr><td>Размер рамки</td><td>≈ 321 × 444 мм</td></tr><tr><td>Профиль</td><td>Алюминий, чёрный матовый</td></tr><tr><td>Фронт</td><td>Защитное стекло</td></tr><tr><td>Смена постера</td><td>Спереди, около минуты</td></tr><tr><td>Крепление</td><td>Вертикально или горизонтально</td></tr></table></div>
+    <div class="sc"><div class="sh"><span>02</span>Свет и питание</div><table class="spec"><tr><td>Подсветка</td><td>LED по периметру + рассеиватель</td></tr><tr><td>Цвет света</td><td>Тёплый, уютный</td></tr><tr><td>Питание</td><td>Адаптер 220 → 12 В, евровилка</td></tr><tr><td>Кабель</td><td>2 м, с выключателем</td></tr><tr><td>Нагрев</td><td>Практически не греется</td></tr></table></div>
+    <div class="sc"><div class="sh"><span>03</span>Комплект</div><table class="spec"><tr><td>В коробке</td><td>Рамка, постер, адаптер, крепёж</td></tr><tr><td>Упаковка</td><td>Жёсткая коробка, защита углов</td></tr><tr><td>Документы</td><td>Декларация ЕАЭС</td></tr><tr><td>Гарантия</td><td>1 год на рамку и свет</td></tr></table></div>
   </div>
 </div></section>
 
@@ -572,11 +598,11 @@
   <h2 style="margin-top:16px">Подарок, который включают каждый вечер</h2>
   <div class="sets">
     <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/b7/81/16/b78116b4b57ea27c1773401aad8b8f5a.jpg" alt=""></div></div></div>
-      <div class="body"><h3>Рамка + постер</h3><p>Proswet A3 и один постер на выбор.</p><div class="row"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn line" data-add="Рамка + постер" data-price="3449">В корзину</button></div></div></div>
-    <div class="set"><div class="pic"><div class="frame s"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/27/23/2e/27232e100735f944dd2289d885ec79ff.jpg" alt=""></div></div><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/7b/d4/bb/7bd4bb6c76199797a8b3641c161e9cb9.jpg" alt=""></div></div><div class="frame s"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/49/5b/6e/495b6e3ef207f91398df69899dcf8916.jpg" alt=""></div></div></div>
-      <div class="body"><h3>Рамка + 3 постера</h3><p>Три истории на смену — под настроение, сезон и праздник.</p><div class="row"><span class="price">7&nbsp;490&nbsp;₽<s>8&nbsp;429&nbsp;₽</s></span><button class="btn" data-add="Рамка + 3 постера" data-price="7490">В корзину</button></div></div></div>
+      <div class="body"><h3>Одна рамка</h3><p>Proswet A3 с постером вашего фильма.</p><div class="row"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="3449">Выбрать фильм</button></div></div></div>
+    <div class="set"><div class="pic"><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/27/23/2e/27232e100735f944dd2289d885ec79ff.jpg" alt=""></div></div><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/7b/d4/bb/7bd4bb6c76199797a8b3641c161e9cb9.jpg" alt=""></div></div><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/49/5b/6e/495b6e3ef207f91398df69899dcf8916.jpg" alt=""></div></div></div>
+      <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">9&nbsp;490&nbsp;₽<s>10&nbsp;347&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="9490">Выбрать 3 фильма</button></div></div></div>
     <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/a4/4b/6e/a44b6e258c78539ea7212c42c0315da0.jpg" alt=""></div></div></div>
-      <div class="body"><h3>Подарочный набор</h3><p>Рамка, постер, жёсткая коробка с лентой и открытка с вашим текстом.</p><div class="row"><span class="price">3&nbsp;990&nbsp;₽</span><button class="btn line" data-add="Подарочный набор" data-price="3990">В корзину</button></div></div></div>
+      <div class="body"><h3>Подарочный набор</h3><p>Рамка с постером, жёсткая коробка с лентой и открытка с вашим текстом.</p><div class="row"><span class="price">3&nbsp;990&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="3990">Выбрать фильм</button></div></div></div>
   </div>
 </div></section>
 
@@ -623,6 +649,13 @@
   <input type="tel" placeholder="+7 (___) ___-__-__" inputmode="tel"><button class="btn" id="codeBtn">Получить код</button>
 </div></div>
 <div class="overlay" id="cartOv"></div>
+<div class="overlay" id="pickOv"><div class="sheet picker">
+  <button class="x" data-close="pickOv" aria-label="Закрыть">×</button>
+  <h3 id="pickTitle">Выберите фильмы</h3><p id="pickHint">Нажмите на рамку, затем на постер.</p>
+  <div class="slots" id="slots"></div>
+  <div class="pgrid" id="pgrid"></div>
+  <div class="pickfoot"><span class="price" id="pickPrice"></span><button class="btn" id="pickAdd" disabled>В корзину</button></div>
+</div></div>
 <aside class="drawer" id="drawer"><h3>Корзина <button class="x" id="closeCart" aria-label="Закрыть" style="font-size:26px;color:var(--muted)">×</button></h3><div class="cart-items" id="cartItems"></div><div class="total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div><button class="btn" id="checkout">Оформить заказ</button></aside>
 <div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#subscription">Подписка</a><a class="btn line" href="#gifts">Подарки</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
 <div class="toast" id="toast"></div>
@@ -755,7 +788,27 @@ function renderCart() {
 }
 function add(item) { cart.push(item); renderCart(); toast("Добавлено: " + item.name); }
 $("buyBtn").onclick = () => add({ name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: P(films[cfg.poster].img) });
-document.querySelectorAll("[data-add]").forEach(b => b.onclick = () => add({ name: b.dataset.add, sub: "Набор", price: +b.dataset.price }));
+// выбор постера для каждой рамки набора
+const pick = { n: 1, name: "", price: 0, sel: [], cur: 0 };
+function drawPick() {
+  $("slots").style.setProperty("--n", pick.n);
+  $("slots").innerHTML = pick.sel.map((v, k) => '<div class="slot' + (k === pick.cur ? ' on' : '') + '" data-k="' + k + '"><div class="frame' + (v != null ? ' lit' : '') + '"><div class="poster">' + (v != null ? '<img alt="" src="' + P(films[v].img) + '">' : '+') + '</div></div>' + (v != null ? films[v].t : 'Рамка ' + (k + 1)) + '</div>').join("");
+  document.querySelectorAll("#slots .slot").forEach(el => el.onclick = () => { pick.cur = +el.dataset.k; drawPick(); });
+  const left = pick.sel.filter(v => v == null).length;
+  $("pickAdd").disabled = left > 0;
+  $("pickAdd").textContent = left ? "Осталось выбрать: " + left : "В корзину";
+}
+function openPick(n, name, price) {
+  Object.assign(pick, { n, name, price, sel: Array(n).fill(null), cur: 0 });
+  $("pickTitle").textContent = name; $("pickHint").textContent = n > 1 ? "Для каждой рамки — свой фильм. Нажмите на рамку, затем на постер." : "Выберите фильм для рамки.";
+  $("pickPrice").textContent = fmt(price);
+  $("pgrid").innerHTML = films.map((f, i) => '<button data-i="' + i + '" title="' + f.t + '"><img loading="lazy" alt="' + f.t + '" src="' + P(f.img) + '"></button>').join("");
+  document.querySelectorAll("#pgrid button").forEach(b => b.onclick = () => { pick.sel[pick.cur] = +b.dataset.i; const nxt = pick.sel.indexOf(null); if (nxt >= 0) pick.cur = nxt; drawPick(); });
+  drawPick(); $("pickOv").classList.add("open");
+}
+document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
+$("pickAdd").onclick = () => { add({ name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "»").join(", "), price: pick.price, img: P(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
+$("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList.remove("open"); };
 $("subBtn").onclick = () => { const [m, k] = planInfo[plan]; add({ name: "Подписка на " + k + " мес.", sub: fmt(m) + " в месяц", price: m * k }); };
 const openCart = () => { $("drawer").classList.add("open"); $("cartOv").classList.add("open"); };
 const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").classList.remove("open"); };
@@ -768,7 +821,7 @@ document.querySelectorAll("[data-close]").forEach(b => b.onclick = () => $(b.dat
 $("loginOv").onclick = e => { if (e.target.id === "loginOv") $("loginOv").classList.remove("open"); };
 $("codeBtn").onclick = () => { $("loginOv").classList.remove("open"); toast("Вход откроется совсем скоро"); };
 
-document.addEventListener("keydown", e => { if (e.key === "Escape") { $("search").classList.remove("open"); $("loginOv").classList.remove("open"); closeCart(); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { $("search").classList.remove("open"); $("loginOv").classList.remove("open"); $("pickOv").classList.remove("open"); closeCart(); } });
 $("burger").onclick = () => $("search").classList.toggle("open");
 document.querySelectorAll("#menuRes a").forEach(a => a.onclick = () => $("search").classList.remove("open"));
 
