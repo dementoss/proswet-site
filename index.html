@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROSWET — световая рамка для постеров</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&family=Oswald:wght@500..700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0a0806">
 <style>
   :root {
     --black: #000; --carbon: #0a0a0b; --graphite: #141416; --panel: #1b1b1e; --panel2: #232327;
@@ -411,7 +415,6 @@
   .proto { position: fixed; left: 12px; bottom: 12px; z-index: 30; font-size: 11px; background: rgba(20,20,22,.9); color: var(--muted); padding: 5px 10px; border-radius: var(--pill); box-shadow: inset 0 0 0 1px var(--line); }
 
   /* невысокие экраны ноутбуков: всё на первом экране */
-  .split h2 { font-size: clamp(40px, 4.6vw, 68px); }
   @media (min-width: 901px) and (max-height: 960px) {
     .product { padding: 20px 0; }
     .quote { height: 168px; font-size: clamp(28px, 2.9vw, 42px); }
@@ -432,6 +435,68 @@
   }
   @media (min-width: 901px) and (max-width: 1380px) { .mainnav { gap: 18px; letter-spacing: .08em; font-size: 14px; } .wordmark { font-size: 26px; } }
   @media (min-width: 901px) and (max-width: 1150px) { .mainnav a[href="#help"] { display: none; } .hdr-cta .price { display: none; } }
+
+  /* ===== система после аудита 14.11: шрифты, кнопки, радиусы, ритм ===== */
+  :root { --text: "Inter", -apple-system, system-ui, sans-serif; --dim: #7a7c82; --h-l: 48px; --h-s: 40px; --r-s: 4px; --r-m: 8px; --head-gap: 48px; }
+  body { font-family: var(--text); font-optical-sizing: auto; font-size: 16px; }
+  h1, h3, .display { font-family: var(--text); }
+  h2 { font-size: clamp(40px, 5vw, 72px) !important; line-height: 1.02 !important; padding-top: .04em; font-weight: 600 !important; }
+  .lead { color: var(--silver); }
+  .price { font-family: var(--disp); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0; }
+  .label { font-family: var(--text); font-size: 11px !important; letter-spacing: .16em !important; transform: rotate(-1deg); margin-bottom: 4px; }
+  .btn { height: var(--h-l); border-radius: var(--r-s); font-weight: 600; font-size: 15px; transition: background .2s ease, box-shadow .25s ease, transform .2s ease; }
+  .btn:hover { box-shadow: 0 0 0 1px rgba(var(--accent), .6), 0 8px 30px rgba(var(--accent), .25); }
+  .btn.line:hover { box-shadow: inset 0 0 0 1px rgba(var(--accent), .8), 0 8px 30px rgba(var(--accent), .15); }
+  .info .row .btn, .set .btn, .filters button, .hdr-cta { height: var(--h-s) !important; font-size: 14px; }
+  :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; }
+  .icon:hover { background: none; color: rgb(var(--accent)); }
+  .compare, .cal, .sheet, .sc, .set { border-radius: var(--r-m) !important; }
+  .kpis, .sets, .service, .specs3 { margin-top: var(--head-gap); }
+  /* первый экран: цитата прижата к надзаголовку, кнопки на месте */
+  .quote { justify-content: flex-start; }
+  /* комната: без дыры под названием */
+  .info h3 { min-height: 0; margin-top: 14px; line-height: 1; display: block; font-size: 44px; }
+  .info .orig { margin-top: 8px; } .gq { margin-top: 20px; }
+  .info .row .price, .set .price { font-size: 28px; }
+  /* подарки: рамка карточки целиком, кнопка в одну строку, старая цена под новой */
+  .set { box-shadow: none; border: 1px solid var(--line); transition: border-color .3s ease; }
+  .set:hover { border-color: rgba(var(--accent), .35); }
+  .set:hover .pic .frame.lit { box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 0 40px 8px rgba(var(--glow), .45); }
+  .set .row { align-items: flex-end; gap: 12px; }
+  .set .price s { display: block; margin: 2px 0 0; font-family: var(--text); font-size: 13px; font-weight: 400; color: var(--dim); }
+  .set .btn { white-space: nowrap; }
+  /* день / вечер: переключатель не лежит на рамке, «день» — живая стена */
+  .compare .side { padding-bottom: 64px; }
+  .compare .frame { --w: min(220px, 40%); }
+  .compare .day { background: radial-gradient(ellipse 70% 60% at 18% 12%, rgba(255,251,242,.95), transparent 62%), linear-gradient(180deg, #e6e2dc, #c9c3bb); }
+  .compare .day .frame { box-shadow: 0 0 0 1px rgba(0,0,0,.25), 0 30px 60px rgba(0,0,0,.28); }
+  .compare .mode button { height: 32px; }
+  /* характеристики */
+  .sc td { line-height: 1.45; font-size: 14px !important; }
+  .sc td:first-child { width: 38% !important; }
+  .kpis span { letter-spacing: .12em; }
+  /* тумблер подсветки — строгий */
+  .toggle { width: 44px; height: 24px; border-radius: var(--r-s); }
+  .toggle::after { top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 2px; }
+  .toggle.on::after { transform: translateX(20px); }
+  /* подвал */
+  .fgrid { align-items: start; } .fgrid .wordmark { font-size: 20px !important; line-height: 1; text-shadow: none; }
+  /* края сайта гаснут в тёмной комнате, чтобы не было двух столбцов постеров */
+  .rail { transition: opacity .5s ease; }
+  body.in-room .rail { opacity: 0; }
+  .rail .frame { pointer-events: auto; }
+  body.in-room .rail .frame { pointer-events: none; }
+  /* липкая покупка на телефоне */
+  .mbuy { display: none; }
+  @media (max-width: 900px) {
+    .stagebox .frame { --w: min(230px, 58vw); }
+    .stagebox { padding: 16px 0 44px; }
+    .mbuy { display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 18px; border-radius: var(--r-m); background: rgba(14,11,9,.94); box-shadow: inset 0 0 0 1px rgba(var(--accent), .35), 0 12px 40px rgba(0,0,0,.6); }
+    .mbuy .price { font-size: 24px; } .mbuy .btn { height: var(--h-s); padding: 0 26px; }
+    body { padding-bottom: 76px; }
+    .ribbon::after { background: linear-gradient(90deg, transparent 86%, #070504) !important; }
+    .kpis span { font-size: 11px; }
+  }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .mq, .rail .col { animation: none !important; } }
 
   /* ===== телефон ===== */
@@ -549,9 +614,9 @@
     <div><b>6–8<small>Вт</small></b><span>как ночник</span></div>
   </div>
   <div class="specs3">
-    <div class="sc"><div class="sh"><span>01</span>Рамка</div><table class="spec"><tr><td>Формат постера</td><td>A3, 297 × 420 мм</td></tr><tr><td>Размер рамки</td><td>≈ 321 × 444 мм</td></tr><tr><td>Профиль</td><td>Алюминий, чёрный матовый</td></tr><tr><td>Фронт</td><td>Защитное стекло</td></tr><tr><td>Смена постера</td><td>Спереди, около минуты</td></tr><tr><td>Крепление</td><td>Вертикально или горизонтально</td></tr></table></div>
-    <div class="sc"><div class="sh"><span>02</span>Свет и питание</div><table class="spec"><tr><td>Подсветка</td><td>LED по периметру + рассеиватель</td></tr><tr><td>Цвет света</td><td>Тёплый, уютный</td></tr><tr><td>Питание</td><td>Адаптер 220 → 12 В, евровилка</td></tr><tr><td>Кабель</td><td>2 м, с выключателем</td></tr><tr><td>Нагрев</td><td>Практически не греется</td></tr></table></div>
-    <div class="sc"><div class="sh"><span>03</span>Комплект</div><table class="spec"><tr><td>В коробке</td><td>Рамка, постер, адаптер, крепёж</td></tr><tr><td>Упаковка</td><td>Жёсткая коробка, защита углов</td></tr><tr><td>Документы</td><td>Декларация ЕАЭС</td></tr><tr><td>Гарантия</td><td>1 год на рамку и свет</td></tr></table></div>
+    <div class="sc"><div class="sh"><span>01</span>Рамка</div><table class="spec"><tr><td>Формат</td><td>A3, 297 × 420 мм</td></tr><tr><td>Размер</td><td>≈ 321 × 444 мм</td></tr><tr><td>Профиль</td><td>Алюминий, матовый</td></tr><tr><td>Фронт</td><td>Защитное стекло</td></tr><tr><td>Смена постера</td><td>Спереди, за минуту</td></tr></table></div>
+    <div class="sc"><div class="sh"><span>02</span>Свет</div><table class="spec"><tr><td>Подсветка</td><td>LED + рассеиватель</td></tr><tr><td>Цвет света</td><td>Тёплый</td></tr><tr><td>Питание</td><td>220 → 12 В</td></tr><tr><td>Кабель</td><td>2 м, с выключателем</td></tr><tr><td>Нагрев</td><td>Почти не греется</td></tr></table></div>
+    <div class="sc"><div class="sh"><span>03</span>Комплект</div><table class="spec"><tr><td>В коробке</td><td>Рамка, постер, адаптер</td></tr><tr><td>Крепление</td><td>Вертикально и горизонтально</td></tr><tr><td>Упаковка</td><td>Жёсткая коробка</td></tr><tr><td>Документы</td><td>Декларация ЕАЭС</td></tr><tr><td>Гарантия</td><td>1 год</td></tr></table></div>
   </div>
 </div></section>
 
@@ -645,6 +710,7 @@
 </div></div>
 <aside class="drawer" id="drawer"><h3>Корзина <button class="x" id="closeCart" aria-label="Закрыть" style="font-size:26px;color:var(--muted)">×</button></h3><div class="cart-items" id="cartItems"></div><div class="total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div><button class="btn" id="checkout">Оформить заказ</button></aside>
 <div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#gifts">Подарки</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
+<div class="mbuy" id="mbuy"><span class="price">3&nbsp;449&nbsp;₽</span><a class="btn" href="#top" id="mbuyBtn">Купить</a></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -731,7 +797,7 @@ function buildTrack() {
 cats.forEach(([k, n]) => { const b = document.createElement("button"); const cnt = k === "all" ? films.length : films.filter(f => f.c.includes(k)).length; b.innerHTML = n + "<small>" + cnt + "</small>"; b.className = k === "all" ? "on" : ""; b.onclick = () => { filter = k; document.querySelectorAll("#filters button").forEach(x => x.classList.toggle("on", x === b)); buildTrack(); }; $("filters").appendChild(b); });
 buildTrack();
 let paused = false, resumeAt = 0, roomVisible = false;
-new IntersectionObserver(es => es.forEach(e => roomVisible = e.isIntersecting)).observe(document.querySelector('.room'));
+new IntersectionObserver(es => es.forEach(e => { roomVisible = e.isIntersecting; document.body.classList.toggle('in-room', e.isIntersecting); }), { threshold: .25 }).observe(document.querySelector('.room'));
 const pause = () => { paused = true; resumeAt = Date.now() + 2500; };
 ["pointerenter", "touchstart", "wheel"].forEach(e => track.addEventListener(e, pause, { passive: true }));
 track.addEventListener("pointerleave", () => { resumeAt = Date.now() + 600; });
