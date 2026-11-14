@@ -545,9 +545,45 @@
     .fgrid { grid-template-columns: 1fr 1fr; }
     .fgrid > div:first-child { grid-column: span 2; }
   }
+  /* ===== первый экран 14.11: фильм как часть интерьера ===== */
+  body > section.hero { margin-left: 0; margin-right: 0; }
+  .hero { position: relative; overflow: hidden; isolation: isolate; min-height: calc(100svh - var(--hh)); background: #0b0705; }
+  .hero-bg { position: absolute; inset: 0; z-index: -1; background: url(img/hero-room.jpg) 58% 50% / cover no-repeat; transition: filter .7s ease; }
+  .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,4,3,.86) 0%, rgba(6,4,3,.62) 30%, rgba(6,4,3,.08) 56%, transparent 70%), linear-gradient(180deg, transparent 72%, #000 100%); }
+  .hero.off .hero-bg { filter: brightness(.42) saturate(.7); }
+  .hero .wrap { max-width: 1400px; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .hero-h { font-family: var(--disp); font-size: clamp(52px, 5.8vw, 92px) !important; font-weight: 600 !important; line-height: .98 !important; letter-spacing: -.01em; color: #fbf3ea; text-shadow: 0 2px 30px rgba(0,0,0,.5); }
+  .hero .sub { font-size: 20px; color: rgba(251,243,234,.78); margin-top: 22px; }
+  .hero .from { margin-top: 30px; color: rgba(251,243,234,.6); }
+  .hero .from .price { font-size: 56px; color: #fbf3ea; }
+  .hero .opt { max-width: 430px; } .hero .buy { max-width: 430px; }
+  .hero .opt .t span { color: rgba(251,243,234,.6); }
+  .hero .buy .btn:not(.line) { background: #fbf3ea; color: #0a0705; }
+  .hero .buy .btn.line { background: rgba(10,7,5,.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .hero .stagebox { justify-content: flex-start; padding-left: 4%; }
+  .hero .stagebox .frame { --w: min(400px, 27vw, calc((100svh - var(--hh) - 64px - 110px) * .715)); }
+  .hero .frame.lit { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 60px 8px rgba(var(--glow), .42), 0 0 200px 60px rgba(var(--glow), .2); }
+  .hero .lightsw { left: calc(4% + min(400px, 27vw) / 2); color: rgba(251,243,234,.6); }
+  body.in-hero .rail { opacity: 0; }
+  body.in-hero .rail .frame { pointer-events: none; }
+  @media (max-width: 900px) {
+    .hero { min-height: 0; padding: 28px 0 40px; }
+    .hero-bg { background-position: 66% 50%; }
+    .hero-bg::after { background: linear-gradient(180deg, rgba(6,4,3,.82) 0%, rgba(6,4,3,.45) 38%, rgba(6,4,3,.2) 60%, #000 100%); }
+    .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .hero .opt, .hero .buy { max-width: none; } .hero .from { margin-top: 8px; }
+    .hero-h { font-size: clamp(40px, 11vw, 56px) !important; }
+    .hero .sub { font-size: 16px; margin-top: 14px; }
+    .hero .from .price { font-size: 40px; }
+    .hero .stagebox { justify-content: center; padding: 24px 0 52px; order: 2; }
+    .hero .hero-copy { display: contents; }
+    .hero-h, .hero .sub { order: 1; } .hero .from, .hero .opt, .hero .buy { order: 3; }
+    .hero .stagebox .frame { --w: min(280px, 68vw); }
+    .hero .lightsw { left: 50%; }
+  }
 </style>
 </head>
-<body>
+<body class="in-hero">
 
 <div class="rail l" aria-hidden="true"><div class="col" id="railL"></div></div><div class="rail r" aria-hidden="true"><div class="col" id="railR"></div></div>
 
@@ -563,22 +599,22 @@
 </div></header>
 
 <!-- 1. Товар -->
-<section class="product" id="top"><div class="wrap">
-  <div class="stagebox">
-    <div class="device"><div class="frame lit" id="heroFrame"><div class="poster"><img id="heroImg" alt="Постер в рамке"></div><div class="glass"></div></div></div>
-    <div class="floor"></div>
-    <div class="lightsw"><span>Подсветка</span><button class="toggle on" id="lightToggle" aria-label="Подсветка"></button></div>
-  </div>
-  <div>
-    <div class="badge-new" id="heroKicker">Вы любите «Интерстеллар»</div>
-    <blockquote class="quote" id="heroQuote"></blockquote>
-    <p class="sub">Пусть он светится у вас дома. <b style="color:var(--white);font-weight:600">Proswet A3</b> — световая рамка 1 см толщиной со сменным постером.</p>
+<section class="product hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap">
+  <div class="hero-copy">
+    <h1 class="hero-h">Ваш фильм —<br>часть интерьера</h1>
+    <p class="sub">Световая рамка A3 · постер меняется за минуту</p>
     <div class="from"><span class="price" id="totalPrice">3&nbsp;449&nbsp;₽</span> рамка с постером</div>
 
     <div class="opt"><div class="t">Ваш фильм <span id="posterName"></span></div>
       <div class="minis" id="minis"></div></div>
 
     <div class="buy"><button class="btn" id="buyBtn">Купить</button><a class="btn line" href="#posters">Все постеры</a></div>
+  </div>
+  <div class="stagebox">
+    <div class="device"><div class="frame lit" id="heroFrame"><div class="poster"><img id="heroImg" alt="Постер в рамке"></div><div class="glass"></div></div></div>
+    <div class="lightsw"><span>Подсветка</span><button class="toggle on" id="lightToggle" aria-label="Подсветка"></button></div>
   </div>
 </div></section>
 
@@ -714,7 +750,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const P = h => "https://i.pinimg.com/736x/" + h + ".jpg";
+const P = h => h.includes(".") ? h : "https://i.pinimg.com/736x/" + h + ".jpg";
 const films = [
   { t: "Интерстеллар", q: "Мы найдём способ. Как и всегда.", o: "Interstellar", y: 2014, d: "Кристофер Нолан", c: ["sci"], img: "b7/81/16/b78116b4b57ea27c1773401aad8b8f5a", f: ["Научным консультантом был физик Кип Торн — позже он получил Нобелевскую премию.", "Чёрную дыру считали по настоящим уравнениям, по этой работе вышли научные статьи.", "Кукурузное поле вырастили специально для съёмок, урожай потом продали."] },
   { t: "Начало", q: "Не бойся мечтать масштабнее, дорогуша.", o: "Inception", y: 2010, d: "Кристофер Нолан", c: ["sci"], img: "eb/4e/01/eb4e01399cd156ca7d8fa87fa09737d2", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Вращающийся коридор построили по-настоящему.", "Музыка Циммера собрана из замедленной песни Эдит Пиаф."] },
@@ -739,6 +775,7 @@ const films = [
   { t: "Амели", q: "Маленькие радости ложечкой.", tag: true, o: "Le Fabuleux Destin d'Amélie Poulain", y: 2001, d: "Жан-Пьер Жёне", c: ["love"], img: "cf/7c/6c/cf7c6c284c4554fbe252ea0d771d7636", f: ["Снимали на Монмартре в Париже.", "Красный и зелёный усилили при цветокоррекции — это почерк фильма.", "Пять номинаций на «Оскар»."] },
   { t: "Титаник", q: "Звёзды, лёд и одна ночь.", tag: true, o: "Titanic", y: 1997, d: "Джеймс Кэмерон", c: ["love"], img: "28/11/cf/2811cf1b33666433cdf2424496bfe11c", f: ["Одиннадцать «Оскаров» — рекорд, общий с «Бен-Гуром» и «Властелином колец».", "Корабль для съёмок построили почти в натуральную величину.", "Больше десяти лет был самым кассовым фильмом в истории."] },
   { t: "Драйв", q: "Ночной город, неон и тишина.", tag: true, o: "Drive", y: 2011, d: "Николас Виндинг Рефн", c: ["action"], img: "e5/c2/5a/e5c25a58249b355a4e67d037ddbe227c", f: ["Рефн получил приз за режиссуру в Каннах.", "Синтвейв-саундтрек стал культовым сам по себе.", "Снят по роману Джеймса Саллиса."] },
+  { t: "Убить Билла", q: "Месть — это блюдо, которое лучше подавать холодным.", o: "Kill Bill", y: 2003, d: "Квентин Тарантино", c: ["cult"], img: "img/killbill.jpg", f: ["Жёлтый костюм Невесты — оммаж Брюсу Ли из «Игры смерти».", "Задумывался как один фильм — его разделили на две части из‑за длины."] },
 ];
 const cats = [["all", "Все"], ["sci", "Фантастика"], ["cult", "Культовое кино"], ["love", "Для двоих"], ["action", "Драйв"], ["winter", "Зима"]];
 const $ = id => document.getElementById(id);
@@ -746,7 +783,7 @@ const fmt = n => n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
 const toast = msg => { $("toast").textContent = msg; $("toast").classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").classList.remove("show"), 2000); };
 
 // ---------- конфигуратор ----------
-let cfg = { color: "graphite", light: "warm", poster: 0, on: true };
+let cfg = { color: "graphite", light: "warm", poster: films.length - 1, on: true };
 const heroFrame = $("heroFrame");
 function renderHero() {
   heroFrame.classList.toggle("silver", cfg.color === "silver");
@@ -755,16 +792,14 @@ function renderHero() {
   document.querySelectorAll(".cmpImg").forEach(i => i.src = P(films[cfg.poster].img));
   document.querySelectorAll(".compare .frame, #stageFrame, .set .frame, .thumb .frame").forEach(f => f.classList.toggle("silver", cfg.color === "silver"));
   $("posterName").textContent = films[cfg.poster].t;
-  const hf = films[cfg.poster]; $("heroKicker").textContent = "Вы любите «" + hf.t + "»";
-  $("heroQuote").classList.toggle("long", hf.q.length > 44);
-  $("heroQuote").innerHTML = (hf.tag ? hf.q : "«" + hf.q + "»") + "<small>" + hf.t + ", " + hf.y + "</small>";
+  document.querySelector(".hero").classList.toggle("off", !cfg.on);
   document.documentElement.style.setProperty("--glow", cfg.light === "warm" ? "var(--warm)" : "var(--neutral)");
   document.querySelectorAll(".mini[data-i]").forEach(m => m.classList.toggle("on", +m.dataset.i === cfg.poster));
 }
 document.querySelectorAll(".mat .m").forEach(b => b.onclick = () => { document.querySelectorAll(".mat .m").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.color = b.dataset.color; renderHero(); });
 document.querySelectorAll("#lightSeg button").forEach(b => b.onclick = () => { document.querySelectorAll("#lightSeg button").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.light = b.dataset.light; renderHero(); });
 $("lightToggle").onclick = e => { cfg.on = e.currentTarget.classList.toggle("on"); renderHero(); };
-[0, 12, 2, 13].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + P(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
+[films.length - 1, 0, 12, 2].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + P(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
 const more = document.createElement("a"); more.className = "mini more"; more.href = "#posters"; more.textContent = "+" + (films.length - 4); $("minis").appendChild(more);
 
 // ---------- день / вечер ----------
@@ -858,6 +893,7 @@ const secIds = ["overview", "specs", "posters", "help"];
 const mainMap = { overview: "#overview", specs: "#overview", posters: "#posters", gifts: "#gifts", help: "#help" };
 const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const h = mainMap[e.target.id]; document.querySelectorAll("#mainnav a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === h)); } }), { rootMargin: "-45% 0px -50% 0px" });
 [...secIds, "gifts"].forEach(id => io2.observe($(id)));
+new IntersectionObserver(es => es.forEach(e => document.body.classList.toggle('in-hero', e.isIntersecting)), { threshold: .2 }).observe(document.querySelector('.hero'));
 
 // открыть выбранный фильм в тёмной комнате
 function openFilm(i) {
@@ -868,7 +904,7 @@ function openFilm(i) {
 // края сайта и бегущая строка
 (function () {
   const fr = i => '<div class="frame lit" data-i="' + i + '" title="' + films[i].t + '"><div class="poster"><img decoding="async" alt="" src="' + P(films[i].img) + '"></div></div>';
-  const a = [0, 12, 3, 16, 5, 13, 9, 19, 1, 15, 7, 21], b = [2, 14, 4, 17, 11, 22, 6, 10, 18, 8, 20];
+  const a = [23, 0, 12, 3, 16, 5, 13, 9, 19, 1, 15, 7, 21], b = [2, 14, 4, 17, 11, 22, 6, 10, 18, 8, 20];
   $("railL").innerHTML = [...a, ...a].map(fr).join(""); $("railR").innerHTML = [...b, ...b].map(fr).join("");
   document.querySelectorAll(".rail .frame").forEach(el => el.onclick = () => openFilm(+el.dataset.i));
   const words = films.map((f, i) => '<span' + (i % 4 === 1 ? ' class="hot"' : '') + '>' + f.t + '</span><span>✦</span>').join("");
