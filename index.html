@@ -427,7 +427,7 @@
     .badge-new { margin-bottom: 8px; }
   }
   @media (min-width: 901px) and (max-width: 1380px) { .mainnav { gap: 18px; letter-spacing: .08em; font-size: 14px; } .wordmark { font-size: 26px; } }
-  @media (min-width: 901px) and (max-width: 1150px) { .mainnav a[href="#help"], .mainnav a[href="#subscription"] { display: none; } .hdr-cta .price { display: none; } }
+  @media (min-width: 901px) and (max-width: 1150px) { .mainnav a[href="#help"] { display: none; } .hdr-cta .price { display: none; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .mq, .rail .col { animation: none !important; } }
 
   /* ===== телефон ===== */
@@ -482,7 +482,7 @@
 <div class="rail l" aria-hidden="true"><div class="col" id="railL"></div></div><div class="rail r" aria-hidden="true"><div class="col" id="railR"></div></div>
 
 <header><div class="wrap">
-  <nav class="mainnav" id="mainnav"><a href="#overview" class="on">Рамка</a><a href="#posters">Постеры</a><a href="#subscription">Подписка</a><a href="#gifts">Подарки</a><a href="#help">Поддержка</a></nav>
+  <nav class="mainnav" id="mainnav"><a href="#overview" class="on">Рамка</a><a href="#posters">Постеры</a><a href="#gifts">Подарки</a><a href="#help">Поддержка</a></nav>
   <button class="icon burger" aria-label="Меню" id="burger"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
   <a class="wordmark" href="#top">PROSWET</a>
   <div class="icons">
@@ -573,23 +573,6 @@
   </div>
 </section>
 
-<!-- 6. Подписка -->
-<section id="subscription"><div class="wrap">
-  <div class="label">Подписка</div>
-  <h2 style="margin-top:16px">Новая история каждый месяц</h2>
-  <p class="lead" style="margin-top:20px">Для тех, у кого уже есть рамка Proswet. Постер приходит в пункт выдачи рядом с домом. Выбираете сами или доверяете нашей подборке — к праздникам, премьерам и сезону.</p>
-  <div class="subgrid">
-    <div class="cal"><div class="calstage"><div class="frame lit" id="calFrame"><div class="poster"><img id="calImg" alt=""></div></div></div>
-      <div class="months"><div class="mtrack" id="mtrack"></div></div><div class="calcap" id="calcap"></div></div>
-    <div><div class="plans" id="plans">
-      <div class="plan" data-plan="1"><div><h3>1 месяц</h3><div class="d">Попробовать. Отмена в любой момент</div></div><div class="p">2&nbsp;490&nbsp;₽ <small>/ мес</small></div></div>
-      <div class="plan on" data-plan="3"><div><h3>3 месяца<span class="tag">Популярный</span></h3><div class="d">Подборка к праздникам, пауза в кабинете. Экономия 600 ₽</div></div><div class="p">2&nbsp;290&nbsp;₽ <small>/ мес</small></div></div>
-      <div class="plan" data-plan="6"><div><h3>6 месяцев</h3><div class="d">Ранний доступ к новым постерам. Экономия 1&nbsp;800 ₽</div></div><div class="p">2&nbsp;190&nbsp;₽ <small>/ мес</small></div></div>
-    </div>
-  <div class="plans-cta"><p id="planText">Выбрано: 3 месяца · 6 870 ₽ за период</p><button class="btn" id="subBtn">Оформить подписку</button></div></div>
-  </div>
-</div></section>
-
 <!-- 7. Подарки -->
 <div class="marquee" aria-hidden="true"><div class="mq" id="mq2"></div></div>
 
@@ -626,7 +609,6 @@
     <details><summary>Можно вставить свой постер?</summary><p>Да, любой лист A3. Лучше всего светится печать на плёнке для подсветки — обычная бумага на просвет выглядит тусклее. Свой дизайн можем напечатать за вас.</p></details>
     <details><summary>Сколько стоит доставка и как быстро?</summary><p>Отправляем в день оплаты. До пункта выдачи Ozon или Яндекса — 2–5 дней. Стоимость считается при оформлении.</p></details>
     <details><summary>Безопасно ли оставлять включённой?</summary><p>Да. Внутри рамки низкое напряжение 12 В, светодиоды почти не греются. На светильник есть декларация соответствия ЕАЭС.</p></details>
-    <details><summary>Как работает подписка?</summary><p>Раз в месяц отправляем новый постер. Выбрать можно заранее в личном кабинете, там же — пауза и отмена.</p></details>
     <details><summary>Как вернуть?</summary><p>В течение 7 дней после получения. Напишите нам — пришлём инструкцию и вернём деньги после возврата рамки.</p></details>
   </div>
 </div></section>
@@ -635,7 +617,7 @@
   <div class="fgrid">
     <div><a class="wordmark" href="#top" style="text-align:left;padding-left:0;display:inline-block">PROSWET</a>
 </div>
-    <div><h4>Магазин</h4><a href="#top">Рамка Proswet A3</a><a href="#posters">Постеры</a><a href="#subscription">Подписка</a><a href="#gifts">Подарки</a></div>
+    <div><h4>Магазин</h4><a href="#top">Рамка Proswet A3</a><a href="#posters">Постеры</a><a href="#gifts">Подарки</a></div>
     <div><h4>Покупателям</h4><a href="#">Доставка и оплата</a><a href="#">Возврат и гарантия</a><a href="#help">Вопросы</a><a href="#">Личный кабинет</a></div>
     <div><h4>Proswet</h4><a href="#">О нас</a><a href="#">Telegram-канал</a><a href="#">Контакты</a><a href="#">Сотрудничество</a></div>
   </div>
@@ -645,7 +627,7 @@
 <!-- поверх: вход, корзина, поиск -->
 <div class="overlay" id="loginOv"><div class="sheet">
   <button class="x" data-close="loginOv" aria-label="Закрыть">×</button>
-  <h3>Вход</h3><p>Заказы, подписка и избранное. Без пароля — пришлём код по SMS.</p>
+  <h3>Вход</h3><p>Заказы и избранное. Без пароля — пришлём код по SMS.</p>
   <input type="tel" placeholder="+7 (___) ___-__-__" inputmode="tel"><button class="btn" id="codeBtn">Получить код</button>
 </div></div>
 <div class="overlay" id="cartOv"></div>
@@ -657,7 +639,7 @@
   <div class="pickfoot"><span class="price" id="pickPrice"></span><button class="btn" id="pickAdd" disabled>В корзину</button></div>
 </div></div>
 <aside class="drawer" id="drawer"><h3>Корзина <button class="x" id="closeCart" aria-label="Закрыть" style="font-size:26px;color:var(--muted)">×</button></h3><div class="cart-items" id="cartItems"></div><div class="total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div><button class="btn" id="checkout">Оформить заказ</button></aside>
-<div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#subscription">Подписка</a><a class="btn line" href="#gifts">Подарки</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
+<div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#gifts">Подарки</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -754,30 +736,6 @@ const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   requestAnimationFrame(tick); })();
 $("putInFrame").onclick = () => { cfg.poster = current; renderHero(); toast("«" + films[current].t + "» — в комплекте с рамкой"); setTimeout(() => $("top").scrollIntoView({ behavior: "smooth" }), 500); };
 
-// ---------- подписка ----------
-const planInfo = { 1: [2490, 1], 3: [2290, 3], 6: [2190, 6] }; let plan = 3;
-// лента месяцев: каждый месяц — новый постер
-(function () {
-  const names = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
-  const start = new Date().getMonth() + 1, order = [2, 13, 0, 20, 16, 14, 21, 12, 18, 17, 3, 9];
-  const mt = $("mtrack"), N = 12;
-  for (let k = 0; k < N * 2; k++) { const sp = document.createElement("span"); sp.textContent = names[(start + k) % 12]; mt.appendChild(sp); }
-  let m = 0, vis = false;
-  new IntersectionObserver(es => es.forEach(e => vis = e.isIntersecting)).observe($("calFrame"));
-  function step(first) {
-    const f = films[order[m % N]], sp = mt.children;
-    [...sp].forEach((x, k) => x.classList.toggle("on", k === m));
-    const w = sp[0].offsetWidth + 10, box = mt.parentElement.offsetWidth;
-    mt.style.transform = "translateX(" + (box / 2 - w * m - sp[0].offsetWidth / 2) + "px)";
-    $("calcap").textContent = names[(start + m) % 12] + " — «" + f.t + "»";
-    const set = () => { $("calImg").src = P(f.img); $("calFrame").classList.remove("fade"); };
-    if (first) set(); else { $("calFrame").classList.add("fade"); setTimeout(set, 450); }
-  }
-  step(true);
-  setInterval(() => { if (!vis || document.hidden) return; m++; if (m >= N) { m = 0; mt.style.transition = "none"; step(true); mt.offsetWidth; mt.style.transition = ""; } else step(); }, 2600);
-  addEventListener("resize", () => step(true));
-})();
-document.querySelectorAll(".plan").forEach(p => p.onclick = () => { plan = +p.dataset.plan; document.querySelectorAll(".plan").forEach(x => x.classList.toggle("on", x === p)); const [m, k] = planInfo[plan]; $("planText").textContent = "Выбрано: " + k + " " + (k === 1 ? "месяц" : k === 3 ? "месяца" : "месяцев") + " · " + fmt(m * k) + " за период"; });
 
 // ---------- корзина ----------
 const cart = [];
@@ -809,7 +767,6 @@ function openPick(n, name, price) {
 document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
 $("pickAdd").onclick = () => { add({ name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "»").join(", "), price: pick.price, img: P(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
 $("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList.remove("open"); };
-$("subBtn").onclick = () => { const [m, k] = planInfo[plan]; add({ name: "Подписка на " + k + " мес.", sub: fmt(m) + " в месяц", price: m * k }); };
 const openCart = () => { $("drawer").classList.add("open"); $("cartOv").classList.add("open"); };
 const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").classList.remove("open"); };
 $("cartBtn").onclick = openCart; $("closeCart").onclick = closeCart; $("cartOv").onclick = closeCart;
@@ -826,8 +783,8 @@ $("burger").onclick = () => $("search").classList.toggle("open");
 document.querySelectorAll("#menuRes a").forEach(a => a.onclick = () => $("search").classList.remove("open"));
 
 // ---------- подсветка пунктов меню по прокрутке ----------
-const secIds = ["overview", "specs", "posters", "subscription", "help"];
-const mainMap = { overview: "#overview", specs: "#overview", posters: "#posters", subscription: "#subscription", gifts: "#gifts", help: "#help" };
+const secIds = ["overview", "specs", "posters", "help"];
+const mainMap = { overview: "#overview", specs: "#overview", posters: "#posters", gifts: "#gifts", help: "#help" };
 const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const h = mainMap[e.target.id]; document.querySelectorAll("#mainnav a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === h)); } }), { rootMargin: "-45% 0px -50% 0px" });
 [...secIds, "gifts"].forEach(id => io2.observe($(id)));
 
