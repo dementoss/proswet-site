@@ -684,6 +684,17 @@
   .co-foot .btn { width: auto !important; margin: 0 !important; flex: 1; max-width: 260px; }
   .co-err { min-height: 20px; margin-top: 12px !important; color: rgb(var(--accent)) !important; }
   @media (max-width: 600px) { .co-2 { grid-template-columns: 1fr; } .co { padding: 24px 20px !important; } }
+  .co-pay { display: none; text-align: center; }
+  .co.paying > :not(.co-pay):not(.x) { display: none !important; }
+  .co.paying .co-pay { display: block; }
+  .co-pay .co-lead { font-size: 16px; color: rgba(251,243,234,.75); margin-top: 10px; }
+  .co-pay .co-lead b { color: var(--cream); }
+  .co-pay .qr { width: 220px; height: 220px; margin: 22px auto 10px; padding: 12px; background: #fff; border-radius: 12px; box-shadow: 0 0 60px rgba(var(--glow), .25); }
+  .co-pay .qr svg { width: 100%; height: 100%; display: block; }
+  .co-pay .btn { width: 100%; margin-top: 12px; }
+  .co-pay .btn.sbp { margin-top: 22px; background: rgb(var(--accent)); color: #0a0705; }
+  .co-hint { font-size: 13px !important; color: rgba(251,243,234,.5) !important; }
+  .co-wait { margin-top: 16px !important; font-size: 13px !important; color: rgba(251,243,234,.5) !important; }
 </style>
 </head>
 <body class="in-hero">
@@ -870,6 +881,7 @@
   <label class="co-ok"><input type="checkbox" name="agree" required> <span>Согласен с офертой и обработкой персональных данных</span></label>
   <div class="co-foot"><div><small>Итого</small><span class="price" id="coTotal"></span></div><button class="btn" type="submit">Перейти к оплате</button></div>
   <p class="co-err" id="coErr"></p>
+  <div class="co-pay" id="coPay"></div>
 </form></div>
 <div class="toast" id="toast"></div>
 
@@ -994,7 +1006,7 @@ function add(item) {
   if (same) same.qty = (same.qty || 1) + 1; else cart.push({ ...item, qty: 1 });
   saveCart(); renderCart(); openCart();
 }
-$("buyBtn").onclick = () => add({ name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: T(films[cfg.poster].img) });
+$("buyBtn").onclick = () => add({ sku: "one", films: [films[cfg.poster].t], name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: T(films[cfg.poster].img) });
 // выбор постера для каждой рамки набора
 const pick = { n: 1, name: "", price: 0, sel: [], cur: 0 };
 function drawPick() {
@@ -1014,7 +1026,7 @@ function openPick(n, name, price) {
   drawPick(); $("pickOv").classList.add("open");
 }
 document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
-$("pickAdd").onclick = () => { add({ name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "»").join(", "), price: pick.price, img: T(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
+$("pickAdd").onclick = () => { add({ sku: pick.n === 3 ? "three" : /Подароч/.test(pick.name) ? "gift" : "one", films: pick.sel.map(v => films[v].t), name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "»").join(", "), price: pick.price, img: T(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
 $("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList.remove("open"); };
 const openCart = () => { $("drawer").classList.add("open"); $("cartOv").classList.add("open"); };
 const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").classList.remove("open"); };
@@ -1025,14 +1037,46 @@ function openCheckout() {
   $("coTotal").textContent = fmt(cartSum()); $("coErr").textContent = ""; $("coOv").classList.add("open");
 }
 $("coShip").querySelectorAll("button").forEach(b => b.onclick = () => $("coShip").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)));
-$("coOv").onclick = e => { if (e.target.id === "coOv" || e.target.dataset.close === "coOv") $("coOv").classList.remove("open"); };
-$("coForm").onsubmit = e => {
+$("coOv").onclick = e => { if (e.target.id === "coOv" || e.target.dataset.close === "coOv") { $("coOv").classList.remove("open"); clearInterval(payTimer); $("coForm").classList.remove("paying"); } };
+const SKU = { "Proswet A3": "one", "Три рамки Proswet": "three", "Подарочный набор Proswet": "gift" };
+const apiItems = () => cart.map(c => ({ sku: c.sku || SKU[c.name] || "one", films: c.films || (c.sub.match(/«([^»]+)»/g) || []).map(x => x.slice(1, -1)), qty: c.qty || 1 }));
+let payTimer = 0;
+$("coForm").onsubmit = async e => {
   e.preventDefault(); const f = e.target;
   const bad = [...f.querySelectorAll("[required]")].find(x => !x.checkValidity());
   if (bad) { bad.focus(); $("coErr").textContent = bad.type === "checkbox" ? "Нужно согласие с офертой" : "Проверьте поле: " + bad.closest("label").firstChild.textContent.trim(); return; }
   if (!/^\+?[78]?[\s(-]*\d{3}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/.test(f.phone.value.trim())) { f.phone.focus(); $("coErr").textContent = "Телефон в формате +7 900 000-00-00"; return; }
-  $("coErr").textContent = "Оплата подключается к запуску магазина. Данные никуда не отправлены.";
+  if (location.protocol !== "https:" && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) { $("coErr").textContent = "Оплата заработает после перехода на защищённый адрес. Данные никуда не отправлены."; return; }
+  const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Создаём платёж…"; $("coErr").textContent = "";
+  const body = { items: apiItems(), name: f.name.value, phone: f.phone.value, email: f.email.value, ship: $("coShip").querySelector(".on").dataset.v, city: f.city.value, pvz: f.pvz.value, note: f.note.value, agree: f.agree.checked };
+  try {
+    const r = await fetch("/api/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(d.error || (d.detail && d.detail[0] && "Проверьте данные заказа") || "Не получилось создать заказ");
+    showPay(d);
+  } catch (err) { $("coErr").textContent = err.message === "Failed to fetch" ? "Нет связи с магазином. Попробуйте ещё раз." : err.message; }
+  finally { btn.disabled = false; btn.textContent = "Перейти к оплате"; }
 };
+const mobile = () => matchMedia("(pointer: coarse)").matches;
+function loadQR() { return window.qrcode ? Promise.resolve() : new Promise((ok, no) => { const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"; sc.onload = ok; sc.onerror = no; document.head.appendChild(sc); }); }
+async function showPay(d) {
+  $("coForm").classList.add("paying");
+  $("coPay").innerHTML = '<h3>Заказ ' + d.number + '</h3><p class="co-lead">К оплате <b>' + fmt(d.amount) + '</b>. Быстрее всего — через СБП, без ввода карты.</p>' +
+    (d.sbp_url ? (mobile() ? '<a class="btn sbp" href="' + d.sbp_url + '">Оплатить через СБП</a><p class="co-hint">Откроется приложение вашего банка</p>'
+      : '<div class="qr" id="qr"></div><p class="co-hint">Наведите камеру телефона или откройте сканер в приложении банка</p>') : "") +
+    '<a class="btn line" href="' + d.card_url + '">Оплатить картой</a><p class="co-wait" id="coWait">Ждём оплату…</p>';
+  if (d.sbp_url && !mobile()) { try { await loadQR(); const q = qrcode(0, "M"); q.addData(d.sbp_url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").innerHTML = '<a class="btn sbp" href="' + d.sbp_url + '">Открыть СБП</a>'; } }
+  clearInterval(payTimer);
+  payTimer = setInterval(async () => {
+    try { const r = await fetch("/api/orders/" + d.number); if (!r.ok) return; const st = (await r.json()).status;
+      if (st === "paid") { clearInterval(payTimer); cart.length = 0; saveCart(); renderCart(); $("coPay").innerHTML = '<h3>Оплачено ✓</h3><p class="co-lead">Заказ <b>' + d.number + '</b> принят. Чек придёт на почту, трек-номер — в течение дня.</p><button type="button" class="btn" data-close="coOv">Отлично</button>'; }
+      else if (st === "canceled") { clearInterval(payTimer); $("coWait").textContent = "Оплата не прошла. Попробуйте ещё раз или картой."; }
+    } catch (e) {}
+  }, 3000);
+}
+const q0 = new URLSearchParams(location.search);
+if (q0.get("order") && q0.get("paid") === "1") { cart.length = 0; saveCart(); renderCart(); setTimeout(() => toast("Заказ " + q0.get("order") + " оплачен. Спасибо!"), 600); }
+
 
 // ---------- вход ----------
 $("loginBtn").onclick = () => $("loginOv").classList.add("open");
