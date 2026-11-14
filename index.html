@@ -37,7 +37,7 @@
   .topline { height: 34px; background: #0d0d0f; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); letter-spacing: .02em; }
   .topline .wrap { height: 100%; display: flex; align-items: center; justify-content: center; gap: 34px; }
   .topline b { color: var(--white); font-weight: 500; }
-  header { position: sticky; top: 0; z-index: 40; background: rgba(0,0,0,.82); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--line); }
+  header { position: sticky; top: 0; z-index: 40; background: rgba(0,0,0,.96); border-bottom: 1px solid var(--line); }
   header .wrap { height: 64px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
   .mainnav { display: flex; gap: 30px; font-size: 14px; color: var(--silver); }
   .mainnav a { position: relative; padding: 22px 0; transition: color .2s ease; }
@@ -51,7 +51,7 @@
   .icon i { position: absolute; top: 4px; right: 3px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--white); color: #000; font-size: 10px; font-style: normal; font-weight: 700; display: grid; place-items: center; padding: 0 4px; transform: scale(0); transition: transform .25s cubic-bezier(.3,1.6,.5,1); }
   .icon i.on { transform: scale(1); }
   .burger { display: none; }
-  .subnav { position: sticky; top: 64px; z-index: 35; background: rgba(10,10,11,.86); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--line); }
+  .subnav { position: sticky; top: 64px; z-index: 35; background: rgba(10,10,11,.97); border-bottom: 1px solid var(--line); }
   .subnav .wrap { height: 52px; display: flex; align-items: center; gap: 28px; }
   .subnav .name { font-weight: 600; font-size: 17px; margin-right: auto; white-space: nowrap; }
   .subnav nav { display: flex; gap: 24px; font-size: 13px; color: var(--muted); overflow-x: auto; scrollbar-width: none; }
@@ -210,10 +210,11 @@
   .track { position: absolute; inset: 0; overflow-y: auto; scrollbar-width: none; padding: 10px 26px; -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
   .track::-webkit-scrollbar { display: none; }
   .thumb { display: block; width: 100%; margin: 22px 0; }
-  .thumb .frame { --w: 100%; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 26px 4px rgba(var(--glow), .22); }
-  .thumb .frame .poster img { filter: brightness(.8); }
-  .thumb:hover .frame .poster img, .thumb.active .frame .poster img { filter: brightness(1.05); }
-  .thumb.active .frame { box-shadow: 0 0 0 2px #fff, 0 0 40px 8px rgba(var(--glow), .45); }
+  .thumb .frame, .thumb .frame.lit { --w: 100%; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 16px 2px rgba(var(--glow), .25); }
+  .thumb .frame .poster img { opacity: .82; filter: none; }
+  .thumb .frame.lit .poster::after { display: none; }
+  .thumb:hover .frame .poster img, .thumb.active .frame .poster img { opacity: 1; }
+  .thumb.active .frame { box-shadow: 0 0 0 2px #fff, 0 0 22px 4px rgba(var(--glow), .45); }
 
   /* ===== подписка ===== */
   .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 50px; }
@@ -233,7 +234,7 @@
   .sets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 50px; }
   .set { border-radius: 22px; overflow: hidden; background: var(--carbon); box-shadow: inset 0 0 0 1px var(--line); display: flex; flex-direction: column; }
   .set .pic { height: 230px; display: flex; align-items: center; justify-content: center; gap: 10px; background: radial-gradient(ellipse at 50% 60%, rgba(var(--glow), .14), transparent 70%), #070707; }
-  .set .pic .frame { --w: 108px; --ry: 0deg; --rx: 0deg; }
+  .set .pic .frame, .set .pic .frame.lit { --w: 108px; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 30px 6px rgba(var(--glow), .25); }
   .set .pic .frame.s { --w: 74px; opacity: .85; }
   .set .body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
   .set h3 { font-size: 21px; font-weight: 600; }
@@ -562,11 +563,11 @@
   <div class="label">Подарки</div>
   <h2 style="margin-top:16px">Подарок, который включают каждый вечер</h2>
   <div class="sets">
-    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img src="https://i.pinimg.com/736x/b7/81/16/b78116b4b57ea27c1773401aad8b8f5a.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/b7/81/16/b78116b4b57ea27c1773401aad8b8f5a.jpg" alt=""></div></div></div>
       <div class="body"><h3>Рамка + постер</h3><p>Proswet A3 и один постер на выбор.</p><div class="row"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn line" data-add="Рамка + постер" data-price="3449">В корзину</button></div></div></div>
-    <div class="set"><div class="pic"><div class="frame s"><div class="poster"><img src="https://i.pinimg.com/736x/27/23/2e/27232e100735f944dd2289d885ec79ff.jpg" alt=""></div></div><div class="frame lit"><div class="poster"><img src="https://i.pinimg.com/736x/7b/d4/bb/7bd4bb6c76199797a8b3641c161e9cb9.jpg" alt=""></div></div><div class="frame s"><div class="poster"><img src="https://i.pinimg.com/736x/49/5b/6e/495b6e3ef207f91398df69899dcf8916.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame s"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/27/23/2e/27232e100735f944dd2289d885ec79ff.jpg" alt=""></div></div><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/7b/d4/bb/7bd4bb6c76199797a8b3641c161e9cb9.jpg" alt=""></div></div><div class="frame s"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/49/5b/6e/495b6e3ef207f91398df69899dcf8916.jpg" alt=""></div></div></div>
       <div class="body"><h3>Рамка + 3 постера</h3><p>Три истории на смену — под настроение, сезон и праздник.</p><div class="row"><span class="price">5&nbsp;490&nbsp;₽<s>6&nbsp;029&nbsp;₽</s></span><button class="btn" data-add="Рамка + 3 постера" data-price="5490">В корзину</button></div></div></div>
-    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img src="https://i.pinimg.com/736x/a4/4b/6e/a44b6e258c78539ea7212c42c0315da0.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="https://i.pinimg.com/736x/a4/4b/6e/a44b6e258c78539ea7212c42c0315da0.jpg" alt=""></div></div></div>
       <div class="body"><h3>Подарочный набор</h3><p>Рамка, постер, жёсткая коробка с лентой и открытка с вашим текстом.</p><div class="row"><span class="price">3&nbsp;990&nbsp;₽</span><button class="btn line" data-add="Подарочный набор" data-price="3990">В корзину</button></div></div></div>
   </div>
 </div></section>
@@ -673,7 +674,7 @@ function renderHero() {
 document.querySelectorAll(".sw").forEach(b => b.onclick = () => { document.querySelectorAll(".sw").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.color = b.dataset.color; renderHero(); });
 document.querySelectorAll("#lightSeg button").forEach(b => b.onclick = () => { document.querySelectorAll("#lightSeg button").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.light = b.dataset.light; renderHero(); });
 $("lightToggle").onclick = e => { cfg.on = e.currentTarget.classList.toggle("on"); renderHero(); };
-[0, 2, 4, 8].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img alt="" src="' + P(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
+[0, 2, 4, 8].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + P(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
 const more = document.createElement("a"); more.className = "mini more"; more.href = "#posters"; more.textContent = "+" + (films.length - 4); $("minis").appendChild(more);
 
 // ---------- день / вечер ----------
@@ -707,19 +708,20 @@ function show(i, instant) {
 function buildTrack() {
   track.innerHTML = ""; const ids = list(); const reps = ids.length < 6 ? 4 : 2;
   for (let k = 0; k < reps; k++) ids.forEach(i => { const b = document.createElement("button"); b.className = "thumb"; b.dataset.i = i; b.setAttribute("aria-label", films[i].t);
-    b.innerHTML = '<div class="frame lit' + (cfg.color === "silver" ? " silver" : "") + '"><div class="poster"><img alt="" src="' + P(films[i].img) + '"></div></div>';
+    b.innerHTML = '<div class="frame lit' + (cfg.color === "silver" ? " silver" : "") + '"><div class="poster"><img decoding="async" alt="" src="' + P(films[i].img) + '"></div></div>';
     b.onclick = () => { show(i); if (innerWidth <= 900) $("stageFrame").scrollIntoView({ behavior: "smooth", block: "center" }); }; track.appendChild(b); });
   current = -1; show(ids[0], true); track.scrollTop = 0; track.scrollLeft = 0;
 }
 cats.forEach(([k, n]) => { const b = document.createElement("button"); const cnt = k === "all" ? films.length : films.filter(f => f.c.includes(k)).length; b.innerHTML = n + "<small>" + cnt + "</small>"; b.className = k === "all" ? "on" : ""; b.onclick = () => { filter = k; document.querySelectorAll("#filters button").forEach(x => x.classList.toggle("on", x === b)); buildTrack(); }; $("filters").appendChild(b); });
 buildTrack();
-let paused = false, resumeAt = 0;
+let paused = false, resumeAt = 0, roomVisible = false;
+new IntersectionObserver(es => es.forEach(e => roomVisible = e.isIntersecting)).observe(document.querySelector('.room'));
 const pause = () => { paused = true; resumeAt = Date.now() + 2500; };
 ["pointerenter", "touchstart", "wheel"].forEach(e => track.addEventListener(e, pause, { passive: true }));
 track.addEventListener("pointerleave", () => { resumeAt = Date.now() + 600; });
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 (function tick() { if (paused && Date.now() > resumeAt) paused = false;
-  if (!paused && !reduced) { if (innerWidth <= 900) { track.scrollLeft += .5; if (track.scrollLeft >= track.scrollWidth / 2) track.scrollLeft -= track.scrollWidth / 2; } else { track.scrollTop += .5; if (track.scrollTop >= track.scrollHeight / 2) track.scrollTop -= track.scrollHeight / 2; } }
+  if (!paused && !reduced && roomVisible && !document.hidden) { if (innerWidth <= 900) { track.scrollLeft += .5; if (track.scrollLeft >= track.scrollWidth / 2) track.scrollLeft -= track.scrollWidth / 2; } else { track.scrollTop += .5; if (track.scrollTop >= track.scrollHeight / 2) track.scrollTop -= track.scrollHeight / 2; } }
   requestAnimationFrame(tick); })();
 $("putInFrame").onclick = () => { cfg.poster = current; renderHero(); toast("«" + films[current].t + "» — в комплекте с рамкой"); setTimeout(() => $("top").scrollIntoView({ behavior: "smooth" }), 500); };
 
@@ -731,7 +733,7 @@ document.querySelectorAll(".plan").forEach(p => p.onclick = () => { plan = +p.da
 const cart = [];
 function renderCart() {
   $("count").textContent = cart.length; $("count").classList.toggle("on", cart.length > 0);
-  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th">' + (c.img ? '<img alt="" src="' + c.img + '">' : "") + '</div><div><b>' + c.name + '</b><small>' + c.sub + '</small></div><span class="price">' + fmt(c.price) + '</span></div>').join("") : '<div class="empty">Корзина пуста</div>';
+  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th">' + (c.img ? '<img decoding="async" alt="" src="' + c.img + '">' : "") + '</div><div><b>' + c.name + '</b><small>' + c.sub + '</small></div><span class="price">' + fmt(c.price) + '</span></div>').join("") : '<div class="empty">Корзина пуста</div>';
   $("cartTotal").textContent = fmt(cart.reduce((s, c) => s + c.price, 0));
 }
 function add(item) { cart.push(item); renderCart(); toast("Добавлено: " + item.name); }
