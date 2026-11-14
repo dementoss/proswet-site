@@ -30,22 +30,23 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   .label { display: inline-block; background: rgb(var(--accent)); color: #0a0705 !important; padding: 6px 12px 5px; transform: rotate(-1.5deg); font-weight: 700 !important; box-shadow: 0 6px 18px rgba(var(--accent), .25); }
   .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #050403; padding: 26px 0; }
-  .marquee .mq { display: flex; gap: 42px; width: max-content; animation: mq 60s linear infinite; font-family: var(--disp); font-weight: 700; font-size: clamp(40px, 6vw, 88px); line-height: 1; text-transform: uppercase; white-space: nowrap; }
+  .marquee .mq { display: flex; gap: 42px; width: max-content; animation: mq 60s linear infinite; will-change: transform; backface-visibility: hidden; font-family: var(--disp); font-weight: 700; font-size: clamp(40px, 6vw, 88px); line-height: 1; text-transform: uppercase; white-space: nowrap; }
   .marquee .mq span { color: transparent; -webkit-text-stroke: 1.2px rgba(255,255,255,.28); }
   .marquee .mq span.hot { color: rgb(var(--accent)); -webkit-text-stroke: 0; text-shadow: 0 0 40px rgba(var(--accent), .45); }
-  @keyframes mq { to { transform: translateX(-50%); } }
+  @keyframes mq { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
   /* светящиеся постеры по краям всего сайта */
-  .rail { display: none; position: fixed; top: var(--hh); bottom: 0; width: var(--rail); z-index: 5; overflow: hidden; pointer-events: none;
-    -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent); }
+  .rail { display: none; position: fixed; top: var(--hh); bottom: 0; width: var(--rail); z-index: 5; overflow: hidden; pointer-events: none; contain: layout paint; }
+  .rail::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(#000, transparent 14%, transparent 86%, #000); }
   .rail.l { left: 0; } .rail.r { right: 0; }
   .rail::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 120% 50% at var(--side) 50%, rgba(var(--glow), .16), transparent 70%); }
   .rail.l { --side: 0%; } .rail.r { --side: 100%; }
-  .rail .col { position: relative; display: flex; flex-direction: column; gap: 46px; padding: 0 22%; animation: railup 90s linear infinite; }
+  .rail .col { position: relative; display: flex; flex-direction: column; gap: 46px; padding: 0 22%; animation: railup 90s linear infinite; will-change: transform; backface-visibility: hidden; transform: translate3d(0,0,0); }
   .rail.r .col { animation-duration: 110s; animation-direction: reverse; }
-  .rail .frame { --w: 100%; --g: .45; pointer-events: auto; cursor: pointer; transition: transform .3s ease, filter .3s ease; }
-  .rail .frame:hover { transform: scale(1.06); filter: brightness(1.15); }
+  .rail .frame { --w: 100%; --g: .45; pointer-events: auto; cursor: pointer; transition: transform .3s ease, opacity .3s ease; opacity: .9; }
+  .rail .frame:hover { transform: scale(1.06); opacity: 1; }
   .rail:hover .col { animation-play-state: paused; }
-  @keyframes railup { to { transform: translateY(-50%); } }
+  @keyframes railup { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,-50%,0); } }
+  .rail .frame.lit, .thumb .frame.lit, .set .pic .frame.lit { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 22px 3px rgba(var(--glow), .3); }
   @media (min-width: 1180px) {
     :root { --rail: clamp(110px, 9vw, 170px); }
     .rail { display: block; }
@@ -109,7 +110,7 @@
   .frame .glass { display: none; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.10) 38%, rgba(255,255,255,0) 46%, rgba(255,255,255,0) 70%, rgba(255,255,255,.05) 76%, rgba(255,255,255,0) 82%); }
   .frame.lit .poster img { filter: brightness(1.04) saturate(1.06) contrast(1.03); }
   
-  .frame.lit { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 calc(80px * var(--g)) calc(10px * var(--g)) rgba(var(--glow), .26), 0 0 calc(220px * var(--g)) calc(70px * var(--g)) rgba(var(--glow), .13), 0 0 calc(420px * var(--g)) calc(140px * var(--g)) rgba(var(--glow), .06); }
+  .frame.lit { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 calc(80px * var(--g)) calc(10px * var(--g)) rgba(var(--glow), .26), 0 0 calc(220px * var(--g)) calc(70px * var(--g)) rgba(var(--glow), .13); }
   .frame.flat { --ry: 0deg; --rx: 0deg; }
   .cable { position: absolute; left: 50%; bottom: -70px; width: 2px; height: 70px; background: linear-gradient(#222, #000); }
 
@@ -290,8 +291,9 @@
   .info .row .btn { height: 46px; padding: 0 22px; font-size: 15px; }
   .info .hint { font-size: 13px; color: var(--dim); margin-top: 12px; }
   .ribbon { position: relative; border-left: 1px solid var(--line); background: rgba(0,0,0,.3); }
-  .track { position: absolute; inset: 0; overflow-y: auto; scrollbar-width: none; padding: 10px 26px; -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
+  .track { position: absolute; inset: 0; overflow-y: auto; scrollbar-width: none; padding: 10px 26px; }
   .track::-webkit-scrollbar { display: none; }
+  .ribbon::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(#070504, transparent 10%, transparent 90%, #070504); }
   .thumb { display: block; width: 100%; margin: 22px 0; }
   .thumb .frame { --w: 100%; --g: .22; }
   .thumb .frame .poster img { opacity: .82; filter: none; }
@@ -471,8 +473,9 @@
     .stage { display: contents; }
     .stage .frame { order: 1; --w: min(220px, 58vw); margin: 44px auto 0; }
     .ribbon { order: 2; height: 160px; border-left: 0; border-top: 1px solid var(--line); margin-top: 34px; }
-    .track { display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden; padding: 16px 20px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .track { display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden; padding: 16px 20px; }
     .thumb { flex: 0 0 82px; margin: 0; }
+    .ribbon::after { background: linear-gradient(90deg, #070504, transparent 10%, transparent 90%, #070504); }
     .info { order: 3; width: 100%; height: 540px; padding: 20px 20px 40px; }
     .fgrid { grid-template-columns: 1fr 1fr; }
     .fgrid > div:first-child { grid-column: span 2; }
