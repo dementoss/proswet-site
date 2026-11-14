@@ -460,12 +460,6 @@
     <p class="sub">Пусть он светится у вас дома. <b style="color:var(--white);font-weight:600">Proswet A3</b> — световая рамка 1 см толщиной со сменным постером.</p>
     <div class="from"><span class="price" id="totalPrice">3&nbsp;449&nbsp;₽</span> рамка с постером</div>
 
-    <div class="opt"><div class="t">Профиль <span id="colorName">Графит</span></div>
-      <div class="mat"><button class="m on" data-color="graphite"><i class="chip graphite"></i>Графит</button><button class="m" data-color="silver"><i class="chip silver"></i>Серебро</button></div></div>
-
-    <div class="opt"><div class="t">Свет</div>
-      <div class="seg light" id="lightSeg"><button class="on" data-light="warm"><i class="bulb warm"></i><span>Тёплый<small>3000 K · вечер</small></span></button><button data-light="neutral"><i class="bulb neutral"></i><span>Нейтральный<small>4000 K · день</small></span></button></div></div>
-
     <div class="opt"><div class="t">Ваш фильм <span id="posterName"></span></div>
       <div class="minis" id="minis"></div></div>
 
@@ -505,7 +499,7 @@
         <tr><td>Формат постера</td><td>A3, 297 × 420 мм</td></tr>
         <tr><td>Размер рамки</td><td>≈ 321 × 444 мм</td></tr>
         <tr><td>Толщина</td><td>≈ 10 мм</td></tr>
-        <tr><td>Профиль</td><td>Анодированный алюминий, графит или серебро</td></tr>
+        <tr><td>Профиль</td><td>Анодированный алюминий, чёрный матовый</td></tr>
         <tr><td>Фронт</td><td>Защитное стекло</td></tr>
         <tr><td>Смена постера</td><td>Спереди, около минуты, рамку не снимать со стены</td></tr>
         <tr><td>Крепление</td><td>Настенное, 2 точки; горизонтально или вертикально</td></tr>
@@ -513,7 +507,7 @@
       </table></div>
       <div class="tabpane" data-pane="light"><table class="spec">
         <tr><td>Подсветка</td><td>Светодиоды по периметру + рассеиватель</td></tr>
-        <tr><td>Цвет света</td><td>Тёплый 3000 K или нейтральный 4000 K</td></tr>
+        <tr><td>Цвет света</td><td>Тёплый, уютный</td></tr>
         <tr><td>Мощность</td><td>≈ 6–8 Вт</td></tr>
         <tr><td>Питание</td><td>Адаптер 220 В → 12 В, евровилка</td></tr>
         <tr><td>Кабель</td><td>2 м, с выключателем</td></tr>
@@ -674,7 +668,6 @@ function renderHero() {
   $("heroImg").src = P(films[cfg.poster].img);
   document.querySelectorAll(".cmpImg").forEach(i => i.src = P(films[cfg.poster].img));
   document.querySelectorAll(".compare .frame, #stageFrame, .set .frame, .thumb .frame").forEach(f => f.classList.toggle("silver", cfg.color === "silver"));
-  $("colorName").textContent = cfg.color === "silver" ? "Серебро" : "Графит";
   $("posterName").textContent = films[cfg.poster].t;
   const hf = films[cfg.poster]; $("heroKicker").textContent = "Вы любите «" + hf.t + "»";
   $("heroQuote").classList.toggle("long", hf.q.length > 44);
@@ -761,7 +754,7 @@ function renderCart() {
   $("cartTotal").textContent = fmt(cart.reduce((s, c) => s + c.price, 0));
 }
 function add(item) { cart.push(item); renderCart(); toast("Добавлено: " + item.name); }
-$("buyBtn").onclick = () => add({ name: "Proswet A3 · " + (cfg.color === "silver" ? "серебро" : "графит"), sub: (cfg.light === "warm" ? "Тёплый свет" : "Нейтральный свет") + " · постер «" + films[cfg.poster].t + "»", price: 3449, img: P(films[cfg.poster].img) });
+$("buyBtn").onclick = () => add({ name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: P(films[cfg.poster].img) });
 document.querySelectorAll("[data-add]").forEach(b => b.onclick = () => add({ name: b.dataset.add, sub: "Набор", price: +b.dataset.price }));
 $("subBtn").onclick = () => { const [m, k] = planInfo[plan]; add({ name: "Подписка на " + k + " мес.", sub: fmt(m) + " в месяц", price: m * k }); };
 const openCart = () => { $("drawer").classList.add("open"); $("cartOv").classList.add("open"); };
