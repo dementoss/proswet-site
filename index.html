@@ -42,7 +42,9 @@
   .rail.l { --side: 0%; } .rail.r { --side: 100%; }
   .rail .col { position: relative; display: flex; flex-direction: column; gap: 46px; padding: 0 22%; animation: railup 90s linear infinite; }
   .rail.r .col { animation-duration: 110s; animation-direction: reverse; }
-  .rail .frame { --w: 100%; --g: .45; }
+  .rail .frame { --w: 100%; --g: .45; pointer-events: auto; cursor: pointer; transition: transform .3s ease, filter .3s ease; }
+  .rail .frame:hover { transform: scale(1.06); filter: brightness(1.15); }
+  .rail:hover .col { animation-play-state: paused; }
   @keyframes railup { to { transform: translateY(-50%); } }
   @media (min-width: 1180px) {
     :root { --rail: clamp(110px, 9vw, 170px); }
@@ -788,11 +790,18 @@ const mainMap = { overview: "#overview", specs: "#overview", posters: "#posters"
 const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const h = mainMap[e.target.id]; document.querySelectorAll("#mainnav a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === h)); } }), { rootMargin: "-45% 0px -50% 0px" });
 [...secIds, "gifts"].forEach(id => io2.observe($(id)));
 
+// открыть выбранный фильм в тёмной комнате
+function openFilm(i) {
+  filter = "all"; document.querySelectorAll("#filters button").forEach((x, k) => x.classList.toggle("on", k === 0));
+  buildTrack(); show(i, true); cfg.poster = i; renderHero();
+  $("room").scrollIntoView({ behavior: "smooth", block: "center" });
+}
 // края сайта и бегущая строка
 (function () {
-  const fr = i => '<div class="frame lit"><div class="poster"><img decoding="async" alt="" src="' + P(films[i].img) + '"></div></div>';
+  const fr = i => '<div class="frame lit" data-i="' + i + '" title="' + films[i].t + '"><div class="poster"><img decoding="async" alt="" src="' + P(films[i].img) + '"></div></div>';
   const a = [0, 12, 3, 16, 5, 13, 9, 19, 1, 15, 7, 21], b = [2, 14, 4, 17, 11, 22, 6, 10, 18, 8, 20];
   $("railL").innerHTML = [...a, ...a].map(fr).join(""); $("railR").innerHTML = [...b, ...b].map(fr).join("");
+  document.querySelectorAll(".rail .frame").forEach(el => el.onclick = () => openFilm(+el.dataset.i));
   const words = films.map((f, i) => '<span' + (i % 4 === 1 ? ' class="hot"' : '') + '>' + f.t + '</span><span>✦</span>').join("");
   $("mq").innerHTML = words + words;
   const w2 = [...films].reverse().map((f, i) => '<span' + (i % 4 === 2 ? ' class="hot"' : '') + '>' + f.t + '</span><span>✦</span>').join("");
