@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ru">
 <head>
+<link rel="preload" as="image" href="img/w/hero-room.webp" fetchpriority="high">
+<link rel="preload" as="image" href="img/w/killbill.webp" fetchpriority="high">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROSWET — световая рамка для постеров</title>
@@ -110,7 +112,7 @@
   .frame .poster::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.7), inset 0 1px 4px rgba(0,0,0,.55); }
   .frame.silver { --prof-a: #eceef1; --prof-b: #c3c6cb; --prof-c: #9a9da3; --edge: #7d7f85; }
   .frame .poster { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 1px; background: #111; box-shadow: inset 0 0 0 1px rgba(0,0,0,.6); }
-  .frame .poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: filter .6s ease, opacity .3s ease; filter: brightness(.8) saturate(.92); }
+  .frame .poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: filter .6s ease, opacity .18s ease; filter: brightness(.8) saturate(.92); }
   .frame .glass { display: none; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.10) 38%, rgba(255,255,255,0) 46%, rgba(255,255,255,0) 70%, rgba(255,255,255,.05) 76%, rgba(255,255,255,0) 82%); }
   .frame.lit .poster img { filter: brightness(1.04) saturate(1.06) contrast(1.03); }
   
@@ -548,7 +550,7 @@
   /* ===== первый экран 14.11: фильм как часть интерьера ===== */
   body > section.hero { margin-left: 0; margin-right: 0; }
   .hero { position: relative; overflow: hidden; isolation: isolate; min-height: calc(100svh - var(--hh)); background: #0b0705; }
-  .hero-bg { position: absolute; inset: 0; z-index: -1; background: url(img/hero-room.jpg) 58% 50% / cover no-repeat; transition: filter .7s ease; }
+  .hero-bg { position: absolute; inset: 0; z-index: -1; background: url(img/w/hero-room.webp) 58% 50% / cover no-repeat; transition: filter .7s ease; }
   .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,4,3,.86) 0%, rgba(6,4,3,.62) 30%, rgba(6,4,3,.08) 56%, transparent 70%), linear-gradient(180deg, transparent 72%, #000 100%); }
   .hero.off .hero-bg { filter: brightness(.42) saturate(.7); }
   .hero .wrap { max-width: 1400px; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -603,7 +605,7 @@
   .sc:hover, .set:hover, .service > div:hover { transform: translateY(-3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 0 0 1px rgba(var(--glow), .25), 0 30px 70px rgba(0,0,0,.5), 0 0 60px rgba(var(--glow), .10) !important; }
   .sc::before { display: none; }
   .sh { text-transform: none; letter-spacing: 0; font-size: 26px; color: var(--cream); }
-  .set .pic { background: radial-gradient(ellipse 60% 70% at 50% 55%, rgba(var(--glow), .22), transparent 72%), url(img/hero-room.jpg) 60% 40% / cover !important; position: relative; }
+  .set .pic { background: radial-gradient(ellipse 60% 70% at 50% 55%, rgba(var(--glow), .22), transparent 72%), url(img/w/hero-room.webp) 60% 40% / cover !important; position: relative; }
   .set .pic::before { content: ""; position: absolute; inset: 0; background: rgba(6,4,3,.55); }
   .set .pic .frame { position: relative; }
   .service > div { padding: 30px 26px !important; border: 0 !important; }
@@ -618,9 +620,9 @@
   #specs { background: linear-gradient(180deg, #070504, #0d0907 50%, #070504); }
   #gifts { background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(var(--glow), .08), transparent 70%), #0a0705 !important; }
   .compare .day { background: radial-gradient(ellipse 60% 60% at 50% 40%, #efe7dc, #cfc5b8) !important; }
-  .compare .night { background: radial-gradient(ellipse 40% 50% at 50% 48%, rgba(var(--glow), .35), transparent 72%), linear-gradient(rgba(6,4,3,.5), rgba(6,4,3,.5)), url(img/hero-room.jpg) 62% 50% / cover !important; }
+  .compare .night { background: radial-gradient(ellipse 40% 50% at 50% 48%, rgba(var(--glow), .35), transparent 72%), linear-gradient(rgba(6,4,3,.5), rgba(6,4,3,.5)), url(img/w/hero-room.webp) 62% 50% / cover !important; }
   .compare .mode button.on { background: var(--cream); color: #0a0705; }
-  .room { background: linear-gradient(90deg, rgba(6,4,3,.72), rgba(6,4,3,.5) 50%, rgba(6,4,3,.85)), url(img/hero-room.jpg) 60% 50% / cover !important; border: 0 !important; }
+  .room { background: linear-gradient(90deg, rgba(6,4,3,.72), rgba(6,4,3,.5) 50%, rgba(6,4,3,.85)), url(img/w/hero-room.webp) 60% 50% / cover !important; border: 0 !important; }
   .ribbon { background: rgba(6,4,3,.55) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   .info h3 { text-transform: none; color: var(--cream); }
   .filters button.on { background: var(--cream); color: #0a0705; }
@@ -791,11 +793,11 @@
   <div class="label">Подарки</div>
   <h2 style="margin-top:16px">Подарок, который включают каждый вечер</h2>
   <div class="sets">
-    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/b78116b4b57ea27c1773401aad8b8f5a.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/t/b78116b4b57ea27c1773401aad8b8f5a.webp" alt=""></div></div></div>
       <div class="body"><h3>Одна рамка</h3><p>Proswet A3 с постером вашего фильма.</p><div class="row"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="3449">Выбрать фильм</button></div></div></div>
-    <div class="set"><div class="pic"><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/27232e100735f944dd2289d885ec79ff.jpg" alt=""></div></div><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/7bd4bb6c76199797a8b3641c161e9cb9.jpg" alt=""></div></div><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/495b6e3ef207f91398df69899dcf8916.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="img/t/27232e100735f944dd2289d885ec79ff.webp" alt=""></div></div><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/t/7bd4bb6c76199797a8b3641c161e9cb9.webp" alt=""></div></div><div class="frame s lit"><div class="poster"><img decoding="async" loading="lazy" src="img/t/495b6e3ef207f91398df69899dcf8916.webp" alt=""></div></div></div>
       <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">9&nbsp;490&nbsp;₽<s>10&nbsp;347&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="9490">Выбрать 3 фильма</button></div></div></div>
-    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/p/a44b6e258c78539ea7212c42c0315da0.jpg" alt=""></div></div></div>
+    <div class="set"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/t/a44b6e258c78539ea7212c42c0315da0.webp" alt=""></div></div></div>
       <div class="body"><h3>Подарочный набор</h3><p>Рамка с постером, жёсткая коробка с лентой и открытка с вашим текстом.</p><div class="row"><span class="price">3&nbsp;990&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="3990">Выбрать фильм</button></div></div></div>
   </div>
 </div></section>
@@ -872,7 +874,10 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const P = h => h.includes(".") ? h : "img/p/" + h.split("/").pop() + ".jpg";
+const P = h => "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp";
+const T = h => P(h).replace("img/w/", "img/t/");
+const loaded = {};
+const preload = src => loaded[src] || (loaded[src] = new Promise(r => { const im = new Image(); im.onload = im.onerror = () => (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(r); im.src = src; }));
 const films = [
   { t: "Интерстеллар", q: "Мы найдём способ. Как и всегда.", o: "Interstellar", y: 2014, d: "Кристофер Нолан", c: ["sci"], img: "img/interstellar.jpg", f: ["Научным консультантом был физик Кип Торн — позже он получил Нобелевскую премию.", "Чёрную дыру считали по настоящим уравнениям, по этой работе вышли научные статьи.", "Кукурузное поле вырастили специально для съёмок, урожай потом продали."] },
   { t: "Начало", q: "Не бойся мечтать масштабнее, дорогуша.", o: "Inception", y: 2010, d: "Кристофер Нолан", c: ["sci"], img: "eb/4e/01/eb4e01399cd156ca7d8fa87fa09737d2", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Вращающийся коридор построили по-настоящему.", "Музыка Циммера собрана из замедленной песни Эдит Пиаф."] },
@@ -914,8 +919,10 @@ const heroFrame = $("heroFrame");
 function renderHero() {
   heroFrame.classList.toggle("silver", cfg.color === "silver");
   heroFrame.classList.toggle("lit", cfg.on);
-  $("heroImg").src = P(films[cfg.poster].img);
-  document.querySelectorAll(".cmpImg").forEach(i => i.src = P(films[cfg.poster].img));
+  const want = P(films[cfg.poster].img), hi = $("heroImg");
+  if (!hi.getAttribute("src")) hi.src = want;
+  else if (hi.getAttribute("src") !== want) { hi.style.opacity = ".55"; preload(want).then(() => { if (P(films[cfg.poster].img) === want) { hi.src = want; hi.style.opacity = ""; document.querySelectorAll(".cmpImg").forEach(i => i.src = want); } }); }
+  if (!document.querySelector(".cmpImg").getAttribute("src")) document.querySelectorAll(".cmpImg").forEach(i => i.src = want);
   document.querySelectorAll(".compare .frame, #stageFrame, .set .frame, .thumb .frame").forEach(f => f.classList.toggle("silver", cfg.color === "silver"));
   $("posterName").textContent = films[cfg.poster].t;
   document.querySelector(".hero").classList.toggle("off", !cfg.on);
@@ -925,7 +932,7 @@ function renderHero() {
 document.querySelectorAll(".mat .m").forEach(b => b.onclick = () => { document.querySelectorAll(".mat .m").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.color = b.dataset.color; renderHero(); });
 document.querySelectorAll("#lightSeg button").forEach(b => b.onclick = () => { document.querySelectorAll("#lightSeg button").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.light = b.dataset.light; renderHero(); });
 $("lightToggle").onclick = e => { cfg.on = e.currentTarget.classList.toggle("on"); renderHero(); };
-[films.length - 1, 0, 12, 15, films.length - 5].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + P(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
+[films.length - 1, 0, 12, 15, films.length - 5].forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
 const more = document.createElement("a"); more.className = "mini more"; more.href = "#posters"; more.textContent = "+" + (films.length - 5); $("minis").appendChild(more);
 
 // ---------- день / вечер ----------
@@ -951,7 +958,7 @@ function show(i, instant) {
 function buildTrack() {
   track.innerHTML = ""; const ids = list(); const reps = ids.length < 6 ? 4 : 2;
   for (let k = 0; k < reps; k++) ids.forEach(i => { const b = document.createElement("button"); b.className = "thumb"; b.dataset.i = i; b.setAttribute("aria-label", films[i].t);
-    b.innerHTML = '<div class="frame lit' + (cfg.color === "silver" ? " silver" : "") + '"><div class="poster"><img decoding="async" alt="" src="' + P(films[i].img) + '"></div></div>';
+    b.innerHTML = '<div class="frame lit' + (cfg.color === "silver" ? " silver" : "") + '"><div class="poster"><img decoding="async" alt="" src="' + T(films[i].img) + '"></div></div>';
     b.onclick = () => { show(i); if (innerWidth <= 900) $("stageFrame").scrollIntoView({ behavior: "smooth", block: "center" }); }; track.appendChild(b); });
   current = -1; show(ids[0], true); track.scrollTop = 0; track.scrollLeft = 0;
 }
@@ -987,7 +994,7 @@ function add(item) {
   if (same) same.qty = (same.qty || 1) + 1; else cart.push({ ...item, qty: 1 });
   saveCart(); renderCart(); openCart();
 }
-$("buyBtn").onclick = () => add({ name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: P(films[cfg.poster].img) });
+$("buyBtn").onclick = () => add({ name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: T(films[cfg.poster].img) });
 // выбор постера для каждой рамки набора
 const pick = { n: 1, name: "", price: 0, sel: [], cur: 0 };
 function drawPick() {
@@ -1002,12 +1009,12 @@ function openPick(n, name, price) {
   Object.assign(pick, { n, name, price, sel: Array(n).fill(null), cur: 0 });
   $("pickTitle").textContent = name; $("pickHint").textContent = n > 1 ? "Для каждой рамки — свой фильм. Нажмите на рамку, затем на постер." : "Выберите фильм для рамки.";
   $("pickPrice").textContent = fmt(price);
-  $("pgrid").innerHTML = films.map((f, i) => '<button data-i="' + i + '" title="' + f.t + '"><img loading="lazy" alt="' + f.t + '" src="' + P(f.img) + '"></button>').join("");
+  $("pgrid").innerHTML = films.map((f, i) => '<button data-i="' + i + '" title="' + f.t + '"><img loading="lazy" alt="' + f.t + '" src="' + T(f.img) + '"></button>').join("");
   document.querySelectorAll("#pgrid button").forEach(b => b.onclick = () => { pick.sel[pick.cur] = +b.dataset.i; const nxt = pick.sel.indexOf(null); if (nxt >= 0) pick.cur = nxt; drawPick(); });
   drawPick(); $("pickOv").classList.add("open");
 }
 document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
-$("pickAdd").onclick = () => { add({ name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "»").join(", "), price: pick.price, img: P(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
+$("pickAdd").onclick = () => { add({ name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "»").join(", "), price: pick.price, img: T(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
 $("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList.remove("open"); };
 const openCart = () => { $("drawer").classList.add("open"); $("cartOv").classList.add("open"); };
 const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").classList.remove("open"); };
@@ -1052,7 +1059,7 @@ function openFilm(i) {
 }
 // края сайта и бегущая строка
 (function () {
-  const fr = i => '<div class="frame lit" data-i="' + i + '" title="' + films[i].t + '"><div class="poster"><img decoding="async" alt="" src="' + P(films[i].img) + '"></div></div>';
+  const fr = i => '<div class="frame lit" data-i="' + i + '" title="' + films[i].t + '"><div class="poster"><img decoding="async" alt="" src="' + T(films[i].img) + '"></div></div>';
   const a = [23, 0, 12, 3, 16, 5, 13, 9, 19, 1, 15, 7, 21], b = [2, 14, 4, 17, 11, 22, 6, 10, 18, 8, 20];
   $("railL").innerHTML = [...a, ...a].map(fr).join(""); $("railR").innerHTML = [...b, ...b].map(fr).join("");
   document.querySelectorAll(".rail .frame").forEach(el => el.onclick = () => openFilm(+el.dataset.i));
@@ -1062,12 +1069,14 @@ function openFilm(i) {
   $("mq2").innerHTML = w2 + w2; $("mq2").style.animationDirection = "reverse";
 })();
 renderHero(); renderCart();
+document.querySelectorAll(".mini[data-i]").forEach(m => { const go = () => preload(P(films[+m.dataset.i].img)); m.addEventListener("pointerenter", go); m.addEventListener("touchstart", go, { passive: true }); });
+addEventListener("load", () => { const q = [...document.querySelectorAll(".mini[data-i]")].map(m => +m.dataset.i).concat(films.map((f, i) => i)); const next = () => { const i = q.shift(); if (i == null) return; preload(P(films[i].img)).then(() => setTimeout(next, 30)); }; setTimeout(next, 400); });
 $("mbuyBtn").onclick = () => $("buyBtn").click();
 
 // ---------- диагональная лента фильмов ----------
 (function () {
   const ids = films.map((f, i) => i).reverse();
-  const card = i => '<button class="cc" data-i="' + i + '" aria-label="' + films[i].t + '"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" alt="" src="' + P(films[i].img) + '"></div></div><span>' + films[i].t + '</span></button>';
+  const card = i => '<button class="cc" data-i="' + i + '" aria-label="' + films[i].t + '"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" alt="" src="' + T(films[i].img) + '"></div></div><span>' + films[i].t + '</span></button>';
   $("coilTrack").innerHTML = ids.map(card).join("") + ids.map(card).join("");
   $("coilTrack").querySelectorAll(".cc").forEach(b => b.onclick = () => {
     cfg.poster = +b.dataset.i; renderHero(); toast("«" + films[cfg.poster].t + "» — в рамке");
