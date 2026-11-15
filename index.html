@@ -1098,7 +1098,7 @@
   .a4-in { position: absolute; inset: 11cqw 12cqw 10cqw; display: flex; flex-direction: column; align-items: center; text-align: center; }
   .a4-orn { width: 20cqw; height: 14cqw; color: var(--a); flex: none; display: flex; align-items: flex-end; justify-content: center; }
   .a4-orn svg { width: 100%; height: 100%; overflow: visible; }
-  .a4-orn svg * { vector-effect: non-scaling-stroke; stroke-width: 1.25; }
+  .a4-orn svg * { vector-effect: non-scaling-stroke; stroke-width: 1.25; fill: none !important; }
   .a4-h { margin-top: 4.5cqw; font-family: "Cormorant", Georgia, serif; font-style: italic; font-weight: 500; font-size: 10.5cqw; line-height: 1.02; letter-spacing: -.01em; color: var(--a); text-wrap: balance; }
   .a4-rule { width: 12cqw; height: 1px; margin: 5cqw 0 0; background: var(--a); opacity: .6; flex: none; }
   .a4-body { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
@@ -1152,7 +1152,9 @@
   .pk-list dt { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(240,244,250,.45); padding-top: 3px; }
   .pk-list dd { margin: 0; font-size: 15px; line-height: 1.45; color: var(--cream); }
   .sheet-a4 { aspect-ratio: 100 / 150; width: min(100%, 320px); border-radius: 3px; }
-  .sheet-a4 .a4-fit { font-size: 4.6cqw; }
+  .sheet-a4 .a4-fit { font-size: 5.4cqw; }
+  .sheet-a4 .a4-txt .ph { opacity: .55; }
+  .sheet-a4 .a4-h { font-size: 12cqw; }
   .sheet-a4 .a4-orn { width: 34cqw; height: 20cqw; }
   .card-tpl { display: grid; grid-template-columns: repeat(5, auto); justify-content: start; gap: 0; width: max-content; max-width: 100%; overflow-x: auto; scrollbar-width: none; padding: 4px; border-radius: 999px; background: rgba(206,220,255,.05); box-shadow: inset 0 0 0 1px rgba(240,244,250,.12); }
   .card-tpl::-webkit-scrollbar { display: none; }
@@ -1164,6 +1166,17 @@
   .flow { height: min(165vh, 1750px) !important; }
   .flow::before, .flow::after { height: 200px; }
   @media (max-width: 760px) { .flow { height: 190vw !important; } }
+  header { background: #060505 !important; }
+  .cc, .cg, .fcol, .coil, .flow, .minis, .wordmark { -webkit-user-select: none; user-select: none; }
+  /* ===== комнаты на первом экране: меняются под постер растворением ===== */
+  .hero-bg { background: #05070b !important; }
+  .hero-bg .hb { position: absolute; inset: 0; background: url(img/w/hero-room.webp) 78% 50% / cover no-repeat; opacity: 0; transition: opacity 1.6s cubic-bezier(.4,0,.2,1); }
+  .hero-bg .hb.on { opacity: 1; }
+  .hero-bg .hb[data-r="living"] { background-image: url(img/w/room-living.webp); }
+  .hero-bg .hb[data-r="loft"] { background-image: url(img/w/room-loft.webp); }
+  .hero-bg .hb[data-r="attic"] { background-image: url(img/w/room-attic.webp); }
+  .hero-bg::after { z-index: 1; }
+  @media (max-width: 760px) { .hero-bg .hb { background-position: 66% 50%; } }
   /* ===== логотип 15.11: Cormorant Garamond + W из киноплёнки (A1) + плёнка под словом (A2), белым ===== */
   @font-face { font-family: "ProswetLogo"; font-weight: 600; font-display: block; src: url(fonts/cormorant-garamond-600-logo.woff2) format("woff2"); }
   .wordmark.lg { font-family: "ProswetLogo", "Cormorant Garamond", Georgia, serif !important; font-weight: 600 !important; font-size: 36px !important; letter-spacing: .045em !important; padding-left: 0 !important; text-shadow: none !important; color: #fff; line-height: 1; display: inline-flex; flex-direction: column; align-items: stretch; justify-self: center; text-decoration: none; }
@@ -1184,7 +1197,7 @@
 <header><div class="wrap">
   <nav class="mainnav" id="mainnav"><a href="#overview" class="on">Рамка</a><a href="#posters">Постеры</a><a href="#gifts">Подарки</a><a href="#help">Поддержка</a></nav>
   <button class="icon burger" aria-label="Меню" id="burger"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
-  <a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROS<span class="lg-wl">W</span>ET</span><span class="lg-strip" aria-hidden="true"></span></a>
+  <a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROSWET</span><span class="lg-strip" aria-hidden="true"></span></a>
   <div class="icons">
     <button class="icon" aria-label="Личный кабинет" id="loginBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.4-3.6 4.2-5.2 7.5-5.2s6.1 1.6 7.5 5.2"/></svg></button>
     <button class="icon" aria-label="Корзина" id="cartBtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><i id="count">0</i></button>
@@ -1194,7 +1207,7 @@
 
 <!-- 1. Товар -->
 <section class="product hero" id="top">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true"><div class="hb on" data-r="lounge"></div><div class="hb" data-r="living"></div><div class="hb" data-r="loft"></div><div class="hb" data-r="attic"></div></div>
   <div class="wrap">
   <div class="hero-copy">
     <div class="hero-kicker">Световая рамка Proswet</div>
@@ -1236,7 +1249,7 @@
     <div class="bt bt-vid lightvid to-day swtile" id="swTile" role="button" tabindex="0" aria-pressed="false" aria-label="Нажмите, чтобы включить или выключить подсветку"><video id="lightVid" muted playsinline preload="auto" poster="img/w/scene-off.webp" aria-hidden="true"><source src="media/light-on.mp4" type="video/mp4"></video><img class="lv-day" src="img/w/scene-off.webp" alt="Рамка днём, подсветка выключена">
       <div class="sw-ui" aria-hidden="true"><span class="sw-hint">Попробуйте сами</span><span class="sw-key"><i></i></span></div>
       <div class="bt-cap"><b class="sw-t">Один щелчок — и свет вместо бра</b><span>Мягкий, ровный, не слепит · выключатель на проводе · 12 В · 6–8 Вт</span></div></div>
-    <div class="bt bt-box"><img loading="lazy" decoding="async" src="img/w/s-box.webp" alt="Рамка в коробке"><div class="bt-cap"><b>Готова из коробки</b><span>Постер уже внутри, кабель и крепёж в комплекте</span></div></div>
+    <div class="bt bt-box"><img loading="lazy" decoding="async" src="img/w/s-box-1511.webp" alt="Рамка в коробке"><div class="bt-cap"><b>Готова из коробки</b><span>Постер уже внутри, кабель и крепёж в комплекте</span></div></div>
     <div class="bt bt-wide"><img loading="lazy" decoding="async" src="img/w/s-side.webp" alt="Рамка на стене сбоку"><div class="bt-cap"><b>10 мм</b><span>Висит на стене как обычная картина</span></div></div>
   </div>
 </div>
@@ -1260,7 +1273,7 @@
   <div class="sets gifts3" id="gifts3">
     <div class="set g1"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g1.webp" alt="Световая рамка Proswet на стене"></div>
       <div class="body"><h3>Одна рамка</h3><p>Proswet A3 с постером вашего фильма.</p><div class="row"><span class="price">4&nbsp;250&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="4250">Выбрать фильм</button></div></div></div>
-    <div class="set g3 hit"><div class="badge">Выгоднее на 560&nbsp;₽</div><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g3.webp" alt="Три световые рамки над диваном"></div>
+    <div class="set g3 hit"><div class="badge">Выгоднее на 560&nbsp;₽</div><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g3-1511.webp" alt="Три световые рамки над диваном"></div>
       <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">12&nbsp;190&nbsp;₽<s>12&nbsp;750&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="12190">Выбрать 3 фильма</button></div></div></div>
     <div class="set gg"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-gg.webp" alt="Подарочная коробка с лентой и сухоцветами"></div>
       <div class="body"><h3>Подарочный набор</h3><p>Рамка в большой коробке: лента с бантом, сухоцветы и открытка с вашим текстом.</p><div class="row"><span class="price">5&nbsp;490&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="5490">Выбрать фильм</button></div></div></div>
@@ -1268,8 +1281,8 @@
   <div class="pack">
     <div class="pack-t"><div class="label">Упаковка</div><h3>Дарить не стыдно</h3><p class="pk-lead">Собираем подарок руками. Открыть коробку — уже праздник.</p>
       <dl class="pk-list"><div><dt>Коробка</dt><dd>Жёсткая, чёрная, под размер рамки — ничего не нужно заворачивать</dd></div><div><dt>Лента</dt><dd>Атласная, с бантом</dd></div><div><dt>Сухоцветы</dt><dd>Небольшой букет под лентой</dd></div><div><dt>Открытка</dt><dd>10 × 15 см, с вашим текстом — напечатаем сами</dd></div></dl></div>
-    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-open.webp" alt="Рамка в открытой подарочной коробке"></div>
-    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-det.webp" alt="Лента, наклейки, сухоцветы и открытка"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-open-1511.webp" alt="Рамка в открытой подарочной коробке"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-det-1511.webp" alt="Лента, наклейки, сухоцветы и открытка"></div>
   </div>
 
   <div class="card-b" id="card">
@@ -1329,7 +1342,7 @@
 
 <footer><div class="wrap">
   <div class="fgrid">
-    <div><a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROS<span class="lg-wl">W</span>ET</span><span class="lg-strip" aria-hidden="true"></span></a>
+    <div><a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROSWET</span><span class="lg-strip" aria-hidden="true"></span></a>
 </div>
     <div><h4>Магазин</h4><a href="#top">Рамка Proswet A3</a><a href="#posters">Постеры</a><a href="#gifts">Подарки</a></div>
     <div><h4>Покупателям</h4><a href="oferta.html#dostavka">Доставка и оплата</a><a href="oferta.html#vozvrat">Возврат и гарантия</a><a href="#help">Вопросы</a><a href="#">Личный кабинет</a></div>
@@ -1400,52 +1413,51 @@ const films = [
   { t: "Паразиты", q: "Знаешь, какой план никогда не подводит? Никакого плана.", o: "Parasite", y: 2019, d: "Пон Джун Хо", c: ["cult"], img: "img/parasite2.jpg", f: ["Первый неанглоязычный фильм с «Оскаром» за лучший фильм.", "Получил «Золотую пальмовую ветвь» в Каннах.", "Дом семьи Пак построили как декорацию."] },
   { t: "Криминальное чтиво", q: "Знаешь, как в Париже называют четвертьфунтовый с сыром?", o: "Pulp Fiction", y: 1994, d: "Квентин Тарантино", c: ["cult"], img: "img/pulp2.jpg", f: ["«Золотая пальмовая ветвь» и «Оскар» за сценарий.", "Что лежит в чемоданчике, так и не показали.", "Вернул Джону Траволте большую карьеру."] },
   { t: "Сияние", q: "Работа без забавы делает Джека скучным парнем.", o: "The Shining", y: 1980, d: "Стэнли Кубрик", c: ["cult"], img: "img/shining2.jpg", f: ["Снят по роману Стивена Кинга — сам Кинг экранизацию не любил.", "Кубрик известен десятками дублей одной сцены.", "Узор ковра в отеле стал культовым."] },
-  { t: "Шоу Трумана", q: "Доброе утро! И если не увидимся — добрый день, добрый вечер и доброй ночи!", o: "The Truman Show", y: 1998, d: "Питер Уир", c: ["cult"], img: "img/truman3.jpg", f: ["Город снимали в настоящем курортном городке Сисайд во Флориде.", "Джим Керри получил «Золотой глобус».", "Психиатры описали «синдром Трумана» — по названию фильма."] },
+  { t: "Шоу Трумана", q: "Доброе утро! И если не увидимся — добрый день, добрый вечер и доброй ночи!", o: "The Truman Show", y: 1998, d: "Питер Уир", c: ["cult"], img: "img/truman4.jpg", f: ["Город снимали в настоящем курортном городке Сисайд во Флориде.", "Джим Керри получил «Золотой глобус».", "Психиатры описали «синдром Трумана» — по названию фильма."] },
   { t: "Малыш на драйве", q: "Погоня в ритме любимой песни.", tag: true, o: "Baby Driver", y: 2017, d: "Эдгар Райт", c: ["action"], img: "img/babydriver2.jpg", f: ["Сцены смонтированы в ритм песен из плеера героя.", "Погони снимали с настоящими машинами и каскадёрами.", "Три номинации на «Оскар», в том числе за монтаж."] },
-  { t: "Матрица", q: "Красная или синяя — выбор за вами.", tag: true, o: "The Matrix", y: 1999, d: "Лана и Лилли Вачовски", c: ["sci", "action"], img: "img/matrix3.jpg", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Эффект замедленного времени снимали рядом фотокамер, выставленных по дуге.", "Зелёный «код» на экранах, по словам его автора, — отсканированные японские рецепты."] },
+  { t: "Матрица", q: "Красная или синяя — выбор за вами.", tag: true, o: "The Matrix", y: 1999, d: "Лана и Лилли Вачовски", c: ["sci", "action"], img: "img/matrix4.jpg", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Эффект замедленного времени снимали рядом фотокамер, выставленных по дуге.", "Зелёный «код» на экранах, по словам его автора, — отсканированные японские рецепты."] },
   { t: "Дюна", q: "Песок помнит всё.", tag: true, o: "Dune", y: 2021, d: "Дени Вильнёв", c: ["sci"], img: "img/dune2.jpg", f: ["Шесть «Оскаров» — больше, чем у любого фильма того года.", "Пустыню снимали в Иордании и Абу-Даби.", "Снят по роману Фрэнка Герберта 1965 года."] },
   { t: "Бойцовский клуб", q: "Розовое мыло и первое правило.", tag: true, o: "Fight Club", y: 1999, d: "Дэвид Финчер", c: ["cult"], img: "img/fightclub3.jpg", f: ["Снят по роману Чака Паланика.", "В прокате провалился — культовым стал позже, на дисках.", "Фильм полон спрятанных кадров, которые мелькают на долю секунды."] },
-  { t: "Назад в будущее", q: "Восемьдесят восемь миль в час.", tag: true, o: "Back to the Future", y: 1985, d: "Роберт Земекис", c: ["sci", "family"], img: "img/bttf3.jpg", f: ["В первых версиях сценария машиной времени был холодильник.", "Для прыжка во времени нужно разогнаться до 88 миль в час.", "Стал самым кассовым фильмом 1985 года."] },
+  { t: "Назад в будущее", q: "Восемьдесят восемь миль в час.", tag: true, o: "Back to the Future", y: 1985, d: "Роберт Земекис", c: ["sci", "family"], img: "img/bttf4.jpg", f: ["В первых версиях сценария машиной времени был холодильник.", "Для прыжка во времени нужно разогнаться до 88 миль в час.", "Стал самым кассовым фильмом 1985 года."] },
   { t: "Марсианин", q: "Один на Марсе — и картошка.", tag: true, o: "The Martian", y: 2015, d: "Ридли Скотт", c: ["sci"], img: "img/martian2.jpg", f: ["Энди Вейер сначала выкладывал роман главами на своём сайте.", "Марс снимали в иорданской пустыне Вади-Рам.", "Семь номинаций на «Оскар»."] },
   { t: "Амели", q: "Маленькие радости ложечкой.", tag: true, o: "Le Fabuleux Destin d'Amélie Poulain", y: 2001, d: "Жан-Пьер Жёне", c: ["love"], img: "img/amelie3.jpg", f: ["Снимали на Монмартре в Париже.", "Красный и зелёный усилили при цветокоррекции — это почерк фильма.", "Пять номинаций на «Оскар»."] },
   { t: "Драйв", q: "Ночной город, неон и тишина.", tag: true, o: "Drive", y: 2011, d: "Николас Виндинг Рефн", c: ["action"], img: "img/drive3.jpg", f: ["Рефн получил приз за режиссуру в Каннах.", "Синтвейв-саундтрек стал культовым сам по себе.", "Снят по роману Джеймса Саллиса."] },
   { t: "Клан Сопрано", q: "Бада Бинг!", tag: true, o: "The Sopranos", y: 1999, d: "Дэвид Чейз", c: ["cult"], img: "img/sopranos2.jpg", f: ["Сериал собрал 21 премию «Эмми».", "Финальную сцену в закусочной фанаты разбирают до сих пор."] },
-  { t: "Джентльмены", q: "Когда лев голоден — он ест.", o: "The Gentlemen", y: 2019, d: "Гай Ричи", c: ["cult", "action"], img: "img/gentlemen3.jpg", f: ["Мэттью Макконахи играет американца, построившего бизнес в Англии.", "В 2024 году по фильму вышел одноимённый сериал."] },
+  { t: "Джентльмены", q: "Когда лев голоден — он ест.", o: "The Gentlemen", y: 2019, d: "Гай Ричи", c: ["cult", "action"], img: "img/gentlemen4.jpg", f: ["Мэттью Макконахи играет американца, построившего бизнес в Англии.", "В 2024 году по фильму вышел одноимённый сериал."] },
   { t: "Гарри Поттер", q: "Торжественно клянусь, что замышляю только шалость.", o: "Harry Potter and the Prisoner of Azkaban", y: 2004, d: "Альфонсо Куарон", c: ["sci", "winter"], img: "img/harrypotter2.jpg", f: ["«Узник Азкабана» — единственный фильм серии, снятый Альфонсо Куароном.", "Сириуса Блэка сыграл Гэри Олдман."] },
-  { t: "Убить Билла", q: "Месть — это блюдо, которое лучше подавать холодным.", o: "Kill Bill", y: 2003, d: "Квентин Тарантино", c: ["cult"], img: "img/killbill.jpg", f: ["Жёлтый костюм Невесты — оммаж Брюсу Ли из «Игры смерти».", "Задумывался как один фильм — его разделили на две части из‑за длины."] },
   { t: "Побег из Шоушенка", q: "Надежда — хорошая вещь, может быть, лучшая из вещей.", tag: true, o: "The Shawshank Redemption", y: 1994, d: "Фрэнк Дарабонт", c: ["cult"], img: "img/shawshank.jpg", f: ["Снят по повести Стивена Кинга.", "В прокате провалился, а славу набрал на кассетах и ТВ.", "Много лет держится в верхушке рейтинга IMDb."] },
-  { t: "Зелёная миля", q: "Я устал, босс.", tag: true, o: "The Green Mile", y: 1999, d: "Фрэнк Дарабонт", c: ["cult"], img: "img/greenmile.jpg", f: ["Тоже по Стивену Кингу — и тот же режиссёр, что у «Шоушенка».", "Кинг сначала выпустил роман шестью тонкими выпусками.", "Четыре номинации на «Оскар»."] },
-  { t: "Властелин колец", q: "Даже самый маленький человек может изменить ход будущего.", tag: true, o: "The Lord of the Rings", y: 2001, d: "Питер Джексон", c: ["sci", "cult"], img: "img/lotr.jpg", f: ["Все три фильма снимали одновременно, больше года подряд.", "Новая Зеландия сыграла Средиземье целиком.", "Третья часть взяла 11 «Оскаров» из 11 номинаций."] },
-  { t: "Терминатор", q: "Я вернусь.", tag: true, o: "The Terminator", y: 1984, d: "Джеймс Кэмерон", c: ["sci", "action"], img: "img/terminator.jpg", f: ["Бюджет — около 6,4 млн долларов.", "Идея пришла Кэмерону во сне.", "Фраза «Я вернусь» стала одной из самых известных в кино."] },
+  { t: "Зелёная миля", q: "Я устал, босс.", tag: true, o: "The Green Mile", y: 1999, d: "Фрэнк Дарабонт", c: ["cult"], img: "img/greenmile2.jpg", f: ["Тоже по Стивену Кингу — и тот же режиссёр, что у «Шоушенка».", "Кинг сначала выпустил роман шестью тонкими выпусками.", "Четыре номинации на «Оскар»."] },
+  { t: "Властелин колец", q: "Даже самый маленький человек может изменить ход будущего.", tag: true, o: "The Lord of the Rings", y: 2001, d: "Питер Джексон", c: ["sci", "cult"], img: "img/lotr2.jpg", f: ["Все три фильма снимали одновременно, больше года подряд.", "Новая Зеландия сыграла Средиземье целиком.", "Третья часть взяла 11 «Оскаров» из 11 номинаций."] },
+  { t: "Терминатор", q: "Я вернусь.", tag: true, o: "The Terminator", y: 1984, d: "Джеймс Кэмерон", c: ["sci", "action"], img: "img/terminator2.jpg", f: ["Бюджет — около 6,4 млн долларов.", "Идея пришла Кэмерону во сне.", "Фраза «Я вернусь» стала одной из самых известных в кино."] },
   { t: "Крёстный отец", q: "Я сделаю ему предложение, от которого он не сможет отказаться.", tag: true, o: "The Godfather", y: 1972, d: "Фрэнсис Форд Коппола", c: ["cult"], img: "img/godfather.jpg", f: ["Кот на руках у дона — бродяга, найденный на студии.", "Три «Оскара», включая лучший фильм.", "Снят по роману Марио Пьюзо."] },
-  { t: "Брат", q: "Сила в правде.", tag: true, o: "Брат", y: 1997, d: "Алексей Балабанов", c: ["cult", "action"], img: "img/brat.jpg", f: ["Снят меньше чем за полтора месяца на крошечный бюджет.", "Свитер Данилы купили на барахолке.", "Музыка «Наутилуса» стала голосом фильма."] },
+  { t: "Брат", q: "Сила в правде.", tag: true, o: "Брат", y: 1997, d: "Алексей Балабанов", c: ["cult", "action"], img: "img/brat2.jpg", f: ["Снят меньше чем за полтора месяца на крошечный бюджет.", "Свитер Данилы купили на барахолке.", "Музыка «Наутилуса» стала голосом фильма."] },
   { t: "Шерлок Холмс", q: "Данные! Мне нужны данные!", tag: true, o: "Sherlock Holmes", y: 2009, d: "Гай Ричи", c: ["action"], img: "img/sherlock.jpg", f: ["Тауэрский мост в фильме ещё строится — как в 1890-х.", "Холмс здесь — боксёр, как в рассказах Конан Дойла.", "Музыка Ханса Циммера номинирована на «Оскар»."] },
   { t: "Карты, деньги, два ствола", q: "Это было по-честному — почти.", tag: true, o: "Lock, Stock and Two Smoking Barrels", y: 1998, d: "Гай Ричи", c: ["cult", "action"], img: "img/lockstock.jpg", f: ["Дебют Гая Ричи в большом кино.", "Для многих актёров — первая роль.", "Деньги на фильм собирали буквально по знакомым."] },
-  { t: "Большой куш", q: "Не видел, чтобы бриллианты кто-то так любил.", tag: true, o: "Snatch", y: 2000, d: "Гай Ричи", c: ["cult", "action"], img: "img/snatch.jpg", f: ["Почти все герои — с кличками вместо имён.", "Брэд Питт придумал речь своего героя так, чтобы её никто не понимал.", "Сюжет крутится вокруг камня в 86 карат."] },
+  { t: "Большой куш", q: "Не видел, чтобы бриллианты кто-то так любил.", tag: true, o: "Snatch", y: 2000, d: "Гай Ричи", c: ["cult", "action"], img: "img/snatch2.jpg", f: ["Почти все герои — с кличками вместо имён.", "Брэд Питт придумал речь своего героя так, чтобы её никто не понимал.", "Сюжет крутится вокруг камня в 86 карат."] },
   { t: "Чёрный лебедь", q: "Я была идеальной.", tag: true, o: "Black Swan", y: 2010, d: "Даррен Аронофски", c: ["love"], img: "img/blackswan.jpg", f: ["Натали Портман год занималась балетом к роли.", "За неё она получила «Оскар».", "Бюджет — около 13 млн долларов."] },
-  { t: "Бэтмен", q: "Я — месть.", tag: true, o: "Batman", y: 2022, d: "Мэтт Ривз", c: ["action"], img: "img/batman.jpg", f: ["Готэм снимали в Ливерпуле, Глазго и Лондоне.", "Бэтмен здесь — скорее детектив, чем супергерой.", "Город-сказка, город-нуар: дождь почти в каждой сцене."] },
+  { t: "Бэтмен", q: "Я — месть.", tag: true, o: "Batman", y: 2022, d: "Мэтт Ривз", c: ["action"], img: "img/batman2.jpg", f: ["Готэм снимали в Ливерпуле, Глазго и Лондоне.", "Бэтмен здесь — скорее детектив, чем супергерой.", "Город-сказка, город-нуар: дождь почти в каждой сцене."] },
   { t: "Гарри Поттер. Экспресс", q: "Платформа девять и три четверти.", tag: true, o: "Harry Potter", y: 2001, d: "Крис Коламбус", c: ["sci", "winter", "family"], img: "img/hpexpress.jpg", f: ["Хогвартс-экспресс снимали на виадуке Гленфиннан в Шотландии.", "Паровоз — настоящий, 1937 года.", "Виадук стал местом паломничества фанатов."] },
   { t: "Леон. Матильда", q: "Мне нравится это растение.", tag: true, o: "Léon", y: 1994, d: "Люк Бессон", c: ["cult", "love"], img: "img/mathilda.jpg", f: ["Цветок Леона — аглаонема.", "Для Натали Портман это первая роль в кино.", "Бессон написал сценарий примерно за месяц."] },
   { t: "Чернобыль", q: "Какова цена лжи?", tag: true, o: "Chernobyl", y: 2019, d: "Йохан Ренк", c: ["series"], img: "img/chernobyl.jpg", f: ["Снимали в Литве — на похожей АЭС в Игналине.", "Пять серий — и 10 «Эмми».", "Сценарист три года изучал воспоминания очевидцев."] },
   { t: "Друзья", q: "Он был с ней в перерыве!", tag: true, o: "Friends", y: 1994, d: "Дэвид Крейн, Марта Кауффман", c: ["series", "love"], img: "img/friends.jpg", f: ["Десять сезонов, 236 серий.", "Фонтан из заставки стоит в Калифорнии, а не в Нью-Йорке.", "Кафе «Central Perk» придумали для сериала."] },
   { t: "Твин Пикс", q: "Чертовски хороший кофе!", tag: true, o: "Twin Peaks", y: 1990, d: "Дэвид Линч", c: ["series", "cult"], img: "img/twinpeaks.jpg", f: ["Красная комната — одна из самых узнаваемых декораций ТВ.", "Вопрос «Кто убил Лору Палмер?» обсуждала вся Америка.", "Продолжение вышло через 25 лет."] },
   { t: "Теория большого взрыва", q: "Базинга!", tag: true, o: "The Big Bang Theory", y: 2007, d: "Чак Лорри", c: ["series", "family"], img: "img/bigbang.jpg", f: ["Формулы на досках проверял настоящий физик.", "Двенадцать сезонов, 279 серий.", "Шелдон всегда сидит на одном и том же месте дивана."] },
-  { t: "Доктор Кто", q: "Время — это не прямая линия.", tag: true, o: "Doctor Who", y: 1963, d: "BBC", c: ["series", "sci"], img: "img/doctorwho.jpg", f: ["Самый долгий научно-фантастический сериал в мире.", "ТАРДИС снаружи — полицейская будка, внутри больше, чем снаружи.", "Шарф Четвёртого Доктора — около 6 метров."] },
   { t: "Сумерки", q: "И вот лев влюбился в ягнёнка.", tag: true, o: "Twilight", y: 2008, d: "Кэтрин Хардвик", c: ["love"], img: "img/twilight.jpg", f: ["Снят по роману Стефани Майер.", "Город Форкс после фильма стал местом паломничества.", "Сине-зелёный цвет фильма сделан нарочно — как вечный туман."] },
   { t: "Обитель зла", q: "Добро пожаловать в особняк.", tag: true, o: "Resident Evil", y: 1996, d: "Capcom", c: ["action"], img: "img/residentevil.jpg", f: ["Сначала была игра — потом фильмы и сериалы.", "Особняк Спенсера — главная локация первой игры.", "Серия продана тиражом более 160 млн копий."] },
   { t: "Призрак в доспехах", q: "Сеть огромна и бесконечна.", tag: true, o: "Ghost in the Shell", y: 1995, d: "Мамору Осии", c: ["sci", "anime"], img: "img/ghostshell.jpg", f: ["Вачовски показывали его продюсерам, объясняя «Матрицу».", "Снят по манге Масамунэ Сиро.", "Городом-прототипом стал Гонконг."] },
-  { t: "Земля", q: "Голубая точка.", tag: true, o: "Earth", y: 0, d: "", c: ["space"], img: "img/earth.jpg", f: ["Из космоса видно огни городов на ночной стороне.", "Атмосфера — тоньше, чем кожура у яблока, если сравнить с размером планеты.", "Земля летит вокруг Солнца со скоростью около 30 км/с."] },
-  { t: "Луна", q: "Свет, который всегда рядом.", tag: true, o: "The Moon", y: 0, d: "", c: ["space"], img: "img/moon.jpg", f: ["Луна всегда повёрнута к нам одной стороной.", "Она удаляется от Земли примерно на 3,8 см в год.", "Двенадцать человек ходили по её поверхности."] },
-  { t: "Сатурн", q: "Кольца из льда и камня.", tag: true, o: "Saturn", y: 0, d: "", c: ["space"], img: "img/saturn.jpg", f: ["Кольца Сатурна — в основном лёд.", "Толщина колец — местами всего десятки метров.", "Сатурн легче воды: в огромной ванне он бы плавал."] },
+  { t: "Земля", q: "Голубая точка.", tag: true, o: "Earth", y: 0, d: "", c: ["space"], img: "img/earth3.jpg", f: ["Из космоса видно огни городов на ночной стороне.", "Атмосфера — тоньше, чем кожура у яблока, если сравнить с размером планеты.", "Земля летит вокруг Солнца со скоростью около 30 км/с."] },
+  { t: "Луна", q: "Свет, который всегда рядом.", tag: true, o: "The Moon", y: 0, d: "", c: ["space"], img: "img/moon3.jpg", f: ["Луна всегда повёрнута к нам одной стороной.", "Она удаляется от Земли примерно на 3,8 см в год.", "Двенадцать человек ходили по её поверхности."] },
+  { t: "Сатурн", q: "Кольца из льда и камня.", tag: true, o: "Saturn", y: 0, d: "", c: ["space"], img: "img/saturn3.jpg", f: ["Кольца Сатурна — в основном лёд.", "Толщина колец — местами всего десятки метров.", "Сатурн легче воды: в огромной ванне он бы плавал."] },
   { t: "Секс в большом городе", q: "Я не могла не задуматься…", tag: true, o: "Sex and the City", y: 1998, d: "Даррен Стар", c: ["series", "love"], img: "img/satc.jpg", f: ["Шесть сезонов и два фильма.", "Пачка «туфель от Маноло» стала символом сериала.", "Нью-Йорк называли пятой героиней."] },
   { t: "Очень странные дела", q: "Друзья не врут.", tag: true, o: "Stranger Things", y: 2016, d: "Братья Даффер", c: ["series", "sci"], img: "img/strangerthings.jpg", f: ["Действие начинается в 1983 году в Индиане.", "Шрифт заставки — как у обложек Стивена Кинга.", "Сериал вернул моду на 80-е."] },
   { t: "Чёрное зеркало", q: "А что, если технологии зайдут слишком далеко?", tag: true, o: "Black Mirror", y: 2011, d: "Чарли Брукер", c: ["series", "sci"], img: "img/blackmirror.jpg", f: ["Каждая серия — отдельная история.", "Название — про погасший экран телефона.", "Некоторые сюжеты потом почти сбылись."] },
   { t: "Острые козырьки", q: "По приказу «Острых козырьков».", tag: true, o: "Peaky Blinders", y: 2013, d: "Стивен Найт", c: ["series", "cult"], img: "img/peaky.jpg", f: ["Банда существовала на самом деле, в Бирмингеме.", "В козырьки кепок якобы зашивали лезвия.", "Шесть сезонов и фильм."] },
   { t: "Рик и Морти", q: "Уаббалаббадабдаб!", tag: true, o: "Rick and Morty", y: 2013, d: "Джастин Ройланд, Дэн Хармон", c: ["series", "sci"], img: "img/rickmorty.jpg", f: ["Начинался как пародия на «Назад в будущее».", "Шесть с лишним сезонов безумной фантастики.", "Соус из одной серии потом реально вернули в продажу."] },
   { t: "Унесённые призраками", q: "Однажды случившееся не забывается, просто вспомнить не можешь.", tag: true, o: "Spirited Away", y: 2001, d: "Хаяо Миядзаки", c: ["anime", "family"], img: "img/spiritedaway.jpg", f: ["Единственное аниме с «Оскаром» за лучший анимационный фильм.", "Миядзаки рисовал раскадровки сам.", "Долго был самым кассовым фильмом в истории Японии."] },
-  { t: "Шрек", q: "Огры как лук — у них слои.", tag: true, o: "Shrek", y: 2001, d: "Эндрю Адамсон, Вики Дженсон", c: ["family"], img: "img/shrek.jpg", f: ["Первый «Оскар» за лучший анимационный фильм.", "Шрек сначала должен был говорить голосом другого актёра.", "Болото Шрека — его собственное, и табличка об этом предупреждает."] },
+  { t: "Шрек", q: "Огры как лук — у них слои.", tag: true, o: "Shrek", y: 2001, d: "Эндрю Адамсон, Вики Дженсон", c: ["family"], img: "img/shrek2.jpg", f: ["Первый «Оскар» за лучший анимационный фильм.", "Шрек сначала должен был говорить голосом другого актёра.", "Болото Шрека — его собственное, и табличка об этом предупреждает."] },
   { t: "Деньги рекой", q: "Пусть течёт.", tag: true, o: "Money", y: 0, d: "", c: ["mood"], img: "img/moneyfalls.jpg", f: ["Постер-настроение для кабинета или офиса.", "Тёплый свет рамки делает золото ярче.", "Хорошо смотрится над рабочим столом."] },
   { t: "Млечный путь", q: "Мы сделаны из звёздной пыли.", tag: true, o: "The Milky Way", y: 0, d: "", c: ["space"], img: "img/milkyway.jpg", f: ["В нашей галактике 100–400 млрд звёзд.", "Свет от её края идёт к нам десятки тысяч лет.", "Лучше всего Млечный путь виден вдали от городов летом."] },
+  { t: "Убить Билла", q: "Месть — это блюдо, которое лучше подавать холодным.", o: "Kill Bill", y: 2003, d: "Квентин Тарантино", c: ["cult"], img: "img/killbill.jpg", f: ["Жёлтый костюм Невесты — оммаж Брюсу Ли из «Игры смерти».", "Задумывался как один фильм — его разделили на две части из‑за длины."] },
 ];
 const cats = [["all", "Все"], ["sci", "Фантастика"], ["cult", "Культовое кино"], ["series", "Сериалы"], ["love", "Для двоих"], ["action", "Драйв"], ["anime", "Аниме"], ["space", "Космос"], ["mood", "Настроение"], ["winter", "Зима"]];
 const $ = id => document.getElementById(id);
@@ -1457,8 +1469,8 @@ const CARD_T = {
   bday: { n: "День рождения", h: "С днём рождения!", ideas: ["Пусть этот год будет как любимый фильм: с хорошим сюжетом, смешными сценами и счастливым финалом. Включай свет почаще!", "Желаю, чтобы каждый вечер был уютным, а каждый день — поводом для новой истории. С днём рождения!"] },
   wed: { n: "Свадьба", h: "В день вашей свадьбы", ideas: ["Пусть ваша история будет длиннее любой саги и светлее любого кадра. Совет да любовь!", "Желаем, чтобы в вашем доме всегда горел тёплый свет, а любимые фильмы вы смотрели только вдвоём."] },
   ny: { n: "Новый год", h: "С Новым годом!", ideas: ["Пусть новый год будет как лучший фильм: с чудесами, тёплыми встречами и счастливым концом каждой серии.", "Света, уюта и любимого кино в каждый вечер наступающего года!"] },
-  love: { n: "Любимому человеку", h: "Тебе", ideas: ["Ты — мой любимый фильм, который хочется пересматривать каждый вечер.", "Чтобы каждый вечер напоминал о нас. Люблю."] },
-  any: { n: "Просто так", h: "Для тебя", ideas: ["Просто так — потому что ты делаешь мои дни светлее.", "Маленький свет для больших вечеров. Включай, когда захочется уюта."] },
+  love: { n: "Любимым", h: "Тебе", ideas: ["Ты — мой любимый фильм, который хочется пересматривать каждый вечер.", "Чтобы каждый вечер напоминал о нас. Люблю."] },
+  any: { n: "Без повода", h: "Для тебя", ideas: ["Просто так — потому что ты делаешь мои дни светлее.", "Маленький свет для больших вечеров. Включай, когда захочется уюта."] },
 };
 const CARD_ORN = {
   bday: "<svg viewBox=\"152 133 523 491\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g style=\"vector-effect:non-scaling-stroke\"><g id=\"balloons\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"> <g id=\"left-balloon\"> <path d=\"M439 335C422 330 402 310 391 284C377 251 378 218 396 202C413 187 440 193 458 214C479 238 486 274 474 303C466 322 450 333 439 335Z\" /> <path d=\"M439 335L435 344Q441 342 447 344L439 335\" /> <path d=\"M441 344C439 370 472 382 472 407C472 429 448 440 453 460C458 479 486 474 488 457C490 446 479 442 473 450C460 469 494 492 499 518\" /> </g> <g id=\"right-balloon\"> <path d=\"M582 341C567 338 552 324 546 303C537 273 549 238 570 217C589 198 615 197 631 214C648 233 644 266 629 294C616 318 595 337 582 341Z\" /> <path d=\"M582 341L575 349Q582 347 587 351L582 341\" /> <path d=\"M581 350C573 374 549 385 551 409C553 429 577 437 576 456C575 475 548 482 540 468C534 457 546 450 553 457C567 472 533 499 530 523\" /> </g> <g id=\"center-balloon\"> <path d=\"M513 298C497 294 479 275 468 249C455 219 456 183 474 163C492 143 522 141 542 161C563 181 566 215 554 247C545 274 526 294 513 298Z\" /> <path d=\"M513 298L507 307Q513 305 519 307L513 298\" /> <path d=\"M513 307C503 332 521 353 520 376C519 397 496 407 497 426C498 445 522 450 530 436C536 425 526 416 518 422C500 435 513 464 516 482C519 503 510 524 514 545\" /> </g> </g> <g id=\"sparkles\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"> <path d=\"M407 150C407 158 405 161 398 162C405 163 407 166 407 174C408 166 410 163 417 162C410 161 408 158 407 150Z\" /> <path d=\"M611 155V165M606 160H616\" /> <path d=\"M658 316C658 323 656 326 650 327C656 328 658 331 658 338C659 331 661 328 667 327C661 326 659 323 658 316Z\" /> <path d=\"M367 323V333M362 328H372\" /> <path d=\"M607 395V403M603 399H611\" /> </g></g></svg>",
@@ -1503,7 +1515,14 @@ function dissolve(hi, src) {
   requestAnimationFrame(() => requestAnimationFrame(() => nx.classList.add("in")));
   setTimeout(() => { hi.src = src; delete hi.dataset.next; setTimeout(() => nx.remove(), 60); }, 1150);
 }
-function renderHero() {
+const ROOMS = {
+  living: ["Амели", "Друзья", "Секс в большом городе", "Сумерки", "Шрек", "Унесённые призраками", "Теория большого взрыва", "Шоу Трумана", "Зелёная миля", "Побег из Шоушенка", "Гарри Поттер", "Гарри Поттер. Экспресс", "Леон. Матильда", "Чёрный лебедь", "Деньги рекой"],
+  loft: ["Матрица", "Терминатор", "Призрак в доспехах", "Драйв", "Малыш на драйве", "Очень странные дела", "Чёрное зеркало", "Рик и Морти", "Обитель зла", "Бэтмен", "Довод", "Начало", "Бойцовский клуб"],
+  attic: ["Интерстеллар", "Дюна", "Марсианин", "Земля", "Луна", "Сатурн", "Млечный путь", "Властелин колец"]
+};
+const roomOf = f => (Object.keys(ROOMS).find(k => ROOMS[k].includes(f.t)) || (f.c.includes("space") ? "attic" : "lounge"));
+function setRoom(f) { const r = roomOf(f); document.querySelectorAll(".hero-bg .hb").forEach(el => el.classList.toggle("on", el.dataset.r === r)); }
+function renderHero() { try { setRoom(films[cfg.poster]); } catch (e) {}
   heroFrame.classList.toggle("silver", cfg.color === "silver");
   heroFrame.classList.toggle("lit", cfg.on);
   const want = P(films[cfg.poster].img), hi = $("heroImg");
