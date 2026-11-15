@@ -16,7 +16,7 @@
     --black: #000; --carbon: #0a0a0b; --graphite: #141416; --panel: #1b1b1e; --panel2: #232327;
     --line: rgba(255,255,255,.09); --line2: rgba(255,255,255,.16);
     --white: #f5f5f7; --silver: #b9bcc2; --muted: #8b8d93; --dim: #5d5f65;
-    --warm: 255, 214, 130; --accent: 255, 208, 40; --blue: 47, 107, 255; --green: 46, 204, 113; --rail: 0px; --hh: 78px; --disp: "Manrope", -apple-system, system-ui, sans-serif; --neutral: 255, 238, 214;
+    --warm: 255, 214, 130; --accent: 255, 208, 40; --blue: 84, 136, 255; --green: 84, 136, 255; --rail: 0px; --hh: 78px; --disp: "Manrope", -apple-system, system-ui, sans-serif; --neutral: 255, 238, 214;
     --glow: var(--warm);
     --pill: 4px;
   }
@@ -888,7 +888,7 @@
   @media (max-width: 900px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .facts div { border-left: 0; border-top: 1px solid rgba(206,220,255,.08); } .facts div:first-child, .facts div:nth-child(2) { border-top: 0; } .allspecs .specs3 { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
 
   /* подарки */
-  .gifts3 .badge { background: rgb(var(--green)); color: #04130a; }
+  .gifts3 .badge { background: rgb(var(--blue)); color: #fff; }
   .gifts3 .set.hit { border-color: rgba(var(--green), .5) !important; }
 
   /* доставка: 0 ₽, маркетплейсы, счётчик по городу */
@@ -921,7 +921,7 @@
   @media (max-width: 900px) { .ship { grid-template-columns: minmax(0, 1fr); } .ship-main { grid-template-columns: minmax(0, 1fr); padding: 24px; } .ship-calc { grid-column: 1; grid-row: auto; padding: 24px 0 0; border-left: 0; border-top: 1px solid rgba(206,220,255,.1); } .ship-side { grid-template-columns: minmax(0, 1fr); } }
 
   /* Телеграм, корзина, демо-оплата */
-  .btn.tg { margin-top: 26px; height: 54px; padding: 0 26px; font-size: 16px; gap: 10px; background: rgb(var(--blue)); color: #fff; }
+  .btn.tg { margin-top: 26px; height: 54px; padding: 0 26px; font-size: 16px; gap: 10px; background: #2f6bff; color: #fff; }
   .btn.tg:hover { background: #4a80ff; }
   .btn.tg svg { width: 22px; height: 22px; fill: currentColor; }
   .drawer { width: min(504px, 100%); }
@@ -932,6 +932,60 @@
   .coil { height: clamp(400px, 42vw, 560px) !important; }
   footer .legal { font-size: 13px; color: rgba(240,244,250,.6); }
   @media (max-width: 760px) { .coil { height: 440px !important; } }
+
+  /* переключатель подсветки: ясные состояния, нормальная подпись */
+  .lightsw, .hero .lightsw { font-size: 14px; font-weight: 600; letter-spacing: 0; text-transform: none; color: rgba(240,244,250,.8); gap: 12px; }
+  .toggle { width: 48px; height: 28px; border-radius: 14px !important; background: rgba(206,220,255,.14); box-shadow: inset 0 0 0 1px rgba(206,220,255,.25); }
+  .toggle::after { top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50% !important; background: #f2f5fa; }
+  .toggle.on { background: rgb(var(--accent)); box-shadow: none; } .toggle.on::after { transform: translateX(20px); background: #07090e; }
+  .hero.off .hero-bg { filter: brightness(.55); }
+  /* подвал */
+  footer { font-size: 15px; padding: 64px 0 36px; background: #04060a; }
+  .fgrid h4 { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: none; color: var(--cream); margin-bottom: 14px; }
+  .fgrid a { color: rgba(240,244,250,.62); padding: 6px 0; font-size: 15px; }
+  .fgrid a:hover { color: var(--cream); }
+  footer .legal { font-size: 14px; color: rgba(240,244,250,.55); margin-top: 44px; }
+  footer .legal a:hover { color: var(--cream); }
+
+  /* вся коллекция: светлее и живее */
+  .sheet.cat { background: radial-gradient(ellipse 60% 40% at 12% 0%, rgba(47,107,255,.28), transparent 70%), radial-gradient(ellipse 50% 36% at 92% 0%, rgba(var(--accent), .16), transparent 70%), linear-gradient(180deg, #151c2e, #0b101b) !important; }
+  .cat-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .cat-head h3 { font-size: 34px !important; font-weight: 800 !important; letter-spacing: -.03em; }
+  .cat-n { padding: 6px 12px; border-radius: 999px; background: rgb(var(--accent)); color: #07090e; font-size: 13px; font-weight: 800; }
+  .cat-sub { color: rgba(240,244,250,.75); font-size: 16px; }
+  .cat-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .cat-chips button { padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; color: var(--cream); background: rgba(206,220,255,.1); transition: background .2s ease, color .2s ease, transform .2s ease; }
+  .cat-chips button:hover { background: rgba(206,220,255,.2); transform: translateY(-1px); }
+  .cat-chips button.on { background: #2f6bff; color: #fff; }
+  .cat-grid { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 34px 24px; margin-top: 30px; }
+  .cg[hidden] { display: none; }
+  .cg .frame { box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 18px 34px rgba(0,0,0,.45), 0 0 34px rgba(var(--glow), .16); transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; }
+  .cg:nth-child(odd) .frame { transform: rotate(-1.4deg); } .cg:nth-child(even) .frame { transform: rotate(1.2deg); }
+  .cg:hover .frame { transform: translateY(-8px) scale(1.04) rotate(0deg); outline: 0; box-shadow: 0 0 0 2px rgb(var(--accent)), 0 26px 44px rgba(0,0,0,.5), 0 0 60px rgba(var(--glow), .38); }
+  .cg b { margin-top: 14px; font-size: 15px; font-weight: 800; }
+  .cg span { font-size: 13px; color: rgba(240,244,250,.6); }
+  @media (max-width: 600px) { .cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 12px; } .cat-head h3 { font-size: 26px !important; } }
+
+  /* как это работает: плитки с фото */
+  .bento-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
+  .bento-head .lead { max-width: 400px; }
+  .bento { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 300px 270px; gap: 18px; margin-top: 44px; }
+  .bt { position: relative; border-radius: 16px !important; overflow: hidden; background: #0a0d14; box-shadow: inset 0 0 0 1px rgba(206,220,255,.08); }
+  .bt-vid { grid-row: 1 / 3; aspect-ratio: auto !important; }
+  .bt-wide { grid-column: 2 / 4; }
+  .bt > img, .bt > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .bt > img:not(.lv-day) { transition: transform 1.4s cubic-bezier(.2,.8,.2,1); }
+  .bt:hover > img:not(.lv-day) { transform: scale(1.05); }
+  .bt::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(0deg, rgba(4,6,11,.88), rgba(4,6,11,.25) 42%, transparent 60%); }
+  .bt-cap { position: absolute; z-index: 2; left: 26px; right: 26px; bottom: 24px; }
+  .bt-cap b { display: block; font-size: 32px; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; color: var(--cream); }
+  .bt-cap span { display: block; margin-top: 6px; font-size: 15px; line-height: 1.4; color: rgba(240,244,250,.78); }
+  #specs { margin-top: 26px; }
+  @media (max-width: 900px) { .bento { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .bt { aspect-ratio: 4 / 3; } .bt-vid { grid-row: auto; aspect-ratio: 4 / 3 !important; } .bt-wide { grid-column: auto; } .bt-cap b { font-size: 26px; } }
+  /* сервис */
+  .ship-t b { display: block; font-size: 40px; font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--cream); }
+  .ship-t h3 { margin-top: 6px; font-size: 17px; font-weight: 700; color: rgba(240,244,250,.8); }
+  .ship-t p { margin-top: 12px; }
 </style>
 </head>
 <body class="in-hero">
@@ -986,27 +1040,17 @@
 </section>
 
 <!-- 2. Обзор -->
-<section id="overview"><div class="wrap split">
-  <div class="ov">
-    <div class="label">Как это работает</div>
-    <h2>Днём — картина.<br>Вечером — свет.</h2>
-    <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша кинотеатра.</p>
-    <ul class="ov-list">
-      <li><b>Вместо бра</b><span>Мягкий свет, не слепит</span></li>
-      <li><b>Ровное свечение</b><span>Без пятен и тёмных углов</span></li>
-      <li><b>Один провод</b><span>Тонкий кабель с выключателем</span></li>
-    </ul>
+<section id="overview"><div class="wrap">
+  <div class="bento-head"><div><div class="label">Как это работает</div><h2 style="margin-top:16px">Днём — картина.<br>Вечером — свет.</h2></div>
+    <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша кинотеатра.</p></div>
+  <div class="bento">
+    <div class="bt bt-vid lightvid to-day"><video id="lightVid" muted playsinline preload="auto" poster="img/w/scene-off.webp" aria-label="Рамка включается вечером"><source src="media/light-on.mp4" type="video/mp4"></video><img class="lv-day" src="img/w/scene-off.webp" alt=""><div class="bt-cap"><b>Свет вместо бра</b><span>Мягкий, ровный, не слепит</span></div></div>
+    <div class="bt"><img loading="lazy" src="img/w/d-edge.webp" alt="Тонкий профиль рамки сбоку"><div class="bt-cap"><b>10 мм</b><span>Толщина рамки — как у картины</span></div></div>
+    <div class="bt"><img loading="lazy" src="img/w/d-swap.webp" alt="Смена постера в рамке"><div class="bt-cap"><b>1 минута</b><span>Постер меняется спереди, рамку не снимать</span></div></div>
+    <div class="bt bt-wide"><img loading="lazy" src="img/w/d-switch.webp" alt="Выключатель на проводе"><div class="bt-cap"><b>Один провод</b><span>Выключатель под рукой · 12 В · 6–8 Вт, как ночник</span></div></div>
   </div>
-  <div class="lightvid"><video id="lightVid" muted playsinline preload="none" poster="img/w/scene-off.webp" aria-label="Рамка включается вечером"><source src="media/light-on.mp4" type="video/mp4"></video><img class="lv-day" src="img/w/scene-off.webp" alt="" loading="lazy"></div>
 </div>
 <div class="wrap" id="specs">
-  <div class="facts">
-    <div><b>10 мм</b><span>толщина рамки</span></div>
-    <div><b>30 × 42 см</b><span>постер A3</span></div>
-    <div><b>1,2 кг</b><span>вес — держится на одном саморезе</span></div>
-    <div><b>6–8 Вт</b><span>ест как ночник</span></div>
-    <div><b>12 В</b><span>безопасное напряжение</span></div>
-  </div>
   <details class="allspecs"><summary>Все характеристики</summary>
     <div class="specs3">
       <table class="spec"><tr><td>Формат</td><td>A3, 297 × 420 мм</td></tr><tr><td>Размер рамки</td><td>≈ 321 × 444 мм</td></tr><tr><td>Профиль</td><td>Алюминий, матовый чёрный</td></tr><tr><td>Фронт</td><td>Защитное стекло</td></tr><tr><td>Смена постера</td><td>Спереди, за минуту</td></tr></table>
@@ -1047,8 +1091,8 @@
       </div>
     </div>
     <div class="ship-side">
-      <div class="ship-t"><h3>7 дней на возврат</h3><p>Не подошло — вернём деньги после получения рамки.</p></div>
-      <div class="ship-t"><h3>Гарантия 1 год</h3><p>Перестала светить — заменим рамку за наш счёт.</p></div>
+      <div class="ship-t"><b>7 дней</b><h3>на возврат</h3><p>Не подошло — вернём деньги после получения рамки.</p></div>
+      <div class="ship-t"><b>1 год</b><h3>гарантии</h3><p>Перестала светить — заменим рамку за наш счёт.</p></div>
     </div>
   </div>
 </div></section>
@@ -1086,7 +1130,8 @@
 <div class="overlay" id="cartOv"></div>
 <div class="overlay" id="catOv"><div class="sheet cat">
   <button class="x" data-close="catOv" aria-label="Закрыть">×</button>
-  <h3>Вся коллекция</h3><p class="cat-sub">Нажмите на постер — он встанет в рамку. Доставка бесплатно.</p>
+  <div class="cat-head"><h3>Вся коллекция</h3><span class="cat-n" id="catN"></span></div><p class="cat-sub">Нажмите на постер — он встанет в рамку. Доставка бесплатно.</p>
+  <div class="cat-chips" id="catChips"></div>
   <div class="cat-grid" id="catGrid"></div>
 </div></div>
 <div class="overlay" id="pickOv"><div class="sheet picker">
@@ -1139,7 +1184,6 @@ const films = [
   { t: "Марсианин", q: "Один на Марсе — и картошка.", tag: true, o: "The Martian", y: 2015, d: "Ридли Скотт", c: ["sci"], img: "img/martian2.jpg", f: ["Энди Вейер сначала выкладывал роман главами на своём сайте.", "Марс снимали в иорданской пустыне Вади-Рам.", "Семь номинаций на «Оскар»."] },
   { t: "Амели", q: "Маленькие радости ложечкой.", tag: true, o: "Le Fabuleux Destin d'Amélie Poulain", y: 2001, d: "Жан-Пьер Жёне", c: ["love"], img: "img/amelie2.jpg", f: ["Снимали на Монмартре в Париже.", "Красный и зелёный усилили при цветокоррекции — это почерк фильма.", "Пять номинаций на «Оскар»."] },
   { t: "Драйв", q: "Ночной город, неон и тишина.", tag: true, o: "Drive", y: 2011, d: "Николас Виндинг Рефн", c: ["action"], img: "img/drive2.jpg", f: ["Рефн получил приз за режиссуру в Каннах.", "Синтвейв-саундтрек стал культовым сам по себе.", "Снят по роману Джеймса Саллиса."] },
-  { t: "Волк с Уолл-стрит", q: "Продай мне эту ручку.", o: "The Wolf of Wall Street", y: 2013, d: "Мартин Скорсезе", c: ["cult", "action"], img: "img/wolf2.jpg", f: ["Ди Каприо получил «Золотой глобус» за роль Джордана Белфорта.", "Настоящий Белфорт появляется в фильме в камео — в самом конце."] },
   { t: "Клан Сопрано", q: "Бада Бинг!", tag: true, o: "The Sopranos", y: 1999, d: "Дэвид Чейз", c: ["cult"], img: "img/sopranos2.jpg", f: ["Сериал собрал 21 премию «Эмми».", "Финальную сцену в закусочной фанаты разбирают до сих пор."] },
   { t: "Джентльмены", q: "Когда лев голоден — он ест.", o: "The Gentlemen", y: 2019, d: "Гай Ричи", c: ["cult", "action"], img: "img/gentlemen2.jpg", f: ["Мэттью Макконахи играет американца, построившего бизнес в Англии.", "В 2024 году по фильму вышел одноимённый сериал."] },
   { t: "Гарри Поттер", q: "Торжественно клянусь, что замышляю только шалость.", o: "Harry Potter and the Prisoner of Azkaban", y: 2004, d: "Альфонсо Куарон", c: ["sci", "winter"], img: "img/harrypotter2.jpg", f: ["«Узник Азкабана» — единственный фильм серии, снятый Альфонсо Куароном.", "Сириуса Блэка сыграл Гэри Олдман."] },
@@ -1174,7 +1218,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
   set(false);
   preload(P(films[cfg.poster].img)).then(() => setTimeout(() => { hero.classList.add("intro"); set(true); setTimeout(() => hero.classList.remove("intro"), 2600); }, 1500));
 }
-["Убить Билла", "Интерстеллар", "Матрица", "Бойцовский клуб", "Волк с Уолл-стрит"].map(t => films.findIndex(f => f.t === t)).forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.setAttribute("aria-label", films[i].t); m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">'; m.onclick = () => { cfg.poster = +m.dataset.i; renderHero(); }; $("minis").appendChild(m); });
+["Убить Билла", "Интерстеллар", "Матрица", "Бойцовский клуб", "Дюна"].map(t => films.findIndex(f => f.t === t)).forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.setAttribute("aria-label", films[i].t); m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">'; m.onclick = () => { cfg.poster = +m.dataset.i; renderHero(); }; $("minis").appendChild(m); });
 const more = document.createElement("button"); more.type = "button"; more.className = "mini more"; more.dataset.cat = ""; more.setAttribute("aria-label", "Все постеры"); more.innerHTML = '<img decoding="async" alt="" src="' + T(films.find(f => f.t === "Сияние").img) + '"><span>+' + (films.length - 5) + "</span>"; $("minis").appendChild(more);
 // миниатюры сами меняются: раз в 3,5 с одна плитка показывает другой фильм
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(() => {
@@ -1189,7 +1233,8 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(() => {
 // ---------- день / вечер ----------
 // видео «днём — картина, вечером — свет»: играет, только пока видно
 { const v = $("lightVid"), box = v.parentNode; let vis = false;
-  v.addEventListener("ended", () => setTimeout(() => { box.classList.add("to-day"); setTimeout(() => { v.currentTime = 0; setTimeout(() => { box.classList.remove("to-day"); if (vis) v.play().catch(() => {}); }, 1400); }, 1300); }, 1800));
+  v.addEventListener("playing", () => setTimeout(() => box.classList.remove("to-day"), 120));
+  v.addEventListener("ended", () => setTimeout(() => { box.classList.add("to-day"); setTimeout(() => { v.currentTime = 0; if (vis) setTimeout(() => v.play().catch(() => {}), 600); }, 1400); }, 1800));
   new IntersectionObserver(es => es.forEach(e => { vis = e.isIntersecting; if (vis) { if (!v.ended) v.play().catch(() => {}); } else v.pause(); }), { threshold: .35 }).observe(v); }
 
 // ---------- вкладки характеристик ----------
@@ -1200,7 +1245,11 @@ document.querySelectorAll("#specTabs button").forEach(b => b.onclick = () => {
 
 // ---------- постеры: коллекция «рекой» — колонки едут вверх и вниз ----------
 $("catCount").textContent = "· " + films.length;
-$("catGrid").innerHTML = films.map((f, i) => '<button class="cg" data-i="' + i + '"><div class="frame"><div class="poster"><img decoding="async" loading="lazy" alt="" src="' + T(f.img) + '"></div></div><b>' + f.t + '</b><span>' + f.y + " · " + f.d + '</span></button>').join("");
+$("catN").textContent = films.length + " фильмов";
+$("catGrid").innerHTML = films.map((f, i) => '<button class="cg" data-i="' + i + '" data-c="' + f.c.join(" ") + '"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" alt="" src="' + T(f.img) + '"></div></div><b>' + f.t + '</b><span>' + f.y + " · " + f.d + '</span></button>').join("");
+cats.filter(([k]) => k === "all" || films.some(f => f.c.includes(k))).forEach(([k, n]) => { const b = document.createElement("button"); b.type = "button"; b.textContent = n; b.className = k === "all" ? "on" : "";
+  b.onclick = () => { $("catChips").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); let n = 0; $("catGrid").querySelectorAll(".cg").forEach(c => { const ok = k === "all" || c.dataset.c.split(" ").includes(k); c.hidden = !ok; if (ok) { c.style.setProperty("--k", n++); c.style.animation = "none"; void c.offsetWidth; c.style.animation = ""; } }); };
+  $("catChips").appendChild(b); });
 $("catGrid").querySelectorAll(".cg").forEach((b, k) => { b.style.setProperty("--k", k); b.onclick = () => { $("catOv").classList.remove("open"); pickFilm(+b.dataset.i); }; });
 document.addEventListener("click", e => { if (e.target.closest("[data-cat]")) { e.preventDefault(); $("catOv").classList.remove("open"); void $("catOv").offsetWidth; $("catOv").classList.add("open"); } });
 function pickFilm(i) { cfg.poster = i; renderHero(); toast("«" + films[i].t + "» — в рамке"); setTimeout(() => $("top").scrollIntoView({ behavior: "smooth" }), 400); }
