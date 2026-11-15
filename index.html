@@ -1327,6 +1327,8 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// тестовый вход в оплату, пока продажи закрыты: ?test=КЛЮЧ запоминается в этом браузере, ?test=off — забыть
+{ const t = new URLSearchParams(location.search).get("test"); if (t) { try { t === "off" ? localStorage.removeItem("proswetTest") : localStorage.setItem("proswetTest", t); } catch (e) {} history.replaceState(null, "", location.pathname); } }
 // перезагрузка всегда открывает верх страницы: не восстанавливаем прокрутку и не прыгаем по #якорю
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
@@ -1531,9 +1533,10 @@ $("coForm").onsubmit = async e => {
   const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Создаём платёж…"; $("coErr").textContent = "";
   const body = { items: apiItems(), name: f.name.value, phone: f.phone.value, email: f.email.value, ship: $("coShip").querySelector(".on").dataset.v, city: f.city.value, pvz: f.pvz.value, note: cardNote(f.note.value), agree: f.agree.checked };
   try {
-    const r = await fetch("/api/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const tk = (() => { try { return localStorage.getItem("proswetTest") || ""; } catch (e) { return ""; } })();
+    const r = await fetch("/api/orders", { method: "POST", headers: Object.assign({ "Content-Type": "application/json" }, tk ? { "X-Test-Key": tk } : {}), body: JSON.stringify(body) });
     const d = await r.json().catch(() => ({}));
-    if (r.status === 404 || r.status === 405) throw Object.assign(new Error("demo"), { demo: true });
+    if (r.status === 423 || r.status === 404 || r.status === 405) throw Object.assign(new Error("demo"), { demo: true });
     if (!r.ok) throw new Error(d.error || (d.detail && d.detail[0] && "Проверьте данные заказа") || "Не получилось создать заказ");
     showPay(d);
   } catch (err) { if (err.message === "Failed to fetch" || err.demo) demoPay(); else $("coErr").textContent = err.message; }
