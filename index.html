@@ -1140,7 +1140,7 @@
   .bt.swtile.lightvid.used .sw-hint { opacity: 0; }
   .lightvid .lv-day { transition: opacity .55s cubic-bezier(.4,0,.2,1); }
   @media (min-width: 901px) { .hero .wrap { grid-template-columns: minmax(0, .97fr) minmax(0, 1.03fr); } .hero .opt, .hero .buy { max-width: 520px; } .hero-facts { max-width: 575px; } }
-  @media (max-width: 900px) { .bento { grid-template-rows: none; } }
+  @media (max-width: 900px) { .bento { grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: none !important; } .bento .bt-box, .bento .bt-wide { grid-column: auto !important; } .bento .bt { aspect-ratio: 4 / 3; } .bento .bt-vid { aspect-ratio: 4 / 5 !important; } }
   /* ===== 15.11 вечер: «Дарить не стыдно» — иерархия; открытка 10×15; поводы одной строкой ===== */
   .pack-t { display: flex; flex-direction: column; padding: 36px 34px !important; }
   .pack-t h3 { font-size: 36px !important; line-height: 1.05; margin-top: 12px !important; }
@@ -1742,8 +1742,6 @@ const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersectin
 [...secIds, "gifts"].forEach(id => io2.observe($(id)));
 new IntersectionObserver(es => es.forEach(e => document.body.classList.toggle('in-hero', e.isIntersecting)), { threshold: .2 }).observe(document.querySelector('.hero'));
 
-// открыть выбранный фильм в тёмной комнате
-function openFilm(i) { pickFilm(i); }
 // края сайта и бегущая строка
 (function () {
   const fr = i => '<div class="frame lit" data-i="' + i + '" title="' + films[i].t + '"><div class="poster"><img decoding="async" alt="" src="' + T(films[i].img) + '"></div></div>';
