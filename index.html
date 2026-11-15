@@ -16,7 +16,7 @@
     --black: #000; --carbon: #0a0a0b; --graphite: #141416; --panel: #1b1b1e; --panel2: #232327;
     --line: rgba(255,255,255,.09); --line2: rgba(255,255,255,.16);
     --white: #f5f5f7; --silver: #b9bcc2; --muted: #8b8d93; --dim: #5d5f65;
-    --warm: 255, 214, 130; --accent: 255, 208, 40; --blue: 255, 208, 40; --green: 255, 208, 40; --rail: 0px; --hh: 78px; --disp: "Manrope", -apple-system, system-ui, sans-serif; --neutral: 255, 238, 214;
+    --warm: 255, 214, 130; --accent: 255, 208, 40; --blue: 255, 208, 40; --green: 255, 208, 40; --rail: 0px; --hh: 78px; --disp: "ProswetRub", "Manrope", -apple-system, system-ui, sans-serif; --neutral: 255, 238, 214;
     --glow: var(--warm);
     --pill: 4px;
   }
@@ -438,7 +438,7 @@
   @media (min-width: 901px) and (max-width: 1150px) { .mainnav a[href="#help"] { display: none; } .hdr-cta .price { display: none; } }
 
   /* ===== система после аудита 14.11: шрифты, кнопки, радиусы, ритм ===== */
-  :root { --text: "Manrope", -apple-system, system-ui, sans-serif; --dim: #7a7c82; --h-l: 48px; --h-s: 40px; --r-s: 4px; --r-m: 8px; --head-gap: 48px; }
+  :root { --text: "ProswetRub", "Manrope", -apple-system, system-ui, sans-serif; --dim: #7a7c82; --h-l: 48px; --h-s: 40px; --r-s: 4px; --r-m: 8px; --head-gap: 48px; }
   body { font-family: var(--text); font-optical-sizing: auto; font-size: 16px; }
   h1, h3, .display { font-family: var(--text); }
   h2 { font-size: clamp(40px, 5vw, 72px) !important; line-height: 1.02 !important; padding-top: .04em; font-weight: 600 !important; }
@@ -1007,6 +1007,34 @@
   .wish input:focus { border-color: rgb(var(--accent)); }
   .wish .btn { height: 48px; white-space: nowrap; }
   @media (max-width: 760px) { .wish { grid-template-columns: minmax(0, 1fr); } }
+
+  /* единый жёлтый, лента без свечения, автосмена фильма */
+  :root { --accent: 245, 197, 24; --blue: 245, 197, 24; --green: 245, 197, 24; }
+  .btn, .hdr-cta, .hero .buy .btn:not(.line), .mbuy .btn, .co-pay .btn.sbp { background: rgb(var(--accent)) !important; background-image: none !important; color: #07090e !important; box-shadow: none !important; }
+  .btn:hover, .hdr-cta:hover { background: #ffd84a !important; }
+  .btn.line, .btn.line:hover { background: rgba(206,220,255,.04) !important; color: var(--cream) !important; box-shadow: inset 0 0 0 1px rgba(240,244,250,.22) !important; }
+  .btn.line:hover { box-shadow: inset 0 0 0 1px rgba(240,244,250,.6) !important; }
+  .btn.tg, .btn.tg:hover { background: #f2f5fa !important; }
+  header { background: rgba(5,7,11,.96) !important; }
+  .coil { background: #05070b !important; }
+  .coil .cc .frame, .coil .cc .frame.lit { box-shadow: 0 0 0 1px rgba(255,255,255,.09), 0 18px 34px rgba(0,0,0,.5) !important; }
+  .coil .cc:hover .frame { transform: translateY(-8px) scale(1.05); box-shadow: 0 0 0 2px rgb(var(--accent)), 0 22px 40px rgba(0,0,0,.55) !important; }
+  .hero .mini { position: relative; }
+  body.auto .hero .mini.on::after { content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: rgb(var(--accent)); transform-origin: left; animation: miniBar 6s linear; }
+  @keyframes miniBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* тень закрытой корзины ложилась на правый край страницы и затемняла кнопку в шапке */
+  .drawer { box-shadow: none !important; visibility: hidden; transition: transform .35s cubic-bezier(.2,.8,.2,1), visibility 0s .35s; }
+  .drawer.open { box-shadow: -30px 0 80px rgba(0,0,0,.6) !important; visibility: visible; transition: transform .35s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+
+  .search { box-shadow: none !important; visibility: hidden; transition: transform .35s ease, visibility 0s .35s; }
+  .search.open { box-shadow: 0 30px 80px rgba(0,0,0,.6) !important; visibility: visible; transition: transform .35s ease, visibility 0s; }
+
+  /* щелчок выключателем: кадр «выключено» ↔ «включено» */
+  .bt.swtile .sw-on { opacity: 0; animation: swClick 6s infinite; }
+  @keyframes swClick { 0%, 30% { opacity: 0; } 33%, 80% { opacity: 1; } 84%, 100% { opacity: 0; } }
+  .bt.swtile:hover > img { transform: none !important; }
+  @media (prefers-reduced-motion: reduce) { .bt.swtile .sw-on { animation: none; opacity: 1; } }
 </style>
 </head>
 <body class="in-hero">
@@ -1020,7 +1048,7 @@
   <div class="icons">
     <button class="icon" aria-label="Личный кабинет" id="loginBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.4-3.6 4.2-5.2 7.5-5.2s6.1 1.6 7.5 5.2"/></svg></button>
     <button class="icon" aria-label="Корзина" id="cartBtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><i id="count">0</i></button>
-    <a class="btn hdr-cta" href="#top">Купить <span class="price">3&nbsp;449&nbsp;₽</span></a>
+    <a class="btn hdr-cta" href="#top">Купить <span class="price">4&nbsp;250&nbsp;₽</span></a>
   </div>
 </div></header>
 
@@ -1032,7 +1060,7 @@
     <div class="hero-kicker">Световая рамка Proswet</div>
     <h1 class="hero-h">Ваш фильм —<br>часть интерьера</h1>
     <ul class="hero-facts"><li><b>Готова</b><span>постер уже внутри</span></li><li><b>A3</b><span>формат 30 × 42 см</span></li><li class="free"><b>0 ₽</b><span>доставка по России</span></li></ul>
-    <div class="from"><span class="price" id="totalPrice">3&nbsp;449&nbsp;₽</span> рамка с постером</div>
+    <div class="from"><span class="price" id="totalPrice">4&nbsp;250&nbsp;₽</span> рамка с постером</div>
 
     <div class="opt"><div class="t">Ваш фильм <span id="posterName"></span></div>
       <div class="minis" id="minis"></div></div>
@@ -1066,9 +1094,9 @@
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша кинотеатра.</p></div>
   <div class="bento">
     <div class="bt bt-vid lightvid to-day"><video id="lightVid" muted playsinline preload="auto" poster="img/w/scene-off.webp" aria-label="Рамка включается вечером"><source src="media/light-on.mp4" type="video/mp4"></video><img class="lv-day" src="img/w/scene-off.webp" alt=""><div class="bt-cap"><b>Свет вместо бра</b><span>Мягкий, ровный, не слепит</span></div></div>
-    <div class="bt"><img loading="lazy" src="img/w/d-edge.webp" alt="Тонкий профиль рамки сбоку"><div class="bt-cap"><b>10 мм</b><span>Толщина рамки — как у картины</span></div></div>
-    <div class="bt"><img loading="lazy" src="img/w/d-hang.webp" alt="Рамку вешают на стену"><div class="bt-cap"><b>Готова из коробки</b><span>Постер уже внутри — повесили и включили</span></div></div>
-    <div class="bt bt-wide"><img loading="lazy" src="img/w/d-switch.webp" alt="Выключатель на проводе"><div class="bt-cap"><b>Один провод</b><span>Выключатель под рукой · 12 В · 6–8 Вт, как ночник</span></div></div>
+    <div class="bt"><img loading="lazy" src="img/w/s-side.webp" alt="Рамка на стене сбоку"><div class="bt-cap"><b>10 мм</b><span>Висит на стене как обычная картина</span></div></div>
+    <div class="bt"><img loading="lazy" src="img/w/s-box.webp" alt="Рамка в коробке"><div class="bt-cap"><b>Готова из коробки</b><span>Постер внутри, кабель и крепёж в комплекте</span></div></div>
+    <div class="bt bt-wide swtile" id="swTile"><img loading="lazy" src="img/w/s-sw-off.webp" alt="Рамка выключена, рука тянется к выключателю"><img class="sw-on" loading="lazy" src="img/w/s-sw-on.webp" alt="Рамка включена"><div class="bt-cap"><b>Один щелчок</b><span>Выключатель на проводе · 12 В · 6–8 Вт, как ночник</span></div></div>
   </div>
 </div>
 <div class="wrap" id="specs">
@@ -1076,7 +1104,7 @@
     <div class="specs3">
       <table class="spec"><tr><td>Формат</td><td>A3, 297 × 420 мм</td></tr><tr><td>Размер рамки</td><td>≈ 321 × 444 мм</td></tr><tr><td>Профиль</td><td>Алюминий, матовый чёрный</td></tr><tr><td>Фронт</td><td>Защитное стекло</td></tr><tr><td>Сборка</td><td>Собрана нами, постер внутри</td></tr></table>
       <table class="spec"><tr><td>Подсветка</td><td>LED + рассеиватель</td></tr><tr><td>Цвет света</td><td>Тёплый</td></tr><tr><td>Питание</td><td>220 → 12 В</td></tr><tr><td>Кабель</td><td>2 м, с выключателем</td></tr><tr><td>Нагрев</td><td>Почти не греется</td></tr></table>
-      <table class="spec"><tr><td>В коробке</td><td>Рамка, постер, адаптер</td></tr><tr><td>Крепление</td><td>Вертикально и горизонтально</td></tr><tr><td>Упаковка</td><td>Жёсткая коробка</td></tr><tr><td>Документы</td><td>Декларация ЕАЭС</td></tr><tr><td>Гарантия</td><td>1 год</td></tr></table>
+      <table class="spec"><tr><td>В коробке</td><td>Рамка, постер, адаптер</td></tr><tr><td>Крепление</td><td>Вертикально и горизонтально</td></tr><tr><td>Упаковка</td><td>Жёсткая коробка</td></tr><tr><td>Документы</td><td>Декларация ЕАЭС</td></tr><tr><td>Гарантия</td><td>1 месяц</td></tr></table>
     </div>
   </details>
 </div></section>
@@ -1090,11 +1118,11 @@
   <p class="lead" style="margin-top:18px">Любой фильм из коллекции — в каждый набор.</p>
   <div class="sets gifts3" id="gifts3">
     <div class="set g1"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g1.webp" alt="Световая рамка Proswet на стене"></div>
-      <div class="body"><h3>Одна рамка</h3><p>Proswet A3 с постером вашего фильма.</p><div class="row"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="3449">Выбрать фильм</button></div></div></div>
-    <div class="set g3 hit"><div class="badge">Выгоднее на 857&nbsp;₽</div><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g3.webp" alt="Три световые рамки над диваном"></div>
-      <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">9&nbsp;490&nbsp;₽<s>10&nbsp;347&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="9490">Выбрать 3 фильма</button></div></div></div>
+      <div class="body"><h3>Одна рамка</h3><p>Proswet A3 с постером вашего фильма.</p><div class="row"><span class="price">4&nbsp;250&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="4250">Выбрать фильм</button></div></div></div>
+    <div class="set g3 hit"><div class="badge">Выгоднее на 1&nbsp;260&nbsp;₽</div><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g3.webp" alt="Три световые рамки над диваном"></div>
+      <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">11&nbsp;490&nbsp;₽<s>12&nbsp;750&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="11490">Выбрать 3 фильма</button></div></div></div>
     <div class="set gg"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-gg.webp" alt="Подарочная коробка с лентой и сухоцветами"></div>
-      <div class="body"><h3>Подарочный набор</h3><p>Рамка в большой коробке: лента с бантом, сухоцветы и открытка с вашим текстом.</p><div class="row"><span class="price">3&nbsp;990&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="3990">Выбрать фильм</button></div></div></div>
+      <div class="body"><h3>Подарочный набор</h3><p>Рамка в большой коробке: лента с бантом, сухоцветы и открытка с вашим текстом.</p><div class="row"><span class="price">4&nbsp;790&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="4790">Выбрать фильм</button></div></div></div>
   </div>
   <div class="pack">
     <div class="pack-t"><div class="label">Упаковка</div><h3>Дарить не стыдно</h3><p>Собираем подарочный набор руками. Коробка под размер рамки — её не нужно ни во что заворачивать.</p>
@@ -1119,7 +1147,7 @@
     </div>
     <div class="ship-side">
       <div class="ship-t"><b>14 дней</b><h3>на возврат</h3><p>Не подошло — вернём деньги после получения рамки.</p></div>
-      <div class="ship-t"><b>1 год</b><h3>гарантии</h3><p>Перестала светить — заменим рамку за наш счёт.</p></div>
+      <div class="ship-t"><b>1 месяц</b><h3>гарантии</h3><p>Перестала светить — заменим рамку за наш счёт.</p></div>
     </div>
   </div>
 </div></section>
@@ -1171,7 +1199,7 @@
 </div></div>
 <aside class="drawer" id="drawer"><h3>Корзина <button class="x" id="closeCart" aria-label="Закрыть" style="font-size:26px;color:var(--muted)">×</button></h3><div class="cart-items" id="cartItems"></div><div class="total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div><button class="btn" id="checkout">Оформить заказ</button></aside>
 <div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#gifts">Подарки</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
-<div class="mbuy" id="mbuy"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn" id="mbuyBtn">Купить</button></div>
+<div class="mbuy" id="mbuy"><span class="price">4&nbsp;250&nbsp;₽</span><button class="btn" id="mbuyBtn">Купить</button></div>
 <div class="overlay" id="coOv"><form class="sheet co" id="coForm" novalidate>
   <button type="button" class="x" data-close="coOv" aria-label="Закрыть">×</button>
   <h3>Оформление заказа</h3>
@@ -1248,17 +1276,19 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
   set(false);
   preload(P(films[cfg.poster].img)).then(() => setTimeout(() => { hero.classList.add("intro"); set(true); setTimeout(() => hero.classList.remove("intro"), 2600); }, 1500));
 }
-["Убить Билла", "Интерстеллар", "Матрица", "Бойцовский клуб", "Дюна"].map(t => films.findIndex(f => f.t === t)).forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.setAttribute("aria-label", films[i].t); m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">'; m.onclick = () => { cfg.poster = +m.dataset.i; renderHero(); }; $("minis").appendChild(m); });
-const more = document.createElement("button"); more.type = "button"; more.className = "mini more"; more.dataset.cat = ""; more.setAttribute("aria-label", "Все постеры"); more.innerHTML = '<img decoding="async" alt="" src="' + T(films.find(f => f.t === "Сияние").img) + '"><span>+' + (films.length - 5) + "</span>"; $("minis").appendChild(more);
-// миниатюры сами меняются: раз в 3,5 с одна плитка показывает другой фильм
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(() => {
-  if (document.hidden || !document.body.classList.contains("in-hero")) return;
-  const tiles = [...document.querySelectorAll(".mini[data-i]")], shown = tiles.map(m => +m.dataset.i);
-  const free = tiles.filter(m => +m.dataset.i !== cfg.poster && !m.matches(":hover")), pool = films.map((f, i) => i).filter(i => !shown.includes(i));
-  if (!free.length || !pool.length) return;
-  const m = free[Math.floor(Math.random() * free.length)], i = pool[Math.floor(Math.random() * pool.length)], src = T(films[i].img);
-  preload(src).then(() => { m.classList.add("flip"); setTimeout(() => { m.dataset.i = i; m.setAttribute("aria-label", films[i].t); m.querySelector("img").src = src; m.classList.remove("flip"); }, 350); });
-}, 3500);
+// очередь показа: с Kill Bill, дальше по кругу. Плитки — окно из 5 фильмов очереди.
+const SEQ = ["Убить Билла", "Интерстеллар", "Матрица", "Бойцовский клуб", "Дюна"].map(t => films.findIndex(f => f.t === t)); films.forEach((f, i) => { if (!SEQ.includes(i)) SEQ.push(i); });
+let seqPos = Math.max(0, SEQ.indexOf(cfg.poster)), win = Math.floor(seqPos / 5) * 5, auto = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+function drawMinis() {
+  $("minis").querySelectorAll(".mini[data-i]").forEach(m => m.remove());
+  const more = $("minis").querySelector(".more");
+  for (let k = 0; k < 5; k++) { const i = SEQ[(win + k) % SEQ.length], m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.setAttribute("aria-label", films[i].t); m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">';
+    m.onclick = () => { auto = false; document.body.classList.remove("auto"); seqPos = SEQ.indexOf(i); cfg.poster = i; renderHero(); }; $("minis").insertBefore(m, more); preload(P(films[i].img)); }
+}
+{ const more = document.createElement("button"); more.type = "button"; more.className = "mini more"; more.dataset.cat = ""; more.setAttribute("aria-label", "Все постеры"); more.innerHTML = '<img decoding="async" alt="" src="' + T(films.find(f => f.t === "Сияние").img) + '"><span>+' + (films.length - 5) + "</span>"; $("minis").appendChild(more); }
+drawMinis();
+function showSeq(pos) { seqPos = (pos + SEQ.length) % SEQ.length; const w = Math.floor(seqPos / 5) * 5; if (w !== win) { win = w; drawMinis(); } cfg.poster = SEQ[seqPos]; renderHero(); }
+if (auto) { document.body.classList.add("auto"); setInterval(() => { if (!auto || document.hidden || !document.body.classList.contains("in-hero") || !cfg.on) return; const next = (seqPos + 1) % SEQ.length; preload(P(films[SEQ[next]].img)).then(() => { if (auto) showSeq(next); }); }, 6000); }
 
 // ---------- день / вечер ----------
 // видео «днём — картина, вечером — свет»: играет, только пока видно
@@ -1283,7 +1313,7 @@ cats.filter(([k]) => k === "all" || films.some(f => f.c.includes(k))).forEach(([
 $("catGrid").querySelectorAll(".cg").forEach((b, k) => { b.style.setProperty("--k", k); b.onclick = () => { $("catOv").classList.remove("open"); pickFilm(+b.dataset.i); }; });
 $("wish").onsubmit = e => { e.preventDefault(); const v = e.target.f.value.trim(); if (!v) return; fetch("/wish?f=" + encodeURIComponent(v.slice(0, 80)), { cache: "no-store" }).catch(() => {}); $("wish").innerHTML = "<div><b>Записали: «" + v.replace(/[<>&]/g, "") + "»</b><span>Спасибо! Самые желанные фильмы появятся в коллекции первыми.</span></div>"; };
 document.addEventListener("click", e => { if (e.target.closest("[data-cat]")) { e.preventDefault(); $("catOv").classList.remove("open"); void $("catOv").offsetWidth; $("catOv").classList.add("open"); } });
-function pickFilm(i) { cfg.poster = i; renderHero(); toast("«" + films[i].t + "» — в рамке"); setTimeout(() => $("top").scrollIntoView({ behavior: "smooth" }), 400); }
+function pickFilm(i) { auto = false; document.body.classList.remove("auto"); showSeq(SEQ.indexOf(i)); toast("«" + films[i].t + "» — в рамке"); setTimeout(() => $("top").scrollIntoView({ behavior: "smooth" }), 400); }
 (function buildFlow() {
   const n = innerWidth <= 760 ? 3 : 5, cols = Array.from({ length: n }, () => []);
   films.forEach((f, i) => cols[i % n].push(i));
@@ -1312,7 +1342,7 @@ function add(item) {
   if (same) same.qty = (same.qty || 1) + 1; else cart.push({ ...item, qty: 1 });
   saveCart(); renderCart(); openCart();
 }
-$("buyBtn").onclick = () => add({ sku: "one", films: [films[cfg.poster].t], name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 3449, img: T(films[cfg.poster].img) });
+$("buyBtn").onclick = () => add({ sku: "one", films: [films[cfg.poster].t], name: "Proswet A3", sub: "Чёрная рамка · постер «" + films[cfg.poster].t + "»", price: 4250, img: T(films[cfg.poster].img) });
 // выбор постера для каждой рамки набора
 const pick = { n: 1, name: "", price: 0, sel: [], cur: 0 };
 function drawPick() {
@@ -1479,8 +1509,6 @@ $("mbuyBtn").onclick = () => $("buyBtn").click();
   { const band = coil.querySelector(".coil-band"), rate = r => { const a = $("coilTrack").getAnimations()[0]; if (a) a.updatePlaybackRate(r); };
     band.addEventListener("pointerenter", () => rate(.3)); band.addEventListener("pointerleave", () => rate(1)); }
   new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) coil.classList.add("in"); }), { threshold: .15 }).observe(coil);
-  let raf = 0;
-  addEventListener("scroll", () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; const r = coil.getBoundingClientRect(); const p = Math.max(-1, Math.min(1, (innerHeight / 2 - (r.top + r.height / 2)) / innerHeight)); coil.style.setProperty("--p", p.toFixed(3)); }); }, { passive: true });
 })();
 </script>
 </body>
