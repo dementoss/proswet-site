@@ -1370,7 +1370,7 @@ const films = [
 const cats = [["all", "Все"], ["sci", "Фантастика"], ["cult", "Культовое кино"], ["love", "Для двоих"], ["action", "Драйв"], ["winter", "Зима"]];
 const $ = id => document.getElementById(id);
 const fmt = n => n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
-const toast = msg => { $("toast").textContent = msg; $("toast").classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").classList.remove("show"), 2000); };
+const toast = msg => { $("toast").textContent = msg; $("toast").classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").classList.remove("show"), Math.max(2000, msg.length * 60)); };
 
 // ---------- открытка ----------
 const CARD_T = {
@@ -1591,6 +1591,7 @@ async function showPay(d) {
 }
 const q0 = new URLSearchParams(location.search);
 if (q0.get("order") && q0.get("paid") === "1") { cart.length = 0; saveCart(); renderCart(); setTimeout(() => toast("Заказ " + q0.get("order") + " оплачен. Спасибо!"), 600); }
+else if (q0.get("order") && q0.get("paid") === "0") setTimeout(() => toast("Оплата не прошла — деньги не списаны. Корзина сохранена, можно попробовать ещё раз."), 600);
 
 
 // ---------- вход ----------
