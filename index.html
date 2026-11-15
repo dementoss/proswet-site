@@ -1209,6 +1209,30 @@
   .card-pv .sheet-a4 { z-index: 1; transform: rotate(-3deg); box-shadow: 0 2px 0 rgba(255,255,255,.06), 0 40px 80px rgba(0,0,0,.65), 0 8px 18px rgba(0,0,0,.4); }
   .card-pv .a4-cap { position: relative; z-index: 1; margin-top: 30px; font-size: 12px; letter-spacing: .08em; }
   @media (max-width: 900px) { .card-b { padding: 30px 20px !important; gap: 34px !important; } .card-ed h3 { font-size: 30px !important; } }
+  /* ===== моушн-история: коробка → стена → 10 мм → свет ===== */
+  .story { margin-top: 44px; }
+  .st-stage { position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #0a0807; box-shadow: inset 0 0 0 1px rgba(255,230,190,.08), 0 40px 90px rgba(0,0,0,.5); }
+  .st-stage video, .st-stage .st-off { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .st-stage .st-off { opacity: 0; transition: opacity .5s cubic-bezier(.4,0,.2,1); pointer-events: none; }
+  .st-stage.off .st-off { opacity: 1; }
+  .st-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, rgba(4,4,6,.85), rgba(4,4,6,.15) 40%, transparent 60%); }
+  .st-cap { position: absolute; z-index: 2; left: 36px; bottom: 34px; right: 36px; display: grid; gap: 4px; transition: opacity .4s ease, transform .4s ease; }
+  .st-cap.swap { opacity: 0; transform: translateY(8px); }
+  .st-n { font-size: 12px; font-weight: 700; letter-spacing: .2em; color: rgb(var(--accent)); }
+  .st-cap b { font-family: var(--disp); font-size: clamp(26px, 3vw, 44px); font-weight: 700; letter-spacing: -.03em; color: var(--cream); line-height: 1.05; }
+  .st-cap > span:last-child { font-size: 15px; color: rgba(240,244,250,.72); }
+  .st-steps { position: absolute; z-index: 2; top: 24px; left: 36px; right: 36px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .st-steps i { height: 2px; border-radius: 2px; background: rgba(255,255,255,.18); overflow: hidden; position: relative; }
+  .st-steps i::after { content: ""; position: absolute; inset: 0; background: rgb(var(--accent)); transform: scaleX(var(--p, 0)); transform-origin: left; }
+  .st-sw, .st-replay { position: absolute; z-index: 3; display: flex; align-items: center; gap: 10px; opacity: 0; pointer-events: none; transition: opacity .5s ease; color: var(--cream); font: inherit; }
+  .st-sw { right: 36px; bottom: 30px; }
+  .st-sw > span:first-child { font-size: 13px; font-weight: 600; background: rgba(4,6,11,.6); backdrop-filter: blur(8px); padding: 7px 12px; border-radius: 999px; }
+  .st-replay { left: auto; right: 36px; top: 40px; font-size: 13px; color: rgba(240,244,250,.7); }
+  .story.done .st-sw, .story.done .st-replay { opacity: 1; pointer-events: auto; }
+  .st-sw .sw-key i { top: 24px; background: linear-gradient(#ffe9a8, #ffd25a); box-shadow: 0 0 12px rgba(255,210,90,.9); }
+  .st-stage.off .st-sw .sw-key i { top: 5px; background: linear-gradient(#fff, #e6e1d6); box-shadow: 0 2px 3px rgba(0,0,0,.25); }
+  .story.done:not(.used) .st-sw .sw-key::after { content: ""; position: absolute; inset: -6px; border-radius: 13px; border: 2px solid rgb(var(--accent)); animation: swRing 1.8s ease-out infinite; }
+  @media (max-width: 760px) { .st-stage { aspect-ratio: 4 / 5; border-radius: 14px; } .st-cap { left: 18px; right: 18px; bottom: 90px; } .st-steps { left: 18px; right: 18px; top: 16px; } .st-sw { right: 18px; bottom: 22px; } .st-replay { right: 18px; top: 30px; } }
   /* ===== логотип 15.11: Cormorant Garamond + W из киноплёнки (A1) + плёнка под словом (A2), белым ===== */
   @font-face { font-family: "ProswetLogo"; font-weight: 600; font-display: block; src: url(fonts/cormorant-garamond-600-logo.woff2) format("woff2"); }
   .wordmark.lg { font-family: "ProswetLogo", "Cormorant Garamond", Georgia, serif !important; font-weight: 600 !important; font-size: 36px !important; letter-spacing: .045em !important; padding-left: 0 !important; text-shadow: none !important; color: #fff; line-height: 1; display: inline-flex; flex-direction: column; align-items: stretch; justify-self: center; text-decoration: none; }
@@ -1275,15 +1299,16 @@
 
 <!-- 2. Обзор -->
 <section id="overview"><div class="wrap">
-  <div class="bento-head"><div><div class="label">Как это работает</div><h2 style="margin-top:16px">Днём — картина.<br>Вечером — свет.</h2></div>
+  <div class="bento-head"><div><div class="label">Как это работает</div><h2 style="margin-top:16px">Из коробки — на стену.<br>Щелчок — и свет.</h2></div>
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша кинотеатра.</p></div>
-  <div class="bento">
-    <div class="bt bt-vid lightvid to-day swtile" id="swTile" role="button" tabindex="0" aria-pressed="false" aria-label="Нажмите, чтобы включить или выключить подсветку"><video id="lightVid" muted playsinline preload="auto" poster="img/w/scene-off.webp" aria-hidden="true"><source src="media/light-on.mp4" type="video/mp4"></video><img class="lv-day" src="img/w/scene-off.webp" alt="Рамка днём, подсветка выключена">
-      <div class="sw-ui" aria-hidden="true"><span class="sw-hint">Попробуйте сами</span><span class="sw-key"><i></i></span></div>
-      <div class="bt-cap"><b class="sw-t">Один щелчок — и свет вместо бра</b><span>Мягкий, ровный, не слепит · выключатель на проводе · 12 В · 6–8 Вт</span></div></div>
-    <div class="bt bt-box"><img loading="lazy" decoding="async" src="img/w/s-box-1511.webp" alt="Рамка в коробке"><div class="bt-cap"><b>Готова из коробки</b><span>Постер уже внутри, кабель и крепёж в комплекте</span></div></div>
-    <div class="bt bt-wide"><img loading="lazy" decoding="async" src="img/w/s-side.webp" alt="Рамка на стене сбоку"><div class="bt-cap"><b>10 мм</b><span>Висит на стене как обычная картина</span></div></div>
+  <div class="story" id="story">
+    <div class="st-stage"><video id="stVid" muted playsinline preload="none" poster="img/w/s-box-1511.webp" aria-label="Распаковка, рамка на стене, включение"></video><img class="st-off" src="img/w/s-sw-off.webp" alt="">
+      <div class="st-cap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
+      <div class="st-steps" id="stSteps"><i></i><i></i><i></i><i></i></div>
+      <button type="button" class="st-sw" id="stSw" aria-pressed="true"><span>Попробуйте сами</span><span class="sw-key"><i></i></span></button>
+      <button type="button" class="st-replay" id="stReplay">↺ Ещё раз</button></div>
   </div>
+</div>
 </div>
 <div class="wrap" id="specs">
   <details class="allspecs"><summary>Все характеристики</summary>
@@ -1482,13 +1507,17 @@ const films = [
   { t: "Земля", q: "Голубая точка.", tag: true, o: "Earth", y: 0, d: "", c: ["space"], img: "img/earth4.jpg", f: ["Из космоса видно огни городов на ночной стороне.", "Атмосфера — тоньше, чем кожура у яблока, если сравнить с размером планеты.", "Земля летит вокруг Солнца со скоростью около 30 км/с."] },
   { t: "Луна", q: "Свет, который всегда рядом.", tag: true, o: "The Moon", y: 0, d: "", c: ["space"], img: "img/moon4.jpg", f: ["Луна всегда повёрнута к нам одной стороной.", "Она удаляется от Земли примерно на 3,8 см в год.", "Двенадцать человек ходили по её поверхности."] },
   { t: "Сатурн", q: "Кольца из льда и камня.", tag: true, o: "Saturn", y: 0, d: "", c: ["space"], img: "img/saturn4.jpg", f: ["Кольца Сатурна — в основном лёд.", "Толщина колец — местами всего десятки метров.", "Сатурн легче воды: в огромной ванне он бы плавал."] },
-  { t: "Секс в большом городе", q: "Я не могла не задуматься…", tag: true, o: "Sex and the City", y: 1998, d: "Даррен Стар", c: ["series", "love"], img: "img/satc.jpg", f: ["Шесть сезонов и два фильма.", "Пачка «туфель от Маноло» стала символом сериала.", "Нью-Йорк называли пятой героиней."] },
+  { t: "Секс в большом городе", q: "Я не могла не задуматься…", tag: true, o: "Sex and the City", y: 1998, d: "Даррен Стар", c: ["series", "love"], img: "img/satc2.jpg", f: ["Шесть сезонов и два фильма.", "Пачка «туфель от Маноло» стала символом сериала.", "Нью-Йорк называли пятой героиней."] },
   { t: "Очень странные дела", q: "Друзья не врут.", tag: true, o: "Stranger Things", y: 2016, d: "Братья Даффер", c: ["series", "sci"], img: "img/strangerthings2.jpg", f: ["Действие начинается в 1983 году в Индиане.", "Шрифт заставки — как у обложек Стивена Кинга.", "Сериал вернул моду на 80-е."] },
   { t: "Чёрное зеркало", q: "А что, если технологии зайдут слишком далеко?", tag: true, o: "Black Mirror", y: 2011, d: "Чарли Брукер", c: ["series", "sci"], img: "img/blackmirror2.jpg", f: ["Каждая серия — отдельная история.", "Название — про погасший экран телефона.", "Некоторые сюжеты потом почти сбылись."] },
   { t: "Острые козырьки", q: "По приказу «Острых козырьков».", tag: true, o: "Peaky Blinders", y: 2013, d: "Стивен Найт", c: ["series", "cult"], img: "img/peaky2.jpg", f: ["Банда существовала на самом деле, в Бирмингеме.", "В козырьки кепок якобы зашивали лезвия.", "Шесть сезонов и фильм."] },
   { t: "Рик и Морти", q: "Уаббалаббадабдаб!", tag: true, o: "Rick and Morty", y: 2013, d: "Джастин Ройланд, Дэн Хармон", c: ["series", "sci"], img: "img/rickmorty2.jpg", f: ["Начинался как пародия на «Назад в будущее».", "Шесть с лишним сезонов безумной фантастики.", "Соус из одной серии потом реально вернули в продажу."] },
-  { t: "Унесённые призраками", q: "Однажды случившееся не забывается, просто вспомнить не можешь.", tag: true, o: "Spirited Away", y: 2001, d: "Хаяо Миядзаки", c: ["anime", "family"], img: "img/spiritedaway.jpg", f: ["Единственное аниме с «Оскаром» за лучший анимационный фильм.", "Миядзаки рисовал раскадровки сам.", "Долго был самым кассовым фильмом в истории Японии."] },
+  { t: "Унесённые призраками", q: "Однажды случившееся не забывается, просто вспомнить не можешь.", tag: true, o: "Spirited Away", y: 2001, d: "Хаяо Миядзаки", c: ["anime", "family"], img: "img/spiritedaway2.jpg", f: ["Единственное аниме с «Оскаром» за лучший анимационный фильм.", "Миядзаки рисовал раскадровки сам.", "Долго был самым кассовым фильмом в истории Японии."] },
   { t: "Млечный путь", q: "Мы сделаны из звёздной пыли.", tag: true, o: "The Milky Way", y: 0, d: "", c: ["space"], img: "img/milkyway3.jpg", f: ["В нашей галактике 100–400 млрд звёзд.", "Свет от её края идёт к нам десятки тысяч лет.", "Лучше всего Млечный путь виден вдали от городов летом."] },
+  { t: "Марс", q: "Красная планета.", tag: true, o: "Mars", y: 0, d: "", c: ["space"], img: "img/mars.jpg", f: ["Сутки на Марсе всего на 40 минут длиннее земных.", "Здесь самая высокая гора в Солнечной системе — Олимп, около 22 км.", "Закаты на Марсе голубые."] },
+  { t: "Юпитер", q: "Великан с бурей больше Земли.", tag: true, o: "Jupiter", y: 0, d: "", c: ["space"], img: "img/jupiter.jpg", f: ["В Юпитер поместилось бы больше тысячи Земель.", "Большое Красное пятно — шторм, который бушует сотни лет.", "У Юпитера больше 90 спутников."] },
+  { t: "Уран", q: "Планета, которая катится на боку.", tag: true, o: "Uranus", y: 0, d: "", c: ["space"], img: "img/uranus.jpg", f: ["Ось Урана наклонена почти на 98 градусов.", "Один год там длится 84 земных.", "Его открыли в телескоп — первым из планет."] },
+  { t: "Нептун", q: "Самый дальний синий.", tag: true, o: "Neptune", y: 0, d: "", c: ["space"], img: "img/neptune.jpg", f: ["На Нептуне самые быстрые ветры — до 2000 км/ч.", "Его сначала вычислили на бумаге, а потом нашли.", "Один год там — 165 земных."] },
   { t: "Убить Билла", q: "Месть — это блюдо, которое лучше подавать холодным.", o: "Kill Bill", y: 2003, d: "Квентин Тарантино", c: ["cult"], img: "img/killbill.jpg", f: ["Жёлтый костюм Невесты — оммаж Брюсу Ли из «Игры смерти».", "Задумывался как один фильм — его разделили на две части из‑за длины."] },
 ];
 const cats = [["all", "Все"], ["sci", "Фантастика"], ["cult", "Культовое кино"], ["series", "Сериалы"], ["love", "Для двоих"], ["action", "Драйв"], ["anime", "Аниме"], ["space", "Космос"], ["winter", "Зима"]];
@@ -1591,6 +1620,18 @@ if (auto) { document.body.classList.add("auto"); setInterval(() => { if (!auto |
 
 // ---------- день / вечер ----------
 // видео «днём — картина, вечером — свет»: играет, только пока видно
+
+// ---------- история: коробка → стена → 10 мм → свет ----------
+{ const st = $("story"), stage = st.querySelector(".st-stage"), v = $("stVid"), steps = [...$("stSteps").children];
+  const SC = [["media/story-1.mp4", "Открыли коробку", "Рамка уже собрана, постер внутри"], ["media/story-2.mp4", "Повесили на стену", "Как обычную картину — на один гвоздь"], ["media/story-3.mp4", "10 мм толщиной", "Почти не выступает от стены"], ["media/story-4.mp4", "Щёлк — и свет", "Мягкий, ровный, не слепит · 12 В · 6–8 Вт"]];
+  let k = 0, started = false;
+  const cap = j => { const c = st.querySelector(".st-cap"); c.classList.add("swap"); setTimeout(() => { $("stN").textContent = "0" + (j + 1); $("stT").textContent = SC[j][1]; $("stS").textContent = SC[j][2]; c.classList.remove("swap"); }, 300); };
+  const play = j => { k = j; v.src = SC[j][0]; cap(j); steps.forEach((s, n) => s.style.setProperty("--p", n < j ? 1 : 0)); v.play().catch(() => {}); };
+  v.addEventListener("timeupdate", () => { if (v.duration) steps[k].style.setProperty("--p", v.currentTime / v.duration); });
+  v.addEventListener("ended", () => { if (k < SC.length - 1) play(k + 1); else { st.classList.add("done"); stage.classList.remove("off"); $("stSw").setAttribute("aria-pressed", true); } });
+  $("stSw").onclick = () => { const off = !stage.classList.contains("off"); stage.classList.toggle("off", off); st.classList.add("used"); $("stSw").setAttribute("aria-pressed", !off); $("stT").textContent = off ? "Выключена — просто картина" : "Щёлк — и свет"; };
+  $("stReplay").onclick = () => { st.classList.remove("done", "used"); stage.classList.remove("off"); play(0); };
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !started) { started = true; play(0); } else if (!e.isIntersecting && !v.paused) v.pause(); else if (e.isIntersecting && started && v.paused && !st.classList.contains("done")) v.play().catch(() => {}); }), { threshold: .4 }).observe(stage); }
 
 // ---------- вкладки характеристик ----------
 document.querySelectorAll("#specTabs button").forEach(b => b.onclick = () => {
@@ -1796,14 +1837,6 @@ addEventListener("load", () => setTimeout(() => preload(P(films[SEQ[(seqPos + 1)
 $("mbuyBtn").onclick = () => $("buyBtn").click();
 
 // ---------- «Один щелчок»: человек сам нажимает выключатель ----------
-{ const t = $("swTile"), v = $("lightVid"), cap = t.querySelector(".sw-t"); let played = false;
-  // сначала рамка включается сама (видео), потом зовём нажать
-  const set = on => { t.classList.toggle("on", on); t.classList.toggle("to-day", !on); t.setAttribute("aria-pressed", on); cap.textContent = on ? "Включена. Нажмите ещё раз" : "Выключена. Нажмите — и свет вместо бра"; };
-  v.addEventListener("playing", () => setTimeout(() => t.classList.remove("to-day"), 120));
-  v.addEventListener("ended", () => { t.classList.add("on", "ready"); t.setAttribute("aria-pressed", true); });
-  const flip = () => { if (!t.classList.contains("ready")) { try { v.currentTime = v.duration || 0; } catch (e) {} t.classList.add("ready"); } t.classList.add("used"); set(!t.classList.contains("on")); };
-  t.onclick = flip; t.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } };
-  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !played) { played = true; v.play().catch(() => { t.classList.add("ready"); }); } }), { threshold: .45 }).observe(t); }
 
 // ---------- диагональная лента фильмов ----------
 (function () {
