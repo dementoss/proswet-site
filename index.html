@@ -618,7 +618,7 @@
   #overview { background: radial-gradient(ellipse 50% 60% at 78% 50%, rgba(var(--glow), .10), transparent 70%), #070504; }
   #specs { background: linear-gradient(180deg, #070504, #0d0907 50%, #070504); }
   #gifts { background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(var(--glow), .08), transparent 70%), #0a0705 !important; }
-  .compare .day { background: radial-gradient(ellipse 60% 60% at 50% 40%, #efe7dc, #cfc5b8) !important; }
+  .compare .day { background: url(img/w/scene-day.webp) 72% 30% / 190% no-repeat !important; }
   .compare .night { background: radial-gradient(ellipse 40% 50% at 50% 48%, rgba(var(--glow), .35), transparent 72%), linear-gradient(rgba(6,4,3,.5), rgba(6,4,3,.5)), url(img/w/hero-room.webp) 62% 50% / cover !important; }
   .compare .mode button.on { background: var(--cream); color: #0a0705; }
   .room { background: linear-gradient(90deg, rgba(6,4,3,.72), rgba(6,4,3,.5) 50%, rgba(6,4,3,.85)), url(img/w/hero-room.webp) 60% 50% / cover !important; border: 0 !important; }
@@ -695,23 +695,23 @@
   .co-hint { font-size: 13px !important; color: rgba(251,243,234,.5) !important; }
   .co-wait { margin-top: 16px !important; font-size: 13px !important; color: rgba(251,243,234,.5) !important; }
 
-  /* ---- первый экран 15.11: имя, УТП, пункты выдачи, вступление светом ---- */
-  .hero-kicker { font-family: var(--disp); font-size: clamp(20px, 1.9vw, 28px); letter-spacing: .08em; text-transform: uppercase; color: rgba(251,243,234,.82); margin-bottom: 18px; }
-  .hero-kicker b { color: #fbf3ea; letter-spacing: .3em; font-weight: 700; text-shadow: 0 0 26px rgba(var(--accent), .6); margin-left: .2em; }
-  .hero-usp { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; align-items: center; }
-  .hero-usp .usp { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px 11px 14px; border-radius: 999px; background: rgba(var(--accent), .16); border: 1px solid rgba(var(--accent), .5); color: #fbf3ea; font-size: 18px; box-shadow: 0 0 30px rgba(var(--accent), .18); }
-  .hero-usp .usp b { color: rgb(var(--accent)); font-weight: 700; }
-  .hero-usp .usp svg { width: 20px; height: 20px; fill: none; stroke: rgb(var(--accent)); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .hero-usp .fmt { font-size: 15px; color: rgba(251,243,234,.7); padding: 11px 14px; border-radius: 999px; background: rgba(10,7,5,.4); border: 1px solid rgba(255,255,255,.12); }
-  .hero-usp .fmt b { color: #fbf3ea; }
-  .pvz { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: 13px; color: rgba(251,243,234,.6); max-width: 520px; }
-  .pvz-l { display: flex; flex-wrap: wrap; gap: 6px; }
-  .pvz-l i { font-style: normal; font-weight: 600; font-size: 12.5px; padding: 5px 10px; border-radius: 6px; color: #fff; letter-spacing: .01em; }
-  .b-ozon { background: #005bff; } .b-ym { background: #fc0; color: #111 !important; } .b-wb { background: linear-gradient(90deg, #cb11ab, #7b2ff7); } .b-cdek { background: #1ab248; }
-  .hero .frame { transition: box-shadow .9s ease; }
-  .hero .frame.flick { animation: flick 1.1s steps(1, end); }
-  @keyframes flick { 0% { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 40px 6px rgba(var(--glow), .35); } 8% { box-shadow: none; } 16% { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 60px 8px rgba(var(--glow), .42); } 24% { box-shadow: none; } 100% { box-shadow: none; } }
-  @media (max-width: 760px) { .hero-kicker { order: 1; margin-bottom: 10px; } .hero-usp { order: 1; margin-top: 16px; } .hero-usp .usp { font-size: 16px; } .pvz { order: 4; } }
+  /* ---- первый экран: имя, три факта, доставка, плавное включение света ---- */
+  .hero-kicker { font-family: var(--disp); font-weight: 600; font-size: clamp(20px, 1.7vw, 26px); letter-spacing: .14em; text-transform: uppercase; color: var(--cream); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+  .hero-kicker::before { content: ""; width: 34px; height: 2px; background: rgb(var(--accent)); }
+  .hero-facts { list-style: none; display: flex; margin-top: 30px; max-width: 520px; }
+  .hero-facts li { flex: 1; padding: 0 22px; border-left: 1px solid rgba(251,243,234,.18); }
+  .hero-facts li:first-child { padding-left: 0; border-left: 0; }
+  .hero-facts b { display: block; font-family: var(--disp); font-weight: 600; font-size: clamp(26px, 2.3vw, 34px); line-height: 1; color: var(--cream); white-space: nowrap; }
+  .hero-facts span { display: block; margin-top: 8px; font-size: 13px; line-height: 1.35; color: rgba(251,243,234,.62); }
+  .pvz { margin-top: 20px; font-size: 14px; line-height: 1.5; color: rgba(251,243,234,.62); max-width: 430px; }
+  .pvz b { color: var(--cream); font-weight: 500; }
+  .hero.intro .hero-bg { transition: filter 2.4s ease; }
+  .hero.intro .frame { transition: box-shadow 2.4s ease; }
+  .hero.intro .frame .poster img { transition: filter 2.4s ease; }
+  .mini.more { position: relative; color: var(--cream); font-family: var(--disp); font-size: 15px; font-weight: 600; background: #120d0a; }
+  .mini.more img { position: absolute; inset: 0; opacity: .45; filter: saturate(.8); }
+  .mini.more span { position: relative; text-shadow: 0 1px 8px #000; }
+  @media (max-width: 760px) { .hero-kicker { order: 1; margin-bottom: 12px; font-size: 18px; } .hero-facts { order: 1; margin-top: 20px; } .hero-facts li { padding: 0 12px; } .hero-facts b { font-size: 22px; } .hero-facts span { font-size: 12px; } .pvz { order: 4; max-width: none; } }
 
   /* ---- коллекция «рекой» ---- */
   .flowsec { padding-bottom: 0 !important; overflow: hidden; }
@@ -721,10 +721,9 @@
     -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
     background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(var(--glow), .10), transparent 70%); }
   .fcol { overflow: hidden; }
-  .fstrip { display: flex; flex-direction: column; gap: 30px; animation: flowUp var(--d) linear infinite; animation-play-state: paused; will-change: transform; }
+  .fstrip { display: flex; flex-direction: column; gap: 30px; animation: flowUp var(--d) linear infinite; will-change: transform; }
   .fcol.down .fstrip { animation-name: flowDown; }
-  .flow.run .fstrip { animation-play-state: running; }
-  .flow:hover .fstrip { animation-play-state: paused; }
+  .fcol:hover .fstrip { animation-play-state: paused; }
   @keyframes flowUp { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, calc(-50% - 15px), 0); } }
   @keyframes flowDown { from { transform: translate3d(0, calc(-50% - 15px), 0); } to { transform: translate3d(0, 0, 0); } }
   .fc { display: block; width: 100%; text-align: left; }
@@ -745,48 +744,66 @@
   .gifts3 .set:hover { transform: translateY(-8px) !important; transition-delay: 0s !important; }
   .gifts3 .set.hit { border-color: rgba(var(--accent), .45) !important; }
   .gifts3 .badge { position: absolute; z-index: 3; top: 14px; left: 14px; background: rgb(var(--accent)); color: #0a0705; font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 999px; box-shadow: 0 6px 18px rgba(var(--accent), .35); }
-  .gifts3 .pic { height: 300px; overflow: hidden; }
-  .gifts3 .pic .frame { transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; animation: sway 6s ease-in-out infinite; }
-  @keyframes sway { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
-  .g1 .pic .frame { --w: 150px; }
-  .g1:hover .pic .frame { transform: scale(1.08); }
-  .g3 .pic { gap: 0; } .g3 .pic .frame.m { --w: 132px; z-index: 2; animation-delay: -2s; } .g3 .pic .frame.s { --w: 100px; }
-  .g3 .pic .frame.l { transform: translateX(26px) rotate(-6deg); animation-delay: -1s; } .g3 .pic .frame.r { transform: translateX(-26px) rotate(6deg); animation-delay: -3s; }
-  .g3:hover .pic .frame.l { transform: translateX(-12px) rotate(-2deg); } .g3:hover .pic .frame.r { transform: translateX(12px) rotate(2deg); } .g3:hover .pic .frame.m { transform: scale(1.06); }
-  .gg .pic .frame.gf { --w: 118px; z-index: 2; transform: translateY(40px); }
-  .gg:hover .pic .frame.gf { transform: translateY(-14px); }
-  .giftbox { position: absolute; z-index: 3; bottom: -10px; left: 50%; width: 210px; height: 110px; margin-left: -105px; background: linear-gradient(180deg, #2a2320, #15110f); border-radius: 6px; box-shadow: 0 20px 40px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); transition: transform .6s cubic-bezier(.2,.8,.2,1); }
-  .giftbox::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 16px; margin-left: -8px; background: linear-gradient(90deg, #b8462a, #e0663d, #b8462a); }
-  .giftbox .lid { position: absolute; left: -6px; right: -6px; top: -14px; height: 18px; border-radius: 4px; background: #2f2724; box-shadow: 0 4px 10px rgba(0,0,0,.4); transition: transform .6s cubic-bezier(.2,.8,.2,1); }
-  .giftbox .bow { position: absolute; left: 50%; top: -34px; width: 44px; height: 24px; margin-left: -22px; background: radial-gradient(circle at 30% 50%, #e0663d 38%, transparent 40%), radial-gradient(circle at 70% 50%, #e0663d 38%, transparent 40%); transition: transform .6s ease; }
-  .gg:hover .giftbox { transform: translateY(26px); } .gg:hover .giftbox .lid { transform: translate(60px, -30px) rotate(18deg); } .gg:hover .giftbox .bow { transform: translate(60px, -30px) rotate(18deg); }
-  .card-note { position: absolute; z-index: 4; right: 22px; top: 30px; background: #fbf3ea; color: #3a2a20; font: 600 italic 12px/1.2 Georgia, serif; padding: 10px 12px; border-radius: 3px; transform: rotate(8deg) translateY(-90px); opacity: 0; transition: transform .6s cubic-bezier(.2,.8,.2,1) .1s, opacity .4s ease .1s; box-shadow: 0 10px 24px rgba(0,0,0,.45); }
-  .gg:hover .card-note { transform: rotate(8deg); opacity: 1; }
-  @media (hover: none) { .gg .card-note { transform: rotate(8deg); opacity: 1; } .gg .pic .frame.gf { transform: translateY(-6px); } .gg .giftbox { transform: translateY(26px); } .g3 .pic .frame.l { transform: translateX(-6px) rotate(-3deg); } .g3 .pic .frame.r { transform: translateX(6px) rotate(3deg); } }
-  @media (prefers-reduced-motion: reduce) { .gifts3 .set { opacity: 1; transform: none; } .gifts3 .pic .frame { animation: none; } }
+  .gifts3 .pic.ph { height: auto; aspect-ratio: 4 / 3; overflow: hidden; background: #0d0907 !important; padding: 0; }
+  .gifts3 .pic.ph::before { display: none; }
+  .gifts3 .pic.ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .gifts3 .set:hover .pic.ph img { transform: scale(1.07); }
+  .gifts3 .set { overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) { .gifts3 .set { opacity: 1; transform: none; } }
 
   /* ---- сервис: плитки и сроки по регионам ---- */
   .svc { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: var(--head-gap, 44px); }
   .svc-t { position: relative; padding: 28px 24px 26px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,236,214,.06), rgba(255,236,214,.015)); box-shadow: inset 0 1px 0 rgba(255,255,255,.07), inset 0 0 0 1px rgba(255,236,214,.07), 0 24px 50px rgba(0,0,0,.35); transition: transform .35s ease, box-shadow .35s ease; }
-  .svc-t:hover { transform: translateY(-4px); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 0 0 1px rgba(var(--glow), .3), 0 30px 70px rgba(0,0,0,.5), 0 0 50px rgba(var(--glow), .1); }
-  .svc-t i { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: radial-gradient(circle at 50% 40%, rgba(var(--glow), .35), rgba(var(--glow), .08)); box-shadow: 0 0 30px rgba(var(--glow), .25), inset 0 0 0 1px rgba(var(--glow), .35); }
-  .svc-t svg { width: 24px; height: 24px; fill: none; stroke: #fbf3ea; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .svc-t:hover { transform: translateY(-4px); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 0 0 1px rgba(255,236,214,.2), 0 30px 70px rgba(0,0,0,.5); }
+  .svc-t i { display: block; }
+  .svc-t svg { width: 30px; height: 30px; fill: none; stroke: var(--cream); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
   .svc-t h3 { font-size: 19px; font-weight: 600; margin-top: 20px; }
   .svc-t p { font-size: 14.5px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
-  .eta { margin-top: 18px; padding: 30px; border-radius: 16px; background: linear-gradient(120deg, rgba(var(--glow), .10), rgba(255,236,214,.02) 50%); box-shadow: inset 0 0 0 1px rgba(255,236,214,.08), 0 24px 50px rgba(0,0,0,.35); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 30px; align-items: center; }
+  .eta { margin-top: 18px; padding: 30px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,236,214,.06), rgba(255,236,214,.015)); box-shadow: inset 0 0 0 1px rgba(255,236,214,.08), 0 24px 50px rgba(0,0,0,.35); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 30px; align-items: center; }
   .eta-h h3 { font-family: var(--disp); font-size: 30px; font-weight: 600; } .eta-h p { color: var(--muted); margin-top: 8px; font-size: 15px; }
   .eta-body { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: center; }
   .eta-regs { display: flex; flex-wrap: wrap; gap: 8px; }
   .eta-regs button { padding: 9px 14px; border-radius: 999px; font-size: 14px; color: rgba(251,243,234,.75); box-shadow: inset 0 0 0 1px rgba(255,236,214,.14); transition: all .25s ease; }
   .eta-regs button:hover { color: #fbf3ea; box-shadow: inset 0 0 0 1px rgba(255,236,214,.35); }
-  .eta-regs button.on { background: #fbf3ea; color: #0a0705; box-shadow: 0 0 24px rgba(var(--glow), .35); }
-  .eta-out b { font-family: var(--disp); font-size: 64px; font-weight: 600; line-height: 1; color: #fbf3ea; text-shadow: 0 0 30px rgba(var(--glow), .45); }
+  .eta-regs button.on { background: #fbf3ea; color: #0a0705; box-shadow: none; }
+  .eta-out b { font-family: var(--disp); font-size: 64px; font-weight: 600; line-height: 1; color: #fbf3ea; }
   .eta-out span { font-size: 18px; color: var(--muted); margin-left: 8px; }
   .eta-bar { height: 6px; border-radius: 6px; background: rgba(255,255,255,.08); margin: 16px 0 10px; overflow: hidden; }
-  .eta-bar i { display: block; height: 100%; width: 25%; border-radius: 6px; background: linear-gradient(90deg, rgba(var(--glow), .6), rgb(var(--accent))); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+  .eta-bar i { display: block; height: 100%; width: 25%; border-radius: 6px; background: var(--cream); transition: width .6s cubic-bezier(.2,.8,.2,1); }
   .eta-out small { color: var(--muted); font-size: 13px; }
   @media (max-width: 900px) { .svc { grid-template-columns: repeat(2, minmax(0, 1fr)); } .eta { grid-template-columns: minmax(0, 1fr); padding: 22px; } .eta-body { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 480px) { .svc { grid-template-columns: minmax(0, 1fr); } }
+
+  /* ===== единая типографика и формы (аудит 15.11) =====
+     Oswald — заголовки, цены, логотип. Inter — весь остальной текст.
+     Размеры текста: 13 / 15 / 18. Заголовки карточек: 20. Скругления: кнопки 4, карточки 12. */
+  body, button, input, textarea, select { font-family: var(--text); }
+  body { font-size: 16px; }
+  .wordmark { font-weight: 600; letter-spacing: .32em; padding-left: .32em; text-shadow: none; }
+  .lead { font-size: 18px !important; line-height: 1.55; }
+  .set h3, .svc-t h3, .swap3 h3, .plan h3, .service h3 { font-family: var(--text); font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: 0; }
+  .sheet h3, .drawer h3, .co h3, .eta-h h3, .sh { font-family: var(--disp); font-size: 28px; font-weight: 600; letter-spacing: 0; color: var(--cream); }
+  .set p, .svc-t p, .eta-h p, #help details p, .bullets li { font-size: 15px; line-height: 1.55; }
+  #help details summary { font-size: 17px; font-weight: 500; }
+  .set .price, .info .row .price, .pickfoot .price, .co-foot .price { font-size: 28px; }
+  .svc-t, .eta, .kpis div, .sc, .set, #help details, .compare, .sheet, .co-sum { border-radius: 12px !important; }
+  .eta-regs button, .gifts3 .badge, .co-seg button, .btn, .mode button { border-radius: var(--r-s) !important; }
+  .eta-regs button { font-size: 14px; padding: 10px 14px; }
+  .eta-out b { font-size: 56px; }
+  .gifts3 .badge { box-shadow: none; font-size: 12px; font-weight: 600; }
+  .btn:hover, .btn.line:hover { box-shadow: none; }
+  .btn.line:hover { box-shadow: inset 0 0 0 1px rgba(251,243,234,.6); }
+
+  /* правки по скриншотам */
+  .hdr-cta .price { color: #0a0705 !important; }
+  .hero .opt, .hero .buy { max-width: 480px; }
+  .hero-facts { max-width: 600px; margin-top: 34px; }
+  .hero-facts li { flex: none; padding: 0 30px; }
+  .hero-facts span { font-size: 14px; white-space: nowrap; }
+  .hero-facts b { font-size: clamp(30px, 2.6vw, 40px); }
+  .hero .mini { width: 62px; opacity: .8; }
+  .pvz { max-width: 480px; font-size: 15px; }
+  @media (max-width: 760px) { .hero-facts li { flex: 1; padding: 0 10px; } .hero-facts span { white-space: normal; font-size: 12px; } .hero .mini { width: 44px; } }
 </style>
 </head>
 <body class="in-hero">
@@ -809,16 +826,16 @@
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap">
   <div class="hero-copy">
-    <div class="hero-kicker">Световая рамка <b>PROSWET</b></div>
+    <div class="hero-kicker">Световая рамка Proswet</div>
     <h1 class="hero-h">Ваш фильм —<br>часть интерьера</h1>
-    <div class="hero-usp"><span class="usp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.5h-4.5"/></svg>Постер меняется за <b>1&nbsp;минуту</b></span><span class="fmt">Формат <b>A3</b> · 30×42&nbsp;см</span></div>
+    <ul class="hero-facts"><li><b>1 минута</b><span>и в рамке новый постер</span></li><li><b>A3</b><span>формат 30 × 42 см</span></li><li><b>0 ₽</b><span>доставка по России</span></li></ul>
     <div class="from"><span class="price" id="totalPrice">3&nbsp;449&nbsp;₽</span> рамка с постером</div>
 
     <div class="opt"><div class="t">Ваш фильм <span id="posterName"></span></div>
       <div class="minis" id="minis"></div></div>
 
     <div class="buy"><button class="btn" id="buyBtn">Купить</button><a class="btn line" href="#posters">Все постеры</a></div>
-    <div class="pvz"><span class="pvz-t">Доставка в пункты выдачи</span><span class="pvz-l"><i class="b-ozon">Ozon</i><i class="b-ym">Яндекс Маркет</i><i class="b-wb">Wildberries</i><i class="b-cdek">СДЭК</i></span></div>
+    <p class="pvz">Бесплатно привезём в пункт выдачи <b>Ozon</b>, <b>Яндекс Маркета</b>, <b>Wildberries</b> или <b>СДЭК</b></p>
   </div>
   <div class="stagebox">
     <div class="device"><div class="frame lit" id="heroFrame"><div class="poster"><img id="heroImg" alt="Постер в рамке"></div><div class="glass"></div></div></div>
@@ -831,6 +848,14 @@
   <div class="coil-band"><div class="coil-track" id="coilTrack"></div></div>
 </section>
 <div class="marquee" aria-hidden="true" hidden><div class="mq" id="mq"></div></div>
+
+<section class="posters flowsec" id="posters">
+  <div class="wrap flow-head">
+    <div><div class="label">Коллекция</div><h2 style="margin-top:16px">Постеры для вашей рамки</h2></div>
+    <p class="lead">Нажмите на постер — он встанет в рамку. Рамка с постером — <span class="price">3&nbsp;449&nbsp;₽</span>, доставка бесплатно.</p>
+  </div>
+  <div class="flow" id="flow" aria-label="Коллекция постеров"></div>
+</section>
 
 <!-- 2. Обзор -->
 <section id="overview"><div class="wrap split">
@@ -869,13 +894,7 @@
 </div></section>
 
 <!-- 5. Постеры -->
-<section class="posters flowsec" id="posters">
-  <div class="wrap flow-head">
-    <div><div class="label">Коллекция</div><h2 style="margin-top:16px">Постеры для вашей рамки</h2></div>
-    <p class="lead">Нажмите на постер — он встанет в рамку. Рамка с постером — <span class="price">3&nbsp;449&nbsp;₽</span>.</p>
-  </div>
-  <div class="flow" id="flow" aria-label="Коллекция постеров"></div>
-</section>
+
 
 <!-- 7. Подарки -->
 <div class="marquee" aria-hidden="true"><div class="mq" id="mq2"></div></div>
@@ -885,11 +904,11 @@
   <h2 style="margin-top:16px">Подарок, который включают каждый вечер</h2>
   <p class="lead" style="margin-top:18px">Любой фильм из коллекции — в каждый набор.</p>
   <div class="sets gifts3" id="gifts3">
-    <div class="set g1"><div class="pic"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" src="img/t/killbill.webp" alt=""></div></div></div>
+    <div class="set g1"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g1.webp" alt="Световая рамка Proswet на стене"></div>
       <div class="body"><h3>Одна рамка</h3><p>Proswet A3 с постером вашего фильма.</p><div class="row"><span class="price">3&nbsp;449&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="3449">Выбрать фильм</button></div></div></div>
-    <div class="set g3 hit"><div class="badge">Выгоднее на 857&nbsp;₽</div><div class="pic"><div class="frame lit s l"><div class="poster"><img decoding="async" loading="lazy" src="img/t/interstellar.webp" alt=""></div></div><div class="frame lit m"><div class="poster"><img decoding="async" loading="lazy" src="img/t/matrix2.webp" alt=""></div></div><div class="frame lit s r"><div class="poster"><img decoding="async" loading="lazy" src="img/t/amelie2.webp" alt=""></div></div></div>
+    <div class="set g3 hit"><div class="badge">Выгоднее на 857&nbsp;₽</div><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g3.webp" alt="Три световые рамки над диваном"></div>
       <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">9&nbsp;490&nbsp;₽<s>10&nbsp;347&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="9490">Выбрать 3 фильма</button></div></div></div>
-    <div class="set gg"><div class="pic"><div class="giftbox"><div class="lid"></div><div class="bow"></div></div><div class="frame lit gf"><div class="poster"><img decoding="async" loading="lazy" src="img/t/wolf2.webp" alt=""></div></div><div class="card-note">С днём рождения!</div></div>
+    <div class="set gg"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-gg.webp" alt="Рамка в подарочной коробке с открыткой"></div>
       <div class="body"><h3>Подарочный набор</h3><p>Рамка с постером, жёсткая коробка с лентой и открытка с вашим текстом.</p><div class="row"><span class="price">3&nbsp;990&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="3990">Выбрать фильм</button></div></div></div>
 </div></section>
 
@@ -898,7 +917,7 @@
   <div class="label">Сервис</div>
   <h2 style="margin-top:16px">Покупка без сюрпризов</h2>
   <div class="svc">
-    <div class="svc-t"><i><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></i><h3>В любой пункт выдачи</h3><p>Ozon, Яндекс Маркет, Wildberries или СДЭК — выбираете при оформлении.</p></div>
+    <div class="svc-t"><i><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></i><h3>Доставка бесплатно</h3><p>В любой пункт выдачи Ozon, Яндекс Маркета, Wildberries или СДЭК. Платим мы.</p></div>
     <div class="svc-t"><i><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></i><h3>СБП или картой</h3><p>Оплата через Т-Банк, чек приходит на почту.</p></div>
     <div class="svc-t"><i><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"/></svg></i><h3>Возврат 7 дней</h3><p>Не подошло — вернём деньги после получения рамки.</p></div>
     <div class="svc-t"><i><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/></svg></i><h3>Гарантия 1 год</h3><p>Перестала светить — заменим рамку за наш счёт.</p></div>
@@ -918,7 +937,7 @@
   <div>
     <details open><summary>Это просто рамка или светильник?</summary><p>И то и другое. Внутри — светодиодная подсветка: днём это постер в тонкой чёрной раме, вечером он мягко светится, как афиша кинотеатра. Работает от розетки, выключатель на проводе.</p></details>
     <details><summary>Постер уже внутри?</summary><p>Да. Рамка приходит собранной с выбранным постером: распаковали, повесили, включили.</p></details>
-    <details><summary>Куда доставляете и как быстро?</summary><p>В любой пункт выдачи Ozon, Яндекс Маркета, Wildberries или СДЭК по всей России. Отправляем на следующий рабочий день после оплаты. По Москве и Петербургу — 1–3 дня, по центру России — 2–4, до Урала и Сибири — 3–8, на Дальний Восток — до 12 дней.</p></details>
+    <details><summary>Сколько стоит доставка и как быстро?</summary><p>Доставка бесплатная — в любой пункт выдачи Ozon, Яндекс Маркета, Wildberries или СДЭК по всей России. Отправляем на следующий рабочий день после оплаты. По Москве и Петербургу — 1–3 дня, по центру России — 2–4, до Урала и Сибири — 3–8, на Дальний Восток — до 12 дней.</p></details>
     <details><summary>Как оплатить?</summary><p>Через СБП или картой — платёж проводит Т-Банк. Кассовый чек приходит на почту.</p></details>
     <details><summary>Безопасно ли оставлять включённой?</summary><p>Да. Внутри рамки низкое напряжение 12 В, светодиоды почти не греются. На светильник есть декларация соответствия ЕАЭС.</p></details>
     <details><summary>Не понравилось — можно вернуть?</summary><p>Да, в течение 7 дней после получения. Напишите нам — пришлём инструкцию и вернём деньги после возврата рамки.</p></details>
@@ -980,15 +999,12 @@ const loaded = {};
 const preload = src => loaded[src] || (loaded[src] = new Promise(r => { const im = new Image(); im.onload = im.onerror = () => (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(r); im.src = src; }));
 const films = [
   { t: "Интерстеллар", q: "Мы найдём способ. Как и всегда.", o: "Interstellar", y: 2014, d: "Кристофер Нолан", c: ["sci"], img: "img/interstellar.jpg", f: ["Научным консультантом был физик Кип Торн — позже он получил Нобелевскую премию.", "Чёрную дыру считали по настоящим уравнениям, по этой работе вышли научные статьи.", "Кукурузное поле вырастили специально для съёмок, урожай потом продали."] },
-  { t: "Начало", q: "Не бойся мечтать масштабнее, дорогуша.", o: "Inception", y: 2010, d: "Кристофер Нолан", c: ["sci"], img: "img/inception2.jpg", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Вращающийся коридор построили по-настоящему.", "Музыка Циммера собрана из замедленной песни Эдит Пиаф."] },
   { t: "Леон", q: "— Жизнь всегда такая трудная? — Всегда.", o: "Léon", y: 1994, d: "Люк Бессон", c: ["cult"], img: "1f/e8/c0/1fe8c07c8f84cf5defc046fc2eac8b63", f: ["Первая роль в кино Натали Портман — ей было 12 лет.", "Режиссёрская версия длиннее прокатной больше чем на 20 минут.", "Цветок Леона стал самым известным растением в кино."] },
   { t: "Паразиты", q: "Знаешь, какой план никогда не подводит? Никакого плана.", o: "Parasite", y: 2019, d: "Пон Джун Хо", c: ["cult"], img: "img/parasite2.jpg", f: ["Первый неанглоязычный фильм с «Оскаром» за лучший фильм.", "Получил «Золотую пальмовую ветвь» в Каннах.", "Дом семьи Пак построили как декорацию."] },
   { t: "Криминальное чтиво", q: "Знаешь, как в Париже называют четвертьфунтовый с сыром?", o: "Pulp Fiction", y: 1994, d: "Квентин Тарантино", c: ["cult"], img: "img/pulp2.jpg", f: ["«Золотая пальмовая ветвь» и «Оскар» за сценарий.", "Что лежит в чемоданчике, так и не показали.", "Вернул Джону Траволте большую карьеру."] },
-  { t: "Вверх", q: "Приключения ждут!", o: "Up", y: 2009, d: "Пит Доктер, Pixar", c: ["love", "family"], img: "75/68/81/756881e87ee5f549372c7d9c24986eac", f: ["Второй мультфильм в истории с номинацией на «Оскар» за лучший фильм.", "Два «Оскара»: за анимацию и музыку.", "Первые 10 минут без слов — один из самых сильных прологов в кино."] },
   { t: "Сияние", q: "Работа без забавы делает Джека скучным парнем.", o: "The Shining", y: 1980, d: "Стэнли Кубрик", c: ["cult"], img: "img/shining2.jpg", f: ["Снят по роману Стивена Кинга — сам Кинг экранизацию не любил.", "Кубрик известен десятками дублей одной сцены.", "Узор ковра в отеле стал культовым."] },
   { t: "Шоу Трумана", q: "Доброе утро! И если не увидимся — добрый день, добрый вечер и доброй ночи!", o: "The Truman Show", y: 1998, d: "Питер Уир", c: ["cult"], img: "img/truman2.jpg", f: ["Город снимали в настоящем курортном городке Сисайд во Флориде.", "Джим Керри получил «Золотой глобус».", "Психиатры описали «синдром Трумана» — по названию фильма."] },
   { t: "Малыш на драйве", q: "Погоня в ритме любимой песни.", tag: true, o: "Baby Driver", y: 2017, d: "Эдгар Райт", c: ["action"], img: "img/babydriver2.jpg", f: ["Сцены смонтированы в ритм песен из плеера героя.", "Погони снимали с настоящими машинами и каскадёрами.", "Три номинации на «Оскар», в том числе за монтаж."] },
-  { t: "Довод", q: "Не пытайся понять. Почувствуй.", o: "Tenet", y: 2020, d: "Кристофер Нолан", c: ["sci", "action"], img: "img/tenet2.jpg", f: ["Для сцены с самолётом разбили настоящий Boeing 747.", "«Оскар» за визуальные эффекты.", "Название — палиндром: читается одинаково в обе стороны."] },
   { t: "Матрица", q: "Красная или синяя — выбор за вами.", tag: true, o: "The Matrix", y: 1999, d: "Лана и Лилли Вачовски", c: ["sci", "action"], img: "img/matrix2.jpg", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Эффект замедленного времени снимали рядом фотокамер, выставленных по дуге.", "Зелёный «код» на экранах, по словам его автора, — отсканированные японские рецепты."] },
   { t: "Дюна", q: "Песок помнит всё.", tag: true, o: "Dune", y: 2021, d: "Дени Вильнёв", c: ["sci"], img: "img/dune2.jpg", f: ["Шесть «Оскаров» — больше, чем у любого фильма того года.", "Пустыню снимали в Иордании и Абу-Даби.", "Снят по роману Фрэнка Герберта 1965 года."] },
   { t: "Бойцовский клуб", q: "Розовое мыло и первое правило.", tag: true, o: "Fight Club", y: 1999, d: "Дэвид Финчер", c: ["cult"], img: "img/fightclub2.jpg", f: ["Снят по роману Чака Паланика.", "В прокате провалился — культовым стал позже, на дисках.", "Фильм полон спрятанных кадров, которые мелькают на долю секунды."] },
@@ -1026,14 +1042,14 @@ function renderHero() {
 document.querySelectorAll(".mat .m").forEach(b => b.onclick = () => { document.querySelectorAll(".mat .m").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.color = b.dataset.color; renderHero(); });
 document.querySelectorAll("#lightSeg button").forEach(b => b.onclick = () => { document.querySelectorAll("#lightSeg button").forEach(x => x.classList.remove("on")); b.classList.add("on"); cfg.light = b.dataset.light; renderHero(); });
 $("lightToggle").onclick = e => { cfg.on = e.currentTarget.classList.toggle("on"); renderHero(); };
-// вступление: рамка гаснет и снова загорается — видно, что это подсветка
+// вступление: комната в полумраке, рамка плавно загорается — видно, что это подсветка
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const sw = $("lightToggle"), set = on => { cfg.on = on; sw.classList.toggle("on", on); renderHero(); };
-  setTimeout(() => set(false), 900);
-  setTimeout(() => { set(true); heroFrame.classList.add("flick"); setTimeout(() => heroFrame.classList.remove("flick"), 1200); }, 2100);
+  const sw = $("lightToggle"), hero = document.querySelector(".hero"), set = on => { cfg.on = on; sw.classList.toggle("on", on); renderHero(); };
+  set(false);
+  preload(P(films[cfg.poster].img)).then(() => setTimeout(() => { hero.classList.add("intro"); set(true); setTimeout(() => hero.classList.remove("intro"), 2600); }, 1500));
 }
 ["Убить Билла", "Интерстеллар", "Матрица", "Бойцовский клуб", "Волк с Уолл-стрит"].map(t => films.findIndex(f => f.t === t)).forEach(i => { const m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">'; m.onclick = () => { cfg.poster = i; renderHero(); }; $("minis").appendChild(m); });
-const more = document.createElement("a"); more.className = "mini more"; more.href = "#posters"; more.textContent = "+" + (films.length - 5); $("minis").appendChild(more);
+const more = document.createElement("a"); more.className = "mini more"; more.href = "#posters"; more.setAttribute("aria-label", "Все постеры"); more.innerHTML = '<img decoding="async" alt="" src="' + T(films.find(f => f.t === "Сияние").img) + '"><span>+' + (films.length - 5) + "</span>"; $("minis").appendChild(more);
 
 // ---------- день / вечер ----------
 document.querySelectorAll("#mode button").forEach(b => b.onclick = () => { document.querySelectorAll("#mode button").forEach(x => x.classList.toggle("on", x === b)); $("compare").classList.toggle("is-night", b.dataset.m === "night"); });
@@ -1052,10 +1068,9 @@ function pickFilm(i) { cfg.poster = i; renderHero(); toast("«" + films[i].t + "
   films.forEach((f, i) => cols[i % n].push(i));
   $("flow").innerHTML = cols.map((c, k) => {
     const cards = c.map(i => '<button class="fc" data-i="' + i + '" aria-label="' + films[i].t + '"><div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" alt="" src="' + T(films[i].img) + '"></div></div><span>' + films[i].t + '</span></button>').join("");
-    return '<div class="fcol' + (k % 2 ? " down" : "") + '" style="--d:' + (70 + k * 9) + 's"><div class="fstrip">' + cards + cards + '</div></div>';
+    return '<div class="fcol' + (k % 2 ? " down" : "") + '" style="--d:' + (46 + k * 7) + 's"><div class="fstrip">' + cards + cards + '</div></div>';
   }).join("");
   $("flow").querySelectorAll(".fc").forEach(b => { b.onclick = () => pickFilm(+b.dataset.i); b.addEventListener("pointerenter", () => preload(P(films[+b.dataset.i].img))); });
-  new IntersectionObserver(es => es.forEach(e => $("flow").classList.toggle("run", e.isIntersecting))).observe($("flow"));
 })();
 
 // ---------- корзина ----------
@@ -1103,7 +1118,7 @@ const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").clas
 $("cartBtn").onclick = openCart; $("closeCart").onclick = closeCart; $("cartOv").onclick = closeCart;
 $("checkout").onclick = () => { if (!cart.length) return; closeCart(); openCheckout(); };
 function openCheckout() {
-  $("coSum").innerHTML = cart.map(c => '<div><span>' + c.name + (c.qty > 1 ? " × " + c.qty : "") + '<small>' + c.sub + '</small></span><b>' + fmt(c.price * (c.qty || 1)) + '</b></div>').join("");
+  $("coSum").innerHTML = cart.map(c => '<div><span>' + c.name + (c.qty > 1 ? " × " + c.qty : "") + '<small>' + c.sub + '</small></span><b>' + fmt(c.price * (c.qty || 1)) + '</b></div>').join("") + '<div><span>Доставка до пункта выдачи</span><b>Бесплатно</b></div>';
   $("coTotal").textContent = fmt(cartSum()); $("coErr").textContent = ""; $("coOv").classList.add("open");
 }
 $("coShip").querySelectorAll("button").forEach(b => b.onclick = () => $("coShip").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)));
