@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<link rel="preload" as="image" href="img/w/hero-room.webp?v=20261116032525" fetchpriority="high">
-<link rel="preload" as="image" href="img/w/killbill.webp?v=20261116032525" fetchpriority="high">
+<link rel="preload" as="image" href="img/w/hero-room.webp?v=20261116032731" fetchpriority="high">
+<link rel="preload" as="image" href="img/w/killbill.webp?v=20261116032731" fetchpriority="high">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROSWET — световая рамка для постеров</title>
@@ -549,7 +549,7 @@
   /* ===== первый экран 14.11: фильм как часть интерьера ===== */
   body > section.hero { margin-left: 0; margin-right: 0; }
   .hero { position: relative; overflow: hidden; isolation: isolate; min-height: calc(100svh - var(--hh)); background: #05070b; }
-  .hero-bg { position: absolute; inset: 0; z-index: -1; background: url(img/w/hero-room.webp?v=20261116032525) 78% 50% / cover no-repeat; transition: filter .7s ease; }
+  .hero-bg { position: absolute; inset: 0; z-index: -1; background: url(img/w/hero-room.webp?v=20261116032731) 78% 50% / cover no-repeat; transition: filter .7s ease; }
   .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,6,11,.86) 0%, rgba(4,6,11,.62) 30%, rgba(4,6,11,.08) 56%, transparent 70%), linear-gradient(180deg, transparent 72%, #000 100%); }
   .hero.off .hero-bg { filter: brightness(.42) saturate(.7); }
   .hero .wrap { max-width: 1400px; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -604,7 +604,7 @@
   .sc:hover, .set:hover, .service > div:hover { transform: translateY(-3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 0 0 1px rgba(var(--glow), .25), 0 30px 70px rgba(0,0,0,.5), 0 0 60px rgba(var(--glow), .10) !important; }
   .sc::before { display: none; }
   .sh { text-transform: none; letter-spacing: 0; font-size: 26px; color: var(--cream); }
-  .set .pic { background: radial-gradient(ellipse 60% 70% at 50% 55%, rgba(var(--glow), .22), transparent 72%), url(img/w/hero-room.webp?v=20261116032525) 60% 40% / cover !important; position: relative; }
+  .set .pic { background: radial-gradient(ellipse 60% 70% at 50% 55%, rgba(var(--glow), .22), transparent 72%), url(img/w/hero-room.webp?v=20261116032731) 60% 40% / cover !important; position: relative; }
   .set .pic::before { content: ""; position: absolute; inset: 0; background: rgba(4,6,11,.55); }
   .set .pic .frame { position: relative; }
   .service > div { padding: 30px 26px !important; border: 0 !important; }
@@ -618,10 +618,10 @@
   #overview { background: radial-gradient(ellipse 50% 60% at 78% 50%, rgba(var(--glow), .10), transparent 70%), #05070b; }
   #specs { background: linear-gradient(180deg, #05070b, #0a0d14 50%, #05070b); }
   #gifts { background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(var(--glow), .08), transparent 70%), #07090e !important; }
-  .compare .day { background: url(img/w/scene-day.webp?v=20261116032525) 72% 30% / 190% no-repeat !important; }
-  .compare .night { background: radial-gradient(ellipse 40% 50% at 50% 48%, rgba(var(--glow), .35), transparent 72%), linear-gradient(rgba(4,6,11,.5), rgba(4,6,11,.5)), url(img/w/hero-room.webp?v=20261116032525) 62% 50% / cover !important; }
+  .compare .day { background: url(img/w/scene-day.webp?v=20261116032731) 72% 30% / 190% no-repeat !important; }
+  .compare .night { background: radial-gradient(ellipse 40% 50% at 50% 48%, rgba(var(--glow), .35), transparent 72%), linear-gradient(rgba(4,6,11,.5), rgba(4,6,11,.5)), url(img/w/hero-room.webp?v=20261116032731) 62% 50% / cover !important; }
   .compare .mode button.on { background: var(--cream); color: #07090e; }
-  .room { background: linear-gradient(90deg, rgba(4,6,11,.72), rgba(4,6,11,.5) 50%, rgba(4,6,11,.85)), url(img/w/hero-room.webp?v=20261116032525) 60% 50% / cover !important; border: 0 !important; }
+  .room { background: linear-gradient(90deg, rgba(4,6,11,.72), rgba(4,6,11,.5) 50%, rgba(4,6,11,.85)), url(img/w/hero-room.webp?v=20261116032731) 60% 50% / cover !important; border: 0 !important; }
   .ribbon { background: rgba(4,6,11,.55) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   .info h3 { text-transform: none; color: var(--cream); }
   .filters button.on { background: var(--cream); color: #07090e; }
@@ -710,7 +710,7 @@
   .mini.more { position: relative; color: var(--cream); font-family: var(--disp); font-size: 15px; font-weight: 600; background: #0c1018; }
   .mini.more img { position: absolute; inset: 0; opacity: .45; filter: saturate(.8); }
   .mini.more span { position: relative; text-shadow: 0 1px 8px #000; }
-  @media (max-width: 760px) { .hero-kicker { order: 1; margin-bottom: 12px; font-size: 18px; } .hero-facts { order: 1; margin-top: 20px; } .hero-facts li { padding: 0 12px; } .hero-facts b { font-size: 22px; } .hero-facts span { font-size: 12px; } .pvz { order: 4; max-width: none; } }
+  @media (max-width: 760px) { .hero-kicker { order: 1; margin-bottom: 12px; font-size: 18px; } .hero-facts { order: 1; margin-top: 20px; } .hero-facts li { padding: 0 10px; } .hero-facts b { font-size: 22px; } .hero-facts span { font-size: 12px; } .pvz { order: 4; max-width: none; } }
 
   /* ---- коллекция «рекой» ---- */
   .flowsec { padding-bottom: 0 !important; overflow: hidden; }
@@ -1071,10 +1071,10 @@
   @media (prefers-reduced-motion: reduce) { .hdr-cta::after { display: none; } }
 
   /* открытка */
-  @font-face { font-family: "Caveat"; font-weight: 500; font-display: swap; src: url(fonts/caveat-cyrillic.woff2?v=20261116032525) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-  @font-face { font-family: "Caveat"; font-weight: 500; font-display: swap; src: url(fonts/caveat-latin.woff2?v=20261116032525) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
-  @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url(fonts/cormorant-i-cyrillic.woff2?v=20261116032525) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-  @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url(fonts/cormorant-i-latin.woff2?v=20261116032525) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "Caveat"; font-weight: 500; font-display: swap; src: url(fonts/caveat-cyrillic.woff2?v=20261116032731) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Caveat"; font-weight: 500; font-display: swap; src: url(fonts/caveat-latin.woff2?v=20261116032731) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url(fonts/cormorant-i-cyrillic.woff2?v=20261116032731) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url(fonts/cormorant-i-latin.woff2?v=20261116032731) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
   .card-b { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; padding: 40px; border-radius: 16px; background: linear-gradient(180deg, rgba(206,220,255,.06), rgba(206,220,255,.018)); box-shadow: inset 0 0 0 1px rgba(206,220,255,.08); align-items: center; }
   .card-ed h3 { margin-top: 14px; font-size: 30px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; color: var(--cream); max-width: 480px; }
   .card-sub { margin-top: 10px; font-size: 15px; color: rgba(240,244,250,.65); }
@@ -1168,11 +1168,11 @@
   .cc, .cg, .fcol, .coil, .flow, .minis, .wordmark { -webkit-user-select: none; user-select: none; }
   /* ===== комнаты на первом экране: меняются под постер растворением ===== */
   .hero-bg { background: #05070b !important; }
-  .hero-bg .hb { position: absolute; inset: 0; background: url(img/w/hero-room.webp?v=20261116032525) 78% 50% / cover no-repeat; opacity: 0; transition: opacity 1.6s cubic-bezier(.4,0,.2,1); }
+  .hero-bg .hb { position: absolute; inset: 0; background: url(img/w/hero-room.webp?v=20261116032731) 78% 50% / cover no-repeat; opacity: 0; transition: opacity 1.6s cubic-bezier(.4,0,.2,1); }
   .hero-bg .hb.on { opacity: 1; }
-  .hero-bg .hb[data-r="living"] { background-image: url(img/w/room-living.webp?v=20261116032525); }
-  .hero-bg .hb[data-r="loft"] { background-image: url(img/w/room-loft.webp?v=20261116032525); }
-  .hero-bg .hb[data-r="attic"] { background-image: url(img/w/room-attic.webp?v=20261116032525); }
+  .hero-bg .hb[data-r="living"] { background-image: url(img/w/room-living.webp?v=20261116032731); }
+  .hero-bg .hb[data-r="loft"] { background-image: url(img/w/room-loft.webp?v=20261116032731); }
+  .hero-bg .hb[data-r="attic"] { background-image: url(img/w/room-attic.webp?v=20261116032731); }
   .hero-bg::after { z-index: 1; }
   @media (max-width: 760px) { .hero-bg .hb { background-position: 66% 50%; } }
   /* ===== цена: подпись в две строки по центру цены ===== */
@@ -1260,7 +1260,7 @@
   .card-tpl button { padding: 0 10px !important; min-width: 0; }
   @media (max-width: 560px) { .card-tpl { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; border-radius: 20px !important; row-gap: 2px !important; } }
   /* ===== логотип 15.11: Cormorant Garamond + W из киноплёнки (A1) + плёнка под словом (A2), белым ===== */
-  @font-face { font-family: "ProswetLogo"; font-weight: 600; font-display: block; src: url(fonts/cormorant-garamond-600-logo.woff2?v=20261116032525) format("woff2"); }
+  @font-face { font-family: "ProswetLogo"; font-weight: 600; font-display: block; src: url(fonts/cormorant-garamond-600-logo.woff2?v=20261116032731) format("woff2"); }
   .wordmark.lg { font-family: "ProswetLogo", "Cormorant Garamond", Georgia, serif !important; font-weight: 600 !important; font-size: 36px !important; letter-spacing: .045em !important; padding-left: 0 !important; text-shadow: none !important; color: #fff; line-height: 1; display: inline-flex; flex-direction: column; align-items: stretch; justify-self: center; text-decoration: none; }
   .lg-row { white-space: nowrap; display: block; }
   .lg-wl { background: linear-gradient(180deg, #fff8e6 10%, #ffd884 60%, #f3b54d); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 .14em rgba(255,186,80,.55)) drop-shadow(0 0 .45em rgba(255,170,60,.28)); }
@@ -1268,6 +1268,7 @@
   .lg-strip { display: block; height: .12em; margin-top: .1em; border-top: 1px solid rgba(255,255,255,.55); border-bottom: 1px solid rgba(255,255,255,.55); background: repeating-linear-gradient(90deg, transparent 0 .08em, rgba(255,255,255,.55) .08em .13em) center / 100% 46% no-repeat; -webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); }
   .fgrid .wordmark.lg { font-size: 28px !important; justify-self: start; }
   @media (max-width: 900px) { .wordmark.lg { font-size: 26px !important; justify-self: start; margin-left: 8px; } }
+  @media (max-width: 420px) { .hero-facts b { font-size: 19px !important; } .hero-facts span { font-size: 11px; } .hero-facts li { padding: 0 8px; } }
 </style>
 
 <body class="in-hero">
@@ -1277,9 +1278,9 @@
 <div class="rail l" aria-hidden="true"><div class="col" id="railL"></div></div><div class="rail r" aria-hidden="true"><div class="col" id="railR"></div></div>
 
 <header><div class="wrap">
-  <nav class="mainnav" id="mainnav"><a href="#overview" class="on">Рамка</a><a href="#posters">Постеры</a><a href="#gifts">Подарки</a><a href="#help">Поддержка</a></nav>
+  <nav class="mainnav" id="mainnav"><a href="#overview" class="on">Рамка</a><a href="#posters">Постеры</a><a href="#gifts">Наборы</a><a href="#help">Поддержка</a></nav>
   <button class="icon burger" aria-label="Меню" id="burger"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
-  <a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROSWET</span><span class="lg-strip" aria-hidden="true"></span></a>
+  <a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROSWET</span></a>
   <div class="icons">
     <button class="icon" aria-label="Личный кабинет" id="loginBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.4-3.6 4.2-5.2 7.5-5.2s6.1 1.6 7.5 5.2"/></svg></button>
     <button class="icon" aria-label="Корзина" id="cartBtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><i id="count">0</i></button>
@@ -1294,14 +1295,14 @@
   <div class="hero-copy">
     <div class="hero-kicker">Световая рамка Proswet</div>
     <h1 class="hero-h">Ваш фильм —<br>часть интерьера</h1>
-    <ul class="hero-facts"><li><b>Готова</b><span>постер уже внутри</span></li><li class="szli"><div class="szsw" id="szSw" data-s="a4" role="radiogroup" aria-label="Формат"><button type="button" data-s="a4" class="on" role="radio" aria-checked="true">A4</button><button type="button" data-s="a3" role="radio">A3</button><i aria-hidden="true"></i></div><span id="szDim">21 × 30 см</span></li><li class="free"><b>Бесплатно</b><span>доставка по России</span></li></ul>
-    <div class="from"><span class="price" id="totalPrice">5&nbsp;000&nbsp;₽</span><span class="from-cap">рамка-светильник<br>с&nbsp;постером внутри</span></div>
+    <ul class="hero-facts"><li><b>Без сборки</b><span>постер уже вставлен</span></li><li class="szli"><div class="szsw" id="szSw" data-s="a4" role="radiogroup" aria-label="Формат"><button type="button" data-s="a4" class="on" role="radio" aria-checked="true">A4</button><button type="button" data-s="a3" role="radio">A3</button><i aria-hidden="true"></i></div><span id="szDim">21 × 30 см</span></li><li class="free"><b>Бесплатно</b><span>доставка по России</span></li></ul>
+    <div class="from"><span class="price" id="totalPrice">5&nbsp;000&nbsp;₽</span><span class="from-cap">Рамка-светильник<br>с&nbsp;постером фильма</span></div>
 
     <div class="opt"><div class="t">Ваш фильм <span id="posterName"></span></div>
       <div class="minis" id="minis"></div></div>
 
     <div class="buy"><button class="btn" id="buyBtn">Купить</button><button type="button" class="btn line" data-cat>Все постеры</button></div>
-    <div class="pvz"><span><b>Бесплатная доставка</b> в пункт выдачи</span><span class="mps"><img src="img/mp/ozon.png?v=20261116032525" alt="Ozon" title="Ozon"><img src="img/mp/yandex-market.png?v=20261116032525" alt="Яндекс Маркет" title="Яндекс Маркет"><img src="img/mp/wb.png?v=20261116032525" alt="Wildberries" title="Wildberries"><i class="cdek" title="СДЭК">СДЭК</i></span></div>
+    <div class="pvz"><span><b>Бесплатная доставка</b> в пункт выдачи</span><span class="mps"><img src="img/mp/ozon.png?v=20261116032731" alt="Ozon" title="Ozon"><img src="img/mp/yandex-market.png?v=20261116032731" alt="Яндекс Маркет" title="Яндекс Маркет"><img src="img/mp/wb.png?v=20261116032731" alt="Wildberries" title="Wildberries"><i class="cdek" title="СДЭК">СДЭК</i></span></div>
   </div>
   <div class="stagebox">
     <div class="device"><div class="frame lit" id="heroFrame"><div class="poster"><img id="heroImg" alt="Постер в рамке"></div><div class="glass"></div></div></div>
@@ -1328,7 +1329,7 @@
   <div class="bento-head"><div><div class="label">Как это работает</div><h2 style="margin-top:16px">Из коробки — на стену.<br>Щелчок — и свет.</h2></div>
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша кинотеатра.</p></div>
   <div class="story" id="story">
-    <div class="st-stage"><video class="stv on" muted playsinline preload="none" poster="img/w/s-box-clean.webp?v=20261116032525" data-src="media/story-1.mp4?v=20261116032525" aria-label="Распаковка, рамка на стене, включение"></video><video class="stv" muted playsinline preload="none" data-src="media/story-2.mp4?v=20261116032525"></video><video class="stv" muted playsinline preload="none" data-src="media/story-3.mp4?v=20261116032525"></video><video class="stv" muted playsinline preload="none" data-src="media/story-4.mp4?v=20261116032525"></video><img class="st-off" src="img/w/s-sw-off.webp?v=20261116032525" alt="">
+    <div class="st-stage"><video class="stv on" muted playsinline preload="none" poster="img/w/s-box-clean.webp?v=20261116032731" data-src="media/story-1.mp4?v=20261116032731" aria-label="Распаковка, рамка на стене, включение"></video><video class="stv" muted playsinline preload="none" data-src="media/story-2.mp4?v=20261116032731"></video><video class="stv" muted playsinline preload="none" data-src="media/story-3.mp4?v=20261116032731"></video><video class="stv" muted playsinline preload="none" data-src="media/story-4.mp4?v=20261116032731"></video><img class="st-off" src="img/w/s-sw-off.webp?v=20261116032731" alt="">
       <div class="st-cap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
       <div class="st-steps" id="stSteps"><i></i><i></i><i></i><i></i></div>
       <button type="button" class="st-sw" id="stSw" aria-pressed="true"><span>Попробуйте сами</span><span class="sw-key"><i></i></span></button>
@@ -1350,22 +1351,22 @@
 <div class="marquee" aria-hidden="true"><div class="mq" id="mq2"></div></div>
 
 <section id="gifts" style="background:var(--carbon)"><div class="wrap">
-  <div class="label">Подарки</div>
+  <div class="label">Наборы</div>
   <h2 style="margin-top:16px">Подарок, который включают каждый вечер</h2>
   <p class="lead" style="margin-top:18px">Любой фильм из коллекции — в каждый набор.</p>
   <div class="sets gifts3" id="gifts3">
-    <div class="set g1"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g1.webp?v=20261116032525" alt="Световая рамка Proswet на стене"></div>
+    <div class="set g1"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g1.webp?v=20261116032731" alt="Световая рамка Proswet на стене"></div>
       <div class="body"><h3>Одна рамка</h3><p>Proswet A4 или A3 с постером вашего фильма.</p><div class="row"><span class="price">от 5&nbsp;000&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Proswet A3" data-price="6000">Выбрать фильм</button></div></div></div>
-    <div class="set g3 hit"><div class="badge">Выгоднее на 560&nbsp;₽</div><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g3-1511.webp?v=20261116032525" alt="Три световые рамки над диваном"></div>
+    <div class="set g3 hit"><div class="badge">Выгоднее на 560&nbsp;₽</div><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-g3-1511.webp?v=20261116032731" alt="Три световые рамки над диваном"></div>
       <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><span class="price">12&nbsp;190&nbsp;₽<s>12&nbsp;750&nbsp;₽</s></span><button class="btn" data-pick="3" data-name="Три рамки Proswet" data-price="12190">Выбрать 3 фильма</button></div></div></div>
-    <div class="set gg"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-gg.webp?v=20261116032525" alt="Подарочная коробка с лентой и сухоцветами"></div>
+    <div class="set gg"><div class="pic ph"><img decoding="async" loading="lazy" src="img/w/scene-gg.webp?v=20261116032731" alt="Подарочная коробка с лентой и сухоцветами"></div>
       <div class="body"><h3>Подарочный набор</h3><p>Рамка в большой коробке: лента с бантом, сухоцветы и открытка с вашим текстом.</p><div class="row"><span class="price">5&nbsp;490&nbsp;₽</span><button class="btn line" data-pick="1" data-name="Подарочный набор Proswet" data-price="5490">Выбрать фильм</button></div></div></div>
   </div>
   <div class="pack">
     <div class="pack-t"><div class="label">Упаковка</div><h3>Дарить не стыдно</h3><p class="pk-lead">Собираем подарок руками. Открыть коробку — уже праздник.</p>
       <dl class="pk-list"><div><dt>Коробка</dt><dd>Жёсткая, чёрная, под размер рамки — ничего не нужно заворачивать</dd></div><div><dt>Лента</dt><dd>Атласная, с бантом</dd></div><div><dt>Сухоцветы</dt><dd>Небольшой букет под лентой</dd></div><div><dt>Открытка</dt><dd>10 × 15 см, с вашим текстом — напечатаем сами</dd></div></dl></div>
-    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-open-1511.webp?v=20261116032525" alt="Рамка в открытой подарочной коробке"></div>
-    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-det-1511.webp?v=20261116032525" alt="Лента, наклейки, сухоцветы и открытка"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-open-1511.webp?v=20261116032731" alt="Рамка в открытой подарочной коробке"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-det-1511.webp?v=20261116032731" alt="Лента, наклейки, сухоцветы и открытка"></div>
   </div>
 
   <div class="card-b" id="card">
@@ -1396,7 +1397,7 @@
   <div class="ship">
     <div class="ship-main">
       <div class="ship-free"><b>0 ₽</b><span>Доставка за наш счёт<br>в любой пункт выдачи</span></div>
-      <div class="ship-mp"><span class="mps"><img src="img/mp/ozon.png?v=20261116032525" alt="Ozon" title="Ozon"><img src="img/mp/yandex-market.png?v=20261116032525" alt="Яндекс Маркет" title="Яндекс Маркет"><img src="img/mp/wb.png?v=20261116032525" alt="Wildberries" title="Wildberries"><i class="cdek" title="СДЭК">СДЭК</i></span></div>
+      <div class="ship-mp"><span class="mps"><img src="img/mp/ozon.png?v=20261116032731" alt="Ozon" title="Ozon"><img src="img/mp/yandex-market.png?v=20261116032731" alt="Яндекс Маркет" title="Яндекс Маркет"><img src="img/mp/wb.png?v=20261116032731" alt="Wildberries" title="Wildberries"><i class="cdek" title="СДЭК">СДЭК</i></span></div>
       <div class="ship-calc">
         <label for="cityIn">Ваш город</label>
         <div class="city"><input id="cityIn" type="text" autocomplete="off" placeholder="Например, Казань" aria-controls="cityList"><ul id="cityList" role="listbox"></ul></div>
@@ -1425,9 +1426,9 @@
 
 <footer><div class="wrap">
   <div class="fgrid">
-    <div><a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROSWET</span><span class="lg-strip" aria-hidden="true"></span></a>
+    <div><a class="wordmark lg" href="#top" aria-label="PROSWET"><span class="lg-row">PROSWET</span></a>
 </div>
-    <div><h4>Магазин</h4><a href="#top">Рамка Proswet A3</a><a href="#posters">Постеры</a><a href="#gifts">Подарки</a></div>
+    <div><h4>Магазин</h4><a href="#top">Рамка Proswet A3</a><a href="#posters">Постеры</a><a href="#gifts">Наборы</a></div>
     <div><h4>Покупателям</h4><a href="oferta.html#dostavka">Доставка и оплата</a><a href="oferta.html#vozvrat">Возврат и гарантия</a><a href="#help">Вопросы</a><a href="#">Личный кабинет</a></div>
     <div><h4>Proswet</h4><a href="#">О нас</a><a href="#">Telegram-канал</a><a href="#">Контакты</a><a href="#">Сотрудничество</a></div>
   </div>
@@ -1462,7 +1463,7 @@
   <div class="pickfoot"><span class="price" id="pickPrice"></span><button class="btn" id="pickAdd" disabled>В корзину</button></div>
 </div></div>
 <aside class="drawer" id="drawer"><h3>Корзина <button class="x" id="closeCart" aria-label="Закрыть" style="font-size:26px;color:var(--muted)">×</button></h3><div class="cart-items" id="cartItems"></div><div class="total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div><button class="btn" id="checkout">Оформить заказ</button></aside>
-<div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#gifts">Подарки</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
+<div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a class="btn line" href="#top">Рамка</a><a class="btn line" href="#posters">Постеры</a><a class="btn line" href="#gifts">Наборы</a><a class="btn line" href="#help">Поддержка</a></div></div></div>
 <div class="mbuy" id="mbuy"><span class="price" id="mbuyPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="mbuyBtn">Купить</button></div>
 <div class="overlay" id="coOv"><form class="sheet co" id="coForm" novalidate>
   <button type="button" class="x" data-close="coOv" aria-label="Закрыть">×</button>
@@ -1492,7 +1493,7 @@ if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "20261116032525";
+const AV = "20261116032731";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
