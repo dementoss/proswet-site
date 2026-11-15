@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROSWET — световая рамка для постеров</title>
 <link href="fonts/fonts.css" rel="stylesheet">
-<link rel="icon" href="favicon.png?v=5" type="image/png" sizes="192x192">
-<link rel="icon" href="favicon.ico?v=5" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=5">
+<link rel="icon" href="favicon.png?v=6" type="image/png" sizes="192x192">
+<link rel="icon" href="favicon.ico?v=6" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=6">
 <meta name="theme-color" content="#05070b">
 <style>
   :root {
@@ -1161,7 +1161,7 @@
   .card-tpl button.on { background: rgb(var(--accent)) !important; color: #07090e; }
   @media (max-width: 900px) { .sheet-a4 { width: min(100%, 300px); } .pk-list > div { grid-template-columns: 84px minmax(0, 1fr); } }
   /* коллекция выше — колонки едут длиннее */
-  .flow { height: min(165vh, 1750px) !important; }
+  .flow { height: 1500px !important; }
   .flow::before, .flow::after { height: 200px; }
   @media (max-width: 760px) { .flow { height: 190vw !important; } }
   header { background: #060505 !important; }
@@ -1213,6 +1213,8 @@
   .story { margin-top: 44px; }
   .st-stage { position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #0a0807; box-shadow: inset 0 0 0 1px rgba(255,230,190,.08), 0 40px 90px rgba(0,0,0,.5); }
   .st-stage video, .st-stage .st-off { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .st-stage .stv { opacity: 0; transition: opacity .45s ease; }
+  .st-stage .stv.on { opacity: 1; }
   .st-stage .st-off { opacity: 0; transition: opacity .5s cubic-bezier(.4,0,.2,1); pointer-events: none; }
   .st-stage.off .st-off { opacity: 1; }
   .st-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, rgba(4,4,6,.85), rgba(4,4,6,.15) 40%, transparent 60%); }
@@ -1233,6 +1235,12 @@
   .st-stage.off .st-sw .sw-key i { top: 5px; background: linear-gradient(#fff, #e6e1d6); box-shadow: 0 2px 3px rgba(0,0,0,.25); }
   .story.done:not(.used) .st-sw .sw-key::after { content: ""; position: absolute; inset: -6px; border-radius: 13px; border: 2px solid rgb(var(--accent)); animation: swRing 1.8s ease-out infinite; }
   @media (max-width: 760px) { .st-stage { aspect-ratio: 4 / 5; border-radius: 14px; } .st-cap { left: 18px; right: 18px; bottom: 90px; } .st-steps { left: 18px; right: 18px; top: 16px; } .st-sw { right: 18px; bottom: 22px; } .st-replay { right: 18px; top: 30px; } }
+  /* ===== кнопка «Купить» в шапке: спокойная, без золота ===== */
+  header .hdr-cta { background: rgba(255,255,255,.04) !important; background-image: none !important; color: var(--cream) !important; box-shadow: inset 0 0 0 1px rgba(240,236,228,.32) !important; border-radius: 999px !important; transform: none !important; letter-spacing: .02em; font-weight: 600 !important; transition: background .25s ease, box-shadow .25s ease, color .25s ease !important; }
+  header .hdr-cta::after, header .hdr-cta::before { display: none !important; }
+  header .hdr-cta .price { color: rgba(240,236,228,.6) !important; font-weight: 500; margin-left: 10px; padding-left: 10px; box-shadow: inset 1px 0 0 rgba(240,236,228,.22); }
+  header .hdr-cta:hover { background: var(--cream) !important; color: #0a0907 !important; box-shadow: none !important; }
+  header .hdr-cta:hover .price { color: rgba(10,9,7,.6) !important; box-shadow: inset 1px 0 0 rgba(10,9,7,.2); }
   /* ===== логотип 15.11: Cormorant Garamond + W из киноплёнки (A1) + плёнка под словом (A2), белым ===== */
   @font-face { font-family: "ProswetLogo"; font-weight: 600; font-display: block; src: url(fonts/cormorant-garamond-600-logo.woff2) format("woff2"); }
   .wordmark.lg { font-family: "ProswetLogo", "Cormorant Garamond", Georgia, serif !important; font-weight: 600 !important; font-size: 36px !important; letter-spacing: .045em !important; padding-left: 0 !important; text-shadow: none !important; color: #fff; line-height: 1; display: inline-flex; flex-direction: column; align-items: stretch; justify-self: center; text-decoration: none; }
@@ -1302,7 +1310,7 @@
   <div class="bento-head"><div><div class="label">Как это работает</div><h2 style="margin-top:16px">Из коробки — на стену.<br>Щелчок — и свет.</h2></div>
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша кинотеатра.</p></div>
   <div class="story" id="story">
-    <div class="st-stage"><video id="stVid" muted playsinline preload="none" poster="img/w/s-box-1511.webp" aria-label="Распаковка, рамка на стене, включение"></video><img class="st-off" src="img/w/s-sw-off.webp" alt="">
+    <div class="st-stage"><video class="stv on" muted playsinline preload="none" poster="img/w/s-box-1511.webp" data-src="media/story-1.mp4" aria-label="Распаковка, рамка на стене, включение"></video><video class="stv" muted playsinline preload="none" data-src="media/story-2.mp4"></video><video class="stv" muted playsinline preload="none" data-src="media/story-3.mp4"></video><video class="stv" muted playsinline preload="none" data-src="media/story-4.mp4"></video><img class="st-off" src="img/w/s-sw-off.webp" alt="">
       <div class="st-cap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
       <div class="st-steps" id="stSteps"><i></i><i></i><i></i><i></i></div>
       <button type="button" class="st-sw" id="stSw" aria-pressed="true"><span>Попробуйте сами</span><span class="sw-key"><i></i></span></button>
@@ -1623,18 +1631,19 @@ if (auto) { document.body.classList.add("auto"); setInterval(() => { if (!auto |
 // ---------- день / вечер ----------
 // видео «днём — картина, вечером — свет»: играет, только пока видно
 
-// ---------- история: коробка → стена → 10 мм → свет ----------
-{ const st = $("story"), stage = st.querySelector(".st-stage"), v = $("stVid"), steps = [...$("stSteps").children];
-  const SC = [["media/story-1.mp4", "Открыли коробку", "Рамка уже собрана, постер внутри"], ["media/story-2.mp4", "Повесили на стену", "Как обычную картину — на один гвоздь"], ["media/story-3.mp4", "10 мм толщиной", "Почти не выступает от стены"], ["media/story-4.mp4", "Щёлк — и свет", "Мягкий, ровный, не слепит · 12 В · 6–8 Вт"]];
-  let k = 0, started = false;
-  const cap = j => { const c = st.querySelector(".st-cap"); c.classList.add("swap"); setTimeout(() => { $("stN").textContent = "0" + (j + 1); $("stT").textContent = SC[j][1]; $("stS").textContent = SC[j][2]; c.classList.remove("swap"); }, 300); };
-  const play = j => { k = j; v.src = SC[j][0]; cap(j); steps.forEach((s, n) => s.style.setProperty("--p", n < j ? 1 : 0)); v.play().catch(() => {}); };
-  v.addEventListener("timeupdate", () => { if (v.duration) steps[k].style.setProperty("--p", v.currentTime / v.duration); });
-  v.addEventListener("ended", () => { if (k < SC.length - 1) play(k + 1); else { st.classList.add("done"); stage.classList.remove("off"); $("stSw").setAttribute("aria-pressed", true); } });
+// ---------- история: коробка → стена → 10 мм → свет (без пауз: все сцены грузятся заранее, переход растворением) ----------
+{ const st = $("story"), stage = st.querySelector(".st-stage"), vs = [...stage.querySelectorAll(".stv")], steps = [...$("stSteps").children];
+  const SC = [["Открыли коробку", "Рамка уже собрана, постер внутри"], ["Повесили на стену", "Как обычную картину — на один гвоздь"], ["10 мм толщиной", "Почти не выступает от стены"], ["Щёлк — и свет", "Мягкий, ровный, не слепит · 12 В · 6–8 Вт"]];
+  let k = 0, started = false, loaded = false;
+  const load = () => { if (loaded) return; loaded = true; vs.forEach(v => { v.preload = "auto"; v.src = v.dataset.src; v.load(); }); };
+  const cap = j => { const c = st.querySelector(".st-cap"); c.classList.add("swap"); setTimeout(() => { $("stN").textContent = "0" + (j + 1); $("stT").textContent = SC[j][0]; $("stS").textContent = SC[j][1]; c.classList.remove("swap"); }, 250); };
+  const play = j => { k = j; load(); vs.forEach((v, n) => { v.classList.toggle("on", n === j); if (n !== j) v.pause(); }); const v = vs[j]; try { v.currentTime = 0; } catch (e) {} v.play().catch(() => {}); cap(j); steps.forEach((s, n) => s.style.setProperty("--p", n < j ? 1 : 0)); };
+  vs.forEach((v, n) => { v.addEventListener("timeupdate", () => { if (n === k && v.duration) { steps[n].style.setProperty("--p", v.currentTime / v.duration); if (n < vs.length - 1 && v.duration - v.currentTime < .35 && !v.dataset.next) { v.dataset.next = 1; play(n + 1); } } });
+    v.addEventListener("ended", () => { delete v.dataset.next; if (n === vs.length - 1) { st.classList.add("done"); stage.classList.remove("off"); $("stSw").setAttribute("aria-pressed", true); } }); });
   $("stSw").onclick = () => { const off = !stage.classList.contains("off"); stage.classList.toggle("off", off); st.classList.add("used"); $("stSw").setAttribute("aria-pressed", !off); $("stT").textContent = off ? "Выключена — просто картина" : "Щёлк — и свет"; };
-  $("stReplay").onclick = () => { st.classList.remove("done", "used"); stage.classList.remove("off"); play(0); };
-  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !started) { started = true; play(0); } else if (!e.isIntersecting && !v.paused) v.pause(); else if (e.isIntersecting && started && v.paused && !st.classList.contains("done")) v.play().catch(() => {}); }), { threshold: .4 }).observe(stage); }
-
+  $("stReplay").onclick = () => { st.classList.remove("done", "used"); stage.classList.remove("off"); vs.forEach(v => delete v.dataset.next); play(0); };
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) load(); }), { rootMargin: "900px 0px" }).observe(stage);
+  new IntersectionObserver(es => es.forEach(e => { const v = vs[k]; if (e.isIntersecting && !started) { started = true; play(0); } else if (!e.isIntersecting) v.pause(); else if (started && v.paused && !st.classList.contains("done")) v.play().catch(() => {}); }), { threshold: .4 }).observe(stage); }
 // ---------- вкладки характеристик ----------
 document.querySelectorAll("#specTabs button").forEach(b => b.onclick = () => {
   document.querySelectorAll("#specTabs button").forEach(x => x.classList.toggle("on", x === b));
