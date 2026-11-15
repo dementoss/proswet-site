@@ -1035,8 +1035,90 @@
   @keyframes swClick { 0%, 30% { opacity: 0; } 33%, 80% { opacity: 1; } 84%, 100% { opacity: 0; } }
   .bt.swtile:hover > img { transform: none !important; }
   @media (prefers-reduced-motion: reduce) { .bt.swtile .sw-on { animation: none; opacity: 1; } }
+
+  /* бенто: коробка крупно */
+  .bento { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 420px 290px; }
+  .bt-box { grid-column: 2 / 4; }
+  .bt-box > img { object-position: 50% 58%; }
+  @media (max-width: 900px) { .bt-box { grid-column: auto; } }
+
+  /* выключатель: человек нажимает сам */
+  .bt.swtile { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .bt.swtile .sw-on { opacity: 0; animation: none; transition: opacity .55s cubic-bezier(.4,0,.2,1); }
+  .bt.swtile.on .sw-on { opacity: 1; }
+  .bt.swtile:not(.used).hint .sw-on { animation: swPeek 5s ease-in-out 1.2s 2; }
+  @keyframes swPeek { 0%, 55%, 100% { opacity: 0; } 70%, 85% { opacity: .9; } }
+  .sw-ui { position: absolute; z-index: 3; top: 18px; right: 18px; display: flex; align-items: center; gap: 10px; }
+  .sw-hint { font-size: 13px; font-weight: 600; color: var(--cream); background: rgba(4,6,11,.55); backdrop-filter: blur(8px); padding: 6px 10px; border-radius: 999px; transition: opacity .3s ease; }
+  .bt.swtile.used .sw-hint { opacity: 0; }
+  .sw-key { position: relative; width: 30px; height: 48px; border-radius: 9px; background: linear-gradient(#f4f1ea, #d8d3c8); box-shadow: 0 6px 16px rgba(0,0,0,.45), inset 0 0 0 1px rgba(0,0,0,.12); }
+  .sw-key i { position: absolute; left: 5px; right: 5px; top: 5px; height: 19px; border-radius: 5px; background: linear-gradient(#fff, #e6e1d6); box-shadow: 0 2px 3px rgba(0,0,0,.25); transition: top .18s cubic-bezier(.3,1.4,.6,1); }
+  .bt.swtile.on .sw-key i { top: 24px; background: linear-gradient(#ffe9a8, #ffd25a); box-shadow: 0 0 12px rgba(255,210,90,.9); }
+  .bt.swtile:not(.used) .sw-key::after { content: ""; position: absolute; inset: -6px; border-radius: 13px; border: 2px solid rgb(var(--accent)); animation: swRing 1.8s ease-out infinite; }
+  @keyframes swRing { from { opacity: .9; transform: scale(.9); } to { opacity: 0; transform: scale(1.35); } }
+  @media (prefers-reduced-motion: reduce) { .bt.swtile .sw-key::after, .bt.swtile.hint .sw-on { animation: none !important; } }
+
+  /* упаковка ровно под наборами */
+  .pack { gap: 16px !important; margin-top: 16px !important; }
+  @media (min-width: 901px) { .pack { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } .pack-i { min-height: 0 !important; } }
+  .pack-t, .pack-i { border-radius: var(--r-m, 16px) !important; }
+
+  /* «Купить» в шапке — живее */
+  .hdr-cta { position: relative; overflow: hidden; border-radius: 999px !important; background: linear-gradient(135deg, #ffe46b 0%, #ffc61a 50%, #ff9d2e 100%) !important; box-shadow: 0 6px 22px rgba(255,170,40,.38), inset 0 1px 0 rgba(255,255,255,.55) !important; font-weight: 700 !important; transition: transform .2s cubic-bezier(.3,1.4,.6,1), box-shadow .2s ease !important; }
+  .hdr-cta:hover { transform: translateY(-1px) scale(1.04); box-shadow: 0 10px 30px rgba(255,170,40,.5), inset 0 1px 0 rgba(255,255,255,.6) !important; background: linear-gradient(135deg, #fff07f 0%, #ffd033 50%, #ffa83c 100%) !important; }
+  .hdr-cta::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.65), transparent); transform: skewX(-20deg); animation: ctaShine 4.5s ease-in-out 2s infinite; }
+  @keyframes ctaShine { 0%, 70% { left: -60%; } 100% { left: 130%; } }
+  @media (prefers-reduced-motion: reduce) { .hdr-cta::after { display: none; } }
+
+  /* открытка */
+  @font-face { font-family: "Caveat"; font-weight: 500; font-display: swap; src: url(fonts/caveat-cyrillic.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Caveat"; font-weight: 500; font-display: swap; src: url(fonts/caveat-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url(fonts/cormorant-i-cyrillic.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url(fonts/cormorant-i-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  .card-b { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; padding: 40px; border-radius: 16px; background: linear-gradient(180deg, rgba(206,220,255,.06), rgba(206,220,255,.018)); box-shadow: inset 0 0 0 1px rgba(206,220,255,.08); align-items: center; }
+  .card-ed h3 { margin-top: 14px; font-size: 30px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; color: var(--cream); max-width: 480px; }
+  .card-sub { margin-top: 10px; font-size: 15px; color: rgba(240,244,250,.65); }
+  .card-tpl { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 8px; }
+  .card-tpl button { height: 38px; padding: 0 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--cream); background: rgba(206,220,255,.05); box-shadow: inset 0 0 0 1px rgba(240,244,250,.18); transition: background .2s ease, color .2s ease, box-shadow .2s ease; }
+  .card-tpl button:hover { box-shadow: inset 0 0 0 1px rgba(240,244,250,.5); }
+  .card-tpl button.on { background: rgb(var(--accent)); color: #07090e; box-shadow: none; }
+  .card-ed label { display: block; margin-top: 14px; font-size: 13px; color: rgba(240,244,250,.6); position: relative; }
+  .card-ed input, .card-ed textarea { display: block; width: 100%; margin-top: 6px; padding: 12px 14px; border-radius: 10px; border: 0; background: rgba(4,6,11,.55); box-shadow: inset 0 0 0 1px rgba(240,244,250,.14); color: var(--cream); font: inherit; font-size: 16px; resize: vertical; }
+  .card-ed input:focus, .card-ed textarea:focus { outline: none; box-shadow: inset 0 0 0 1.5px rgb(var(--accent)); }
+  .card-ed small { position: absolute; right: 10px; bottom: 8px; font-size: 12px; color: rgba(240,244,250,.4); }
+  .card-act { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .card-act .btn { height: 46px; padding: 0 22px; font-size: 15px; }
+  .card-pv { display: flex; flex-direction: column; align-items: center; }
+  .sheet-a4 { width: min(100%, 400px); aspect-ratio: 210 / 297; position: relative; border-radius: 3px; box-shadow: 0 30px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.2); transform: rotate(-1.2deg); transition: background .5s ease, color .5s ease; overflow: hidden; --c: #1c1c1c; --a: #c8553d; background: #fbf7ef; color: var(--c); }
+  .a4-in { position: absolute; inset: 9%; display: flex; flex-direction: column; text-align: center; }
+  .a4-orn { position: absolute; inset: -6%; pointer-events: none; transition: opacity .5s ease; }
+  .a4-h { position: relative; margin-top: 12%; font-family: var(--disp); font-weight: 700; font-size: clamp(22px, 2.3vw, 32px); line-height: 1.1; color: var(--a); }
+  .a4-to { position: relative; margin-top: 14%; font-family: "Caveat", cursive; font-size: clamp(22px, 2vw, 28px); text-align: left; min-height: 1.2em; }
+  .a4-txt { position: relative; margin-top: 4%; font-family: "Caveat", cursive; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.3; text-align: left; overflow: hidden; word-break: break-word; flex: 1; }
+  .a4-txt .ph { opacity: .35; }
+  .a4-from { position: relative; font-family: "Caveat", cursive; font-size: clamp(20px, 1.8vw, 26px); text-align: right; min-height: 1.2em; }
+  .a4-mark { position: relative; margin-top: 8%; font-family: var(--disp); font-size: 9px; letter-spacing: .4em; opacity: .45; }
+  .a4-cap { margin-top: 22px; font-size: 13px; color: rgba(240,244,250,.5); }
+  /* шаблоны */
+  .sheet-a4[data-t="bday"] { background: #fbf6ec; --a: #d2553f; }
+  .sheet-a4[data-t="bday"] .a4-orn { background: radial-gradient(circle at 8% 6%, #f3b23c 0 6px, transparent 7px), radial-gradient(circle at 18% 3%, #d2553f 0 4px, transparent 5px), radial-gradient(circle at 92% 8%, #5aa58a 0 5px, transparent 6px), radial-gradient(circle at 84% 3%, #f3b23c 0 3px, transparent 4px), radial-gradient(circle at 6% 94%, #5aa58a 0 4px, transparent 5px), radial-gradient(circle at 94% 95%, #d2553f 0 6px, transparent 7px), radial-gradient(circle at 86% 98%, #f3b23c 0 3px, transparent 4px); }
+  .sheet-a4[data-t="wed"] { background: #fdfbf6; --a: #a88a4e; }
+  .sheet-a4[data-t="wed"] .a4-h, .sheet-a4[data-t="love"] .a4-h { font-family: "Cormorant", Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(28px, 2.8vw, 40px); }
+  .sheet-a4[data-t="wed"] .a4-orn { inset: 5%; border: 1px solid #c9b07a; box-shadow: inset 0 0 0 5px #fdfbf6, inset 0 0 0 6px #c9b07a; }
+  .sheet-a4[data-t="ny"] { background: radial-gradient(ellipse at 50% 0%, #1d2a4d, #0b1226 70%); --c: #f3efe4; --a: #e8c66a; }
+  .sheet-a4[data-t="ny"] .a4-orn { background: radial-gradient(circle at 10% 8%, #e8c66a 0 1.5px, transparent 2.5px), radial-gradient(circle at 24% 14%, #fff 0 1px, transparent 2px), radial-gradient(circle at 76% 6%, #fff 0 1.5px, transparent 2.5px), radial-gradient(circle at 90% 16%, #e8c66a 0 2px, transparent 3px), radial-gradient(circle at 60% 12%, #fff 0 1px, transparent 2px), radial-gradient(circle at 8% 90%, #fff 0 1px, transparent 2px), radial-gradient(circle at 92% 88%, #e8c66a 0 1.5px, transparent 2.5px), radial-gradient(circle at 40% 96%, #fff 0 1px, transparent 2px); }
+  .sheet-a4[data-t="love"] { background: #fbf0ee; --a: #b8444f; }
+  .sheet-a4[data-t="love"] .a4-orn { background: radial-gradient(ellipse 120px 120px at 50% -20px, rgba(184,68,79,.12), transparent 70%); }
+  .sheet-a4[data-t="any"] { background: #f6f5f1; --a: #111; }
+  .sheet-a4[data-t="any"] .a4-orn { inset: 4%; border-top: 3px solid #111; border-bottom: 3px solid #111; }
+  @media (max-width: 900px) { .card-b { grid-template-columns: minmax(0, 1fr); padding: 26px 20px; } .card-ed h3 { font-size: 24px; } .sheet-a4 { width: min(100%, 340px); } }
+
+  /* растворение постера */
+  .frame .poster img.xf { opacity: 0; transform: scale(1.035); transition: opacity 1.1s cubic-bezier(.4,0,.2,1), transform 1.4s cubic-bezier(.2,.8,.2,1), filter .6s ease !important; z-index: 1; }
+  .frame .poster img.xf.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .frame .poster img.xf { transition: opacity .3s linear !important; transform: none; } }
 </style>
-</head>
+
 <body class="in-hero">
 
 <div class="rail l" aria-hidden="true"><div class="col" id="railL"></div></div><div class="rail r" aria-hidden="true"><div class="col" id="railR"></div></div>
@@ -1094,9 +1176,11 @@
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша кинотеатра.</p></div>
   <div class="bento">
     <div class="bt bt-vid lightvid to-day"><video id="lightVid" muted playsinline preload="auto" poster="img/w/scene-off.webp" aria-label="Рамка включается вечером"><source src="media/light-on.mp4" type="video/mp4"></video><img class="lv-day" src="img/w/scene-off.webp" alt=""><div class="bt-cap"><b>Свет вместо бра</b><span>Мягкий, ровный, не слепит</span></div></div>
-    <div class="bt"><img loading="lazy" src="img/w/s-side.webp" alt="Рамка на стене сбоку"><div class="bt-cap"><b>10 мм</b><span>Висит на стене как обычная картина</span></div></div>
-    <div class="bt"><img loading="lazy" src="img/w/s-box.webp" alt="Рамка в коробке"><div class="bt-cap"><b>Готова из коробки</b><span>Постер внутри, кабель и крепёж в комплекте</span></div></div>
-    <div class="bt bt-wide swtile" id="swTile"><img loading="lazy" src="img/w/s-sw-off.webp" alt="Рамка выключена, рука тянется к выключателю"><img class="sw-on" loading="lazy" src="img/w/s-sw-on.webp" alt="Рамка включена"><div class="bt-cap"><b>Один щелчок</b><span>Выключатель на проводе · 12 В · 6–8 Вт, как ночник</span></div></div>
+    <div class="bt bt-box"><img loading="lazy" decoding="async" src="img/w/s-box.webp" alt="Рамка в коробке"><div class="bt-cap"><b>Готова из коробки</b><span>Постер уже внутри, кабель и крепёж в комплекте</span></div></div>
+    <div class="bt"><img loading="lazy" decoding="async" src="img/w/s-side.webp" alt="Рамка на стене сбоку"><div class="bt-cap"><b>10 мм</b><span>Висит на стене как обычная картина</span></div></div>
+    <div class="bt swtile" id="swTile" role="button" tabindex="0" aria-pressed="false" aria-label="Нажмите, чтобы включить подсветку"><img loading="lazy" decoding="async" src="img/w/s-sw-off.webp" alt="Рамка выключена"><img class="sw-on" loading="lazy" decoding="async" src="img/w/s-sw-on.webp" alt="Рамка включена">
+      <div class="sw-ui" aria-hidden="true"><span class="sw-hint">Нажмите</span><span class="sw-key"><i></i></span></div>
+      <div class="bt-cap"><b class="sw-t">Один щелчок</b><span>Выключатель на проводе · 12 В · 6–8 Вт</span></div></div>
   </div>
 </div>
 <div class="wrap" id="specs">
@@ -1127,8 +1211,30 @@
   <div class="pack">
     <div class="pack-t"><div class="label">Упаковка</div><h3>Дарить не стыдно</h3><p>Собираем подарочный набор руками. Коробка под размер рамки — её не нужно ни во что заворачивать.</p>
       <ul><li>Жёсткая чёрная коробка</li><li>Лента с бантом</li><li>Сухоцветы</li><li>Наклейка и бирка</li><li>Открытка с вашим текстом</li></ul></div>
-    <div class="pack-i"><img loading="lazy" src="img/w/p-open.webp" alt="Рамка в открытой подарочной коробке"></div>
-    <div class="pack-i"><img loading="lazy" src="img/w/p-det.webp" alt="Лента, наклейки, сухоцветы и открытка"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-open.webp" alt="Рамка в открытой подарочной коробке"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/w/p-det.webp" alt="Лента, наклейки, сухоцветы и открытка"></div>
+  </div>
+
+  <div class="card-b" id="card">
+    <div class="card-ed">
+      <div class="label">Открытка</div>
+      <h3>Напишите поздравление — мы распечатаем и вложим в коробку</h3>
+      <p class="card-sub">Плотная бумага А4. Бесплатно к любому заказу.</p>
+      <div class="card-tpl" id="cardTpl" role="radiogroup" aria-label="Повод"></div>
+      <label>Кому<input id="cardTo" maxlength="40" placeholder="Например, Маша"></label>
+      <label>Поздравление<textarea id="cardText" maxlength="320" rows="5" placeholder="Ваши слова"></textarea><small id="cardCnt">0 / 320</small></label>
+      <label>От кого<input id="cardFrom" maxlength="40" placeholder="Например, Дима"></label>
+      <div class="card-act"><button type="button" class="btn line" id="cardIdea">Подсказать текст</button><button type="button" class="btn" id="cardSave">Вложить в заказ</button></div>
+    </div>
+    <div class="card-pv"><div class="sheet-a4" id="cardSheet" data-t="bday"><div class="a4-in">
+      <div class="a4-orn" aria-hidden="true"></div>
+      <div class="a4-h" id="pvH"></div>
+      <div class="a4-to" id="pvTo"></div>
+      <div class="a4-txt" id="pvText"></div>
+      <div class="a4-from" id="pvFrom"></div>
+      <div class="a4-mark">PROSWET</div>
+    </div></div><p class="a4-cap">Так открытка будет выглядеть на листе А4</p></div>
+  </div>
 </div></section>
 
 <!-- 8. Сервис -->
@@ -1221,6 +1327,11 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// перезагрузка всегда открывает верх страницы: не восстанавливаем прокрутку и не прыгаем по #якорю
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
+document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
 const P = h => "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp";
 const T = h => P(h).replace("img/w/", "img/t/");
 const loaded = {};
@@ -1250,17 +1361,51 @@ const $ = id => document.getElementById(id);
 const fmt = n => n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
 const toast = msg => { $("toast").textContent = msg; $("toast").classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").classList.remove("show"), 2000); };
 
+// ---------- открытка ----------
+const CARD_T = {
+  bday: { n: "День рождения", h: "С днём рождения!", ideas: ["Пусть этот год будет как любимый фильм: с хорошим сюжетом, смешными сценами и счастливым финалом. Включай свет почаще!", "Желаю, чтобы каждый вечер был уютным, а каждый день — поводом для новой истории. С днём рождения!"] },
+  wed: { n: "Свадьба", h: "В день вашей свадьбы", ideas: ["Пусть ваша история будет длиннее любой саги и светлее любого кадра. Совет да любовь!", "Желаем, чтобы в вашем доме всегда горел тёплый свет, а любимые фильмы вы смотрели только вдвоём."] },
+  ny: { n: "Новый год", h: "С Новым годом!", ideas: ["Пусть новый год будет как лучший фильм: с чудесами, тёплыми встречами и счастливым концом каждой серии.", "Света, уюта и любимого кино в каждый вечер наступающего года!"] },
+  love: { n: "Любимому человеку", h: "Тебе", ideas: ["Ты — мой любимый фильм, который хочется пересматривать каждый вечер.", "Чтобы каждый вечер напоминал о нас. Люблю."] },
+  any: { n: "Просто так", h: "Для тебя", ideas: ["Просто так — потому что ты делаешь мои дни светлее.", "Маленький свет для больших вечеров. Включай, когда захочется уюта."] },
+};
+const cardData = () => { try { return JSON.parse(localStorage.getItem("proswetCard") || "null"); } catch (e) { return null; } };
+const cardNote = n => { const c = cardData(); if (!c) return n; const s = "Открытка «" + CARD_T[c.t].n + "»" + (c.to ? ", кому: " + c.to : "") + ". " + c.text + (c.from ? " — " + c.from : ""); return (s + (n ? " | " + n : "")).slice(0, 500); };
+function initCard() {
+  const sh = $("cardSheet"), tpl = $("cardTpl"); let cur = "bday", idea = 0;
+  tpl.innerHTML = Object.entries(CARD_T).map(([k, v]) => '<button type="button" role="radio" data-t="' + k + '"' + (k === cur ? ' class="on" aria-checked="true"' : ' aria-checked="false"') + '>' + v.n + '</button>').join("");
+  const esc = v => v.replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c]);
+  const draw = () => { sh.dataset.t = cur; $("pvH").textContent = CARD_T[cur].h; const to = $("cardTo").value.trim(), fr = $("cardFrom").value.trim(), tx = $("cardText").value.trim();
+    $("pvTo").textContent = to ? to + "," : ""; $("pvText").innerHTML = tx ? esc(tx).replace(/\n/g, "<br>") : '<span class="ph">' + CARD_T[cur].ideas[0] + '</span>'; $("pvFrom").textContent = fr ? "— " + fr : "";
+    $("cardCnt").textContent = $("cardText").value.length + " / 320"; };
+  tpl.onclick = e => { const b = e.target.closest("button"); if (!b) return; cur = b.dataset.t; idea = 0; tpl.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); }); draw(); };
+  ["cardTo", "cardText", "cardFrom"].forEach(id => $(id).addEventListener("input", draw));
+  $("cardIdea").onclick = () => { const l = CARD_T[cur].ideas; $("cardText").value = l[idea++ % l.length]; draw(); };
+  $("cardSave").onclick = () => { const tx = $("cardText").value.trim(); if (!tx) { $("cardText").focus(); toast("Напишите пару слов"); return; }
+    localStorage.setItem("proswetCard", JSON.stringify({ t: cur, to: $("cardTo").value.trim(), text: tx, from: $("cardFrom").value.trim() })); toast("Открытка вложена в заказ"); $("cardSave").textContent = "Вложена ✓"; };
+  const c = cardData(); if (c && CARD_T[c.t]) { cur = c.t; $("cardTo").value = c.to || ""; $("cardText").value = c.text || ""; $("cardFrom").value = c.from || ""; $("cardSave").textContent = "Вложена ✓"; tpl.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x.dataset.t === cur); x.setAttribute("aria-checked", x.dataset.t === cur); }); }
+  ["cardTo", "cardText", "cardFrom"].forEach(id => $(id).addEventListener("input", () => { $("cardSave").textContent = "Вложить в заказ"; }));
+  draw();
+}
+
 // ---------- конфигуратор ----------
 let cfg = { color: "graphite", light: "warm", poster: films.length - 1, on: true };
 { const slug = t => t.toLowerCase().replace(/ё/g, "е").replace(/[^a-zа-я0-9]+/g, "-").replace(/^-|-$/g, ""), want = slug(decodeURIComponent(new URLSearchParams(location.search).get("film") || ""));
   const hit = want ? films.findIndex(f => slug(f.o) === want || slug(f.t) === want) : -1; if (hit >= 0) cfg.poster = hit; }
 const heroFrame = $("heroFrame");
+// растворение: новый постер проявляется поверх старого, без мигания чёрным
+function dissolve(hi, src) {
+  const box = hi.parentNode; box.querySelectorAll(".xf").forEach(x => x.remove());
+  const nx = hi.cloneNode(); nx.removeAttribute("id"); nx.className = "xf"; nx.src = src; box.insertBefore(nx, hi.nextSibling);
+  requestAnimationFrame(() => requestAnimationFrame(() => nx.classList.add("in")));
+  setTimeout(() => { hi.src = src; delete hi.dataset.next; setTimeout(() => nx.remove(), 60); }, 1150);
+}
 function renderHero() {
   heroFrame.classList.toggle("silver", cfg.color === "silver");
   heroFrame.classList.toggle("lit", cfg.on);
   const want = P(films[cfg.poster].img), hi = $("heroImg");
   if (!hi.getAttribute("src")) hi.src = want;
-  else if (hi.getAttribute("src") !== want) { hi.style.opacity = ".55"; preload(want).then(() => { if (P(films[cfg.poster].img) === want) { hi.src = want; hi.style.opacity = ""; } }); }
+  else if (hi.getAttribute("src") !== want && hi.dataset.next !== want) { hi.dataset.next = want; preload(want).then(() => { if (P(films[cfg.poster].img) !== want) return; dissolve(hi, want); }); }
   document.querySelectorAll(".compare .frame, #stageFrame, .set .frame, .thumb .frame").forEach(f => f.classList.toggle("silver", cfg.color === "silver"));
   $("posterName").textContent = films[cfg.poster].t;
   document.querySelector(".hero").classList.toggle("off", !cfg.on);
@@ -1283,11 +1428,11 @@ function drawMinis() {
   $("minis").querySelectorAll(".mini[data-i]").forEach(m => m.remove());
   const more = $("minis").querySelector(".more");
   for (let k = 0; k < 5; k++) { const i = SEQ[(win + k) % SEQ.length], m = document.createElement("button"); m.className = "mini"; m.dataset.i = i; m.setAttribute("aria-label", films[i].t); m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">';
-    m.onclick = () => { auto = false; document.body.classList.remove("auto"); seqPos = SEQ.indexOf(i); cfg.poster = i; renderHero(); }; $("minis").insertBefore(m, more); preload(P(films[i].img)); }
+    m.onclick = () => { auto = false; document.body.classList.remove("auto"); seqPos = SEQ.indexOf(i); cfg.poster = i; renderHero(); }; $("minis").insertBefore(m, more); }
 }
 { const more = document.createElement("button"); more.type = "button"; more.className = "mini more"; more.dataset.cat = ""; more.setAttribute("aria-label", "Все постеры"); more.innerHTML = '<img decoding="async" alt="" src="' + T(films.find(f => f.t === "Сияние").img) + '"><span>+' + (films.length - 5) + "</span>"; $("minis").appendChild(more); }
 drawMinis();
-function showSeq(pos) { seqPos = (pos + SEQ.length) % SEQ.length; const w = Math.floor(seqPos / 5) * 5; if (w !== win) { win = w; drawMinis(); } cfg.poster = SEQ[seqPos]; renderHero(); }
+function showSeq(pos) { seqPos = (pos + SEQ.length) % SEQ.length; const w = Math.floor(seqPos / 5) * 5; if (w !== win) { win = w; drawMinis(); } cfg.poster = SEQ[seqPos]; renderHero(); setTimeout(() => preload(P(films[SEQ[(seqPos + 1) % SEQ.length]].img)), 1500); }
 if (auto) { document.body.classList.add("auto"); setInterval(() => { if (!auto || document.hidden || !document.body.classList.contains("in-hero") || !cfg.on) return; const next = (seqPos + 1) % SEQ.length; preload(P(films[SEQ[next]].img)).then(() => { if (auto) showSeq(next); }); }, 6000); }
 
 // ---------- день / вечер ----------
@@ -1369,7 +1514,7 @@ const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").clas
 $("cartBtn").onclick = openCart; $("closeCart").onclick = closeCart; $("cartOv").onclick = closeCart;
 $("checkout").onclick = () => { if (!cart.length) return; closeCart(); openCheckout(); };
 function openCheckout() {
-  $("coSum").innerHTML = cart.map(c => '<div><span>' + c.name + (c.qty > 1 ? " × " + c.qty : "") + '<small>' + c.sub + '</small></span><b>' + fmt(c.price * (c.qty || 1)) + '</b></div>').join("") + '<div><span>Доставка до пункта выдачи</span><b>Бесплатно</b></div>';
+  $("coSum").innerHTML = cart.map(c => '<div><span>' + c.name + (c.qty > 1 ? " × " + c.qty : "") + '<small>' + c.sub + '</small></span><b>' + fmt(c.price * (c.qty || 1)) + '</b></div>').join("") + (cardData() ? '<div><span>Открытка «' + CARD_T[cardData().t].n + '»<small>печатаем и вкладываем</small></span><b>Бесплатно</b></div>' : '') + '<div><span>Доставка до пункта выдачи</span><b>Бесплатно</b></div>';
   $("coTotal").textContent = fmt(cartSum()); $("coErr").textContent = ""; $("coOv").classList.add("open");
 }
 $("coShip").querySelectorAll("button").forEach(b => b.onclick = () => $("coShip").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)));
@@ -1384,7 +1529,7 @@ $("coForm").onsubmit = async e => {
   if (!/^\+?[78]?[\s(-]*\d{3}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/.test(f.phone.value.trim())) { f.phone.focus(); $("coErr").textContent = "Телефон в формате +7 900 000-00-00"; return; }
   if (location.protocol !== "https:" && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return demoPay();
   const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Создаём платёж…"; $("coErr").textContent = "";
-  const body = { items: apiItems(), name: f.name.value, phone: f.phone.value, email: f.email.value, ship: $("coShip").querySelector(".on").dataset.v, city: f.city.value, pvz: f.pvz.value, note: f.note.value, agree: f.agree.checked };
+  const body = { items: apiItems(), name: f.name.value, phone: f.phone.value, email: f.email.value, ship: $("coShip").querySelector(".on").dataset.v, city: f.city.value, pvz: f.pvz.value, note: cardNote(f.note.value), agree: f.agree.checked };
   try {
     const r = await fetch("/api/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
     const d = await r.json().catch(() => ({}));
@@ -1490,11 +1635,16 @@ function openFilm(i) { pickFilm(i); }
   document.addEventListener("pointerdown", e => { if (!e.target.closest(".city")) list.classList.remove("open"); });
   init = false; set("Москва"); inp.value = ""; init = true;
 })();
-renderHero(); renderCart();
+renderHero(); renderCart(); initCard();
 new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { $("gifts3").classList.add("in"); o.disconnect(); } }), { threshold: .2 }).observe($("gifts3"));
 document.querySelectorAll(".mini[data-i]").forEach(m => { const go = () => preload(P(films[+m.dataset.i].img)); m.addEventListener("pointerenter", go); m.addEventListener("touchstart", go, { passive: true }); });
-addEventListener("load", () => { const q = [...document.querySelectorAll(".mini[data-i]")].map(m => +m.dataset.i).concat(films.map((f, i) => i)); const next = () => { const i = q.shift(); if (i == null) return; preload(P(films[i].img)).then(() => setTimeout(next, 30)); }; setTimeout(next, 400); });
+addEventListener("load", () => setTimeout(() => preload(P(films[SEQ[(seqPos + 1) % SEQ.length]].img)), 800));
 $("mbuyBtn").onclick = () => $("buyBtn").click();
+
+// ---------- «Один щелчок»: человек сам нажимает выключатель ----------
+{ const t = $("swTile"), flip = () => { const on = !t.classList.contains("on"); t.classList.add("used"); t.classList.toggle("on", on); t.setAttribute("aria-pressed", on); t.querySelector(".sw-t").textContent = on ? "Включена" : "Один щелчок"; };
+  t.onclick = flip; t.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } };
+  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { t.classList.add("hint"); o.disconnect(); } }), { threshold: .6 }).observe(t); }
 
 // ---------- диагональная лента фильмов ----------
 (function () {
