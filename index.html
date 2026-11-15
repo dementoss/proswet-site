@@ -1089,28 +1089,38 @@
   .card-act { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
   .card-act .btn { height: 46px; padding: 0 22px; font-size: 15px; }
   .card-pv { display: flex; flex-direction: column; align-items: center; }
-  .sheet-a4 { width: min(100%, 400px); aspect-ratio: 210 / 297; position: relative; border-radius: 3px; box-shadow: 0 30px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.2); transform: rotate(-1.2deg); transition: background .5s ease, color .5s ease; overflow: hidden; --c: #1c1c1c; --a: #c8553d; background: #fbf7ef; color: var(--c); }
-  .a4-in { position: absolute; inset: 9%; display: flex; flex-direction: column; text-align: center; }
-  .a4-orn { position: absolute; inset: -6%; pointer-events: none; transition: opacity .5s ease; }
-  .a4-h { position: relative; margin-top: 12%; font-family: var(--disp); font-weight: 700; font-size: clamp(22px, 2.3vw, 32px); line-height: 1.1; color: var(--a); }
-  .a4-to { position: relative; margin-top: 14%; font-family: "Caveat", cursive; font-size: clamp(22px, 2vw, 28px); text-align: left; min-height: 1.2em; }
-  .a4-txt { position: relative; margin-top: 4%; font-family: "Caveat", cursive; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.3; text-align: left; overflow: hidden; word-break: break-word; flex: 1; }
-  .a4-txt .ph { opacity: .35; }
-  .a4-from { position: relative; font-family: "Caveat", cursive; font-size: clamp(20px, 1.8vw, 26px); text-align: right; min-height: 1.2em; }
-  .a4-mark { position: relative; margin-top: 8%; font-family: var(--disp); font-size: 9px; letter-spacing: .4em; opacity: .45; }
+  /* лист А4: размеры в долях ширины листа — одинаково на телефоне, компьютере и при печати */
+  .sheet-a4 { container-type: inline-size; width: min(100%, 400px); aspect-ratio: 210 / 297; position: relative; border-radius: 2px; overflow: hidden; transform: rotate(-1deg); transition: background .5s ease, color .5s ease;
+    box-shadow: 0 1px 0 rgba(255,255,255,.05), 0 24px 50px rgba(0,0,0,.55), 0 4px 10px rgba(0,0,0,.3);
+    --paper: #fbf8f2; --ink: #2a2622; --a: #b4583f; --rule: rgba(42,38,34,.18); background: var(--paper); color: var(--ink); }
+  .sheet-a4::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 30% 0%, rgba(255,255,255,.5), transparent 60%); opacity: .6; }
+  .a4-frame { position: absolute; inset: 5.5cqw; pointer-events: none; border: 0 solid var(--a); transition: border-color .5s ease; }
+  .a4-in { position: absolute; inset: 11cqw 12cqw 10cqw; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .a4-orn { width: 20cqw; height: 14cqw; color: var(--a); flex: none; display: flex; align-items: flex-end; justify-content: center; }
+  .a4-orn svg { width: 100%; height: 100%; overflow: visible; }
+  .a4-h { margin-top: 4.5cqw; font-family: "Cormorant", Georgia, serif; font-style: italic; font-weight: 500; font-size: 10.5cqw; line-height: 1.02; letter-spacing: -.01em; color: var(--a); text-wrap: balance; }
+  .a4-rule { width: 12cqw; height: 1px; margin: 5cqw 0 0; background: var(--a); opacity: .6; flex: none; }
+  .a4-body { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+  .a4-to { font-family: "Cormorant", Georgia, serif; font-style: italic; font-weight: 500; font-size: 1.25em; line-height: 1.2; margin-bottom: .55em; }
+  .a4-txt { font-family: var(--text, "Manrope"), system-ui, sans-serif; font-weight: 400; line-height: 1.6; text-wrap: pretty; overflow-wrap: anywhere; }
+  .a4-txt .ph { opacity: .38; }
+  .a4-from { font-family: "Cormorant", Georgia, serif; font-style: italic; font-weight: 500; font-size: 1.2em; margin-top: .9em; }
+  .a4-fit { font-size: 3.9cqw; }
+  .a4-mark { flex: none; font-family: var(--disp); font-size: 2.1cqw; letter-spacing: .45em; padding-left: .45em; opacity: .4; }
   .a4-cap { margin-top: 22px; font-size: 13px; color: rgba(240,244,250,.5); }
-  /* шаблоны */
-  .sheet-a4[data-t="bday"] { background: #fbf6ec; --a: #d2553f; }
-  .sheet-a4[data-t="bday"] .a4-orn { background: radial-gradient(circle at 8% 6%, #f3b23c 0 6px, transparent 7px), radial-gradient(circle at 18% 3%, #d2553f 0 4px, transparent 5px), radial-gradient(circle at 92% 8%, #5aa58a 0 5px, transparent 6px), radial-gradient(circle at 84% 3%, #f3b23c 0 3px, transparent 4px), radial-gradient(circle at 6% 94%, #5aa58a 0 4px, transparent 5px), radial-gradient(circle at 94% 95%, #d2553f 0 6px, transparent 7px), radial-gradient(circle at 86% 98%, #f3b23c 0 3px, transparent 4px); }
-  .sheet-a4[data-t="wed"] { background: #fdfbf6; --a: #a88a4e; }
-  .sheet-a4[data-t="wed"] .a4-h, .sheet-a4[data-t="love"] .a4-h { font-family: "Cormorant", Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(28px, 2.8vw, 40px); }
-  .sheet-a4[data-t="wed"] .a4-orn { inset: 5%; border: 1px solid #c9b07a; box-shadow: inset 0 0 0 5px #fdfbf6, inset 0 0 0 6px #c9b07a; }
-  .sheet-a4[data-t="ny"] { background: radial-gradient(ellipse at 50% 0%, #1d2a4d, #0b1226 70%); --c: #f3efe4; --a: #e8c66a; }
-  .sheet-a4[data-t="ny"] .a4-orn { background: radial-gradient(circle at 10% 8%, #e8c66a 0 1.5px, transparent 2.5px), radial-gradient(circle at 24% 14%, #fff 0 1px, transparent 2px), radial-gradient(circle at 76% 6%, #fff 0 1.5px, transparent 2.5px), radial-gradient(circle at 90% 16%, #e8c66a 0 2px, transparent 3px), radial-gradient(circle at 60% 12%, #fff 0 1px, transparent 2px), radial-gradient(circle at 8% 90%, #fff 0 1px, transparent 2px), radial-gradient(circle at 92% 88%, #e8c66a 0 1.5px, transparent 2.5px), radial-gradient(circle at 40% 96%, #fff 0 1px, transparent 2px); }
-  .sheet-a4[data-t="love"] { background: #fbf0ee; --a: #b8444f; }
-  .sheet-a4[data-t="love"] .a4-orn { background: radial-gradient(ellipse 120px 120px at 50% -20px, rgba(184,68,79,.12), transparent 70%); }
-  .sheet-a4[data-t="any"] { background: #f6f5f1; --a: #111; }
-  .sheet-a4[data-t="any"] .a4-orn { inset: 4%; border-top: 3px solid #111; border-bottom: 3px solid #111; }
+  /* шаблоны: одна сетка, разные бумага, цвет и рисунок */
+  .sheet-a4[data-t="bday"] { --paper: #fbf6ee; --ink: #2b2420; --a: #c25a3c; }
+  .sheet-a4[data-t="wed"] { --paper: #fcfaf5; --ink: #2d2a25; --a: #a3864f; }
+  .sheet-a4[data-t="wed"] .a4-frame { border-width: 1px; outline: 1px solid var(--a); outline-offset: -1.6cqw; opacity: .55; }
+  .sheet-a4[data-t="ny"] { --paper: #14213d; --ink: #eef0f4; --a: #d9b866; background: radial-gradient(ellipse at 50% -10%, #263a66, #101a33 65%); }
+  .sheet-a4[data-t="ny"] .a4-frame { border-width: 1px; opacity: .45; }
+  .sheet-a4[data-t="ny"]::before { opacity: 0; }
+  .sheet-a4[data-t="love"] { --paper: #fbf1ee; --ink: #33252a; --a: #a8414f; }
+  .sheet-a4[data-t="any"] { --paper: #f6f4ef; --ink: #161616; --a: #161616; }
+  .sheet-a4[data-t="any"] .a4-h { font-family: var(--disp); font-style: normal; font-weight: 700; font-size: 8.6cqw; letter-spacing: -.02em; }
+  .sheet-a4[data-t="any"] .a4-to, .sheet-a4[data-t="any"] .a4-from { font-family: var(--disp); font-style: normal; font-weight: 600; font-size: 1.05em; }
+  /* печать: только лист, на всю страницу А4 */
+  @media print { body * { visibility: hidden !important; } #cardSheet, #cardSheet * { visibility: visible !important; } #cardSheet { position: fixed; inset: 0; width: 210mm; transform: none; box-shadow: none; border-radius: 0; } }
   @media (max-width: 900px) { .card-b { grid-template-columns: minmax(0, 1fr); padding: 26px 20px; } .card-ed h3 { font-size: 24px; } .sheet-a4 { width: min(100%, 340px); } }
 
   /* растворение постера */
@@ -1226,12 +1236,11 @@
       <label>От кого<input id="cardFrom" maxlength="40" placeholder="Например, Дима"></label>
       <div class="card-act"><button type="button" class="btn line" id="cardIdea">Подсказать текст</button><button type="button" class="btn" id="cardSave">Вложить в заказ</button></div>
     </div>
-    <div class="card-pv"><div class="sheet-a4" id="cardSheet" data-t="bday"><div class="a4-in">
-      <div class="a4-orn" aria-hidden="true"></div>
+    <div class="card-pv"><div class="sheet-a4" id="cardSheet" data-t="bday"><div class="a4-frame" aria-hidden="true"></div><div class="a4-in">
+      <div class="a4-orn" id="pvOrn" aria-hidden="true"></div>
       <div class="a4-h" id="pvH"></div>
-      <div class="a4-to" id="pvTo"></div>
-      <div class="a4-txt" id="pvText"></div>
-      <div class="a4-from" id="pvFrom"></div>
+      <div class="a4-rule" aria-hidden="true"></div>
+      <div class="a4-body"><div class="a4-fit" id="pvFit"><div class="a4-to" id="pvTo"></div><div class="a4-txt" id="pvText"></div><div class="a4-from" id="pvFrom"></div></div></div>
       <div class="a4-mark">PROSWET</div>
     </div></div><p class="a4-cap">Так открытка будет выглядеть на листе А4</p></div>
   </div>
@@ -1371,15 +1380,27 @@ const CARD_T = {
   love: { n: "Любимому человеку", h: "Тебе", ideas: ["Ты — мой любимый фильм, который хочется пересматривать каждый вечер.", "Чтобы каждый вечер напоминал о нас. Люблю."] },
   any: { n: "Просто так", h: "Для тебя", ideas: ["Просто так — потому что ты делаешь мои дни светлее.", "Маленький свет для больших вечеров. Включай, когда захочется уюта."] },
 };
+const CARD_ORN = {
+  bday: '<svg viewBox="0 0 60 44" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M30 6v10M30 28v10M10 22h10M40 22h10M16 8l7 7M37 29l7 7M44 8l-7 7M23 29l-7 7"/><circle cx="30" cy="22" r="3.2" fill="currentColor" stroke="none"/></svg>',
+  wed: '<svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="24" cy="24" r="11"/><circle cx="36" cy="24" r="11"/><path d="M33 9l3-4 3 4-3 3z" stroke-linejoin="round"/></svg>',
+  ny: '<svg viewBox="0 0 60 44" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M30 4v36M14 13l32 18M46 13L14 31"/><path d="M26 8l4 4 4-4M26 36l4-4 4 4M15 19l5-1-1-5M45 25l-5 1 1 5M45 19l-5-1 1-5M15 25l5 1-1 5"/></svg>',
+  love: '<svg viewBox="0 0 60 44" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M30 38C14 27 8 20 8 13.5 8 8.3 12 4.5 17 4.5c5.4 0 9.6 4 13 9 3.4-5 7.6-9 13-9 5 0 9 3.8 9 9C52 20 46 27 30 38z"/></svg>',
+  any: '<svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="10" width="56" height="22" rx="1.5"/><path d="M4 15h56M4 27h56"/><path d="M9 12v1M15 12v1M21 12v1M27 12v1M33 12v1M39 12v1M45 12v1M51 12v1M57 12v1M9 29v1M15 29v1M21 29v1M27 29v1M33 29v1M39 29v1M45 29v1M51 29v1M57 29v1" stroke-linecap="round" stroke-width="1.8"/></svg>',
+};
+// подбираем размер текста, чтобы любое поздравление целиком помещалось на лист
+function fitCard() { const box = document.querySelector(".a4-body"), fit = $("pvFit"); if (!box || !fit) return; const w = $("cardSheet").clientWidth; let fs = w * 0.039;
+  fit.style.fontSize = fs + "px"; while (fit.scrollHeight > box.clientHeight && fs > w * 0.022) { fs -= w * 0.0015; fit.style.fontSize = fs + "px"; } }
+if (window.ResizeObserver) addEventListener("DOMContentLoaded", () => { const sh = document.getElementById("cardSheet"); if (!sh) return; const ro = new ResizeObserver(() => setTimeout(fitCard, 0)); ro.observe(sh); ro.observe(sh.querySelector(".a4-body")); }); else addEventListener("resize", () => fitCard());
 const cardData = () => { try { return JSON.parse(localStorage.getItem("proswetCard") || "null"); } catch (e) { return null; } };
 const cardNote = n => { const c = cardData(); if (!c) return n; const s = "Открытка «" + CARD_T[c.t].n + "»" + (c.to ? ", кому: " + c.to : "") + ". " + c.text + (c.from ? " — " + c.from : ""); return (s + (n ? " | " + n : "")).slice(0, 500); };
 function initCard() {
   const sh = $("cardSheet"), tpl = $("cardTpl"); let cur = "bday", idea = 0;
   tpl.innerHTML = Object.entries(CARD_T).map(([k, v]) => '<button type="button" role="radio" data-t="' + k + '"' + (k === cur ? ' class="on" aria-checked="true"' : ' aria-checked="false"') + '>' + v.n + '</button>').join("");
   const esc = v => v.replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c]);
-  const draw = () => { sh.dataset.t = cur; $("pvH").textContent = CARD_T[cur].h; const to = $("cardTo").value.trim(), fr = $("cardFrom").value.trim(), tx = $("cardText").value.trim();
-    $("pvTo").textContent = to ? to + "," : ""; $("pvText").innerHTML = tx ? esc(tx).replace(/\n/g, "<br>") : '<span class="ph">' + CARD_T[cur].ideas[0] + '</span>'; $("pvFrom").textContent = fr ? "— " + fr : "";
-    $("cardCnt").textContent = $("cardText").value.length + " / 320"; };
+  const draw = () => { sh.dataset.t = cur; $("pvH").textContent = CARD_T[cur].h; $("pvOrn").innerHTML = CARD_ORN[cur]; const to = $("cardTo").value.trim(), fr = $("cardFrom").value.trim(), tx = $("cardText").value.trim();
+    $("pvTo").textContent = to ? (/[,.!?:;—]$/.test(to) ? to : to + ",") : ""; $("pvText").innerHTML = tx ? esc(tx).replace(/\n/g, "<br>") : '<span class="ph">' + CARD_T[cur].ideas[0] + '</span>'; $("pvFrom").textContent = fr ? "— " + fr : "";
+    $("cardCnt").textContent = $("cardText").value.length + " / 320"; setTimeout(fitCard, 0); };
+  if (document.fonts) { document.fonts.ready.then(fitCard); document.fonts.addEventListener("loadingdone", () => setTimeout(fitCard, 0)); }
   tpl.onclick = e => { const b = e.target.closest("button"); if (!b) return; cur = b.dataset.t; idea = 0; tpl.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); }); draw(); };
   ["cardTo", "cardText", "cardFrom"].forEach(id => $(id).addEventListener("input", draw));
   $("cardIdea").onclick = () => { const l = CARD_T[cur].ideas; $("cardText").value = l[idea++ % l.length]; draw(); };
