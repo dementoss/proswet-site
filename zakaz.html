@@ -85,7 +85,7 @@ function render(o) {
     const cls = pending || refunded ? "" : i < idx ? "done" : i === idx ? "cur" : "";
     return '<li class="' + cls + '">' + esc(s.title) + (s.at && cls ? '<time>' + esc(when(s.at)) + '</time>' : "") + "</li>";
   }).join("");
-  const lines = o.lines.map(l => '<div class="row"><span>' + esc(l.name) + '<br><span class="muted">' + esc(l.films.join(", ")) + '</span></span><span>× ' + esc(l.qty) + "</span></div>").join("");
+  const lines = o.lines.map(l => '<div class="row"><span>' + esc(l.name) + '<br><span class="muted">' + esc(l.films.map((f, i) => f + (l.skus && l.skus[i] ? " · " + l.skus[i] : "")).join(", ")) + '</span></span><span>× ' + esc(l.qty) + "</span></div>").join("");
   const link = o.track && TRACK_URL[o.ship] ? TRACK_URL[o.ship](o.track) : "";
   const track = o.track
     ? '<div class="track"><b>' + esc(o.track) + '</b><button class="btn line sm" id="copy" type="button">Скопировать</button></div>' +
