@@ -1409,7 +1409,7 @@
       <div class="ship-calc">
         <label for="cityIn">Ваш город</label>
         <div class="city"><input id="cityIn" type="text" autocomplete="off" placeholder="Например, Казань" aria-controls="cityList"><ul id="cityList" role="listbox"></ul></div>
-        <div class="ship-out" id="shipOut"><b id="shipDays">1–3</b><span id="shipUnit">дня</span><small id="shipNote">Москва · в пути, плюс до 7 дней изготовление · привезём до <i id="shipDate"></i></small></div>
+        <div class="ship-out" id="shipOut"><b id="shipDays">1–3</b><span id="shipUnit">дня</span><small id="shipNote">Москва · в дороге. Вместе с изготовлением — до <i id="shipDate"></i></small></div>
       </div>
     </div>
     <div class="ship-side">
@@ -1887,7 +1887,7 @@ new IntersectionObserver(es => es.forEach(e => document.body.classList.toggle('i
   function set(city) {
     const [a, b] = C[city], d2 = new Date(); d2.setDate(d2.getDate() + 7 + b);  // до 7 дней изготовление + дорога
     $("shipUnit").textContent = b >= 5 ? "дней" : "дня";
-    $("shipNote").firstChild.textContent = city + " · в пути, плюс до 7 дней изготовление · привезём до ";
+    $("shipNote").firstChild.textContent = city + " · в дороге. Вместе с изготовлением — до ";
     $("shipDate").textContent = d2.getDate() + " " + mon[d2.getMonth()];
     cancelAnimationFrame(raf); const from = cur, t0 = performance.now();
     (function step(t) { const k = Math.min(1, (t - t0) / 500), v = Math.round(from + (b - from) * (1 - Math.pow(1 - k, 3))); $("shipDays").textContent = Math.min(a, v) + "–" + v; if (k < 1) raf = requestAnimationFrame(step); else { cur = b; $("shipDays").textContent = a + "–" + b; } })(t0);
