@@ -459,6 +459,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 .bag-n { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ash); margin-left: 10px; letter-spacing: 0; vertical-align: middle; }
 .bag-top .x { position: static; }
 .bag-grid { display: grid; grid-template-columns: 1fr 380px; gap: 56px; margin-top: 32px; align-items: start; }
+.bag-main { min-width: 0; }
 .bag-main .cart-items { margin: 0; overflow: visible; }
 .ci { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--hair); align-items: start; }
 .ci b { display: block; font-weight: 600; font-size: 15px; } .ci small { display: block; font-size: 13px; color: var(--ash); margin-top: 2px; }
@@ -629,10 +630,10 @@ html.bag-open, html.bag-open body { overflow: hidden; }
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша в кинотеатре.</p></div>
   <div class="story rise" id="story">
     <div class="story-stage" id="stStage">
-      <video class="stv on" muted playsinline preload="none" poster="img/lib/v1.webp?v=829a4d929a" data-src="media/lib-1.mp4?v=2ca39cdeed" aria-label="Распаковка рамки"></video>
-      <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=1bc06dab88" data-src="media/lib-2.mp4?v=b7cb39e6e5" aria-label="Рамку вешают на стену"></video>
-      <video class="stv" muted playsinline preload="none" poster="img/lib/v3.webp?v=41a79065f5" data-src="media/lib-3.mp4?v=41fef9545f" aria-label="Рука тянется к выключателю"></video>
-      <img class="still" id="stOff" src="img/lib/v4-off.webp?v=1559fb351c" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=8f6dfba3c2" alt="" loading="lazy">
+      <video class="stv on" muted playsinline preload="none" poster="img/lib/v1.webp?v=cbc14c96c3" data-src="media/lib-1.mp4?v=9cfd9c5ef6" aria-label="Распаковка рамки"></video>
+      <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=115feb19d0" data-src="media/lib-2.mp4?v=537c8cd789" aria-label="Рамку вешают на стену"></video>
+      <video class="stv" muted playsinline preload="none" poster="img/lib/v3.webp?v=6d9fc2c7d3" data-src="media/lib-3.mp4?v=61c48e4b21" aria-label="Рука тянется к выключателю"></video>
+      <img class="still" id="stOff" src="img/lib/v4-off.webp?v=85d586a764" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=aa8860f4bf" alt="" loading="lazy">
       <div class="st-cap" id="stCap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
       <div class="st-steps" id="stSteps"><i></i><i></i><i></i></div>
       <div class="st-after"><button type="button" class="sw2" id="stToggle" aria-pressed="false"><span id="stToggleT">Включить</span><span class="toggle" id="stToggleK"></span></button><button type="button" class="st-replay" id="stReplay">Ещё раз</button></div>
@@ -827,7 +828,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "cc2a0a8064";
+const AV = "f7f7c24715";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
