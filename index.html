@@ -643,9 +643,9 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 <section class="sec gifts" id="gifts"><div class="wrap">
   <div class="sec-head rise"><div><h2>Подарок, который<br><em>включают каждый вечер</em></h2></div><p class="lead">В каждый набор — любой фильм из коллекции.</p></div>
   <div class="sets rise" id="gifts3">
-    <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/study.webp?v=aad1fa6f7a" alt="Рамка на стене кабинета"><div class="frames" id="set1"></div></div>
+    <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/set-one.webp?v=04b50ba6e7" alt="Световая рамка с постером «Убить Билла» на стене кабинета"></div>
       <div class="body"><h3>Одна рамка</h3><p>A4 или A3 с постером вашего фильма. Приходит собранной.</p><div class="row"><div class="pr"><span class="price">от 5&nbsp;000&nbsp;₽</span><span class="note">A4 или A3 на выбор</span></div><button class="btn line sm" data-pick="1" data-name="Proswet A3" data-price="6000">Выбрать фильм</button></div></div></div>
-    <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/living.webp?v=86c6701346" alt="Три рамки над диваном"><div class="frames three" id="set3"></div></div>
+    <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/set-three.webp?v=f5fe1ab6d4" alt="Три световые рамки над диваном: «Леон», «Сияние», «Паразиты»"></div>
       <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><div class="pr"><span class="price">12&nbsp;190&nbsp;₽</span><span class="note save">выгоднее на 560&nbsp;₽</span></div><button class="btn sm" data-pick="3" data-name="Три рамки Proswet" data-price="12190">Выбрать 3 фильма</button></div></div></div>
     <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/gift-open.webp?v=b4a28ee93b" alt="Рамка в подарочной коробке с лентой и сухоцветами"></div>
       <div class="body"><h3>Подарочный набор</h3><p>Большая коробка, атласная лента, сухоцветы и открытка с вашими словами.</p><div class="row"><div class="pr"><span class="price">5&nbsp;490&nbsp;₽</span><span class="note">коробка, лента, открытка</span></div><button class="btn line sm" data-pick="1" data-name="Подарочный набор Proswet" data-price="5490">Выбрать фильм</button></div></div></div>
@@ -654,8 +654,8 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="pack rise">
     <div class="pack-t"><h3>Открыть коробку —<br><em>уже праздник</em></h3><p>Собираем каждый подарок руками.</p>
       <dl class="pk-list"><div><dt>Коробка</dt><dd>Жёсткая, чёрная, под размер рамки</dd></div><div><dt>Лента</dt><dd>Атласная, цвета мёда, с бантом</dd></div><div><dt>Сухоцветы</dt><dd>Небольшой букет под лентой</dd></div><div><dt>Открытка</dt><dd>10 × 15 см, с вашим текстом</dd></div></dl></div>
-    <div class="pack-i"><img loading="lazy" decoding="async" src="img/lib/gift-box.webp?v=bd017f0102" alt="Чёрная коробка с лентой и сухоцветами"></div>
-    <div class="pack-i"><img loading="lazy" decoding="async" src="img/lib/gift-flatlay.webp?v=fb8c0ecc6d" alt="Лента, сухоцветы, открытка"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/lib/gift-box.webp?v=62b73658d9" alt="Чёрная коробка с лентой и сухоцветами"></div>
+    <div class="pack-i"><img loading="lazy" decoding="async" src="img/lib/gift-flatlay.webp?v=698d703ff6" alt="Лента, сухоцветы, открытка"></div>
   </div>
 
   <div class="post" id="card">
@@ -717,7 +717,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 
 <!-- 8. Финальная сцена -->
 <section class="finale" id="finale">
-  <img src="img/lib/finale.webp?v=2f9947c225" alt="" loading="lazy" decoding="async" id="finImg">
+  <img src="img/lib/finale.webp?v=ee44c47a21" alt="" loading="lazy" decoding="async" id="finImg">
   <div class="wall" id="finWall"><div class="frame lit"><div class="poster"><img id="finPoster" alt=""></div></div></div>
   <div class="wrap"><div class="finale-copy rise">
     <h2>Пусть любимый фильм<br><em>светит вам по вечерам</em></h2>
@@ -817,7 +817,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "ee70506609";
+const AV = "1e06b81c14";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
@@ -1093,7 +1093,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") ["catOv", "f
 // ---------- наборы: живые рамки на фото ----------
 const frameHtml = i => '<div class="frame lit"><div class="poster"><img decoding="async" loading="lazy" alt="" src="' + T(films[i].img) + '"></div></div>';
 function drawSets() { if (!$("set1")) return; const one = cfg.poster; if ($("set1").dataset.i != one) { $("set1").dataset.i = one; $("set1").innerHTML = frameHtml(one); } }
-$("set3").innerHTML = ["Леон", "Сияние", "Паразиты"].map(byTitle).map(frameHtml).join("");
+if ($("set3")) $("set3").innerHTML = ["Леон", "Сияние", "Паразиты"].map(byTitle).map(frameHtml).join("");
 
 // ---------- ролик «Как это работает»: человек сам включает свет ----------
 (function () {
@@ -1144,7 +1144,7 @@ function initCard() {
 }
 
 // ---------- финальная сцена: рамка с вашим фильмом светит в темноте ----------
-function layoutFinale() { const img = $("finImg"); if (!img) return; const m = narrow(); placeWall($("finWall"), m ? img : $("finale"), 2560, 1448, .665, .35, .5, m ? .66 : .5, .5); if (m) { $("finWall").style.top = (parseFloat($("finWall").style.top) + img.offsetTop) + "px"; } }
+function layoutFinale() { const img = $("finImg"); if (!img) return; const m = narrow(); placeWall($("finWall"), m ? img : $("finale"), 2560, 1429, .665, .36, .5, m ? .66 : .5, .5); if (m) { $("finWall").style.top = (parseFloat($("finWall").style.top) + img.offsetTop) + "px"; } }
 
 // ---------- шапка, появление, меню ----------
 { const hdr = $("hdr"); const on = () => { hdr.classList.toggle("solid", scrollY > 40); document.body.classList.toggle("past-hero", scrollY > innerHeight * .8); }; addEventListener("scroll", on, { passive: true }); on(); }
