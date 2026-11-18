@@ -621,7 +621,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="story rise" id="story">
     <div class="story-stage" id="stStage">
       <video class="stv on" muted playsinline preload="none" poster="img/lib/v1.webp?v=829a4d929a" data-src="media/lib-1.mp4?v=2ca39cdeed" aria-label="Распаковка рамки"></video>
-      <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=1bc06dab88" data-src="media/lib-2.mp4?v=4075bf201c" aria-label="Рамку вешают на стену"></video>
+      <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=1bc06dab88" data-src="media/lib-2.mp4?v=b7cb39e6e5" aria-label="Рамку вешают на стену"></video>
       <video class="stv" muted playsinline preload="none" poster="img/lib/v3.webp?v=41a79065f5" data-src="media/lib-3.mp4?v=41fef9545f" aria-label="Рука тянется к выключателю"></video>
       <img class="still" id="stOff" src="img/lib/v4-off.webp?v=1559fb351c" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=8f6dfba3c2" alt="" loading="lazy">
       <div class="st-cap" id="stCap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
@@ -817,7 +817,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "1e06b81c14";
+const AV = "15b6eb202e";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
