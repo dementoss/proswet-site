@@ -41,7 +41,8 @@ input, textarea { font: inherit; color: inherit; }
 [hidden] { display: none !important; }
 
 /* ---------- типографика ---------- */
-h1, h2, h3, .serif { font-family: var(--serif); font-weight: 500; letter-spacing: -.005em; }
+h1, h2, h3, .serif { font-family: var(--serif); font-weight: 500; letter-spacing: -.005em; font-variant-numeric: lining-nums; }
+.now, .cc b, .fc .meta b, .cg b, .faq summary, .st-cap b, .fm-o, .fm-b blockquote { font-variant-numeric: lining-nums; }
 h1 { font-size: clamp(44px, 5.4vw, 72px); line-height: 1; }
 h2 { font-size: clamp(34px, 3.8vw, 52px); line-height: 1.05; }
 h3 { font-size: clamp(24px, 2.2vw, 30px); line-height: 1.15; font-weight: 600; }
@@ -64,8 +65,8 @@ h1 em, h2 em, h3 em { font-style: italic; font-weight: 500; }
 .btn.line { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 1px var(--hair-2); }
 .btn.line:hover { box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .6); background: rgba(var(--lamp-rgb), .06); }
 .btn.sm { height: 40px; padding: 0 18px; font-size: 14px; }
-.link { color: var(--paper); font-weight: 500; font-size: 15px; border-bottom: 1px solid var(--hair-2); padding-bottom: 2px; transition: border-color var(--t-fast), color var(--t-fast); }
-.link:hover { color: var(--lamp); border-color: rgba(var(--lamp-rgb), .6); }
+.link { color: var(--paper); font-weight: 500; font-size: 15px; text-decoration: none; transition: color var(--t-fast); }
+.link:hover { color: var(--lamp); }
 .seg { display: inline-flex; padding: 3px; border-radius: 8px; background: var(--leather); box-shadow: inset 0 0 0 1px var(--hair); }
 .seg button { height: 36px; padding: 0 16px; border-radius: 6px; font-size: 14px; font-weight: 600; color: var(--ash); transition: background var(--t-fast), color var(--t-fast); }
 .seg button.on { background: var(--shelf); color: var(--paper); box-shadow: inset 0 0 0 1px var(--hair-2); }
@@ -75,14 +76,18 @@ h1 em, h2 em, h3 em { font-style: italic; font-weight: 500; }
 .chips button.on { color: var(--paper); background: var(--shelf); box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .5); }
 
 /* ---------- рамка-светильник: главный герой ---------- */
-.frame { position: relative; aspect-ratio: 309 / 432; padding: 2.4%; border-radius: 2px;
-  background: linear-gradient(145deg, #2c2a28 0%, #121110 45%, #1d1b19 100%);
-  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -20px rgba(0,0,0,.85), 0 8px 18px -6px rgba(0,0,0,.7); }
-.frame .poster { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0a0908; }
+.frame { position: relative; aspect-ratio: 309 / 432; padding: 3.6%; border-radius: 1.5px;   /* матовый анодированный алюминий */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"), linear-gradient(180deg, rgba(255,240,220,.10) 0%, rgba(255,240,220,0) 6%, rgba(0,0,0,0) 90%, rgba(0,0,0,.35) 100%),
+    linear-gradient(90deg, rgba(255,240,220,.05) 0%, rgba(0,0,0,0) 5%, rgba(0,0,0,0) 95%, rgba(0,0,0,.25) 100%), #1b1a19;
+  background-blend-mode: soft-light, normal, normal, normal; background-size: 120px 120px, auto, auto, auto;
+  box-shadow: inset 0 1px 0 rgba(255,236,210,.16), inset 0 0 0 1px rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6),
+    0 0 0 1px rgba(0,0,0,.55), 1px 2px 3px rgba(0,0,0,.55), 6px 14px 22px -6px rgba(0,0,0,.6), 0 34px 60px -24px rgba(0,0,0,.7); }
+.frame .poster { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0a0908; box-shadow: 0 0 0 1px rgba(0,0,0,.85), 0 0 0 2px rgba(255,236,210,.06); }
 .frame .poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   filter: brightness(.6) saturate(.8) contrast(.96); transition: filter var(--t-slow) var(--ease-lamp), opacity var(--t-slow) var(--ease-lamp); }
 .frame .poster::after { content: ""; position: absolute; inset: 0; pointer-events: none;   /* блик лампы на стекле */
-  background: linear-gradient(118deg, rgba(255,226,180,.10) 0%, rgba(255,226,180,0) 38%, rgba(255,255,255,0) 70%, rgba(255,226,180,.04) 100%);
+  background: linear-gradient(118deg, rgba(255,236,210,.09) 0%, rgba(255,236,210,0) 34%, rgba(255,255,255,0) 72%, rgba(255,236,210,.035) 100%);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.55), inset 0 3px 8px -3px rgba(0,0,0,.65), inset 0 0 24px rgba(0,0,0,.22);
   transition: opacity var(--t-slow) var(--ease-lamp); }
 .frame::before { content: ""; position: absolute; inset: -40% -55%; z-index: -1; pointer-events: none; border-radius: 50%;   /* отсвет на стене */
   background: radial-gradient(closest-side, rgba(var(--glow), .30), rgba(var(--glow), .10) 55%, rgba(var(--glow), 0));
@@ -90,7 +95,8 @@ h1 em, h2 em, h3 em { font-style: italic; font-weight: 500; }
 .frame.lit .poster img { filter: brightness(1.06) saturate(1.04); }
 .frame.lit .poster::after { opacity: .35; }
 .frame.lit::before { opacity: 1; }
-.frame.lit { box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 0 0 1px rgba(var(--glow), .10), 0 30px 60px -20px rgba(0,0,0,.6); }
+.frame.lit { box-shadow: inset 0 1px 0 rgba(255,236,210,.2), inset 0 0 0 1px rgba(255,236,210,.07), inset 0 -1px 0 rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.5), 1px 2px 3px rgba(0,0,0,.5), 6px 14px 22px -6px rgba(0,0,0,.5), 0 34px 60px -24px rgba(0,0,0,.6); }
+.frame.lit .poster { box-shadow: 0 0 0 1px rgba(0,0,0,.7), 0 0 0 2px rgba(255,230,190,.12), 0 0 14px rgba(var(--glow), .14); }
 .frame .poster img.xf { opacity: 0; } .frame .poster img.xf.in { opacity: 1; }
 
 /* ---------- шапка ---------- */
@@ -112,13 +118,20 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 
 /* ---------- 1. главный экран: комната ---------- */
 .hero { position: relative; height: 100svh; min-height: 640px; max-height: 1100px; overflow: hidden; isolation: isolate; }
-.room { position: absolute; inset: 0 0 0 32%; z-index: -2; -webkit-mask: linear-gradient(90deg, transparent 0, #000 20%); mask: linear-gradient(90deg, transparent 0, #000 20%); }
+.room { position: absolute; inset: 0; z-index: -2; }
 .room > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 28% 50%; opacity: 0; transition: opacity var(--t-slow) var(--ease-move); }
 .room > img.on { opacity: 1; }
+/* переезд в другую комнату: кадр мягко «наезжает», рамку снимают со стены и вешают на новое место */
+.room > img { transform: scale(1.045); }
+.room > img.on { transform: none; }
+.wall.travel { transition: left 1.5s var(--ease-move), top 1.5s var(--ease-move), height 1.5s var(--ease-move); }
+.wall.travel .frame { animation: hang 1.5s var(--ease-move); }
+@keyframes hang { 0% { transform: none; } 40% { transform: translateY(-2.5%) scale(1.04); box-shadow: 0 0 0 1px rgba(0,0,0,.5), 14px 40px 70px -10px rgba(0,0,0,.75); } 100% { transform: none; } }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(0deg, rgba(13,11,9,1) 0%, rgba(13,11,9,0) 18%); }
+  background: linear-gradient(90deg, rgba(13,11,9,.9) 0%, rgba(13,11,9,.72) 26%, rgba(13,11,9,.25) 44%, rgba(13,11,9,0) 58%),
+    linear-gradient(180deg, rgba(13,11,9,.55) 0%, rgba(13,11,9,0) 14%), linear-gradient(0deg, rgba(13,11,9,1) 0%, rgba(13,11,9,0) 18%); }
 .hero.dim .room > img { filter: brightness(.82); transition: opacity var(--t-slow) var(--ease-move), filter var(--t-slow) var(--ease-lamp); }
-.room > img { transition: opacity var(--t-slow) var(--ease-move), filter var(--t-slow) var(--ease-lamp); }
+.room > img { transition: opacity 1.4s var(--ease-move), filter var(--t-slow) var(--ease-lamp), transform 2.6s cubic-bezier(.2,.7,.2,1); }
 .wall { position: absolute; z-index: 0; transform: translate(-50%, -50%); transition: left var(--t-slow) var(--ease-move), top var(--t-slow) var(--ease-move), height var(--t-slow) var(--ease-move); }
 .wall .frame { height: 100%; }
 .wall .frame .poster img { transition: filter 1.4s var(--ease-lamp), opacity 1.1s var(--ease-lamp); }
@@ -233,7 +246,7 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 48px; background: var(--hair); border-radius: 8px; overflow: hidden; }
 .facts div { background: var(--night); padding: 24px 24px 24px 0; }
 .facts div + div { padding-left: 24px; }
-.facts b { display: block; font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1.1; }
+.facts b { display: block; font-family: var(--sans); font-size: 28px; font-weight: 600; line-height: 1.1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .facts span { display: block; margin-top: 6px; font-size: 14px; color: var(--ash); }
 .allspecs { margin-top: 32px; border-top: 1px solid var(--hair); }
 .allspecs summary { list-style: none; cursor: pointer; padding: 20px 0; font-weight: 600; font-size: 15px; display: flex; justify-content: space-between; }
@@ -332,7 +345,7 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 .ship { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
 .ship-main, .ship-t { background: var(--wood); border-radius: 8px; padding: 32px; box-shadow: 0 0 0 1px var(--hair); }
 .ship-free { display: flex; align-items: baseline; gap: 16px; }
-.ship-free b { font-family: var(--serif); font-size: 64px; font-weight: 600; line-height: 1; }
+.ship-free b { font-family: var(--sans); font-size: 56px; font-weight: 600; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .ship-free span { color: var(--ash); font-size: 15px; }
 .mps { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
 .mps img { width: 28px; height: 28px; border-radius: 7px; }
@@ -346,10 +359,10 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 .city ul.open { display: block; }
 .city li { padding: 10px 14px; font-size: 15px; cursor: pointer; } .city li:hover { background: var(--leather); } .city li.none { color: var(--ash); cursor: default; }
 .ship-out { display: flex; align-items: baseline; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-.ship-out b { font-family: var(--serif); font-size: 44px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.ship-out b { font-family: var(--sans); font-size: 40px; font-weight: 600; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .ship-out small { flex-basis: 100%; font-size: 14px; color: var(--ash); } .ship-out small i { font-style: normal; color: var(--paper); }
 .ship-side { display: grid; gap: 24px; }
-.ship-t b { font-family: var(--serif); font-size: 40px; font-weight: 600; line-height: 1; }
+.ship-t b { font-family: var(--sans); font-size: 36px; font-weight: 600; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .ship-t h3 { font-family: var(--sans); font-size: 16px; font-weight: 600; margin-top: 8px; }
 .ship-t p { margin-top: 6px; font-size: 15px; color: var(--ash); }
 @media (max-width: 900px) { .ship { grid-template-columns: 1fr; } .ship-main, .ship-t { padding: 24px; } }
@@ -442,20 +455,66 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
 .pickfoot { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--hair); }
 .pickfoot .price { font-size: 28px; }
 /* корзина */
-.drawer { position: fixed; z-index: 95; top: 0; right: 0; bottom: 0; width: min(440px, 100vw); background: var(--leather); box-shadow: -1px 0 0 var(--hair-2), -40px 0 80px rgba(0,0,0,.6); padding: 28px; display: flex; flex-direction: column; transform: translateX(100%); transition: transform var(--t-mid) var(--ease-move); }
-.drawer.open { transform: none; }
-.drawer h3 { display: flex; justify-content: space-between; align-items: center; }
-.drawer h3 .x { position: static; }
-.cart-items { flex: 1; overflow-y: auto; margin: 16px 0; }
+/* ---------- корзина: отдельное пространство поверх сайта ---------- */
+.bag { position: fixed; inset: 0; z-index: 95; overflow-y: auto; overscroll-behavior: contain; background:
+  radial-gradient(1200px 700px at 78% -10%, rgba(var(--lamp-rgb), .10), transparent 60%), var(--night);
+  opacity: 0; visibility: hidden; transform: translateY(18px); transition: opacity var(--t-mid) var(--ease-move), transform var(--t-mid) var(--ease-move), visibility 0s linear var(--t-mid); }
+.bag.open { opacity: 1; visibility: visible; transform: none; transition: opacity var(--t-mid) var(--ease-move), transform var(--t-mid) var(--ease-move); }
+html.bag-open, html.bag-open body { overflow: hidden; }
+.bag-in { padding-top: 28px; padding-bottom: 72px; }
+.bag-top { display: flex; align-items: center; gap: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--hair); }
+.bag-top h2 { font-size: clamp(34px, 4vw, 52px); flex: 1; }
+.bag-n { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ash); margin-left: 10px; letter-spacing: 0; vertical-align: middle; }
+.bag-top .x { position: static; }
+.bag-grid { display: grid; grid-template-columns: 1fr 380px; gap: 56px; margin-top: 32px; align-items: start; }
+.bag-main .cart-items { margin: 0; overflow: visible; }
 .ci { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--hair); align-items: start; }
-.ci .th { aspect-ratio: 309 / 432; border-radius: 2px; overflow: hidden; background: var(--shelf); } .ci .th img { width: 100%; height: 100%; object-fit: cover; }
-.ci b { font-weight: 600; font-size: 15px; } .ci small { display: block; font-size: 13px; color: var(--ash); margin-top: 2px; }
-.ci .price { font-size: 15px; }
-.qty { display: inline-flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 14px; }
-.qty button { width: 28px; height: 28px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--hair-2); color: var(--ash); }
-.empty { color: var(--ash); padding: 40px 0; text-align: center; }
-.total { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; font-weight: 600; } .total .price { font-size: 26px; }
-.drawer .btn { width: 100%; }
+.ci b { display: block; font-weight: 600; font-size: 15px; } .ci small { display: block; font-size: 13px; color: var(--ash); margin-top: 2px; }
+.qty { display: inline-flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.qty button { width: 30px; height: 30px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--hair-2); color: var(--ash); transition: color var(--t-fast), box-shadow var(--t-fast); }
+.qty button:hover { color: var(--paper); box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .5); }
+.bag .ci { grid-template-columns: 96px 1fr auto; gap: 24px; padding: 22px 0; align-items: center; }
+.bag .ci .th { aspect-ratio: auto; overflow: visible; background: none; border-radius: 0; }
+.bag .ci .th .frame { width: 96px; }
+.bag .ci b { font-size: 17px; } .bag .ci small { font-size: 14px; margin-top: 4px; max-width: 46ch; }
+.bag .ci .price { font-size: 20px; }
+.ci-b { min-width: 0; }
+.ci-del { margin-left: 18px; font-size: 13px; color: var(--smoke); transition: color var(--t-fast); } .ci-del:hover { color: var(--paper); }
+.bag .empty { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 48px 0; }
+.bag .empty b { font-family: var(--serif); font-size: 30px; font-weight: 500; } .bag .empty span { color: var(--ash); } .bag .empty .btn { margin-top: 14px; }
+.bag-card:empty { display: none; }
+.bag-card { display: flex; align-items: center; gap: 16px; margin-top: 24px; padding: 18px 20px; border-radius: 8px; background: var(--wood); box-shadow: 0 0 0 1px var(--hair); }
+.bag-card div { flex: 1; } .bag-card b { display: block; font-weight: 600; font-size: 15px; } .bag-card small { color: var(--ash); font-size: 13px; }
+.bc-ic, .bc-ok { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgba(var(--lamp-rgb), .14); color: var(--lamp); font-size: 16px; flex: none; }
+.bag-more { margin-top: 48px; } .bag-more h3 { font-size: 28px; } .bag-more p { color: var(--ash); margin-top: 6px; font-size: 15px; }
+.bag-ups { display: grid; grid-template-columns: repeat(4, minmax(0, 150px)); gap: 24px; margin-top: 22px; }
+.up { text-align: left; } .up .frame { width: 100%; transition: transform var(--t-mid) var(--ease-lamp); } .up:hover .frame { transform: translateY(-4px); }
+.up b { display: block; margin-top: 12px; font-family: var(--serif); font-size: 18px; font-weight: 600; line-height: 1.2; font-variant-numeric: lining-nums; }
+.up span { display: block; margin-top: 4px; font-size: 13px; color: var(--lamp); font-weight: 600; font-variant-numeric: tabular-nums; }
+.bag-sum { position: sticky; top: 28px; padding: 28px; border-radius: 10px; background: var(--wood); box-shadow: 0 0 0 1px var(--hair), 0 30px 60px -30px rgba(0,0,0,.6); }
+.bs-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 8px 0; font-size: 15px; color: var(--ash); }
+.bs-row .price { color: var(--paper); font-size: 16px; }
+.bs-off .price { color: var(--lamp); }
+.bs-total { margin-top: 10px; padding-top: 18px; border-top: 1px solid var(--hair); color: var(--paper); font-weight: 600; }
+.bs-total .price { font-size: 32px; }
+.promo { display: flex; gap: 8px; margin-top: 22px; }
+.promo input { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border-radius: 8px; background: var(--night); color: var(--paper); border: 0; box-shadow: inset 0 0 0 1px var(--hair-2); font: 500 15px var(--sans); text-transform: uppercase; letter-spacing: .04em; outline: none; }
+.promo input::placeholder { text-transform: none; letter-spacing: 0; color: var(--smoke); }
+.promo input:focus { box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .6); }
+.promo .btn { height: 44px; }
+.promo-msg { min-height: 20px; margin-top: 8px; font-size: 13px; color: var(--ash); } .promo-msg.ok { color: var(--lamp); } .promo-msg.bad { color: #E08A7A; }
+.bag-sum #checkout { width: 100%; margin-top: 8px; height: 52px; font-size: 16px; }
+.bs-trust { list-style: none; margin-top: 20px; display: grid; gap: 8px; font-size: 13px; color: var(--smoke); }
+.bs-trust li::before { content: "✓"; color: var(--lamp); margin-right: 8px; }
+@media (max-width: 900px) {
+  .bag-in { padding-top: 16px; padding-bottom: 40px; }
+  .bag-top { gap: 12px; } .bag-top .link { display: none; }
+  .bag-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 8px; }
+  .bag .ci { grid-template-columns: 72px 1fr; gap: 16px; } .bag .ci .th .frame { width: 72px; }
+  .bag .ci > .price { grid-column: 2; font-size: 17px; }
+  .bag-ups { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .bag-sum { position: static; padding: 22px; }
+}
 /* меню на телефоне */
 .search { position: fixed; z-index: 45; inset: var(--hh) 0 auto; background: var(--night); box-shadow: 0 1px 0 var(--hair); padding: 16px 0 24px; transform: translateY(-120%); transition: transform var(--t-mid) var(--ease-move); }
 .search.open { transform: none; }
@@ -506,6 +565,16 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
 .rise { opacity: 0; transform: translateY(18px); transition: opacity 900ms var(--ease-lamp), transform 900ms var(--ease-lamp); }
 .rise.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; } .rise { opacity: 1; transform: none; } }
+/* ===== Новогодний слой (временно). Убрать: в build.py NEWYEAR = False ===== */
+/* гирлянда: тёплые огоньки вдоль верха главного экрана, под шапкой */
+.ny-garland { position: absolute; left: 0; right: 0; top: calc(var(--hh) - 6px); height: 46px; z-index: 0; pointer-events: none; opacity: .9; }
+.ny-garland svg { width: 100%; height: 100%; display: block; }
+.ny-garland path { fill: none; stroke: rgba(40, 30, 20, .9); stroke-width: 1.2; }
+.ny-garland circle { fill: #FFD9A0; filter: drop-shadow(0 0 4px rgba(255, 190, 110, .9)) drop-shadow(0 0 10px rgba(255, 170, 80, .45)); animation: ny-tw 3.6s ease-in-out infinite; }
+@keyframes ny-tw { 0%, 100% { opacity: .95; } 50% { opacity: .35; } }
+.ny-kick { color: var(--lamp) !important; }
+@media (prefers-reduced-motion: reduce) { .ny-garland circle { animation: none; } }
+@media (max-width: 900px) { .ny-garland { top: calc(var(--hh) - 10px); height: 34px; } }
 </style>
 </head>
 <body>
@@ -535,7 +604,7 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
     <div class="minis" id="minis"></div>
     <div class="sizes"><div class="seg" id="szSw" role="radiogroup" aria-label="Формат"><button type="button" data-s="a4" class="on" role="radio" aria-checked="true">A4</button><button type="button" data-s="a3" role="radio" aria-checked="false">A3</button></div><span class="cap" id="szDim">21 × 30 см</span></div>
     <div class="buyrow"><span class="price" id="totalPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="buyBtn">Купить</button><button type="button" class="link" data-cat>Вся коллекция</button></div>
-    <p class="hero-note"><b>Приходит собранной</b> — повесил и включил. Доставка бесплатно.</p>
+    <p class="hero-note"><b>Бесплатная доставка</b> по России</p>
   </div></div>
 </section>
 
@@ -564,8 +633,8 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
   <div class="story rise" id="story">
     <div class="story-stage" id="stStage">
       <video class="stv on" muted playsinline preload="none" poster="img/lib/v1.webp?v=829a4d929a" data-src="media/lib-1.mp4?v=2ca39cdeed" aria-label="Распаковка рамки"></video>
-      <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=6efa1707ae" data-src="media/lib-2.mp4?v=7ef050aed7" aria-label="Рамку вешают на стену"></video>
-      <video class="stv" muted playsinline preload="none" poster="img/lib/v3.webp?v=2413066e06" data-src="media/lib-3.mp4?v=1ef466dcb5" aria-label="Рука тянется к выключателю"></video>
+      <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=1bc06dab88" data-src="media/lib-2.mp4?v=4075bf201c" aria-label="Рамку вешают на стену"></video>
+      <video class="stv" muted playsinline preload="none" poster="img/lib/v3.webp?v=41a79065f5" data-src="media/lib-3.mp4?v=41fef9545f" aria-label="Рука тянется к выключателю"></video>
       <video class="stv" muted playsinline preload="none" poster="img/lib/v4-off.webp?v=58403de82d" data-src="media/lib-4.mp4?v=af04dc3b45" aria-label="Постер загорается"></video>
       <img class="still" id="stOff" src="img/lib/v4-off.webp?v=58403de82d" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=63769e8132" alt="" loading="lazy">
       <div class="st-cap" id="stCap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
@@ -709,7 +778,28 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
   <div class="pgrid" id="pgrid"></div>
   <div class="pickfoot"><span class="price" id="pickPrice"></span><button class="btn" id="pickAdd" disabled>В корзину</button></div>
 </div></div>
-<aside class="drawer" id="drawer"><h3>Корзина <button class="x" id="closeCart" aria-label="Закрыть">×</button></h3><div class="cart-items" id="cartItems"></div><div class="total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div><button class="btn" id="checkout">Оформить заказ</button></aside>
+<section class="bag" id="drawer" aria-label="Корзина" aria-hidden="true">
+  <div class="wrap bag-in">
+    <div class="bag-top"><h2>Корзина <span class="bag-n" id="bagN"></span></h2><button class="link" id="bagBack" type="button">← Продолжить выбор</button><button class="x" id="closeCart" aria-label="Закрыть">×</button></div>
+    <div class="bag-grid">
+      <div class="bag-main">
+        <div class="cart-items" id="cartItems"></div>
+        <div class="bag-card" id="bagCard"></div>
+        <div class="bag-more" id="bagMore"><h3>Добавьте к заказу</h3><p>Ещё один фильм — для себя или в подарок. Доставка всё так же бесплатная.</p><div class="bag-ups" id="bagUps"></div></div>
+      </div>
+      <aside class="bag-sum">
+        <div class="bs-row"><span>Товары</span><span class="price" id="bagSub">0 ₽</span></div>
+        <div class="bs-row bs-off" id="bagOffRow" hidden><span id="bagOffT">Промокод</span><span class="price" id="bagOff"></span></div>
+        <div class="bs-row"><span>Доставка до пункта выдачи</span><span class="price">0 ₽</span></div>
+        <div class="bs-row bs-total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div>
+        <form class="promo" id="promoForm" autocomplete="off"><input id="promoIn" name="code" maxlength="32" placeholder="Промокод" aria-label="Промокод"><button class="btn line sm" type="submit">Применить</button></form>
+        <p class="promo-msg" id="promoMsg"></p>
+        <button class="btn" id="checkout">Оформить заказ</button>
+        <ul class="bs-trust"><li>Оплата через СБП или картой — Т-Банк</li><li>14 дней на возврат</li><li>Гарантия 1 месяц</li></ul>
+      </aside>
+    </div>
+  </div>
+</section>
 <div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a href="#posters">Коллекция</a><a href="#overview">Как это работает</a><a href="#gifts">Наборы</a><a href="#help">Вопросы</a></div></div></div>
 <div class="mbuy" id="mbuy"><span class="price" id="mbuyPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="mbuyBtn">Купить</button></div>
 <div class="overlay" id="coOv"><form class="sheet co" id="coForm" novalidate>
@@ -741,7 +831,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "213d95d4f5";
+const AV = "e9e1cc0793";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
@@ -758,29 +848,23 @@ const films = [
   { id: "007", t: "Матрица", q: "Красная или синяя — выбор за вами.", tag: true, o: "The Matrix", y: 1999, d: "Лана и Лилли Вачовски", c: ["sci", "action"], img: "img/matrix5.jpg", f: ["Четыре «Оскара», в том числе за визуальные эффекты.", "Эффект замедленного времени снимали рядом фотокамер, выставленных по дуге.", "Зелёный «код» на экранах, по словам его автора, — отсканированные японские рецепты."] },
   { id: "008", t: "Дюна", q: "Песок помнит всё.", tag: true, o: "Dune", y: 2021, d: "Дени Вильнёв", c: ["sci"], img: "img/dune2.jpg", f: ["Шесть «Оскаров» — больше, чем у любого фильма того года.", "Пустыню снимали в Иордании и Абу-Даби.", "Снят по роману Фрэнка Герберта 1965 года."] },
   { id: "009", t: "Бойцовский клуб", q: "Розовое мыло и первое правило.", tag: true, o: "Fight Club", y: 1999, d: "Дэвид Финчер", c: ["cult"], img: "img/fightclub4.jpg", f: ["Снят по роману Чака Паланика.", "В прокате провалился — культовым стал позже, на дисках.", "Фильм полон спрятанных кадров, которые мелькают на долю секунды."] },
-  { id: "010", t: "Назад в будущее", q: "Восемьдесят восемь миль в час.", tag: true, o: "Back to the Future", y: 1985, d: "Роберт Земекис", c: ["sci", "family"], img: "img/bttf5.jpg", f: ["В первых версиях сценария машиной времени был холодильник.", "Для прыжка во времени нужно разогнаться до 88 миль в час.", "Стал самым кассовым фильмом 1985 года."] },
   { id: "011", top: true, t: "Марсианин", q: "Один на Марсе — и картошка.", tag: true, o: "The Martian", y: 2015, d: "Ридли Скотт", c: ["sci"], img: "img/martian2.jpg", f: ["Энди Вейер сначала выкладывал роман главами на своём сайте.", "Марс снимали в иорданской пустыне Вади-Рам.", "Семь номинаций на «Оскар»."] },
   { id: "012", t: "Амели", q: "Маленькие радости ложечкой.", tag: true, o: "Le Fabuleux Destin d'Amélie Poulain", y: 2001, d: "Жан-Пьер Жёне", c: ["love"], img: "img/amelie4.jpg", f: ["Снимали на Монмартре в Париже.", "Красный и зелёный усилили при цветокоррекции — это почерк фильма.", "Пять номинаций на «Оскар»."] },
   { id: "013", t: "Драйв", q: "Ночной город, неон и тишина.", tag: true, o: "Drive", y: 2011, d: "Николас Виндинг Рефн", c: ["action"], img: "img/drive4.jpg", f: ["Рефн получил приз за режиссуру в Каннах.", "Синтвейв-саундтрек стал культовым сам по себе.", "Снят по роману Джеймса Саллиса."] },
   { id: "014", t: "Клан Сопрано", q: "Бада Бинг!", tag: true, o: "The Sopranos", y: 1999, d: "Дэвид Чейз", c: ["cult"], img: "img/sopranos2.jpg", f: ["Сериал собрал 21 премию «Эмми».", "Финальную сцену в закусочной фанаты разбирают до сих пор."] },
   { id: "015", t: "Джентльмены", q: "Когда лев голоден — он ест.", o: "The Gentlemen", y: 2019, d: "Гай Ричи", c: ["cult", "action"], img: "img/gentlemen5.jpg", f: ["Мэттью Макконахи играет американца, построившего бизнес в Англии.", "В 2024 году по фильму вышел одноимённый сериал."] },
   { id: "016", top: true, t: "Гарри Поттер", q: "Торжественно клянусь, что замышляю только шалость.", o: "Harry Potter and the Prisoner of Azkaban", y: 2004, d: "Альфонсо Куарон", c: ["sci", "winter"], img: "img/harrypotter2.jpg", f: ["«Узник Азкабана» — единственный фильм серии, снятый Альфонсо Куароном.", "Сириуса Блэка сыграл Гэри Олдман."] },
-  { id: "017", t: "Побег из Шоушенка", q: "Надежда — хорошая вещь, может быть, лучшая из вещей.", tag: true, o: "The Shawshank Redemption", y: 1994, d: "Фрэнк Дарабонт", c: ["cult"], img: "img/shawshank2.jpg", f: ["Снят по повести Стивена Кинга.", "В прокате провалился, а славу набрал на кассетах и ТВ.", "Много лет держится в верхушке рейтинга IMDb."] },
-  { id: "018", t: "Зелёная миля", q: "Я устал, босс.", tag: true, o: "The Green Mile", y: 1999, d: "Фрэнк Дарабонт", c: ["cult"], img: "img/greenmile3.jpg", f: ["Тоже по Стивену Кингу — и тот же режиссёр, что у «Шоушенка».", "Кинг сначала выпустил роман шестью тонкими выпусками.", "Четыре номинации на «Оскар»."] },
   { id: "019", t: "Властелин колец", q: "Даже самый маленький человек может изменить ход будущего.", tag: true, o: "The Lord of the Rings", y: 2001, d: "Питер Джексон", c: ["sci", "cult"], img: "img/lotr3.jpg", f: ["Все три фильма снимали одновременно, больше года подряд.", "Новая Зеландия сыграла Средиземье целиком.", "Третья часть взяла 11 «Оскаров» из 11 номинаций."] },
   { id: "020", t: "Крёстный отец", q: "Я сделаю ему предложение, от которого он не сможет отказаться.", tag: true, o: "The Godfather", y: 1972, d: "Фрэнсис Форд Коппола", c: ["cult"], img: "img/godfather2.jpg", f: ["Кот на руках у дона — бродяга, найденный на студии.", "Три «Оскара», включая лучший фильм.", "Снят по роману Марио Пьюзо."] },
   { id: "021", t: "Брат", q: "Сила в правде.", tag: true, o: "Брат", y: 1997, d: "Алексей Балабанов", c: ["cult", "action"], img: "img/brat3.jpg", f: ["Снят меньше чем за полтора месяца на крошечный бюджет.", "Свитер Данилы купили на барахолке.", "Музыка «Наутилуса» стала голосом фильма."] },
-  { id: "022", t: "Шерлок Холмс", q: "Данные! Мне нужны данные!", tag: true, o: "Sherlock Holmes", y: 2009, d: "Гай Ричи", c: ["action"], img: "img/sherlock2.jpg", f: ["Тауэрский мост в фильме ещё строится — как в 1890-х.", "Холмс здесь — боксёр, как в рассказах Конан Дойла.", "Музыка Ханса Циммера номинирована на «Оскар»."] },
   { id: "023", t: "Карты, деньги, два ствола", q: "Это было по-честному — почти.", tag: true, o: "Lock, Stock and Two Smoking Barrels", y: 1998, d: "Гай Ричи", c: ["cult", "action"], img: "img/lockstock2.jpg", f: ["Дебют Гая Ричи в большом кино.", "Для многих актёров — первая роль.", "Деньги на фильм собирали буквально по знакомым."] },
-  { id: "024", t: "Большой куш", q: "Не видел, чтобы бриллианты кто-то так любил.", tag: true, o: "Snatch", y: 2000, d: "Гай Ричи", c: ["cult", "action"], img: "img/snatch3.jpg", f: ["Почти все герои — с кличками вместо имён.", "Брэд Питт придумал речь своего героя так, чтобы её никто не понимал.", "Сюжет крутится вокруг камня в 86 карат."] },
-  { id: "025", t: "Чёрный лебедь", q: "Я была идеальной.", tag: true, o: "Black Swan", y: 2010, d: "Даррен Аронофски", c: ["love"], img: "img/blackswan2.jpg", f: ["Натали Портман год занималась балетом к роли.", "За неё она получила «Оскар».", "Бюджет — около 13 млн долларов."] },
-  { id: "026", t: "Бэтмен", q: "Я — месть.", tag: true, o: "Batman", y: 2022, d: "Мэтт Ривз", c: ["action"], img: "img/batman3.jpg", f: ["Готэм снимали в Ливерпуле, Глазго и Лондоне.", "Бэтмен здесь — скорее детектив, чем супергерой.", "Город-сказка, город-нуар: дождь почти в каждой сцене."] },
+  { id: "025", t: "Чёрный лебедь", q: "Я была идеальной.", tag: true, o: "Black Swan", y: 2010, d: "Даррен Аронофски", c: ["love"], img: "img/blackswan3.jpg", f: ["Натали Портман год занималась балетом к роли.", "За неё она получила «Оскар».", "Бюджет — около 13 млн долларов."] },
+  { id: "026", t: "Бэтмен", q: "Я — месть.", tag: true, o: "Batman", y: 2022, d: "Мэтт Ривз", c: ["action"], img: "img/batman4.jpg", f: ["Готэм снимали в Ливерпуле, Глазго и Лондоне.", "Бэтмен здесь — скорее детектив, чем супергерой.", "Город-сказка, город-нуар: дождь почти в каждой сцене."] },
   { id: "027", t: "Гарри Поттер. Экспресс", q: "Платформа девять и три четверти.", tag: true, o: "Harry Potter", y: 2001, d: "Крис Коламбус", c: ["sci", "winter", "family"], img: "img/hpexpress2.jpg", f: ["Хогвартс-экспресс снимали на виадуке Гленфиннан в Шотландии.", "Паровоз — настоящий, 1937 года.", "Виадук стал местом паломничества фанатов."] },
   { id: "028", top: true, t: "Леон. Матильда", q: "Мне нравится это растение.", tag: true, o: "Léon", y: 1994, d: "Люк Бессон", c: ["cult", "love"], img: "img/mathilda2.jpg", f: ["Цветок Леона — аглаонема.", "Для Натали Портман это первая роль в кино.", "Бессон написал сценарий примерно за месяц."] },
   { id: "029", top: true, t: "Чернобыль", q: "Какова цена лжи?", tag: true, o: "Chernobyl", y: 2019, d: "Йохан Ренк", c: ["series"], img: "img/chernobyl2.jpg", f: ["Снимали в Литве — на похожей АЭС в Игналине.", "Пять серий — и 10 «Эмми».", "Сценарист три года изучал воспоминания очевидцев."] },
   { id: "030", t: "Твин Пикс", q: "Чертовски хороший кофе!", tag: true, o: "Twin Peaks", y: 1990, d: "Дэвид Линч", c: ["series", "cult"], img: "img/twinpeaks2.jpg", f: ["Красная комната — одна из самых узнаваемых декораций ТВ.", "Вопрос «Кто убил Лору Палмер?» обсуждала вся Америка.", "Продолжение вышло через 25 лет."] },
   { id: "031", t: "Сумерки", q: "И вот лев влюбился в ягнёнка.", tag: true, o: "Twilight", y: 2008, d: "Кэтрин Хардвик", c: ["love"], img: "img/twilight2.jpg", f: ["Снят по роману Стефани Майер.", "Город Форкс после фильма стал местом паломничества.", "Сине-зелёный цвет фильма сделан нарочно — как вечный туман."] },
-  { id: "032", t: "Обитель зла", q: "Добро пожаловать в особняк.", tag: true, o: "Resident Evil", y: 1996, d: "Capcom", c: ["action"], img: "img/residentevil2.jpg", f: ["Сначала была игра — потом фильмы и сериалы.", "Особняк Спенсера — главная локация первой игры.", "Серия продана тиражом более 160 млн копий."] },
   { id: "033", top: true, t: "Призрак в доспехах", q: "Сеть огромна и бесконечна.", tag: true, o: "Ghost in the Shell", y: 1995, d: "Мамору Осии", c: ["sci", "anime"], img: "img/ghostshell2.jpg", f: ["Вачовски показывали его продюсерам, объясняя «Матрицу».", "Снят по манге Масамунэ Сиро.", "Городом-прототипом стал Гонконг."] },
   { id: "034", top: true, t: "Земля", q: "Голубая точка.", tag: true, o: "Earth", y: 0, d: "", c: ["space"], img: "img/earth4.jpg", f: ["Из космоса видно огни городов на ночной стороне.", "Атмосфера — тоньше, чем кожура у яблока, если сравнить с размером планеты.", "Земля летит вокруг Солнца со скоростью около 30 км/с."] },
   { id: "035", top: true, t: "Луна", q: "Свет, который всегда рядом.", tag: true, o: "The Moon", y: 0, d: "", c: ["space"], img: "img/moon4.jpg", f: ["Луна всегда повёрнута к нам одной стороной.", "Она удаляется от Земли примерно на 3,8 см в год.", "Двенадцать человек ходили по её поверхности."] },
@@ -799,6 +883,7 @@ const films = [
   { id: "048", top: true, t: "Меркурий", q: "Ближе всех к Солнцу.", tag: true, o: "Mercury", y: 0, d: "", c: ["space"], img: "img/mercury.jpg", f: ["Год на Меркурии — всего 88 земных суток.", "Днём там +430 °C, ночью −180 °C.", "Это самая маленькая планета Солнечной системы."] },
   { id: "049", top: true, t: "Венера", q: "Утренняя звезда.", tag: true, o: "Venus", y: 0, d: "", c: ["space"], img: "img/venus.jpg", f: ["Самая яркая планета на нашем небе.", "Сутки на Венере длиннее её года.", "Там жарче, чем на Меркурии, — около 460 °C."] },
   { id: "050", top: true, t: "Убить Билла", q: "Месть — это блюдо, которое лучше подавать холодным.", o: "Kill Bill", y: 2003, d: "Квентин Тарантино", c: ["cult"], img: "img/killbill.jpg", f: ["Жёлтый костюм Невесты — оммаж Брюсу Ли из «Игры смерти».", "Задумывался как один фильм — его разделили на две части из‑за длины."] },
+  { id: "051", t: "GTA VI", q: "Добро пожаловать в Вайс-Сити.", tag: true, o: "Grand Theft Auto VI", y: 2026, d: "Rockstar Games", c: ["action"], img: "img/gta6.jpg", f: ["Действие — в Вайс-Сити, вымышленном Майами.", "Впервые в серии главная героиня — Люсия.", "Первый трейлер стал самым просматриваемым за сутки в истории YouTube."] },
 ];
 const cats = [["all", "Все"], ["sci", "Фантастика"], ["cult", "Культовое кино"], ["series", "Сериалы"], ["love", "Для двоих"], ["action", "Драйв"], ["anime", "Аниме"], ["space", "Космос"], ["winter", "Зима"]];
 const $ = id => document.getElementById(id);
@@ -842,14 +927,14 @@ let SIZE = "a4";
 // ---------- комнаты: где на стене висит рамка (доли картинки) ----------
 // fx, fy — центр рамки; desktop 2560×1448, телефон — кадр 4:5 вокруг стены (960×1200)
 const ROOMS = {
-  library: { fx: .60, fy: .40, mx: .62, my: .45 },
-  study:   { fx: .555, fy: .42, mx: .60, my: .42 },
-  living:  { fx: .55, fy: .45, mx: .62, my: .44 },
-  attic:   { fx: .565, fy: .46, mx: .62, my: .48 }
+  library: { fx: .60, fy: .40, mx: .62, my: .45, s: 1 },
+  study:   { fx: .555, fy: .42, mx: .60, my: .42, s: .9 },
+  living:  { fx: .55, fy: .45, mx: .62, my: .44, s: .84 },
+  attic:   { fx: .565, fy: .46, mx: .62, my: .48, s: 1.08 }
 };
 const ROOM_OF = {
-  study: ["Клан Сопрано", "Острые козырьки", "Шерлок Холмс", "Крёстный отец", "Джентльмены", "Карты, деньги, два ствола", "Большой куш", "Чернобыль", "Твин Пикс", "Чёрное зеркало", "Брат", "Бэтмен"],
-  living: ["Амели", "Секс в большом городе", "Сумерки", "Унесённые призраками", "Зелёная миля", "Побег из Шоушенка", "Гарри Поттер", "Гарри Поттер. Экспресс", "Леон. Матильда", "Чёрный лебедь", "Рик и Морти"],
+  study: ["Клан Сопрано", "Острые козырьки", "Крёстный отец", "Джентльмены", "Карты, деньги, два ствола", "Чернобыль", "Твин Пикс", "Чёрное зеркало", "Брат", "Бэтмен"],
+  living: ["Амели", "Секс в большом городе", "Сумерки", "Унесённые призраками", "Гарри Поттер", "Гарри Поттер. Экспресс", "Леон. Матильда", "Чёрный лебедь", "Рик и Морти"],
   attic: ["Интерстеллар", "Дюна", "Марсианин", "Призрак в доспехах", "Матрица", "Очень странные дела"]
 };
 const roomOf = f => f.c.includes("space") ? "attic" : (Object.keys(ROOM_OF).find(k => ROOM_OF[k].includes(f.t)) || "library");
@@ -864,12 +949,15 @@ function placeWall(wall, box, imgW, imgH, fx, fy, k, posX = .6, posY = .5) {
 }
 function layoutHero() {
   const R = ROOMS[ROOM], m = narrow();
-  placeWall($("heroWall"), $("room"), m ? 960 : 2560, m ? 1200 : 1448, m ? R.mx : R.fx, m ? R.my : R.fy, SIZES[SIZE].k * (m ? .95 : 1), m ? .5 : .28);
+  placeWall($("heroWall"), $("room"), m ? 960 : 2560, m ? 1200 : 1448, m ? R.mx : R.fx, m ? R.my : R.fy, SIZES[SIZE].k * (R.s || 1) * (m ? .72 : 1), m ? .5 : .28);
 }
 function setRoom(r) {
   if (r === ROOM && loadRoom(r).classList.contains("on")) return;
   ROOM = r; const im = loadRoom(r);
-  const go = () => { roomImgs.forEach(x => x.classList.toggle("on", x === im)); layoutHero(); };
+  const w = $("heroWall"), first = !roomImgs.some(x => x.classList.contains("on"));
+  const go = () => { roomImgs.forEach(x => x.classList.toggle("on", x === im));
+    if (!first && !reduce) { w.classList.remove("travel"); void w.offsetWidth; w.classList.add("travel"); clearTimeout(w._t); w._t = setTimeout(() => w.classList.remove("travel"), 1700); }
+    layoutHero(); };
   im.complete && im.naturalWidth ? go() : im.addEventListener("load", go, { once: true });
 }
 
@@ -897,7 +985,14 @@ function renderHero() {
 $("lightToggle").onclick = () => { cfg.on = !cfg.on; renderHero(); };
 
 // очередь показа: сначала «Выбор Proswet», дальше остальные
-const SEQ = [cfg.poster, ...TOPS.filter(i => i !== cfg.poster), ...films.map((f, i) => i).filter(i => !films[i].top && i !== cfg.poster)];
+// по два фильма в одной комнате, потом переезд в следующую — рамка плывёт на новое место
+const SEQ = (() => {
+  const order = [cfg.poster, ...TOPS.filter(i => i !== cfg.poster), ...films.map((f, i) => i).filter(i => !films[i].top && i !== cfg.poster)];
+  const by = {}; order.forEach(i => (by[roomOf(films[i])] = by[roomOf(films[i])] || []).push(i));
+  const rooms = Object.keys(by), out = []; let left = order.length;
+  while (left) for (const r of rooms) { const q = by[r].splice(0, 2); out.push(...q); left -= q.length; }
+  return out;
+})();
 let seqPos = 0, win = 0, auto = !reduce;
 const stopAuto = () => { auto = false; };
 function drawMinis() {
@@ -997,7 +1092,7 @@ $("catGrid").innerHTML = films.map((f, i) => '<button type="button" class="cg" d
   $("catChips").appendChild(b); });
 const catChip = k => $("catChips").querySelector('[data-k="' + k + '"]');
 $("catGrid").querySelectorAll(".cg").forEach((b, k) => { b.style.setProperty("--k", k); b.onclick = () => openFilm(+b.dataset.i); });
-$("wish").onsubmit = e => { e.preventDefault(); const v = e.target.f.value.trim(); if (!v) return; fetch("/wish?f=" + encodeURIComponent(v.slice(0, 80)), { cache: "no-store" }).catch(() => {}); $("wish").innerHTML = "<div><b>Записали: «" + v.replace(/[<>&]/g, "") + "»</b><span>Спасибо! Самые желанные фильмы появятся первыми.</span></div>"; };
+$("wish").onsubmit = e => { e.preventDefault(); const v = e.target.f.value.trim(); if (!v) return; fetch("/api/wish", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ f: v.slice(0, 80) }) }).catch(() => {}); $("wish").innerHTML = "<div><b>Записали: «" + v.replace(/[<>&]/g, "") + "»</b><span>Спасибо! Самые желанные фильмы появятся первыми.</span></div>"; };
 document.addEventListener("click", e => { if (e.target.closest("[data-cat]")) { e.preventDefault(); $("search").classList.remove("open"); if (!$("catChips").querySelector(".on")) catChip("top").click(); $("catOv").classList.add("open"); } });
 function openFilm(i) { const f = films[i]; if (!f) return; $("fmImg").src = P(f.img); $("fmT").textContent = f.t; $("fmMeta").textContent = (f.y ? f.y + " · " + f.d : "Космос") + " · арт. " + f.id; $("fmO").textContent = f.o && f.o !== f.t ? f.o : ""; $("fmQ").textContent = f.q ? "«" + f.q + "»" : ""; $("fmF").innerHTML = (f.f || []).map(x => "<li>" + x + "</li>").join("");
   $("fmPut").onclick = () => { $("filmOv").classList.remove("open"); flyTo(i, $("fmImg")); toast("«" + f.t + "» — на стене"); };
@@ -1079,14 +1174,49 @@ let cart = [];
 try { cart = JSON.parse(localStorage.getItem("proswet-cart") || "[]"); } catch (e) { cart = []; }
 const saveCart = () => { try { localStorage.setItem("proswet-cart", JSON.stringify(cart)); } catch (e) {} };
 const cartSum = () => cart.reduce((s, c) => s + c.price * (c.qty || 1), 0);
+let promo = null;
+try { promo = JSON.parse(localStorage.getItem("proswet-promo") || "null"); } catch (e) { promo = null; }
+const savePromo = () => { try { promo ? localStorage.setItem("proswet-promo", JSON.stringify(promo)) : localStorage.removeItem("proswet-promo"); } catch (e) {} };
+const promoOff = () => promo ? cart.reduce((s, c) => s + Math.round(c.price * promo.pct / 100) * (c.qty || 1), 0) : 0;
+const payTotal = () => cartSum() - promoOff();
+const plural = (n, a, b, c) => { const m = n % 10, h = n % 100; return m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 10 || h >= 20) ? b : c; };
 function renderCart() {
   const n = cart.reduce((s, c) => s + (c.qty || 1), 0);
   $("count").textContent = n; $("count").classList.toggle("on", n > 0);
-  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th">' + (c.img ? '<img decoding="async" alt="" src="' + c.img + '">' : "") + '</div><div><b>' + c.name + '</b><small>' + c.sub + '</small><div class="qty"><button data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + (c.qty || 1) + '</span><button data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div></div><span class="price">' + fmt(c.price * (c.qty || 1)) + '</span></div>').join("") : '<div class="empty">Корзина пуста — выберите фильм для рамки</div>';
+  $("bagN").textContent = n ? n + " " + plural(n, "рамка", "рамки", "рамок") : "";
+  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th"><div class="frame lit"><div class="poster">' + (c.img ? '<img decoding="async" alt="" src="' + c.img.replace("img/t/", "img/w/") + '">' : "") + '</div></div></div><div class="ci-b"><b>' + c.name + '</b><small>' + c.sub + '</small><div class="qty"><button data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + (c.qty || 1) + '</span><button data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div><button type="button" class="ci-del" data-del="' + i + '">Убрать</button></div><span class="price">' + fmt(c.price * (c.qty || 1)) + '</span></div>').join("") : '<div class="empty"><b>Здесь пока пусто</b><span>Выберите фильм — и он засветится у вас на стене.</span><button type="button" class="btn" data-cat>Открыть коллекцию</button></div>';
   $("cartItems").querySelectorAll(".qty button").forEach(b => b.onclick = () => { const c = cart[+b.dataset.i]; c.qty = (c.qty || 1) + +b.dataset.q; if (c.qty < 1) cart.splice(+b.dataset.i, 1); saveCart(); renderCart(); });
-  $("cartTotal").textContent = fmt(cartSum());
+  $("cartItems").querySelectorAll("[data-del]").forEach(b => b.onclick = () => { cart.splice(+b.dataset.del, 1); saveCart(); renderCart(); });
+  // открытка: бесплатно, если ещё не вложена
+  const cd = typeof cardData === "function" && cardData();
+  $("bagCard").innerHTML = cart.length ? (cd ? '<span class="bc-ok">✓</span><div><b>Открытка «' + CARD_T[cd.t].n + '» вложена</b><small>Напечатаем и положим в коробку — бесплатно</small></div><button type="button" class="link" id="bagCardEdit">Изменить</button>' : '<span class="bc-ic">✉</span><div><b>Добавить открытку — бесплатно</b><small>Ваши слова на плотном картоне 10 × 15 см</small></div><button type="button" class="link" id="bagCardEdit">Написать</button>') : "";
+  const ce = $("bagCardEdit"); if (ce) ce.onclick = () => { closeCart(); document.getElementById("card").scrollIntoView({ behavior: "smooth", block: "center" }); };
+  // допродажа: «Выбор Proswet», которых ещё нет в корзине
+  const inCart = new Set(cart.flatMap(c => c.films || [])), z = SIZES[SIZE];
+  const ups = TOPS.filter(i => !inCart.has(films[i].t)).slice(0, 4);
+  $("bagMore").hidden = !cart.length || !ups.length;
+  $("bagUps").innerHTML = ups.map(i => '<button type="button" class="up" data-up="' + i + '"><div class="frame lit"><div class="poster"><img loading="lazy" decoding="async" alt="" src="' + T(films[i].img) + '"></div></div><b>' + films[i].t + '</b><span>+ ' + z.label + ' · ' + fmt(z.price) + '</span></button>').join("");
+  $("bagUps").querySelectorAll("[data-up]").forEach(b => b.onclick = () => { const f = films[+b.dataset.up]; add({ sku: z.sku, films: [f.t], posters: [f.id], name: z.name, sub: "Чёрная рамка · " + z.label + " · постер «" + f.t + "» · " + z.label + "-" + f.id, price: z.price, img: T(f.img) }); });
+  const off = promoOff();
+  $("bagSub").textContent = fmt(cartSum());
+  $("bagOffRow").hidden = !off; $("bagOffT").textContent = promo ? "Промокод " + promo.code + " · −" + promo.pct + "%" : ""; $("bagOff").textContent = "− " + fmt(off);
+  $("cartTotal").textContent = fmt(payTotal());
+  $("promoIn").value = promo ? promo.code : $("promoIn").value;
   $("checkout").disabled = !cart.length;
+  document.querySelector(".bag-sum").hidden = !cart.length;
 }
+$("promoForm").onsubmit = async e => {
+  e.preventDefault(); const code = $("promoIn").value.trim(), msg = $("promoMsg");
+  if (!code) { promo = null; savePromo(); msg.textContent = ""; renderCart(); return; }
+  msg.className = "promo-msg"; msg.textContent = "Проверяем…";
+  try {
+    const r = await fetch("/api/promo", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code }) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(d.error || "Промокод не найден");
+    promo = { code: d.code, pct: d.pct }; savePromo(); msg.className = "promo-msg ok"; msg.textContent = "Скидка " + d.pct + "% применена";
+  } catch (err) { promo = null; savePromo(); msg.className = "promo-msg bad"; msg.textContent = err.message === "Failed to fetch" ? "Не удалось проверить — попробуйте ещё раз" : err.message; }
+  renderCart();
+};
 function add(item) {
   const same = cart.find(c => c.name === item.name && c.sub === item.sub);
   if (same) same.qty = (same.qty || 1) + 1; else cart.push({ ...item, qty: 1 });
@@ -1114,13 +1244,14 @@ function openPick(n, name, price) {
 document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => b.dataset.name === "Proswet A3" ? openPick(1, SIZES[SIZE].name, SIZES[SIZE].price) : openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
 $("pickAdd").onclick = () => { const psku = pick.n === 3 ? "three" : /Подароч/.test(pick.name) ? "gift" : SKU[pick.name] || "one", psz = psku === "one_a4" ? "A4" : "A3"; add({ sku: psku, films: pick.sel.map(v => films[v].t), posters: pick.sel.map(v => films[v].id), name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "» " + psz + "-" + films[v].id).join(", "), price: pick.price, img: T(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
 $("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList.remove("open"); };
-const openCart = () => { $("drawer").classList.add("open"); $("cartOv").classList.add("open"); };
-const closeCart = () => { $("drawer").classList.remove("open"); $("cartOv").classList.remove("open"); };
-$("cartBtn").onclick = openCart; $("closeCart").onclick = closeCart; $("cartOv").onclick = closeCart;
+const openCart = () => { renderCart(); $("drawer").classList.add("open"); $("drawer").setAttribute("aria-hidden", "false"); document.documentElement.classList.add("bag-open"); $("drawer").scrollTop = 0; };
+const closeCart = () => { $("drawer").classList.remove("open"); $("drawer").setAttribute("aria-hidden", "true"); document.documentElement.classList.remove("bag-open"); };
+$("cartBtn").onclick = openCart; $("closeCart").onclick = closeCart; $("bagBack").onclick = closeCart;
+$("drawer").addEventListener("click", e => { if (e.target.closest("[data-cat]")) closeCart(); });
 $("checkout").onclick = () => { if (!cart.length) return; closeCart(); openCheckout(); };
 function openCheckout() {
-  $("coSum").innerHTML = cart.map(c => '<div><span>' + c.name + (c.qty > 1 ? " × " + c.qty : "") + '<small>' + c.sub + '</small></span><b>' + fmt(c.price * (c.qty || 1)) + '</b></div>').join("") + (cardData() ? '<div><span>Открытка «' + CARD_T[cardData().t].n + '»<small>печатаем и вкладываем</small></span><b>Бесплатно</b></div>' : '') + '<div><span>Доставка до пункта выдачи</span><b>Бесплатно</b></div>';
-  $("coTotal").textContent = fmt(cartSum()); $("coErr").textContent = ""; $("coOv").classList.add("open");
+  $("coSum").innerHTML = cart.map(c => '<div><span>' + c.name + (c.qty > 1 ? " × " + c.qty : "") + '<small>' + c.sub + '</small></span><b>' + fmt(c.price * (c.qty || 1)) + '</b></div>').join("") + (cardData() ? '<div><span>Открытка «' + CARD_T[cardData().t].n + '»<small>печатаем и вкладываем</small></span><b>Бесплатно</b></div>' : '') + (promoOff() ? '<div><span>Промокод ' + promo.code + '<small>скидка ' + promo.pct + '%</small></span><b>− ' + fmt(promoOff()) + '</b></div>' : '') + '<div><span>Доставка до пункта выдачи</span><b>Бесплатно</b></div>';
+  $("coTotal").textContent = fmt(payTotal()); $("coErr").textContent = ""; $("coOv").classList.add("open");
 }
 $("coShip").querySelectorAll("button").forEach(b => b.onclick = () => $("coShip").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)));
 $("coOv").onclick = e => { if (e.target.id === "coOv" || e.target.dataset.close === "coOv") { $("coOv").classList.remove("open"); clearInterval(payTimer); $("coForm").classList.remove("paying"); } };
@@ -1134,7 +1265,7 @@ $("coForm").onsubmit = async e => {
   if (!/^\+?[78]?[\s(-]*\d{3}[\s)-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}$/.test(f.phone.value.trim())) { f.phone.focus(); $("coErr").textContent = "Телефон в формате +7 900 000-00-00"; return; }
   if (location.protocol !== "https:" && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return demoPay();
   const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Создаём платёж…"; $("coErr").textContent = "";
-  const body = { items: apiItems(), name: f.name.value, phone: f.phone.value, email: f.email.value, ship: $("coShip").querySelector(".on").dataset.v, city: f.city.value, pvz: f.pvz.value, note: cardNote(f.note.value), agree: f.agree.checked };
+  const body = { items: apiItems(), name: f.name.value, phone: f.phone.value, email: f.email.value, ship: $("coShip").querySelector(".on").dataset.v, city: f.city.value, pvz: f.pvz.value, note: cardNote(f.note.value), agree: f.agree.checked, promo: promo ? promo.code : "" };
   try {
     const tk = (() => { try { return localStorage.getItem("proswetTest") || ""; } catch (e) { return ""; } })();
     const r = await fetch("/api/orders", { method: "POST", headers: Object.assign({ "Content-Type": "application/json" }, tk ? { "X-Test-Key": tk } : {}), body: JSON.stringify(body) });
@@ -1149,7 +1280,7 @@ $("coForm").onsubmit = async e => {
 const mobile = () => matchMedia("(pointer: coarse)").matches;
 // демо-оплата: банк ещё не подключён — показываем путь целиком, данные никуда не уходят, деньги не списываются
 async function demoPay() {
-  const num = "ДЕМО-" + (1000 + Math.floor(Math.random() * 9000)), sum = cartSum();
+  const num = "ДЕМО-" + (1000 + Math.floor(Math.random() * 9000)), sum = payTotal();
   $("coForm").classList.add("paying");
   $("coPay").innerHTML = '<div class="demo-tag">Демо-режим · деньги не списываются</div><h3>Заказ ' + num + '</h3><p class="co-lead">К оплате <b>' + fmt(sum) + '</b>. Доставка — бесплатно.</p><div class="qr" id="qr"></div><p class="co-hint">Так будет выглядеть QR-код СБП. Сейчас он ведёт на сайт.</p><button type="button" class="btn sbp" id="demoGo">Оплатить через СБП (демо)</button><button type="button" class="btn line" id="demoBack">Назад к заказу</button>';
   try { await loadQR(); const q = qrcode(0, "M"); q.addData(location.origin + location.pathname); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").remove(); }
@@ -1248,6 +1379,19 @@ setSize(SIZE); renderHero(); renderCart(); initCard();
 document.querySelectorAll("#menuRes a").forEach(a => a.onclick = () => $("search").classList.remove("open"));
 $("mbuyBtn").onclick = () => $("buyBtn").click();
 $("finImg").complete ? layoutFinale() : $("finImg").addEventListener("load", layoutFinale, { once: true }); addEventListener("load", layoutFinale);
+// ===== Новогодний слой (временно). Убрать: в build.py NEWYEAR = False =====
+(() => {
+  const kick = document.querySelector(".hero-copy .kick");
+  if (kick) { kick.textContent = "Скоро Новый год — подарите свет"; kick.classList.add("ny-kick"); }
+  // гирлянда
+  const hero = document.querySelector(".hero"), g = document.createElement("div"); g.className = "ny-garland"; g.setAttribute("aria-hidden", "true");
+  const draw = () => { const W = hero.clientWidth, n = Math.max(8, Math.round(W / 70)), sag = W < 700 ? 14 : 22; let d = "", c = "";
+    for (let i = 0; i < n; i++) { const x0 = i * W / n, x1 = (i + 1) * W / n, xm = (x0 + x1) / 2; d += (i ? "" : "M0 2") + " Q" + xm + " " + (2 + sag * 2) + " " + x1 + " 2";
+      const bx = xm, by = 2 + sag; c += '<circle cx="' + bx + '" cy="' + (by + 3) + '" r="' + (W < 700 ? 2.6 : 3.2) + '" style="animation-delay:' + (-(i * 1.37) % 3.6).toFixed(2) + 's"/>'; }
+    g.innerHTML = '<svg viewBox="0 0 ' + W + ' 46" preserveAspectRatio="none"><path d="' + d + '"/>' + c + "</svg>"; };
+  hero.appendChild(g); draw(); addEventListener("resize", draw);
+})();
+
 </script>
 </body>
 </html>
