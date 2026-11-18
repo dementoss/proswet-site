@@ -269,10 +269,14 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 .set .pic .frames .frame::before { inset: -30% -45%; }
 .set .body { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .set .body p { font-size: 15px; color: var(--ash); flex: 1; }
-.set .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px; }
-.set .row .price { font-size: 26px; }
+.set .row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--hair); }
+.set .row .pr { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.set .row .price { font-size: 26px; line-height: 1.1; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.set .row .note { font-size: 13px; color: var(--smoke); white-space: nowrap; }
+.set .row .btn { flex: none; white-space: nowrap; min-width: 168px; justify-content: center; }
+@media (min-width: 901px) and (max-width: 1240px) { .set .row { flex-direction: column; align-items: stretch; } .set .row .btn { width: 100%; } }
 .set .row s { display: block; font-size: 13px; font-weight: 500; color: var(--smoke); }
-.set .save { font-size: 13px; color: var(--lamp); font-weight: 600; }
+.set .row .note.save { color: var(--lamp); font-weight: 600; }
 .pack { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 24px; margin-top: 72px; align-items: stretch; }
 .pack-t h3 { margin-top: 12px; }
 .pack-t > p { margin-top: 12px; color: var(--ash); }
@@ -562,8 +566,8 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
       <video class="stv on" muted playsinline preload="none" poster="img/lib/v1.webp?v=829a4d929a" data-src="media/lib-1.mp4?v=2ca39cdeed" aria-label="Распаковка рамки"></video>
       <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=6efa1707ae" data-src="media/lib-2.mp4?v=7ef050aed7" aria-label="Рамку вешают на стену"></video>
       <video class="stv" muted playsinline preload="none" poster="img/lib/v3.webp?v=2413066e06" data-src="media/lib-3.mp4?v=1ef466dcb5" aria-label="Рука тянется к выключателю"></video>
-      <video class="stv" muted playsinline preload="none" poster="img/lib/v4-off.webp?v=c1babe2aa0" data-src="media/lib-4.mp4?v=875578135f" aria-label="Постер загорается"></video>
-      <img class="still" id="stOff" src="img/lib/v4-off.webp?v=c1babe2aa0" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=01788c7c15" alt="" loading="lazy">
+      <video class="stv" muted playsinline preload="none" poster="img/lib/v4-off.webp?v=58403de82d" data-src="media/lib-4.mp4?v=af04dc3b45" aria-label="Постер загорается"></video>
+      <img class="still" id="stOff" src="img/lib/v4-off.webp?v=58403de82d" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=63769e8132" alt="" loading="lazy">
       <div class="st-cap" id="stCap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
       <div class="st-steps" id="stSteps"><i></i><i></i><i></i><i></i></div>
       <button type="button" class="st-sw" id="stSw" aria-label="Включить свет"><span>Попробуйте сами — нажмите</span></button>
@@ -585,11 +589,11 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
   <div class="sec-head rise"><div><h2>Подарок, который<br><em>включают каждый вечер</em></h2></div><p class="lead">В каждый набор — любой фильм из коллекции.</p></div>
   <div class="sets rise" id="gifts3">
     <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/study.webp?v=aad1fa6f7a" alt="Рамка на стене кабинета"><div class="frames" id="set1"></div></div>
-      <div class="body"><h3>Одна рамка</h3><p>A4 или A3 с постером вашего фильма. Приходит собранной.</p><div class="row"><span class="price">от 5&nbsp;000&nbsp;₽</span><button class="btn line sm" data-pick="1" data-name="Proswet A3" data-price="6000">Выбрать фильм</button></div></div></div>
+      <div class="body"><h3>Одна рамка</h3><p>A4 или A3 с постером вашего фильма. Приходит собранной.</p><div class="row"><div class="pr"><span class="price">от 5&nbsp;000&nbsp;₽</span><span class="note">A4 или A3 на выбор</span></div><button class="btn line sm" data-pick="1" data-name="Proswet A3" data-price="6000">Выбрать фильм</button></div></div></div>
     <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/living.webp?v=86c6701346" alt="Три рамки над диваном"><div class="frames three" id="set3"></div></div>
-      <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><div><span class="price">12&nbsp;190&nbsp;₽</span><span class="save">выгоднее на 560&nbsp;₽</span></div><button class="btn sm" data-pick="3" data-name="Три рамки Proswet" data-price="12190">Выбрать 3 фильма</button></div></div></div>
+      <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><div class="pr"><span class="price">12&nbsp;190&nbsp;₽</span><span class="note save">выгоднее на 560&nbsp;₽</span></div><button class="btn sm" data-pick="3" data-name="Три рамки Proswet" data-price="12190">Выбрать 3 фильма</button></div></div></div>
     <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/gift-open.webp?v=b4a28ee93b" alt="Рамка в подарочной коробке с лентой и сухоцветами"></div>
-      <div class="body"><h3>Подарочный набор</h3><p>Большая коробка, атласная лента, сухоцветы и открытка с вашими словами.</p><div class="row"><span class="price">5&nbsp;490&nbsp;₽</span><button class="btn line sm" data-pick="1" data-name="Подарочный набор Proswet" data-price="5490">Выбрать фильм</button></div></div></div>
+      <div class="body"><h3>Подарочный набор</h3><p>Большая коробка, атласная лента, сухоцветы и открытка с вашими словами.</p><div class="row"><div class="pr"><span class="price">5&nbsp;490&nbsp;₽</span><span class="note">коробка, лента, открытка</span></div><button class="btn line sm" data-pick="1" data-name="Подарочный набор Proswet" data-price="5490">Выбрать фильм</button></div></div></div>
   </div>
 
   <div class="pack rise">
@@ -737,7 +741,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "7fd346f664";
+const AV = "213d95d4f5";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
@@ -832,16 +836,16 @@ const cardNote = n => { const c = cardData(); if (!c || !CARD_T[c.t]) return n; 
 let cfg = { poster: byTitle("Убить Билла"), on: true };
 { const slug = t => t.toLowerCase().replace(/ё/g, "е").replace(/[^a-zа-я0-9]+/g, "-").replace(/^-|-$/g, ""), want = slug(decodeURIComponent(new URLSearchParams(location.search).get("film") || ""));
   const hit = want ? films.findIndex(f => slug(f.o) === want || slug(f.t) === want) : -1; if (hit >= 0) cfg.poster = hit; }
-const SIZES = { a4: { label: "A4", dim: "21 × 30 см", spec: "A4, 210 × 297 мм", price: 5000, sku: "one_a4", name: "Proswet A4", k: .30 }, a3: { label: "A3", dim: "30 × 42 см", spec: "A3, 297 × 420 мм", price: 6000, sku: "one", name: "Proswet A3", k: .38 } };
+const SIZES = { a4: { label: "A4", dim: "21 × 30 см", spec: "A4, 210 × 297 мм", price: 5000, sku: "one_a4", name: "Proswet A4", k: .48 }, a3: { label: "A3", dim: "30 × 42 см", spec: "A3, 297 × 420 мм", price: 6000, sku: "one", name: "Proswet A3", k: .62 } };
 let SIZE = "a4";
 
 // ---------- комнаты: где на стене висит рамка (доли картинки) ----------
 // fx, fy — центр рамки; desktop 2560×1448, телефон — кадр 4:5 вокруг стены (960×1200)
 const ROOMS = {
-  library: { fx: .54, fy: .41, mx: .70, my: .40 },
-  study:   { fx: .56, fy: .35, mx: .66, my: .34 },
-  living:  { fx: .56, fy: .38, mx: .70, my: .38 },
-  attic:   { fx: .60, fy: .45, mx: .70, my: .44 }
+  library: { fx: .60, fy: .40, mx: .62, my: .45 },
+  study:   { fx: .555, fy: .42, mx: .60, my: .42 },
+  living:  { fx: .55, fy: .45, mx: .62, my: .44 },
+  attic:   { fx: .565, fy: .46, mx: .62, my: .48 }
 };
 const ROOM_OF = {
   study: ["Клан Сопрано", "Острые козырьки", "Шерлок Холмс", "Крёстный отец", "Джентльмены", "Карты, деньги, два ствола", "Большой куш", "Чернобыль", "Твин Пикс", "Чёрное зеркало", "Брат", "Бэтмен"],
@@ -860,7 +864,7 @@ function placeWall(wall, box, imgW, imgH, fx, fy, k, posX = .6, posY = .5) {
 }
 function layoutHero() {
   const R = ROOMS[ROOM], m = narrow();
-  placeWall($("heroWall"), $("room"), m ? 960 : 2560, m ? 1200 : 1448, m ? R.mx : R.fx, m ? R.my : R.fy, SIZES[SIZE].k * (m ? 1.18 : 1), m ? .5 : .28);
+  placeWall($("heroWall"), $("room"), m ? 960 : 2560, m ? 1200 : 1448, m ? R.mx : R.fx, m ? R.my : R.fy, SIZES[SIZE].k * (m ? .95 : 1), m ? .5 : .28);
 }
 function setRoom(r) {
   if (r === ROOM && loadRoom(r).classList.contains("on")) return;
