@@ -119,17 +119,14 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 /* ---------- 1. главный экран: комната ---------- */
 .hero { position: relative; height: 100svh; min-height: 640px; max-height: 1100px; overflow: hidden; isolation: isolate; }
 .room { position: absolute; inset: 0; z-index: -2; }
-.room > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 28% 50%; opacity: 0; transition: opacity var(--t-slow) var(--ease-move); }
+.room > img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; opacity: 0; transition: opacity var(--t-slow) var(--ease-move); }
 .room > img.on { opacity: 1; }
-/* переезд в другую комнату: кадр мягко «наезжает», рамку снимают со стены и вешают на новое место */
-.room > img { transform: scale(1.045); }
+/* смена комнаты: кадр мягко «наезжает», рамка стоит на месте */
+.room > img { transform: scale(1.03); transform-origin: 69% 44%; }
 .room > img.on { transform: none; }
-.wall.travel { transition: left 1.5s var(--ease-move), top 1.5s var(--ease-move), height 1.5s var(--ease-move); }
-.wall.travel .frame { animation: hang 1.5s var(--ease-move); }
-@keyframes hang { 0% { transform: none; } 40% { transform: translateY(-2.5%) scale(1.04); box-shadow: 0 0 0 1px rgba(0,0,0,.5), 14px 40px 70px -10px rgba(0,0,0,.75); } 100% { transform: none; } }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(90deg, rgba(13,11,9,.9) 0%, rgba(13,11,9,.72) 26%, rgba(13,11,9,.25) 44%, rgba(13,11,9,0) 58%),
-    linear-gradient(180deg, rgba(13,11,9,.55) 0%, rgba(13,11,9,0) 14%), linear-gradient(0deg, rgba(13,11,9,1) 0%, rgba(13,11,9,0) 18%); }
+  background: linear-gradient(90deg, rgba(13,11,9,.88) 0%, rgba(13,11,9,.68) 26%, rgba(13,11,9,.2) 46%, rgba(13,11,9,0) 58%),
+    linear-gradient(0deg, rgba(13,11,9,1) 0%, rgba(13,11,9,0) 18%); }
 .hero.dim .room > img { filter: brightness(.82); transition: opacity var(--t-slow) var(--ease-move), filter var(--t-slow) var(--ease-lamp); }
 .room > img { transition: opacity 1.4s var(--ease-move), filter var(--t-slow) var(--ease-lamp), transform 2.6s cubic-bezier(.2,.7,.2,1); }
 .wall { position: absolute; z-index: 0; transform: translate(-50%, -50%); transition: left var(--t-slow) var(--ease-move), top var(--t-slow) var(--ease-move), height var(--t-slow) var(--ease-move); }
@@ -164,7 +161,6 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 @media (max-width: 900px) {
   .hero { height: auto; max-height: none; min-height: 0; }
   .room { position: relative; inset: auto; height: min(118vw, 74svh); -webkit-mask: none; mask: none; }
-  .room > img { object-position: 50% 50%; }
   .hero::before { background: linear-gradient(0deg, rgba(13,11,9,1) 0%, rgba(13,11,9,0) 30%); height: min(118vw, 74svh); }
   .hero > .wrap { height: auto; }
   .hero-copy { padding: 0 0 48px; margin-top: -48px; max-width: none; }
@@ -566,15 +562,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 .rise.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; } .rise { opacity: 1; transform: none; } }
 /* ===== Новогодний слой (временно). Убрать: в build.py NEWYEAR = False ===== */
-/* гирлянда: тёплые огоньки вдоль верха главного экрана, под шапкой */
-.ny-garland { position: absolute; left: 0; right: 0; top: calc(var(--hh) - 6px); height: 46px; z-index: 0; pointer-events: none; opacity: .9; }
-.ny-garland svg { width: 100%; height: 100%; display: block; }
-.ny-garland path { fill: none; stroke: rgba(40, 30, 20, .9); stroke-width: 1.2; }
-.ny-garland circle { fill: #FFD9A0; filter: drop-shadow(0 0 4px rgba(255, 190, 110, .9)) drop-shadow(0 0 10px rgba(255, 170, 80, .45)); animation: ny-tw 3.6s ease-in-out infinite; }
-@keyframes ny-tw { 0%, 100% { opacity: .95; } 50% { opacity: .35; } }
 .ny-kick { color: var(--lamp) !important; }
-@media (prefers-reduced-motion: reduce) { .ny-garland circle { animation: none; } }
-@media (max-width: 900px) { .ny-garland { top: calc(var(--hh) - 10px); height: 34px; } }
 </style>
 </head>
 <body>
@@ -628,25 +616,23 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 
 <!-- 4. Как это работает -->
 <section class="sec" id="overview"><div class="wrap">
-  <div class="sec-head rise"><div><h2>Из коробки — на стену.<br><em>Щелчок — и свет.</em></h2></div>
+  <div class="sec-head rise"><div><h2>Днём — постер.<br><em>Вечером — свет.</em></h2></div>
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша в кинотеатре.</p></div>
   <div class="story rise" id="story">
     <div class="story-stage" id="stStage">
       <video class="stv on" muted playsinline preload="none" poster="img/lib/v1.webp?v=829a4d929a" data-src="media/lib-1.mp4?v=2ca39cdeed" aria-label="Распаковка рамки"></video>
       <video class="stv" muted playsinline preload="none" poster="img/lib/v2.webp?v=1bc06dab88" data-src="media/lib-2.mp4?v=4075bf201c" aria-label="Рамку вешают на стену"></video>
       <video class="stv" muted playsinline preload="none" poster="img/lib/v3.webp?v=41a79065f5" data-src="media/lib-3.mp4?v=41fef9545f" aria-label="Рука тянется к выключателю"></video>
-      <video class="stv" muted playsinline preload="none" poster="img/lib/v4-off.webp?v=58403de82d" data-src="media/lib-4.mp4?v=af04dc3b45" aria-label="Постер загорается"></video>
-      <img class="still" id="stOff" src="img/lib/v4-off.webp?v=58403de82d" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=63769e8132" alt="" loading="lazy">
+      <img class="still" id="stOff" src="img/lib/v4-off.webp?v=1559fb351c" alt="" loading="lazy"><img class="still" id="stOn" src="img/lib/v4-on.webp?v=8f6dfba3c2" alt="" loading="lazy">
       <div class="st-cap" id="stCap"><span class="st-n" id="stN">01</span><b id="stT">Открыли коробку</b><span id="stS">Рамка уже собрана, постер внутри</span></div>
-      <div class="st-steps" id="stSteps"><i></i><i></i><i></i><i></i></div>
-      <button type="button" class="st-sw" id="stSw" aria-label="Включить свет"><span>Попробуйте сами — нажмите</span></button>
-      <div class="st-after"><button type="button" class="sw2" id="stToggle" aria-pressed="true"><span id="stToggleT">Выключить</span><span class="toggle on" id="stToggleK"></span></button><button type="button" class="st-replay" id="stReplay">Ещё раз</button></div>
+      <div class="st-steps" id="stSteps"><i></i><i></i><i></i></div>
+      <div class="st-after"><button type="button" class="sw2" id="stToggle" aria-pressed="false"><span id="stToggleT">Включить</span><span class="toggle" id="stToggleK"></span></button><button type="button" class="st-replay" id="stReplay">Ещё раз</button></div>
     </div>
   </div>
   <div class="facts rise"><div><b>1 см</b><span>толщина рамки — почти не выступает</span></div><div><b>12 В</b><span>безопасное напряжение, почти не греется</span></div><div><b>2 м</b><span>кабель с выключателем</span></div><div><b>1 минута</b><span>повесить на один крючок</span></div></div>
   <details class="allspecs"><summary>Все характеристики</summary>
     <div class="specs3">
-      <table class="spec"><tr><td>Формат</td><td id="specFmt">A4, 210 × 297 мм</td></tr><tr><td>Профиль</td><td>Алюминий, матовый чёрный</td></tr><tr><td>Фронт</td><td>Защитное стекло</td></tr><tr><td>Сборка</td><td>Собрана нами, постер внутри</td></tr></table>
+      <table class="spec"><tr><td>Формат</td><td id="specFmt">A4, 210 × 297 мм</td></tr><tr><td>Профиль</td><td>Алюминий, матовый чёрный</td></tr><tr><td>Фронт</td><td>Прозрачная антибликовая панель</td></tr><tr><td>Сборка</td><td>Собрана нами, постер внутри</td></tr></table>
       <table class="spec"><tr><td>Подсветка</td><td>LED + рассеиватель</td></tr><tr><td>Цвет света</td><td>Тёплый</td></tr><tr><td>Питание</td><td>220 → 12 В</td></tr><tr><td>Кабель</td><td>2 м, с выключателем</td></tr></table>
       <table class="spec"><tr><td>В коробке</td><td>Рамка, постер, адаптер</td></tr><tr><td>Крепление</td><td>Вертикально и горизонтально</td></tr><tr><td>Документы</td><td>Декларация ЕАЭС</td></tr><tr><td>Гарантия</td><td>1 месяц</td></tr></table>
     </div>
@@ -831,7 +817,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "e9e1cc0793";
+const AV = "ee70506609";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
@@ -927,10 +913,10 @@ let SIZE = "a4";
 // ---------- комнаты: где на стене висит рамка (доли картинки) ----------
 // fx, fy — центр рамки; desktop 2560×1448, телефон — кадр 4:5 вокруг стены (960×1200)
 const ROOMS = {
-  library: { fx: .60, fy: .40, mx: .62, my: .45, s: 1 },
-  study:   { fx: .555, fy: .42, mx: .60, my: .42, s: .9 },
-  living:  { fx: .55, fy: .45, mx: .62, my: .44, s: .84 },
-  attic:   { fx: .565, fy: .46, mx: .62, my: .48, s: 1.08 }
+  library: { fx: .60, fy: .40, mx: .62, my: .45 },
+  study:   { fx: .555, fy: .42, mx: .60, my: .42 },
+  living:  { fx: .55, fy: .45, mx: .62, my: .44 },
+  attic:   { fx: .565, fy: .46, mx: .62, my: .48 }
 };
 const ROOM_OF = {
   study: ["Клан Сопрано", "Острые козырьки", "Крёстный отец", "Джентльмены", "Карты, деньги, два ствола", "Чернобыль", "Твин Пикс", "Чёрное зеркало", "Брат", "Бэтмен"],
@@ -947,17 +933,20 @@ function placeWall(wall, box, imgW, imgH, fx, fy, k, posX = .6, posY = .5) {
   const ox = (cw - dw) * posX, oy = (ch - dh) * posY;
   wall.style.left = (ox + fx * dw) + "px"; wall.style.top = (oy + fy * dh) + "px"; wall.style.height = (k * dh) + "px";
 }
+// рамка стоит на месте всегда; комната сдвигается и масштабируется так, чтобы стена оказалась под рамкой
+const HERO_AT = { d: { x: .69, y: .44 }, m: { x: .56, y: .45 } };
 function layoutHero() {
-  const R = ROOMS[ROOM], m = narrow();
-  placeWall($("heroWall"), $("room"), m ? 960 : 2560, m ? 1200 : 1448, m ? R.mx : R.fx, m ? R.my : R.fy, SIZES[SIZE].k * (R.s || 1) * (m ? .72 : 1), m ? .5 : .28);
+  const m = narrow(), box = $("room"), cw = box.clientWidth, ch = box.clientHeight, W = m ? 960 : 2560, H = m ? 1200 : 1448;
+  const at = HERO_AT[m ? "m" : "d"], tx = at.x * cw, ty = at.y * ch;
+  roomImgs.forEach(im => { const R = ROOMS[im.dataset.r]; if (!R) return; const fx = m ? R.mx : R.fx, fy = m ? R.my : R.fy;
+    const sc = Math.max(cw / W, ch / H, tx / (fx * W), (cw - tx) / ((1 - fx) * W), ty / (fy * H), (ch - ty) / ((1 - fy) * H));
+    Object.assign(im.style, { width: W * sc + "px", height: H * sc + "px", left: tx - fx * W * sc + "px", top: ty - fy * H * sc + "px" }); });
+  const w = $("heroWall"); w.style.left = tx + "px"; w.style.top = ty + "px"; w.style.height = SIZES[SIZE].k * ch * (m ? .76 : 1) + "px";
 }
 function setRoom(r) {
   if (r === ROOM && loadRoom(r).classList.contains("on")) return;
   ROOM = r; const im = loadRoom(r);
-  const w = $("heroWall"), first = !roomImgs.some(x => x.classList.contains("on"));
-  const go = () => { roomImgs.forEach(x => x.classList.toggle("on", x === im));
-    if (!first && !reduce) { w.classList.remove("travel"); void w.offsetWidth; w.classList.add("travel"); clearTimeout(w._t); w._t = setTimeout(() => w.classList.remove("travel"), 1700); }
-    layoutHero(); };
+  const go = () => { roomImgs.forEach(x => x.classList.toggle("on", x === im)); layoutHero(); };
   im.complete && im.naturalWidth ? go() : im.addEventListener("load", go, { once: true });
 }
 
@@ -985,7 +974,7 @@ function renderHero() {
 $("lightToggle").onclick = () => { cfg.on = !cfg.on; renderHero(); };
 
 // очередь показа: сначала «Выбор Proswet», дальше остальные
-// по два фильма в одной комнате, потом переезд в следующую — рамка плывёт на новое место
+// по два фильма в одной комнате, потом следующая комната; рамка при этом не двигается
 const SEQ = (() => {
   const order = [cfg.poster, ...TOPS.filter(i => i !== cfg.poster), ...films.map((f, i) => i).filter(i => !films[i].top && i !== cfg.poster)];
   const by = {}; order.forEach(i => (by[roomOf(films[i])] = by[roomOf(films[i])] || []).push(i));
@@ -1109,7 +1098,7 @@ $("set3").innerHTML = ["Леон", "Сияние", "Паразиты"].map(byTit
 // ---------- ролик «Как это работает»: человек сам включает свет ----------
 (function () {
   const st = $("story"), stage = $("stStage"), vs = [...stage.querySelectorAll(".stv")], steps = [...$("stSteps").children];
-  const SC = [["Открыли коробку", "Рамка уже собрана, постер внутри"], ["Повесили на стену", "Один крючок — и готово"], ["Осталось включить", "Выключатель — на проводе"], ["Щёлк — и свет", "Мягкий, ровный, тёплый. Не слепит"]];
+  const SC = [["Открыли коробку", "Рамка уже собрана, постер внутри"], ["Повесили на стену", "Один крючок — и готово"], ["Осталось включить", "Выключатель — на проводе"], ["Щёлк", "Выключатель — на проводе"]];
   let k = 0, started = false, loaded = false;
   const load = () => { if (loaded) return; loaded = true; vs.forEach(v => { v.preload = "auto"; v.src = v.dataset.src; v.load(); }); };
   const cap = j => { $("stCap").classList.add("swap"); setTimeout(() => { $("stN").textContent = "0" + (j + 1); $("stT").textContent = SC[j][0]; $("stS").textContent = SC[j][1]; $("stCap").classList.remove("swap"); }, 250); };
@@ -1118,13 +1107,12 @@ $("set3").innerHTML = ["Леон", "Сияние", "Паразиты"].map(byTit
   vs.forEach((v, n) => {
     v.addEventListener("timeupdate", () => { if (n === k && v.duration) { steps[n].style.setProperty("--p", v.currentTime / v.duration); if (n < 2 && v.duration - v.currentTime < .3 && !v.dataset.next) { v.dataset.next = 1; play(n + 1); } } });
     v.addEventListener("ended", () => { delete v.dataset.next;
-      if (n === 2) { st.classList.add("wait"); steps[2].style.setProperty("--p", 1); $("stT").textContent = "Попробуйте сами"; $("stS").textContent = "Нажмите на выключатель в кадре"; }
-      if (n === 3) { stills(true); v.classList.remove("on"); st.classList.add("done"); $("stToggle").setAttribute("aria-pressed", true); $("stToggleT").textContent = "Выключить"; $("stToggleK").classList.add("on"); } });
+      // ролик заканчивается щелчком: показываем рамку выключенной и предлагаем включить самим
+      if (n === 2) { steps[2].style.setProperty("--p", 1); stills(false); v.classList.remove("on"); st.classList.add("done"); $("stToggle").setAttribute("aria-pressed", false); $("stToggleT").textContent = "Включить"; $("stToggleK").classList.remove("on"); $("stN").textContent = "03"; $("stT").textContent = "Теперь включите сами"; $("stS").textContent = "Нажмите «Включить» — рамка засветится"; } });
   });
-  $("stSw").onclick = () => play(3);
   $("stToggle").onclick = () => { const on = !$("stOn").classList.contains("on"); stills(on); $("stToggleK").classList.toggle("on", on); $("stToggle").setAttribute("aria-pressed", on); $("stToggleT").textContent = on ? "Выключить" : "Включить"; $("stT").textContent = on ? "Щёлк — и свет" : "Выключена — просто постер"; $("stS").textContent = on ? "Мягкий, ровный, тёплый. Не слепит" : "Строгий постер в тонкой раме"; };
   $("stReplay").onclick = () => { vs.forEach(v => delete v.dataset.next); play(0); };
-  if (reduce) { stills(true); vs.forEach(v => v.classList.remove("on")); st.classList.add("done"); return; }
+  if (reduce) { stills(false); vs.forEach(v => v.classList.remove("on")); st.classList.add("done"); return; }
   new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) load(); }), { rootMargin: "900px 0px" }).observe(stage);
   new IntersectionObserver(es => es.forEach(e => { const v = vs[k]; if (e.isIntersecting && !started) { started = true; play(0); } else if (!e.isIntersecting) v.pause(); else if (started && v.paused && !st.classList.contains("wait") && !st.classList.contains("done")) v.play().catch(() => {}); }), { threshold: .45 }).observe(stage);
 })();
@@ -1383,13 +1371,6 @@ $("finImg").complete ? layoutFinale() : $("finImg").addEventListener("load", lay
 (() => {
   const kick = document.querySelector(".hero-copy .kick");
   if (kick) { kick.textContent = "Скоро Новый год — подарите свет"; kick.classList.add("ny-kick"); }
-  // гирлянда
-  const hero = document.querySelector(".hero"), g = document.createElement("div"); g.className = "ny-garland"; g.setAttribute("aria-hidden", "true");
-  const draw = () => { const W = hero.clientWidth, n = Math.max(8, Math.round(W / 70)), sag = W < 700 ? 14 : 22; let d = "", c = "";
-    for (let i = 0; i < n; i++) { const x0 = i * W / n, x1 = (i + 1) * W / n, xm = (x0 + x1) / 2; d += (i ? "" : "M0 2") + " Q" + xm + " " + (2 + sag * 2) + " " + x1 + " 2";
-      const bx = xm, by = 2 + sag; c += '<circle cx="' + bx + '" cy="' + (by + 3) + '" r="' + (W < 700 ? 2.6 : 3.2) + '" style="animation-delay:' + (-(i * 1.37) % 3.6).toFixed(2) + 's"/>'; }
-    g.innerHTML = '<svg viewBox="0 0 ' + W + ' 46" preserveAspectRatio="none"><path d="' + d + '"/>' + c + "</svg>"; };
-  hero.appendChild(g); draw(); addEventListener("resize", draw);
 })();
 
 </script>
