@@ -7,7 +7,7 @@
 <meta name="description" content="Световая рамка с постером вашего фильма. Приходит собранной — повесил и включил. Доставка бесплатно.">
 <link rel="preload" as="image" href="img/lib/library.webp?v=b57055c53a" media="(min-width: 901px)" fetchpriority="high">
 <link rel="preload" as="image" href="img/lib/library-m.webp?v=ff8196ca54" media="(max-width: 900px)" fetchpriority="high">
-<link href="fonts/fonts.css" rel="stylesheet">
+<link href="fonts/fonts.css?v=1811" rel="stylesheet">
 <link rel="icon" href="favicon.png?v=6" type="image/png" sizes="192x192">
 <link rel="icon" href="favicon.ico?v=6" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=6">
@@ -882,7 +882,8 @@ function renderHero() {
   const want = P(f.img), hi = $("heroImg");
   if (!hi.getAttribute("src")) hi.src = want;
   else if (hi.getAttribute("src") !== want && hi.dataset.next !== want) { hi.dataset.next = want; preload(want).then(() => { if (P(films[cfg.poster].img) !== want) return; dissolve(hi, want); }); }
-  const nm = $("posterName"); nm.style.opacity = 0; setTimeout(() => { nm.textContent = f.t + (f.y ? ", " + f.y : ""); nm.style.opacity = 1; }, 180);
+  const nm = $("posterName"), label = f.t + (f.y ? ", " + f.y : "");
+  if (nm.textContent !== label) preload(want).then(() => { if (films[cfg.poster] !== f) return; nm.style.opacity = 0; setTimeout(() => { nm.textContent = label; nm.style.opacity = 1; }, 180); });
   $("lightToggle").classList.toggle("on", cfg.on); $("lightToggle").setAttribute("aria-pressed", cfg.on);
   document.querySelector(".hero").classList.toggle("dim", !cfg.on);
   document.querySelectorAll(".mini[data-i]").forEach(m => m.classList.toggle("on", +m.dataset.i === cfg.poster));
