@@ -76,18 +76,15 @@ h1 em, h2 em, h3 em { font-style: italic; font-weight: 500; }
 .chips button.on { color: var(--paper); background: var(--shelf); box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .5); }
 
 /* ---------- рамка-светильник: главный герой ---------- */
-.frame { position: relative; aspect-ratio: 309 / 432; padding: 3.6%; border-radius: 1.5px;   /* матовый анодированный алюминий */
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"), linear-gradient(180deg, rgba(255,240,220,.10) 0%, rgba(255,240,220,0) 6%, rgba(0,0,0,0) 90%, rgba(0,0,0,.35) 100%),
-    linear-gradient(90deg, rgba(255,240,220,.05) 0%, rgba(0,0,0,0) 5%, rgba(0,0,0,0) 95%, rgba(0,0,0,.25) 100%), #1b1a19;
-  background-blend-mode: soft-light, normal, normal, normal; background-size: 120px 120px, auto, auto, auto;
-  box-shadow: inset 0 1px 0 rgba(255,236,210,.16), inset 0 0 0 1px rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6),
-    0 0 0 1px rgba(0,0,0,.55), 1px 2px 3px rgba(0,0,0,.55), 6px 14px 22px -6px rgba(0,0,0,.6), 0 34px 60px -24px rgba(0,0,0,.7); }
-.frame .poster { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0a0908; box-shadow: 0 0 0 1px rgba(0,0,0,.85), 0 0 0 2px rgba(255,236,210,.06); }
+.frame { position: relative; aspect-ratio: 309 / 432; padding: 3.2%; border-radius: 1.5px;   /* матовый чёрный алюминий: профиль одинаковый со всех сторон */
+  background: #161514;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 0 0 1px rgba(0,0,0,.6), 1px 2px 3px rgba(0,0,0,.5), 0 18px 40px -14px rgba(0,0,0,.65); }
+.frame .poster { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0a0908; box-shadow: 0 0 0 1px rgba(0,0,0,.8); }
 .frame .poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   filter: brightness(.6) saturate(.8) contrast(.96); transition: filter var(--t-slow) var(--ease-lamp), opacity var(--t-slow) var(--ease-lamp); }
 .frame .poster::after { content: ""; position: absolute; inset: 0; pointer-events: none;   /* блик лампы на стекле */
   background: linear-gradient(118deg, rgba(255,236,210,.09) 0%, rgba(255,236,210,0) 34%, rgba(255,255,255,0) 72%, rgba(255,236,210,.035) 100%);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.55), inset 0 3px 8px -3px rgba(0,0,0,.65), inset 0 0 24px rgba(0,0,0,.22);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.5), inset 0 0 18px rgba(0,0,0,.18);
   transition: opacity var(--t-slow) var(--ease-lamp); }
 .frame::before { content: ""; position: absolute; inset: -40% -55%; z-index: -1; pointer-events: none; border-radius: 50%;   /* отсвет на стене */
   background: radial-gradient(closest-side, rgba(var(--glow), .30), rgba(var(--glow), .10) 55%, rgba(var(--glow), 0));
@@ -95,8 +92,7 @@ h1 em, h2 em, h3 em { font-style: italic; font-weight: 500; }
 .frame.lit .poster img { filter: brightness(1.06) saturate(1.04); }
 .frame.lit .poster::after { opacity: .35; }
 .frame.lit::before { opacity: 1; }
-.frame.lit { box-shadow: inset 0 1px 0 rgba(255,236,210,.2), inset 0 0 0 1px rgba(255,236,210,.07), inset 0 -1px 0 rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.5), 1px 2px 3px rgba(0,0,0,.5), 6px 14px 22px -6px rgba(0,0,0,.5), 0 34px 60px -24px rgba(0,0,0,.6); }
-.frame.lit .poster { box-shadow: 0 0 0 1px rgba(0,0,0,.7), 0 0 0 2px rgba(255,230,190,.12), 0 0 14px rgba(var(--glow), .14); }
+.frame.lit { box-shadow: inset 0 0 0 1px rgba(255,255,255,.07), 0 0 0 1px rgba(0,0,0,.55), 1px 2px 3px rgba(0,0,0,.45), 0 18px 40px -14px rgba(0,0,0,.55); }
 .frame .poster img.xf { opacity: 0; } .frame .poster img.xf.in { opacity: 1; }
 
 /* ---------- шапка ---------- */
@@ -483,7 +479,20 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 .bag-card div { flex: 1; } .bag-card b { display: block; font-weight: 600; font-size: 15px; } .bag-card small { color: var(--ash); font-size: 13px; }
 .bc-ic, .bc-ok { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgba(var(--lamp-rgb), .14); color: var(--lamp); font-size: 16px; flex: none; }
 .bag-more { margin-top: 48px; } .bag-more h3 { font-size: 28px; } .bag-more p { color: var(--ash); margin-top: 6px; font-size: 15px; }
-.bag-ups { display: grid; grid-template-columns: repeat(4, minmax(0, 150px)); gap: 24px; margin-top: 22px; }
+.bag-ups { margin-top: 22px; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.ups-track { display: flex; gap: 24px; width: max-content; animation: ups var(--d, 50s) linear infinite; padding: 6px 0 4px; }
+.bag-ups:hover .ups-track { animation-play-state: paused; }
+.ups-track .up { width: 140px; flex: none; }
+@keyframes ups { to { transform: translateX(calc(-50% - 12px)); } }
+@media (prefers-reduced-motion: reduce) { .ups-track { animation: none; } .bag-ups { overflow-x: auto; } }
+.ci-ctl { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+.ci-ctl .qty { margin-top: 0; } .ci-ctl .ci-del { margin-left: 4px; }
+.ci-sz button { height: 30px; padding: 0 12px; font-size: 13px; }
+.bs-free { color: var(--lamp); font-weight: 600; font-size: 15px; }
+.promo-box { margin-top: 16px; }
+.promo-box summary { list-style: none; cursor: pointer; font-size: 13px; color: var(--smoke); text-align: center; } .promo-box summary::-webkit-details-marker { display: none; }
+.promo-box summary:hover { color: var(--paper); }
+.promo-box .promo { margin-top: 10px; }
 .up { text-align: left; } .up .frame { width: 100%; transition: transform var(--t-mid) var(--ease-lamp); } .up:hover .frame { transform: translateY(-4px); }
 .up b { display: block; margin-top: 12px; font-family: var(--serif); font-size: 18px; font-weight: 600; line-height: 1.2; font-variant-numeric: lining-nums; }
 .up span { display: block; margin-top: 4px; font-size: 13px; color: var(--lamp); font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -493,13 +502,13 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 .bs-off .price { color: var(--lamp); }
 .bs-total { margin-top: 10px; padding-top: 18px; border-top: 1px solid var(--hair); color: var(--paper); font-weight: 600; }
 .bs-total .price { font-size: 32px; }
-.promo { display: flex; gap: 8px; margin-top: 22px; }
-.promo input { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border-radius: 8px; background: var(--night); color: var(--paper); border: 0; box-shadow: inset 0 0 0 1px var(--hair-2); font: 500 15px var(--sans); text-transform: uppercase; letter-spacing: .04em; outline: none; }
+.promo { display: flex; gap: 8px; }
+.promo input { flex: 1; min-width: 0; height: 40px; padding: 0 14px; border-radius: 8px; background: var(--night); color: var(--paper); border: 0; box-shadow: inset 0 0 0 1px var(--hair-2); font: 500 15px var(--sans); text-transform: uppercase; letter-spacing: .04em; outline: none; }
 .promo input::placeholder { text-transform: none; letter-spacing: 0; color: var(--smoke); }
 .promo input:focus { box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .6); }
-.promo .btn { height: 44px; }
+.promo .btn { height: 40px; }
 .promo-msg { min-height: 20px; margin-top: 8px; font-size: 13px; color: var(--ash); } .promo-msg.ok { color: var(--lamp); } .promo-msg.bad { color: #E08A7A; }
-.bag-sum #checkout { width: 100%; margin-top: 8px; height: 52px; font-size: 16px; }
+.bag-sum #checkout { width: 100%; margin-top: 18px; height: 54px; font-size: 16px; }
 .bs-trust { list-style: none; margin-top: 20px; display: grid; gap: 8px; font-size: 13px; color: var(--smoke); }
 .bs-trust li::before { content: "✓"; color: var(--lamp); margin-right: 8px; }
 @media (max-width: 900px) {
@@ -508,7 +517,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   .bag-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 8px; }
   .bag .ci { grid-template-columns: 72px 1fr; gap: 16px; } .bag .ci .th .frame { width: 72px; }
   .bag .ci > .price { grid-column: 2; font-size: 17px; }
-  .bag-ups { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .ups-track .up { width: 110px; }
   .bag-sum { position: static; padding: 22px; }
 }
 /* меню на телефоне */
@@ -574,7 +583,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="icons">
     <button class="icon" aria-label="Мои заказы" id="loginBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.4-3.6 4.2-5.2 7.5-5.2s6.1 1.6 7.5 5.2"/></svg></button>
     <button class="icon" aria-label="Корзина" id="cartBtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><i id="count">0</i></button>
-    <a class="btn line sm hdr-cta" href="#top">Купить · <span class="price" id="hdrPrice">5&nbsp;000&nbsp;₽</span></a>
+    <button type="button" class="btn line sm hdr-cta" id="hdrBuy">В корзину · <span class="price" id="hdrPrice">5&nbsp;000&nbsp;₽</span></button>
   </div>
 </div></header>
 
@@ -591,8 +600,8 @@ html.bag-open, html.bag-open body { overflow: hidden; }
     <p class="now" id="nowLine">В рамке — <b id="posterName"></b></p>
     <div class="minis" id="minis"></div>
     <div class="sizes"><div class="seg" id="szSw" role="radiogroup" aria-label="Формат"><button type="button" data-s="a4" class="on" role="radio" aria-checked="true">A4</button><button type="button" data-s="a3" role="radio" aria-checked="false">A3</button></div><span class="cap" id="szDim">21 × 30 см</span></div>
-    <div class="buyrow"><span class="price" id="totalPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="buyBtn">Купить</button><button type="button" class="link" data-cat>Вся коллекция</button></div>
-    <p class="hero-note"><b>Бесплатная доставка</b> по России</p>
+    <div class="buyrow"><span class="price" id="totalPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="buyBtn">В корзину</button><button type="button" class="link" data-cat>Вся коллекция</button></div>
+    <p class="hero-note"><b>Бесплатная доставка</b> по всей России</p>
   </div></div>
 </section>
 
@@ -616,7 +625,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
 
 <!-- 4. Как это работает -->
 <section class="sec" id="overview"><div class="wrap">
-  <div class="sec-head rise"><div><h2>Днём — постер.<br><em>Вечером — свет.</em></h2></div>
+  <div class="sec-head rise"><div><h2>Постер днём.<br><em>Светильник вечером.</em></h2></div>
     <p class="lead">Выключена — строгий постер в тонкой раме. Включена — светится изнутри, как афиша в кинотеатре.</p></div>
   <div class="story rise" id="story">
     <div class="story-stage" id="stStage">
@@ -748,7 +757,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <button class="x" data-close="filmOv" aria-label="Закрыть">×</button>
   <div class="fm"><div class="fm-pic"><div class="frame lit"><div class="poster"><img id="fmImg" alt=""></div></div></div>
     <div class="fm-b"><div class="cap" id="fmMeta"></div><h3 id="fmT"></h3><p class="fm-o" id="fmO"></p><blockquote id="fmQ"></blockquote><ul id="fmF"></ul>
-      <div class="fm-act"><button type="button" class="btn" id="fmBuy">Купить · 5&nbsp;000&nbsp;₽</button><button type="button" class="btn line" id="fmPut">Повесить в комнате</button></div></div></div>
+      <div class="fm-act"><button type="button" class="btn" id="fmBuy">В корзину · 5&nbsp;000&nbsp;₽</button><button type="button" class="btn line" id="fmPut">Повесить в комнате</button></div></div></div>
 </div></div>
 <div class="overlay" id="catOv"><div class="sheet cat">
   <button class="x" data-close="catOv" aria-label="Закрыть">×</button>
@@ -771,23 +780,24 @@ html.bag-open, html.bag-open body { overflow: hidden; }
       <div class="bag-main">
         <div class="cart-items" id="cartItems"></div>
         <div class="bag-card" id="bagCard"></div>
-        <div class="bag-more" id="bagMore"><h3>Добавьте к заказу</h3><p>Ещё один фильм — для себя или в подарок. Доставка всё так же бесплатная.</p><div class="bag-ups" id="bagUps"></div></div>
+        <div class="bag-more" id="bagMore"><h3>Добавьте к заказу</h3><p>Ещё один фильм — для себя или в подарок. Доставка всё так же бесплатная.</p><div class="bag-ups" id="bagUps"><div class="ups-track" id="upsTrack"></div></div></div>
       </div>
       <aside class="bag-sum">
-        <div class="bs-row"><span>Товары</span><span class="price" id="bagSub">0 ₽</span></div>
+        <div class="bs-row"><span id="bagSubT">Рамки</span><span class="price" id="bagSub">0 ₽</span></div>
         <div class="bs-row bs-off" id="bagOffRow" hidden><span id="bagOffT">Промокод</span><span class="price" id="bagOff"></span></div>
-        <div class="bs-row"><span>Доставка до пункта выдачи</span><span class="price">0 ₽</span></div>
+        <div class="bs-row"><span>Доставка до пункта выдачи</span><span class="bs-free">Бесплатно</span></div>
         <div class="bs-row bs-total"><span>Итого</span><span class="price" id="cartTotal">0 ₽</span></div>
-        <form class="promo" id="promoForm" autocomplete="off"><input id="promoIn" name="code" maxlength="32" placeholder="Промокод" aria-label="Промокод"><button class="btn line sm" type="submit">Применить</button></form>
-        <p class="promo-msg" id="promoMsg"></p>
         <button class="btn" id="checkout">Оформить заказ</button>
+        <details class="promo-box" id="promoBox"><summary>Есть промокод?</summary>
+          <form class="promo" id="promoForm" autocomplete="off"><input id="promoIn" name="code" maxlength="32" placeholder="Введите код" aria-label="Промокод"><button class="btn line sm" type="submit">Применить</button></form>
+          <p class="promo-msg" id="promoMsg"></p></details>
         <ul class="bs-trust"><li>Оплата через СБП или картой — Т-Банк</li><li>14 дней на возврат</li><li>Гарантия 1 месяц</li></ul>
       </aside>
     </div>
   </div>
 </section>
 <div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a href="#posters">Коллекция</a><a href="#overview">Как это работает</a><a href="#gifts">Наборы</a><a href="#help">Вопросы</a></div></div></div>
-<div class="mbuy" id="mbuy"><span class="price" id="mbuyPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="mbuyBtn">Купить</button></div>
+<div class="mbuy" id="mbuy"><span class="price" id="mbuyPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="mbuyBtn">В корзину</button></div>
 <div class="overlay" id="coOv"><form class="sheet co" id="coForm" novalidate>
   <button type="button" class="x" data-close="coOv" aria-label="Закрыть">×</button>
   <h3>Оформление заказа</h3>
@@ -817,7 +827,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "15b6eb202e";
+const AV = "cc2a0a8064";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
@@ -907,6 +917,8 @@ const cardNote = n => { const c = cardData(); if (!c || !CARD_T[c.t]) return n; 
 let cfg = { poster: byTitle("Убить Билла"), on: true };
 { const slug = t => t.toLowerCase().replace(/ё/g, "е").replace(/[^a-zа-я0-9]+/g, "-").replace(/^-|-$/g, ""), want = slug(decodeURIComponent(new URLSearchParams(location.search).get("film") || ""));
   const hit = want ? films.findIndex(f => slug(f.o) === want || slug(f.t) === want) : -1; if (hit >= 0) cfg.poster = hit; }
+// строка корзины для одной рамки: в заголовке — фильм, ниже формат и артикул
+const frameItem = (f, k) => { const z = SIZES[k]; return { sku: z.sku, size: k, films: [f.t], posters: [f.id], name: f.t, sub: "Световая рамка " + z.label + " · арт. " + z.label + "-" + f.id, price: z.price, img: T(f.img) }; };
 const SIZES = { a4: { label: "A4", dim: "21 × 30 см", spec: "A4, 210 × 297 мм", price: 5000, sku: "one_a4", name: "Proswet A4", k: .48 }, a3: { label: "A3", dim: "30 × 42 см", spec: "A3, 297 × 420 мм", price: 6000, sku: "one", name: "Proswet A3", k: .62 } };
 let SIZE = "a4";
 
@@ -1000,7 +1012,7 @@ if (auto) setInterval(() => { if (!auto || document.hidden || !heroVisible || !c
 function setSize(k) { SIZE = k; const z = SIZES[k], pr = fmtNb(z.price);
   document.querySelectorAll("#szSw button").forEach(b => { const on = b.dataset.s === k; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
   $("szDim").textContent = z.dim; $("specFmt").textContent = z.spec; ["totalPrice", "hdrPrice", "mbuyPrice"].forEach(id => { if ($(id)) $(id).textContent = pr; });
-  if ($("fmBuy")) $("fmBuy").textContent = "Купить · " + pr; document.body.dataset.size = k; layoutHero(); }
+  if ($("fmBuy")) $("fmBuy").textContent = "В корзину · " + pr; document.body.dataset.size = k; layoutHero(); if (typeof layoutFinale === "function") layoutFinale(); }
 document.querySelectorAll("#szSw button").forEach(b => b.onclick = () => setSize(b.dataset.s));
 
 // ---------- полёт постера в рамку ----------
@@ -1085,7 +1097,7 @@ $("wish").onsubmit = e => { e.preventDefault(); const v = e.target.f.value.trim(
 document.addEventListener("click", e => { if (e.target.closest("[data-cat]")) { e.preventDefault(); $("search").classList.remove("open"); if (!$("catChips").querySelector(".on")) catChip("top").click(); $("catOv").classList.add("open"); } });
 function openFilm(i) { const f = films[i]; if (!f) return; $("fmImg").src = P(f.img); $("fmT").textContent = f.t; $("fmMeta").textContent = (f.y ? f.y + " · " + f.d : "Космос") + " · арт. " + f.id; $("fmO").textContent = f.o && f.o !== f.t ? f.o : ""; $("fmQ").textContent = f.q ? "«" + f.q + "»" : ""; $("fmF").innerHTML = (f.f || []).map(x => "<li>" + x + "</li>").join("");
   $("fmPut").onclick = () => { $("filmOv").classList.remove("open"); flyTo(i, $("fmImg")); toast("«" + f.t + "» — на стене"); };
-  $("fmBuy").onclick = () => { $("filmOv").classList.remove("open"); const z = SIZES[SIZE]; add({ sku: z.sku, films: [f.t], posters: [f.id], name: z.name, sub: "Чёрная рамка · " + z.label + " · постер «" + f.t + "» · " + z.label + "-" + f.id, price: z.price, img: T(f.img) }); };
+  $("fmBuy").onclick = () => { $("filmOv").classList.remove("open"); add(frameItem(f, SIZE)); };
   $("catOv").classList.remove("open"); $("filmOv").classList.add("open"); }
 ["catOv", "filmOv"].forEach(id => $(id).addEventListener("click", e => { if (e.target.id === id) $(id).classList.remove("open"); }));
 document.addEventListener("keydown", e => { if (e.key === "Escape") ["catOv", "filmOv"].forEach(id => $(id).classList.remove("open")); });
@@ -1144,7 +1156,13 @@ function initCard() {
 }
 
 // ---------- финальная сцена: рамка с вашим фильмом светит в темноте ----------
-function layoutFinale() { const img = $("finImg"); if (!img) return; const m = narrow(); placeWall($("finWall"), m ? img : $("finale"), 2560, 1429, .665, .36, .5, m ? .66 : .5, .5); if (m) { $("finWall").style.top = (parseFloat($("finWall").style.top) + img.offsetTop) + "px"; } }
+function layoutFinale() { const img = $("finImg"), box = $("finale"), w = $("finWall"); if (!img) return; const m = narrow();
+  if (m) { img.removeAttribute("style"); placeWall(w, img, 2560, 1429, .68, .34, .5, .66, .5); w.style.top = (parseFloat(w.style.top) + img.offsetTop) + "px"; return; }
+  // как на главном: рамка того же размера стоит на месте, фото подстраивается так, чтобы под ней была центральная панель стены
+  const W = 2560, H = 1429, fx = .68, fy = .34, cw = box.clientWidth, ch = box.clientHeight, tx = .69 * cw, ty = .47 * ch;
+  const sc = Math.max(cw / W, ch / H, tx / (fx * W), (cw - tx) / ((1 - fx) * W), ty / (fy * H), (ch - ty) / ((1 - fy) * H));
+  Object.assign(img.style, { width: W * sc + "px", height: H * sc + "px", left: tx - fx * W * sc + "px", top: ty - fy * H * sc + "px", maxWidth: "none", objectFit: "fill" });
+  w.style.left = tx + "px"; w.style.top = ty + "px"; w.style.height = SIZES[SIZE].k * $("room").clientHeight + "px"; }
 
 // ---------- шапка, появление, меню ----------
 { const hdr = $("hdr"); const on = () => { hdr.classList.toggle("solid", scrollY > 40); document.body.classList.toggle("past-hero", scrollY > innerHeight * .8); }; addEventListener("scroll", on, { passive: true }); on(); }
@@ -1172,8 +1190,9 @@ function renderCart() {
   const n = cart.reduce((s, c) => s + (c.qty || 1), 0);
   $("count").textContent = n; $("count").classList.toggle("on", n > 0);
   $("bagN").textContent = n ? n + " " + plural(n, "рамка", "рамки", "рамок") : "";
-  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th"><div class="frame lit"><div class="poster">' + (c.img ? '<img decoding="async" alt="" src="' + c.img.replace("img/t/", "img/w/") + '">' : "") + '</div></div></div><div class="ci-b"><b>' + c.name + '</b><small>' + c.sub + '</small><div class="qty"><button data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + (c.qty || 1) + '</span><button data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div><button type="button" class="ci-del" data-del="' + i + '">Убрать</button></div><span class="price">' + fmt(c.price * (c.qty || 1)) + '</span></div>').join("") : '<div class="empty"><b>Здесь пока пусто</b><span>Выберите фильм — и он засветится у вас на стене.</span><button type="button" class="btn" data-cat>Открыть коллекцию</button></div>';
+  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th"><div class="frame lit"><div class="poster">' + (c.img ? '<img decoding="async" alt="" src="' + c.img.replace("img/t/", "img/w/") + '">' : "") + '</div></div></div><div class="ci-b"><b>' + c.name + '</b><small>' + c.sub + '</small><div class="ci-ctl">' + (c.sku === "one" || c.sku === "one_a4" ? '<div class="seg ci-sz">' + ["a4", "a3"].map(k => '<button type="button" data-sz="' + k + '" data-i="' + i + '"' + (SIZES[k].sku === c.sku ? ' class="on"' : '') + '>' + SIZES[k].label + '</button>').join("") + '</div>' : "") + '<div class="qty"><button data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + (c.qty || 1) + '</span><button data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div><button type="button" class="ci-del" data-del="' + i + '">Убрать</button></div></div><span class="price">' + fmt(c.price * (c.qty || 1)) + '</span></div>').join("") : '<div class="empty"><b>Здесь пока пусто</b><span>Выберите фильм — и он засветится у вас на стене.</span><button type="button" class="btn" data-cat>Открыть коллекцию</button></div>';
   $("cartItems").querySelectorAll(".qty button").forEach(b => b.onclick = () => { const c = cart[+b.dataset.i]; c.qty = (c.qty || 1) + +b.dataset.q; if (c.qty < 1) cart.splice(+b.dataset.i, 1); saveCart(); renderCart(); });
+  $("cartItems").querySelectorAll("[data-sz]").forEach(b => b.onclick = () => { const c = cart[+b.dataset.i], f = films.find(x => x.id === (c.posters || [])[0]) || films.find(x => x.t === (c.films || [])[0]); if (!f) return; Object.assign(c, frameItem(f, b.dataset.sz), { qty: c.qty || 1 }); const dup = cart.findIndex((x, j) => j !== +b.dataset.i && x.sku === c.sku && x.sub === c.sub); if (dup >= 0) { cart[dup].qty = (cart[dup].qty || 1) + c.qty; cart.splice(+b.dataset.i, 1); } saveCart(); renderCart(); });
   $("cartItems").querySelectorAll("[data-del]").forEach(b => b.onclick = () => { cart.splice(+b.dataset.del, 1); saveCart(); renderCart(); });
   // открытка: бесплатно, если ещё не вложена
   const cd = typeof cardData === "function" && cardData();
@@ -1181,15 +1200,18 @@ function renderCart() {
   const ce = $("bagCardEdit"); if (ce) ce.onclick = () => { closeCart(); document.getElementById("card").scrollIntoView({ behavior: "smooth", block: "center" }); };
   // допродажа: «Выбор Proswet», которых ещё нет в корзине
   const inCart = new Set(cart.flatMap(c => c.films || [])), z = SIZES[SIZE];
-  const ups = TOPS.filter(i => !inCart.has(films[i].t)).slice(0, 4);
-  $("bagMore").hidden = !cart.length || !ups.length;
-  $("bagUps").innerHTML = ups.map(i => '<button type="button" class="up" data-up="' + i + '"><div class="frame lit"><div class="poster"><img loading="lazy" decoding="async" alt="" src="' + T(films[i].img) + '"></div></div><b>' + films[i].t + '</b><span>+ ' + z.label + ' · ' + fmt(z.price) + '</span></button>').join("");
-  $("bagUps").querySelectorAll("[data-up]").forEach(b => b.onclick = () => { const f = films[+b.dataset.up]; add({ sku: z.sku, films: [f.t], posters: [f.id], name: z.name, sub: "Чёрная рамка · " + z.label + " · постер «" + f.t + "» · " + z.label + "-" + f.id, price: z.price, img: T(f.img) }); });
+  const upCard = i => '<button type="button" class="up" data-up="' + i + '"><div class="frame lit"><div class="poster"><img loading="lazy" decoding="async" alt="" src="' + T(films[i].img) + '"></div></div><b>' + films[i].t + '</b><span>+ ' + z.label + ' · ' + fmt(z.price) + '</span></button>';
+  const pool = films.map((f, i) => i).filter(i => !inCart.has(films[i].t)).sort((a, b) => (films[b].top ? 1 : 0) - (films[a].top ? 1 : 0)).slice(0, 14);
+  $("bagMore").hidden = !cart.length || !pool.length;
+  $("upsTrack").innerHTML = pool.map(upCard).join("") + pool.map(upCard).join("");   // дважды — для бесконечной ленты
+  $("upsTrack").style.setProperty("--d", pool.length * 4 + "s");
+  $("upsTrack").querySelectorAll("[data-up]").forEach(b => b.onclick = () => add(frameItem(films[+b.dataset.up], SIZE)));
   const off = promoOff();
+  const nf = cart.reduce((s, c) => s + (c.qty || 1) * (c.sku === "three" ? 3 : 1), 0); $("bagSubT").textContent = nf + " " + plural(nf, "рамка", "рамки", "рамок");
   $("bagSub").textContent = fmt(cartSum());
   $("bagOffRow").hidden = !off; $("bagOffT").textContent = promo ? "Промокод " + promo.code + " · −" + promo.pct + "%" : ""; $("bagOff").textContent = "− " + fmt(off);
   $("cartTotal").textContent = fmt(payTotal());
-  $("promoIn").value = promo ? promo.code : $("promoIn").value;
+  $("promoIn").value = promo ? promo.code : $("promoIn").value; if (promo) $("promoBox").open = true;
   $("checkout").disabled = !cart.length;
   document.querySelector(".bag-sum").hidden = !cart.length;
 }
@@ -1210,7 +1232,8 @@ function add(item) {
   if (same) same.qty = (same.qty || 1) + 1; else cart.push({ ...item, qty: 1 });
   saveCart(); renderCart(); openCart();
 }
-$("buyBtn").onclick = () => { const z = SIZES[SIZE]; const f = films[cfg.poster]; add({ sku: z.sku, films: [f.t], posters: [f.id], name: z.name, sub: "Чёрная рамка · " + z.label + " · постер «" + f.t + "» · " + z.label + "-" + f.id, price: z.price, img: T(f.img) }); };
+$("buyBtn").onclick = () => add(frameItem(films[cfg.poster], SIZE));
+$("hdrBuy").onclick = () => add(frameItem(films[cfg.poster], SIZE));
 // выбор постера для каждой рамки набора
 const pick = { n: 1, name: "", price: 0, sel: [], cur: 0 };
 function drawPick() {
@@ -1230,7 +1253,10 @@ function openPick(n, name, price) {
   drawPick(); $("pickOv").classList.add("open");
 }
 document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => b.dataset.name === "Proswet A3" ? openPick(1, SIZES[SIZE].name, SIZES[SIZE].price) : openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
-$("pickAdd").onclick = () => { const psku = pick.n === 3 ? "three" : /Подароч/.test(pick.name) ? "gift" : SKU[pick.name] || "one", psz = psku === "one_a4" ? "A4" : "A3"; add({ sku: psku, films: pick.sel.map(v => films[v].t), posters: pick.sel.map(v => films[v].id), name: pick.name, sub: pick.sel.map(v => "«" + films[v].t + "» " + psz + "-" + films[v].id).join(", "), price: pick.price, img: T(films[pick.sel[0]].img) }); $("pickOv").classList.remove("open"); };
+$("pickAdd").onclick = () => { const psku = pick.n === 3 ? "three" : /Подароч/.test(pick.name) ? "gift" : SKU[pick.name] || "one", psz = psku === "one_a4" ? "A4" : "A3", fs = pick.sel.map(v => films[v]);
+  if (psku === "one" || psku === "one_a4") add(frameItem(fs[0], psku === "one_a4" ? "a4" : "a3"));
+  else add({ sku: psku, films: fs.map(f => f.t), posters: fs.map(f => f.id), name: psku === "three" ? "Три рамки" : "Подарочный набор · «" + fs[0].t + "»", sub: (psku === "three" ? fs.map(f => "«" + f.t + "»").join(", ") + " · " : "Коробка, лента, открытка · ") + psz + " · арт. " + fs.map(f => psz + "-" + f.id).join(", "), price: pick.price, img: T(fs[0].img) });
+  $("pickOv").classList.remove("open"); };
 $("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList.remove("open"); };
 const openCart = () => { renderCart(); $("drawer").classList.add("open"); $("drawer").setAttribute("aria-hidden", "false"); document.documentElement.classList.add("bag-open"); $("drawer").scrollTop = 0; };
 const closeCart = () => { $("drawer").classList.remove("open"); $("drawer").setAttribute("aria-hidden", "true"); document.documentElement.classList.remove("bag-open"); };
