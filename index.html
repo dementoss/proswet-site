@@ -832,7 +832,8 @@ const AV = "f7f7c24715";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
-addEventListener("load", () => { const q = films.map(f => T(f.img)).concat(films.map(f => P(f.img))); let n = 0; const next = () => { if (n >= q.length) return; const im = new Image(); im.decoding = "async"; im.onload = im.onerror = () => setTimeout(next, 30); im.src = q[n++]; }; for (let k = 0; k < 4; k++) setTimeout(next, 800 + k * 50); });
+// на телефоне большие постеры заранее не тянем (~5 МБ): они забивают мобильную связь, и переключение фильма в рамке ждёт в очереди
+addEventListener("load", () => { const nc = navigator.connection || {}, lite = innerWidth <= 900 || nc.saveData || /2g/.test(nc.effectiveType || ""); const q = films.map(f => T(f.img)).concat(lite ? [] : films.map(f => P(f.img))); let n = 0; const next = () => { if (n >= q.length) return; const im = new Image(); im.decoding = "async"; im.onload = im.onerror = () => setTimeout(next, 30); im.src = q[n++]; }; for (let k = 0; k < 4; k++) setTimeout(next, 800 + k * 50); });
 const loaded = {};
 const preload = src => loaded[src] || (loaded[src] = new Promise(r => { const im = new Image(); im.onload = im.onerror = () => (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(r); im.src = src; }));
 const films = [
@@ -938,7 +939,8 @@ const ROOM_OF = {
 };
 const roomOf = f => f.c.includes("space") ? "attic" : (Object.keys(ROOM_OF).find(k => ROOM_OF[k].includes(f.t)) || "library");
 let ROOM = "library";
-const roomImgs = [...document.querySelectorAll("#room img")];
+// только фоны комнат: постер в рамке (#heroImg) тоже лежит внутри #room, его сюда брать нельзя
+const roomImgs = [...document.querySelectorAll("#room > img")];
 function loadRoom(r) { const im = roomImgs.find(x => x.dataset.r === r), src = "img/lib/" + r + (narrow() ? "-m" : "") + ".webp"; if (im.getAttribute("src") !== src) im.src = src; return im; }
 // раскладка рамки по стене с учётом object-fit: cover
 function placeWall(wall, box, imgW, imgH, fx, fy, k, posX = .6, posY = .5) {
@@ -1002,6 +1004,8 @@ function drawMinis() {
   for (let k = 0; k < 6; k++) { const i = SEQ[(win + k) % SEQ.length], m = document.createElement("button"); m.type = "button"; m.className = "mini"; m.dataset.i = i; m.setAttribute("aria-label", films[i].t); m.innerHTML = '<img decoding="async" alt="" src="' + T(films[i].img) + '">';
     m.onclick = () => { stopAuto(); seqPos = SEQ.indexOf(i); cfg.poster = i; renderHero(); };
     m.addEventListener("pointerenter", () => preload(P(films[i].img))); box.insertBefore(m, more); }
+  // на телефоне наведения нет: заранее готовим только постеры шести видимых кнопок, чтобы нажатие срабатывало сразу
+  if (narrow()) setTimeout(() => { for (let k = 0; k < 6; k++) preload(P(films[SEQ[(win + k) % SEQ.length]].img)); }, 2500);
 }
 { const more = document.createElement("button"); more.type = "button"; more.className = "mini more"; more.dataset.cat = ""; more.setAttribute("aria-label", "Вся коллекция"); more.innerHTML = '<img decoding="async" alt="" src="' + T(films[byTitle("Сияние")].img) + '"><span>+' + (films.length - 6) + "</span>"; $("minis").appendChild(more); }
 drawMinis();
