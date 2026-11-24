@@ -110,7 +110,7 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 .icon i.on { transform: scale(1); }
 .hdr-cta { margin-left: 10px; }
 .burger { display: none; }
-@media (max-width: 900px) { .mainnav, .hdr-cta { display: none; } .burger { display: grid; } header .wrap { grid-template-columns: 40px 1fr auto; } .wordmark { text-align: center; font-size: 22px; } }
+@media (max-width: 900px) { header.solid { background: #0D0B09; } .mini { flex: none; } .mainnav, .hdr-cta { display: none; } .burger { display: grid; } header .wrap { grid-template-columns: 40px 1fr auto; } .wordmark { text-align: center; font-size: 22px; } }
 
 /* ---------- 1. главный экран: комната ---------- */
 .hero { position: relative; height: 100svh; min-height: 640px; max-height: 1100px; overflow: hidden; isolation: isolate; }
@@ -159,7 +159,7 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
   .room { position: relative; inset: auto; height: min(118vw, 74svh); -webkit-mask: none; mask: none; }
   .hero::before { background: linear-gradient(0deg, rgba(13,11,9,1) 0%, rgba(13,11,9,0) 30%); height: min(118vw, 74svh); }
   .hero > .wrap { height: auto; }
-  .hero-copy { padding: 0 0 48px; margin-top: -48px; max-width: none; }
+  .hero-copy { padding: 0 0 48px; margin-top: -48px; max-width: none; width: 100%; min-width: 0; }
   .now { font-size: 21px; }
   .buyrow .price { font-size: 32px; }
   .minis { overflow-x: auto; scrollbar-width: none; }
@@ -199,7 +199,7 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 .fcol:hover .fstrip { animation-play-state: paused; }
 @keyframes rise { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, calc(-50% - 12px), 0); } }
 @keyframes fall { from { transform: translate3d(0, calc(-50% - 12px), 0); } to { transform: translate3d(0, 0, 0); } }
-.fc { display: block; width: 100%; text-align: left; }
+.fc { display: block; width: 100%; flex: none; text-align: left; }   /* flex: none — Safari на iPhone иначе может сжать постер в колонке */
 .fc .frame { width: 100%; transition: transform var(--t-mid) var(--ease-lamp); }
 .fc .frame::before { inset: -20% -30%; }
 .fc .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: 10px; opacity: .0; transform: translateY(-4px); transition: opacity var(--t-mid), transform var(--t-mid) var(--ease-lamp); }
@@ -341,7 +341,6 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 .ship-free span { color: var(--ash); font-size: 15px; }
 .mps { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
 .mps img { width: 28px; height: 28px; border-radius: 7px; }
-.mps .cdek { font: 700 11px/28px var(--sans); font-style: normal; padding: 0 8px; border-radius: 7px; background: #1AB248; color: #fff; }
 .ship-calc { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--hair); }
 .ship-calc label { font-size: 13px; color: var(--ash); font-weight: 500; }
 .city { position: relative; margin-top: 8px; max-width: 360px; }
@@ -401,8 +400,8 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
 .sheet h3 { margin-bottom: 8px; }
 .x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 8px; font-size: 26px; line-height: 1; color: var(--ash); display: grid; place-items: center; transition: color var(--t-fast), background var(--t-fast); }
 .x:hover { color: var(--paper); background: var(--shelf); }
-.sheet form input:not([type=checkbox]), .sheet .co label input:not([type=checkbox]) { width: 100%; height: 48px; padding: 0 14px; margin-top: 6px; border-radius: 8px; border: 0; background: var(--shelf); box-shadow: inset 0 0 0 1px var(--hair); color: var(--paper); font-size: 16px; outline: none; }
-.sheet form input:focus { box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .6); }
+.sheet form input:not([type=checkbox]), form.sheet input:not([type=checkbox]) { width: 100%; height: 48px; padding: 0 14px; margin-top: 6px; border-radius: 8px; border: 0; background: var(--shelf); box-shadow: inset 0 0 0 1px var(--hair); color: var(--paper); font-size: 16px; outline: none; }
+.sheet form input:focus, form.sheet input:focus { box-shadow: inset 0 0 0 1px rgba(var(--lamp-rgb), .6); }
 /* каталог */
 .sheet.cat { max-width: 1120px; }
 .cat-head { display: flex; align-items: baseline; gap: 16px; } .cat-n { color: var(--smoke); font-size: 14px; }
@@ -597,7 +596,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="icons">
     <button class="icon" aria-label="Мои заказы" id="loginBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.4-3.6 4.2-5.2 7.5-5.2s6.1 1.6 7.5 5.2"/></svg></button>
     <button class="icon" aria-label="Корзина" id="cartBtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><i id="count">0</i></button>
-    <button type="button" class="btn line sm hdr-cta" id="hdrBuy">В корзину · <span class="price" id="hdrPrice">5&nbsp;000&nbsp;₽</span></button>
+    <button type="button" class="btn line sm hdr-cta" id="hdrBuy">В корзину · <span class="price" id="hdrPrice">6&nbsp;000&nbsp;₽</span></button>
   </div>
 </div></header>
 
@@ -613,8 +612,8 @@ html.bag-open, html.bag-open body { overflow: hidden; }
     <h1>Ваш фильм —<br><em>часть интерьера</em></h1>
     <p class="now" id="nowLine">В рамке — <b id="posterName"></b></p>
     <div class="minis" id="minis"></div>
-    <div class="sizes"><div class="seg" id="szSw" role="radiogroup" aria-label="Формат"><button type="button" data-s="a4" class="on" role="radio" aria-checked="true">A4</button><button type="button" data-s="a3" role="radio" aria-checked="false">A3</button></div><span class="cap" id="szDim">21 × 30 см</span></div>
-    <div class="buyrow"><span class="price" id="totalPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="buyBtn">В корзину</button><button type="button" class="link" data-cat>Вся коллекция</button></div>
+    <div class="sizes"><div class="seg" id="szSw" role="radiogroup" aria-label="Формат"><button type="button" data-s="a3" class="on" role="radio" aria-checked="true">A3</button><button type="button" data-s="a2" role="radio" aria-checked="false">A2</button></div><span class="cap" id="szDim">30 × 42 см</span></div>
+    <div class="buyrow"><span class="price" id="totalPrice">6&nbsp;000&nbsp;₽</span><button class="btn" id="buyBtn">В корзину</button><button type="button" class="link" data-cat>Вся коллекция</button></div>
     <p class="hero-note"><b>Бесплатная доставка</b> по всей России</p>
   </div></div>
 </section>
@@ -655,7 +654,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="facts rise"><div><b>1 см</b><span>толщина рамки — почти не выступает</span></div><div><b>12 В</b><span>безопасное напряжение, почти не греется</span></div><div><b>2 м</b><span>кабель с выключателем</span></div><div><b>1 минута</b><span>повесить на один крючок</span></div></div>
   <details class="allspecs"><summary>Все характеристики</summary>
     <div class="specs3">
-      <table class="spec"><tr><td>Формат</td><td id="specFmt">A4, 210 × 297 мм</td></tr><tr><td>Профиль</td><td>Алюминий, матовый чёрный</td></tr><tr><td>Фронт</td><td>Прозрачная антибликовая панель</td></tr><tr><td>Сборка</td><td>Собрана нами, постер внутри</td></tr></table>
+      <table class="spec"><tr><td>Формат</td><td id="specFmt">A3, 297 × 420 мм</td></tr><tr><td>Профиль</td><td>Алюминий, матовый чёрный</td></tr><tr><td>Фронт</td><td>Прозрачная антибликовая панель</td></tr><tr><td>Сборка</td><td>Собрана нами, постер внутри</td></tr></table>
       <table class="spec"><tr><td>Подсветка</td><td>LED + рассеиватель</td></tr><tr><td>Цвет света</td><td>Тёплый</td></tr><tr><td>Питание</td><td>220 → 12 В</td></tr><tr><td>Кабель</td><td>2 м, с выключателем</td></tr></table>
       <table class="spec"><tr><td>В коробке</td><td>Рамка, постер, адаптер</td></tr><tr><td>Крепление</td><td>Вертикально и горизонтально</td></tr><tr><td>Документы</td><td>Декларация ЕАЭС</td></tr><tr><td>Гарантия</td><td>1 месяц</td></tr></table>
     </div>
@@ -667,7 +666,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="sec-head rise"><div><h2>Подарок, который<br><em>включают каждый вечер</em></h2></div><p class="lead">В каждый набор — любой фильм из коллекции.</p></div>
   <div class="sets rise" id="gifts3">
     <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/set-one.webp?v=04b50ba6e7" alt="Световая рамка с постером «Убить Билла» на стене кабинета"></div>
-      <div class="body"><h3>Одна рамка</h3><p>A4 или A3 с постером вашего фильма. Приходит собранной.</p><div class="row"><div class="pr"><span class="price">от 5&nbsp;000&nbsp;₽</span><span class="note">A4 или A3 на выбор</span></div><button class="btn line sm" data-pick="1" data-name="Proswet A3" data-price="6000">Выбрать фильм</button></div></div></div>
+      <div class="body"><h3>Одна рамка</h3><p>A3 с постером вашего фильма. Приходит собранной.</p><div class="row"><div class="pr"><span class="price">6&nbsp;000&nbsp;₽</span><span class="note">A2 — скоро</span></div><button class="btn line sm" data-pick="1" data-name="Proswet A3" data-price="6000">Выбрать фильм</button></div></div></div>
     <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/set-three.webp?v=f5fe1ab6d4" alt="Три световые рамки над диваном: «Леон», «Сияние», «Паразиты»"></div>
       <div class="body"><h3>Три рамки</h3><p>Стена из трёх любимых фильмов. Каждая рамка — со своим постером.</p><div class="row"><div class="pr"><span class="price">12&nbsp;190&nbsp;₽</span><span class="note save">выгоднее на 560&nbsp;₽</span></div><button class="btn sm" data-pick="3" data-name="Три рамки Proswet" data-price="12190">Выбрать 3 фильма</button></div></div></div>
     <div class="set"><div class="pic"><img loading="lazy" decoding="async" src="img/lib/gift-open.webp?v=b4a28ee93b" alt="Рамка в подарочной коробке с лентой и сухоцветами"></div>
@@ -711,7 +710,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="ship rise">
     <div class="ship-main">
       <div class="ship-free"><b>0 ₽</b><span>доставка за наш счёт<br>в любой пункт выдачи</span></div>
-      <div class="mps"><img src="img/mp/ozon.png?v=2bcaeddb7a" alt="Ozon" title="Ozon"><img src="img/mp/yandex-market.png?v=dd78480323" alt="Яндекс Маркет" title="Яндекс Маркет"><img src="img/mp/wb.png?v=bfe9cabcb4" alt="Wildberries" title="Wildberries"><i class="cdek" title="СДЭК">СДЭК</i></div>
+      <div class="mps"><img src="img/mp/ozon.png?v=2bcaeddb7a" alt="Ozon" title="Ozon"><img src="img/mp/yandex-market.png?v=dd78480323" alt="Яндекс Маркет" title="Яндекс Маркет"></div>
       <div class="ship-calc">
         <label for="cityIn">Ваш город</label>
         <div class="city"><input id="cityIn" type="text" autocomplete="off" placeholder="Например, Казань" aria-controls="cityList"><ul id="cityList" role="listbox"></ul></div>
@@ -731,7 +730,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="faq rise">
     <details open><summary>Это просто рамка или светильник?</summary><p>И то и другое. Внутри — светодиодная подсветка: днём это постер в тонкой чёрной раме, вечером он мягко светится изнутри, как афиша кинотеатра. Работает от розетки, выключатель на проводе.</p></details>
     <details><summary>Постер уже внутри?</summary><p>Да. Рамка приходит собранной с выбранным постером: распаковали, повесили, включили.</p></details>
-    <details><summary>Сколько стоит доставка и как быстро?</summary><p>Доставка бесплатная — в любой пункт выдачи Ozon, Яндекс Маркета, Wildberries или СДЭК по всей России. Изготовим и отправим в течение 7 дней после оплаты. Дорога: по Москве и Петербургу — 1–3 дня, по центру России — 2–4, до Урала и Сибири — 3–8, на Дальний Восток — до 12 дней.</p></details>
+    <details><summary>Сколько стоит доставка и как быстро?</summary><p>Доставка бесплатная — в любой пункт выдачи Ozon или Яндекс Маркета по всей России. Изготовим и отправим в течение 7 дней после оплаты. Дорога: по Москве и Петербургу — 1–3 дня, по центру России — 2–4, до Урала и Сибири — 3–8, на Дальний Восток — до 12 дней.</p></details>
     <details><summary>Как оплатить?</summary><p>Через СБП или картой — платёж проводит Т-Банк. Кассовый чек приходит на почту.</p></details>
     <details><summary>Безопасно ли оставлять включённой?</summary><p>Да. Внутри рамки низкое напряжение 12 В, светодиоды почти не греются. На светильник есть декларация соответствия ЕАЭС.</p></details>
     <details><summary>Не понравилось — можно вернуть?</summary><p>Да, в течение 14 дней после получения. Напишите нам — пришлём инструкцию и вернём деньги после возврата рамки.</p></details>
@@ -771,7 +770,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <button class="x" data-close="filmOv" aria-label="Закрыть">×</button>
   <div class="fm"><div class="fm-pic"><div class="frame lit"><div class="poster"><img id="fmImg" alt=""></div></div></div>
     <div class="fm-b"><div class="cap" id="fmMeta"></div><h3 id="fmT"></h3><p class="fm-o" id="fmO"></p><blockquote id="fmQ"></blockquote><ul id="fmF"></ul>
-      <div class="fm-act"><button type="button" class="btn" id="fmBuy">В корзину · 5&nbsp;000&nbsp;₽</button><button type="button" class="btn line" id="fmPut">Повесить в комнате</button></div></div></div>
+      <div class="fm-act"><button type="button" class="btn" id="fmBuy">В корзину · 6&nbsp;000&nbsp;₽</button><button type="button" class="btn line" id="fmPut">Повесить в комнате</button></div></div></div>
 </div></div>
 <div class="overlay" id="catOv"><div class="sheet cat">
   <button class="x" data-close="catOv" aria-label="Закрыть">×</button>
@@ -811,7 +810,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   </div>
 </section>
 <div class="search" id="search"><div class="wrap"><div class="res" id="menuRes"><a href="#posters">Коллекция</a><a href="#overview">Как это работает</a><a href="#gifts">Наборы</a><a href="#help">Вопросы</a></div></div></div>
-<div class="mbuy" id="mbuy"><span class="price" id="mbuyPrice">5&nbsp;000&nbsp;₽</span><button class="btn" id="mbuyBtn">В корзину</button></div>
+<div class="mbuy" id="mbuy"><span class="price" id="mbuyPrice">6&nbsp;000&nbsp;₽</span><button class="btn" id="mbuyBtn">В корзину</button></div>
 <div class="overlay" id="coOv"><form class="sheet co" id="coForm" novalidate>
   <button type="button" class="x" data-close="coOv" aria-label="Закрыть">×</button>
   <h3>Оформление заказа</h3>
@@ -821,7 +820,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
   <div class="co-2"><label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></label>
   <label>Почта для чека<input name="email" type="email" autocomplete="email" required></label></div>
   <div class="co-h">Доставка</div>
-  <div class="co-seg" id="coShip"><button type="button" class="on" data-v="ozon">Ozon</button><button type="button" data-v="yandex">Яндекс Маркет</button><button type="button" data-v="wb">Wildberries</button><button type="button" data-v="cdek">СДЭК</button></div>
+  <div class="co-seg" id="coShip"><button type="button" class="on" data-v="ozon">Ozon</button><button type="button" data-v="yandex">Яндекс Маркет</button></div>
   <label>Город<input name="city" autocomplete="address-level2" required></label>
   <label>Адрес пункта выдачи<input name="pvz" required placeholder="Улица, дом — выберем ближайший"></label>
   <label>Комментарий<input name="note" placeholder="Например, удобное время"></label>
@@ -934,8 +933,10 @@ let cfg = { poster: byTitle("Убить Билла"), on: true };
   const hit = want ? films.findIndex(f => slug(f.o) === want || slug(f.t) === want) : -1; if (hit >= 0) cfg.poster = hit; }
 // строка корзины для одной рамки: в заголовке — фильм, ниже формат и артикул
 const frameItem = (f, k) => { const z = SIZES[k]; return { sku: z.sku, size: k, films: [f.t], posters: [f.id], name: f.t, sub: "Световая рамка " + z.label + " · арт. " + z.label + "-" + f.id, price: z.price, img: T(f.img) }; };
-const SIZES = { a4: { label: "A4", dim: "21 × 30 см", spec: "A4, 210 × 297 мм", price: 5000, sku: "one_a4", name: "Proswet A4", k: .48 }, a3: { label: "A3", dim: "30 × 42 см", spec: "A3, 297 × 420 мм", price: 6000, sku: "one", name: "Proswet A3", k: .62 } };
-let SIZE = "a4";
+const SIZES = { a3: { label: "A3", dim: "30 × 42 см", spec: "A3, 297 × 420 мм", price: 6000, sku: "one", name: "Proswet A3", k: .62 }, a2: { label: "A2", dim: "42 × 59 см · скоро", spec: "A2, 420 × 594 мм — скоро в наличии", price: 0, soon: true, sku: "one", name: "Proswet A3", k: .78 } };
+// A2 пока не продаём: переключатель работает, рамка на стене растёт, но купить нельзя. Всё, что кладёт в корзину, берёт доступный формат
+const OK_SIZE = () => SIZES[SIZE].soon ? "a3" : SIZE;
+let SIZE = "a3";
 
 // ---------- комнаты: где на стене висит рамка (доли картинки) ----------
 // fx, fy — центр рамки; desktop 2560×1448, телефон — кадр 4:5 вокруг стены (960×1200)
@@ -1026,11 +1027,14 @@ function showSeq(pos) { seqPos = (pos + SEQ.length) % SEQ.length; const w = Math
 let heroVisible = true;
 if (auto) setInterval(() => { if (!auto || document.hidden || !heroVisible || !cfg.on) return; const next = (seqPos + 1) % SEQ.length; preload(P(films[SEQ[next]].img)).then(() => { if (auto) showSeq(next); }); }, 7000);
 
-// ---------- формат A4 / A3: рамка на стене меняет размер ----------
-function setSize(k) { SIZE = k; const z = SIZES[k], pr = fmtNb(z.price);
+// ---------- формат A3 / A2: рамка на стене меняет размер ----------
+function setSize(k) { SIZE = k; const z = SIZES[k], pr = z.soon ? "Скоро" : fmtNb(z.price);
   document.querySelectorAll("#szSw button").forEach(b => { const on = b.dataset.s === k; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
   $("szDim").textContent = z.dim; $("specFmt").textContent = z.spec; ["totalPrice", "hdrPrice", "mbuyPrice"].forEach(id => { if ($(id)) $(id).textContent = pr; });
-  if ($("fmBuy")) $("fmBuy").textContent = "В корзину · " + pr; document.body.dataset.size = k; layoutHero(); if (typeof layoutFinale === "function") layoutFinale(); }
+  ["buyBtn", "mbuyBtn"].forEach(id => { const b = $(id); if (b) { b.disabled = !!z.soon; b.textContent = z.soon ? "Нет в наличии" : "В корзину"; } });
+  if ($("hdrBuy")) { $("hdrBuy").disabled = !!z.soon; $("hdrBuy").firstChild.textContent = z.soon ? "Нет в наличии · " : "В корзину · "; }
+  document.body.classList.toggle("size-soon", !!z.soon);
+  if ($("fmBuy")) $("fmBuy").textContent = "В корзину · " + fmtNb(SIZES[OK_SIZE()].price) + (z.soon ? " · A3" : ""); document.body.dataset.size = k; layoutHero(); if (typeof layoutFinale === "function") layoutFinale(); }
 document.querySelectorAll("#szSw button").forEach(b => b.onclick = () => setSize(b.dataset.s));
 
 // ---------- полёт постера в рамку ----------
@@ -1115,7 +1119,7 @@ $("wish").onsubmit = e => { e.preventDefault(); const v = e.target.f.value.trim(
 document.addEventListener("click", e => { if (e.target.closest("[data-cat]")) { e.preventDefault(); $("search").classList.remove("open"); if (!$("catChips").querySelector(".on")) catChip("top").click(); $("catOv").classList.add("open"); } });
 function openFilm(i) { const f = films[i]; if (!f) return; $("fmImg").src = P(f.img); $("fmT").textContent = f.t; $("fmMeta").textContent = (f.y ? f.y + " · " + f.d : "Космос") + " · арт. " + f.id; $("fmO").textContent = f.o && f.o !== f.t ? f.o : ""; $("fmQ").textContent = f.q ? "«" + f.q + "»" : ""; $("fmF").innerHTML = (f.f || []).map(x => "<li>" + x + "</li>").join("");
   $("fmPut").onclick = () => { $("filmOv").classList.remove("open"); flyTo(i, $("fmImg")); toast("«" + f.t + "» — на стене"); };
-  $("fmBuy").onclick = () => { $("filmOv").classList.remove("open"); add(frameItem(f, SIZE)); };
+  $("fmBuy").onclick = () => { $("filmOv").classList.remove("open"); add(frameItem(f, OK_SIZE())); };
   $("catOv").classList.remove("open"); $("filmOv").classList.add("open"); }
 ["catOv", "filmOv"].forEach(id => $(id).addEventListener("click", e => { if (e.target.id === id) $(id).classList.remove("open"); }));
 document.addEventListener("keydown", e => { if (e.key === "Escape") ["catOv", "filmOv"].forEach(id => $(id).classList.remove("open")); });
@@ -1196,6 +1200,7 @@ if (!reduce) { cfg.on = false; preload(P(films[cfg.poster].img)).then(() => setT
 // ---------- корзина ----------
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem("proswet-cart") || "[]"); } catch (e) { cart = []; }
+cart = cart.map(c => c.sku === "one_a4" ? Object.assign(c, { sku: "one", size: "a3", price: 6000, sub: (c.sub || "").replace(/A4/g, "A3") }) : c);
 const saveCart = () => { try { localStorage.setItem("proswet-cart", JSON.stringify(cart)); } catch (e) {} };
 const cartSum = () => cart.reduce((s, c) => s + c.price * (c.qty || 1), 0);
 let promo = null;
@@ -1208,7 +1213,7 @@ function renderCart() {
   const n = cart.reduce((s, c) => s + (c.qty || 1), 0);
   $("count").textContent = n; $("count").classList.toggle("on", n > 0);
   $("bagN").textContent = n ? n + " " + plural(n, "рамка", "рамки", "рамок") : "";
-  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th"><div class="frame lit"><div class="poster">' + (c.img ? '<img decoding="async" alt="" src="' + c.img.replace("img/t/", "img/w/") + '">' : "") + '</div></div></div><div class="ci-b"><b>' + c.name + '</b><small>' + c.sub + '</small><div class="ci-ctl">' + (c.sku === "one" || c.sku === "one_a4" ? '<div class="seg ci-sz">' + ["a4", "a3"].map(k => '<button type="button" data-sz="' + k + '" data-i="' + i + '"' + (SIZES[k].sku === c.sku ? ' class="on"' : '') + '>' + SIZES[k].label + '</button>').join("") + '</div>' : "") + '<div class="qty"><button data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + (c.qty || 1) + '</span><button data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div><button type="button" class="ci-del" data-del="' + i + '">Убрать</button></div></div><span class="price">' + fmt(c.price * (c.qty || 1)) + '</span></div>').join("") : '<div class="empty"><b>Здесь пока пусто</b><span>Выберите фильм — и он засветится у вас на стене.</span><button type="button" class="btn" data-cat>Открыть коллекцию</button></div>';
+  $("cartItems").innerHTML = cart.length ? cart.map((c, i) => '<div class="ci"><div class="th"><div class="frame lit"><div class="poster">' + (c.img ? '<img decoding="async" alt="" src="' + c.img.replace("img/t/", "img/w/") + '">' : "") + '</div></div></div><div class="ci-b"><b>' + c.name + '</b><small>' + c.sub + '</small><div class="ci-ctl">' + "" + '<div class="qty"><button data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + (c.qty || 1) + '</span><button data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div><button type="button" class="ci-del" data-del="' + i + '">Убрать</button></div></div><span class="price">' + fmt(c.price * (c.qty || 1)) + '</span></div>').join("") : '<div class="empty"><b>Здесь пока пусто</b><span>Выберите фильм — и он засветится у вас на стене.</span><button type="button" class="btn" data-cat>Открыть коллекцию</button></div>';
   $("cartItems").querySelectorAll(".qty button").forEach(b => b.onclick = () => { const c = cart[+b.dataset.i]; c.qty = (c.qty || 1) + +b.dataset.q; if (c.qty < 1) cart.splice(+b.dataset.i, 1); saveCart(); renderCart(); });
   $("cartItems").querySelectorAll("[data-sz]").forEach(b => b.onclick = () => { const c = cart[+b.dataset.i], f = films.find(x => x.id === (c.posters || [])[0]) || films.find(x => x.t === (c.films || [])[0]); if (!f) return; Object.assign(c, frameItem(f, b.dataset.sz), { qty: c.qty || 1 }); const dup = cart.findIndex((x, j) => j !== +b.dataset.i && x.sku === c.sku && x.sub === c.sub); if (dup >= 0) { cart[dup].qty = (cart[dup].qty || 1) + c.qty; cart.splice(+b.dataset.i, 1); } saveCart(); renderCart(); });
   $("cartItems").querySelectorAll("[data-del]").forEach(b => b.onclick = () => { cart.splice(+b.dataset.del, 1); saveCart(); renderCart(); });
@@ -1217,13 +1222,13 @@ function renderCart() {
   $("bagCard").innerHTML = cart.length ? (cd ? '<span class="bc-ok">✓</span><div><b>Открытка «' + CARD_T[cd.t].n + '» вложена</b><small>Напечатаем и положим в коробку — бесплатно</small></div><button type="button" class="link" id="bagCardEdit">Изменить</button>' : '<span class="bc-ic">✉</span><div><b>Добавить открытку — бесплатно</b><small>Ваши слова на плотном картоне 10 × 15 см</small></div><button type="button" class="link" id="bagCardEdit">Написать</button>') : "";
   const ce = $("bagCardEdit"); if (ce) ce.onclick = () => { closeCart(); document.getElementById("card").scrollIntoView({ behavior: "smooth", block: "center" }); };
   // допродажа: «Выбор Proswet», которых ещё нет в корзине
-  const inCart = new Set(cart.flatMap(c => c.films || [])), z = SIZES[SIZE];
+  const inCart = new Set(cart.flatMap(c => c.films || [])), z = SIZES[OK_SIZE()];
   const upCard = i => '<button type="button" class="up" data-up="' + i + '"><div class="frame lit"><div class="poster"><img loading="lazy" decoding="async" alt="" src="' + T(films[i].img) + '"></div></div><b>' + films[i].t + '</b><span>+ ' + z.label + ' · ' + fmt(z.price) + '</span></button>';
   const pool = films.map((f, i) => i).filter(i => !inCart.has(films[i].t)).sort((a, b) => (films[b].top ? 1 : 0) - (films[a].top ? 1 : 0)).slice(0, 14);
   $("bagMore").hidden = !cart.length || !pool.length;
   $("upsTrack").innerHTML = pool.map(upCard).join("") + pool.map(upCard).join("");   // дважды — для бесконечной ленты
   $("upsTrack").style.setProperty("--d", pool.length * 4 + "s");
-  $("upsTrack").querySelectorAll("[data-up]").forEach(b => b.onclick = () => add(frameItem(films[+b.dataset.up], SIZE)));
+  $("upsTrack").querySelectorAll("[data-up]").forEach(b => b.onclick = () => add(frameItem(films[+b.dataset.up], OK_SIZE())));
   const off = promoOff();
   const nf = cart.reduce((s, c) => s + (c.qty || 1) * (c.sku === "three" ? 3 : 1), 0); $("bagSubT").textContent = nf + " " + plural(nf, "рамка", "рамки", "рамок");
   $("bagSub").textContent = fmt(cartSum());
@@ -1250,8 +1255,8 @@ function add(item) {
   if (same) same.qty = (same.qty || 1) + 1; else cart.push({ ...item, qty: 1 });
   saveCart(); renderCart(); openCart();
 }
-$("buyBtn").onclick = () => add(frameItem(films[cfg.poster], SIZE));
-$("hdrBuy").onclick = () => add(frameItem(films[cfg.poster], SIZE));
+$("buyBtn").onclick = () => { if (!SIZES[SIZE].soon) add(frameItem(films[cfg.poster], SIZE)); };
+$("hdrBuy").onclick = () => { if (!SIZES[SIZE].soon) add(frameItem(films[cfg.poster], SIZE)); };
 // выбор постера для каждой рамки набора
 const pick = { n: 1, name: "", price: 0, sel: [], cur: 0 };
 function drawPick() {
@@ -1271,9 +1276,9 @@ function openPick(n, name, price) {
   document.querySelectorAll("#pgrid button").forEach(b => b.onclick = () => { pick.sel[pick.cur] = +b.dataset.i; const nxt = pick.sel.indexOf(null); if (nxt >= 0) pick.cur = nxt; drawPick(); });
   drawPick(); $("pickOv").classList.add("open");
 }
-document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => b.dataset.name === "Proswet A3" ? openPick(1, SIZES[SIZE].name, SIZES[SIZE].price) : openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
-$("pickAdd").onclick = () => { const psku = pick.n === 3 ? "three" : /Подароч/.test(pick.name) ? "gift" : SKU[pick.name] || "one", psz = psku === "one_a4" ? "A4" : "A3", fs = pick.sel.map(v => films[v]);
-  if (psku === "one" || psku === "one_a4") add(frameItem(fs[0], psku === "one_a4" ? "a4" : "a3"));
+document.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => b.dataset.name === "Proswet A3" ? openPick(1, SIZES[OK_SIZE()].name, SIZES[OK_SIZE()].price) : openPick(+b.dataset.pick, b.dataset.name, +b.dataset.price));
+$("pickAdd").onclick = () => { const psku = pick.n === 3 ? "three" : /Подароч/.test(pick.name) ? "gift" : SKU[pick.name] || "one", psz = "A3", fs = pick.sel.map(v => films[v]);
+  if (psku === "one") add(frameItem(fs[0], "a3"));
   else add({ sku: psku, films: fs.map(f => f.t), posters: fs.map(f => f.id), name: psku === "three" ? "Три рамки" : "Подарочный набор · «" + fs[0].t + "»", sub: (psku === "three" ? fs.map(f => "«" + f.t + "»").join(", ") + " · " : "Коробка, лента, открытка · ") + psz + " · арт. " + fs.map(f => psz + "-" + f.id).join(", "), price: pick.price, img: T(fs[0].img) });
   $("pickOv").classList.remove("open"); };
 $("pickOv").onclick = e => { if (e.target.id === "pickOv") $("pickOv").classList.remove("open"); };
@@ -1288,7 +1293,7 @@ function openCheckout() {
 }
 $("coShip").querySelectorAll("button").forEach(b => b.onclick = () => $("coShip").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)));
 $("coOv").onclick = e => { if (e.target.id === "coOv" || e.target.dataset.close === "coOv") { $("coOv").classList.remove("open"); clearInterval(payTimer); $("coForm").classList.remove("paying"); } };
-const SKU = { "Proswet A3": "one", "Proswet A4": "one_a4", "Три рамки Proswet": "three", "Подарочный набор Proswet": "gift" };
+const SKU = { "Proswet A3": "one", "Три рамки Proswet": "three", "Подарочный набор Proswet": "gift" };
 const apiItems = () => cart.map(c => ({ sku: c.sku || SKU[c.name] || "one", posters: c.posters || [], films: c.films || (c.sub.match(/«([^»]+)»/g) || []).map(x => x.slice(1, -1)), qty: c.qty || 1 }));
 let payTimer = 0;
 $("coForm").onsubmit = async e => {
