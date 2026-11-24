@@ -440,10 +440,23 @@ footer { padding: 48px 0 40px; border-top: 1px solid var(--hair); font-size: 14p
 .slot .frame { width: 100%; margin-bottom: 8px; outline: 1.5px solid transparent; outline-offset: 5px; transition: outline-color var(--t-fast); }
 .slot.on .frame { outline-color: var(--lamp); }
 .slot .frame .poster { display: grid; place-items: center; font-size: 28px; color: var(--smoke); }
-.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 10px; max-height: 360px; overflow-y: auto; padding-right: 4px; }
-.pgrid button { aspect-ratio: 309 / 432; border-radius: 2px; overflow: hidden; opacity: .8; transition: opacity var(--t-fast), transform var(--t-fast); }
-.pgrid button:hover { opacity: 1; transform: translateY(-2px); }
-.pgrid img { width: 100%; height: 100%; object-fit: cover; }
+/* постер в сетке держит пропорцию через padding, а не aspect-ratio: в Safari на iPhone aspect-ratio внутри прокручиваемой сетки сплющивает строки, и постеры наезжают друг на друга */
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); grid-auto-rows: max-content; align-items: start; gap: 18px 12px; max-height: 400px; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 6px 6px 6px 2px; }
+.pgrid button { display: block; width: 100%; text-align: left; color: var(--ash); font-size: 12px; line-height: 1.25; -webkit-tap-highlight-color: transparent; }
+.pgrid .pp { position: relative; display: block; width: 100%; height: 0; padding-top: 139.8%; border-radius: 2px; overflow: hidden; background: #0a0908; box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 10px 22px -12px rgba(0,0,0,.8); outline: 2px solid transparent; outline-offset: 3px; transition: outline-color var(--t-fast), transform var(--t-fast); }
+.pgrid img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .86; transition: opacity var(--t-fast); }
+.pgrid .pt { display: block; margin-top: 7px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.pgrid button.on .pp { outline-color: var(--lamp); } .pgrid button.on img { opacity: 1; } .pgrid button.on .pt { color: var(--paper); }
+.pgrid button:active .pp { transform: scale(.97); }
+@media (hover: hover) { .pgrid button:hover img { opacity: 1; } .pgrid button:hover .pp { transform: translateY(-2px); } }
+@media (max-width: 760px) {
+  .sheet.picker { display: flex; flex-direction: column; max-height: 92vh; max-height: 92dvh; padding: 24px 16px 0; margin: auto 0 0; }
+  .picker > h3 { padding-right: 44px; } .picker > p { font-size: 14px; }
+  .slots { grid-template-columns: repeat(var(--n, 1), 92px); gap: 16px; margin: 18px 0 16px; }
+  .pgrid { flex: 1 1 auto; min-height: 0; max-height: none; grid-template-columns: repeat(3, 1fr); gap: 16px 12px; margin: 0 -4px; padding: 6px 4px 12px; border-top: 1px solid var(--hair); padding-top: 16px; }
+  .pickfoot { margin: 0 -16px; padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); background: var(--leather); box-shadow: 0 -12px 24px -12px rgba(0,0,0,.6); }
+  .pickfoot .price { font-size: 24px; }
+}
 .pickfoot { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--hair); }
 .pickfoot .price { font-size: 28px; }
 /* корзина */
@@ -1245,6 +1258,7 @@ function drawPick() {
   $("slots").style.setProperty("--n", pick.n);
   $("slots").innerHTML = pick.sel.map((v, k) => '<div class="slot' + (k === pick.cur ? ' on' : '') + '" data-k="' + k + '"><div class="frame' + (v != null ? ' lit' : '') + '"><div class="poster">' + (v != null ? '<img alt="" src="' + P(films[v].img) + '">' : '+') + '</div></div>' + (v != null ? films[v].t : 'Рамка ' + (k + 1)) + '</div>').join("");
   document.querySelectorAll("#slots .slot").forEach(el => el.onclick = () => { pick.cur = +el.dataset.k; drawPick(); });
+  document.querySelectorAll("#pgrid button").forEach(b => b.classList.toggle("on", pick.sel.includes(+b.dataset.i)));
   const left = pick.sel.filter(v => v == null).length;
   $("pickAdd").disabled = left > 0;
   $("pickAdd").textContent = left ? "Осталось выбрать: " + left : "В корзину";
@@ -1253,7 +1267,7 @@ function openPick(n, name, price) {
   Object.assign(pick, { n, name, price, sel: Array(n).fill(null), cur: 0 });
   $("pickTitle").textContent = name; $("pickHint").textContent = n > 1 ? "Для каждой рамки — свой фильм. Нажмите на рамку, затем на постер." : "Выберите фильм для рамки.";
   $("pickPrice").textContent = fmt(price);
-  $("pgrid").innerHTML = films.map((f, i) => '<button data-i="' + i + '" title="' + f.t + '"><img loading="lazy" alt="' + f.t + '" src="' + T(f.img) + '"></button>').join("");
+  $("pgrid").innerHTML = films.map((f, i) => '<button type="button" data-i="' + i + '" title="' + f.t + '"><span class="pp"><img loading="lazy" decoding="async" alt="" src="' + T(f.img) + '"></span><span class="pt">' + f.t + '</span></button>').join("");
   document.querySelectorAll("#pgrid button").forEach(b => b.onclick = () => { pick.sel[pick.cur] = +b.dataset.i; const nxt = pick.sel.indexOf(null); if (nxt >= 0) pick.cur = nxt; drawPick(); });
   drawPick(); $("pickOv").classList.add("open");
 }
