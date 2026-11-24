@@ -956,7 +956,8 @@ const roomOf = f => f.c.includes("space") ? "attic" : (Object.keys(ROOM_OF).find
 let ROOM = "library";
 // только фоны комнат: постер в рамке (#heroImg) тоже лежит внутри #room, его сюда брать нельзя
 const roomImgs = [...document.querySelectorAll("#room > img")];
-function loadRoom(r) { const im = roomImgs.find(x => x.dataset.r === r), src = "img/lib/" + r + (narrow() ? "-m" : "") + ".webp"; if (im.getAttribute("src") !== src) im.src = src; return im; }
+// ?v= — метка версии: без неё браузер показывает старую комнату из кэша
+function loadRoom(r) { const im = roomImgs.find(x => x.dataset.r === r), src = "img/lib/" + r + (narrow() ? "-m" : "") + ".webp?v=" + AV; if (im.getAttribute("src") !== src) im.src = src; return im; }
 // раскладка рамки по стене с учётом object-fit: cover
 function placeWall(wall, box, imgW, imgH, fx, fy, k, posX = .6, posY = .5) {
   const cw = box.clientWidth, ch = box.clientHeight, s = Math.max(cw / imgW, ch / imgH), dw = imgW * s, dh = imgH * s;
@@ -968,6 +969,8 @@ const HERO_AT = { d: { x: .69, y: .44 }, m: { x: .56, y: .45 } };
 // Рамка в честном масштабе к мебели. Чтобы A3 не терялась, комната приближается (кадр крупнее), а не рамка раздувается.
 // Приближение считаем по A3 и не меняем при переключении на A2 — так A2 честно больше на стене.
 const HERO_A3 = { d: .36, m: .34 };   // какую долю высоты первого экрана занимает A3
+// потолок для A3 (A2 — пропорционально больше): в честном масштабе вплотную к стене рамка выходит на полэкрана — перебор (Дима, 25.11)
+const HERO_MAX = { d: .40, m: 1 };
 function layoutHero() {
   const m = narrow(), box = $("room"), cw = box.clientWidth, ch = box.clientHeight, W = m ? 960 : 2560, H = m ? 1200 : 1440;
   const at = HERO_AT[m ? "m" : "d"], tx = at.x * cw, ty = at.y * ch;
@@ -975,7 +978,7 @@ function layoutHero() {
   roomImgs.forEach(im => { const R = ROOMS[im.dataset.r]; if (!R) return; const fx = m ? R.mx : R.fx, fy = m ? R.my : R.fy;
     const k = m ? R.mcm : R.cm, zoom = HERO_A3[m ? "m" : "d"] * ch / (SIZES.a3.cm * k * H);
     const sc = Math.max(zoom, cw / W, ch / H, tx / (fx * W), (cw - tx) / ((1 - fx) * W), ty / (fy * H), (ch - ty) / ((1 - fy) * H));
-    if (im.dataset.r === ROOM) wallH = SIZES[SIZE].cm * k * H * sc;
+    if (im.dataset.r === ROOM) { const a3 = SIZES.a3.cm * k * H * sc, f = Math.min(1, HERO_MAX[m ? "m" : "d"] * ch / a3); wallH = SIZES[SIZE].cm * k * H * sc * f; }
     Object.assign(im.style, { width: W * sc + "px", height: H * sc + "px", left: tx - fx * W * sc + "px", top: ty - fy * H * sc + "px" }); });
   const w = $("heroWall"); w.style.left = tx + "px"; w.style.top = ty + "px"; w.style.height = (wallH || SIZES[SIZE].k * ch) + "px";
 }
