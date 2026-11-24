@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROSWET — световая рамка с постером любимого фильма</title>
 <meta name="description" content="Световая рамка с постером вашего фильма. Приходит собранной — повесил и включил. Доставка бесплатно.">
-<link rel="preload" as="image" href="img/lib/library.webp?v=b57055c53a" media="(min-width: 901px)" fetchpriority="high">
+<link rel="preload" as="image" href="img/lib/library.webp?v=88fb4be6db" media="(min-width: 901px)" fetchpriority="high">
 <link rel="preload" as="image" href="img/lib/library-m.webp?v=ff8196ca54" media="(max-width: 900px)" fetchpriority="high">
 <link href="fonts/fonts.css?v=1811" rel="stylesheet">
 <link rel="icon" href="favicon.png?v=6" type="image/png" sizes="192x192">
@@ -156,7 +156,7 @@ header .wrap { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr;
 
 @media (max-width: 900px) {
   .hero { height: auto; max-height: none; min-height: 0; }
-  .room { position: relative; inset: auto; height: min(118vw, 74svh); -webkit-mask: none; mask: none; }
+  .room { position: relative; inset: auto; height: min(118vw, 74svh); -webkit-mask: none; mask: none; overflow: hidden; }
   .hero::before { background: linear-gradient(0deg, rgba(13,11,9,1) 0%, rgba(13,11,9,0) 30%); height: min(118vw, 74svh); }
   .hero > .wrap { height: auto; }
   .hero-copy { padding: 0 0 48px; margin-top: -48px; max-width: none; width: 100%; min-width: 0; }
@@ -753,7 +753,7 @@ html.bag-open, html.bag-open body { overflow: hidden; }
     <div><a class="wordmark" href="#top" aria-label="PROSWET">PROSWET</a><p class="tag">Световые рамки с постерами любимых фильмов.</p></div>
     <div><h4>Магазин</h4><a href="#top">Рамка Proswet</a><a href="#posters">Коллекция</a><a href="#gifts">Наборы</a></div>
     <div><h4>Покупателям</h4><a href="oferta.html#dostavka">Доставка и оплата</a><a href="oferta.html#vozvrat">Возврат и гарантия</a><a href="#help">Вопросы</a><a href="#" id="myOrdersLink">Мои заказы</a></div>
-    <div><h4>Proswet</h4><a href="https://t.me/proswet_store" target="_blank" rel="noopener">Telegram</a><a href="mailto:proswet.store@yandex.ru">proswet.store@yandex.ru</a><a href="tel:+79936393350">+7 993 639-33-50</a></div>
+    <div><h4>Proswet</h4><a href="https://t.me/proswetstore" target="_blank" rel="noopener">Telegram-канал</a><a href="https://t.me/proswet_store" target="_blank" rel="noopener">Написать менеджеру</a><a href="mailto:proswet.store@yandex.ru">proswet.store@yandex.ru</a></div>
   </div>
   <div class="legal"><span>© 2026 Proswet · ИП Мозговой Дмитрий Алексеевич · ИНН 301609529383 · ОГРНИП 325300000023116</span><span><a href="oferta.html">Публичная оферта</a> · <a href="privacy.html">Политика конфиденциальности</a></span></div>
 </div></footer>
@@ -840,7 +840,7 @@ const openOrdersOnLoad = location.hash === "#orders";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 scrollTo(0, 0); addEventListener("pageshow", () => scrollTo(0, 0));
 document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; const id = a.getAttribute("href").slice(1), t = id ? document.getElementById(id) : null; if (!id || !t) return; e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); });
-const AV = "f7f7c24715";
+const AV = "93d8946f62";
 const P = h => { h = h.split("?")[0]; return "img/w/" + (h.includes(".") ? h.split("/").pop().replace(/\.\w+$/, "") : h.split("/").pop()) + ".webp?v=" + AV; };
 const T = h => P(h).replace("img/w/", "img/t/");
 // весь ассортимент подгружаем фоном после загрузки страницы: сначала миниатюры, потом большие постеры
@@ -933,18 +933,19 @@ let cfg = { poster: byTitle("Убить Билла"), on: true };
   const hit = want ? films.findIndex(f => slug(f.o) === want || slug(f.t) === want) : -1; if (hit >= 0) cfg.poster = hit; }
 // строка корзины для одной рамки: в заголовке — фильм, ниже формат и артикул
 const frameItem = (f, k) => { const z = SIZES[k]; return { sku: z.sku, size: k, films: [f.t], posters: [f.id], name: f.t, sub: "Световая рамка " + z.label + " · арт. " + z.label + "-" + f.id, price: z.price, img: T(f.img) }; };
-const SIZES = { a3: { label: "A3", dim: "30 × 42 см", spec: "A3, 297 × 420 мм", price: 6000, sku: "one", name: "Proswet A3", k: .62 }, a2: { label: "A2", dim: "42 × 59 см · скоро", spec: "A2, 420 × 594 мм — скоро в наличии", price: 0, soon: true, sku: "one", name: "Proswet A3", k: .78 } };
+const SIZES = { a3: { label: "A3", dim: "30 × 42 см", spec: "A3, 297 × 420 мм", price: 6000, sku: "one", name: "Proswet A3", k: .62, cm: 43.2 }, a2: { label: "A2", dim: "42 × 59 см · скоро", spec: "A2, 420 × 594 мм — скоро в наличии", price: 0, soon: true, sku: "one", name: "Proswet A3", k: .78, cm: 60.6 } };
 // A2 пока не продаём: переключатель работает, рамка на стене растёт, но купить нельзя. Всё, что кладёт в корзину, берёт доступный формат
 const OK_SIZE = () => SIZES[SIZE].soon ? "a3" : SIZE;
 let SIZE = "a3";
 
 // ---------- комнаты: где на стене висит рамка (доли картинки) ----------
 // fx, fy — центр рамки; desktop 2560×1448, телефон — кадр 4:5 вокруг стены (960×1200)
-const ROOMS = {
-  library: { fx: .60, fy: .40, mx: .62, my: .45 },
-  study:   { fx: .555, fy: .42, mx: .60, my: .42 },
-  living:  { fx: .55, fy: .45, mx: .62, my: .44 },
-  attic:   { fx: .565, fy: .46, mx: .62, my: .48 }
+// cm — доля высоты фото на 1 см у стены, по предметам в кадре. Комнаты для компьютера 25.11 сняты вплотную к стене; на телефоне прежние общие планы — иначе A2 не помещается в кадр
+const ROOMS = {   // mcm — то же для телефонных кадров (там прежние, более общие планы комнат)
+  library: { fx: .70, fy: .40, mx: .62, my: .45, cm: .0114, mcm: .0041 },   // банкирская лампа ≈ 40 см; на телефоне кресло ≈ 110 см
+  study:   { fx: .64, fy: .40, mx: .60, my: .42, cm: .0092, mcm: .0057 },   // глобус ≈ 30 см
+  living:  { fx: .68, fy: .42, mx: .62, my: .44, cm: .0100, mcm: .0053 },   // книги ≈ 22 см, ваза ≈ 25 см
+  attic:   { fx: .68, fy: .40, mx: .62, my: .48, cm: .0115, mcm: .0046 }    // керосиновая лампа ≈ 45 см
 };
 const ROOM_OF = {
   study: ["Клан Сопрано", "Острые козырьки", "Крёстный отец", "Джентльмены", "Карты, деньги, два ствола", "Чернобыль", "Твин Пикс", "Чёрное зеркало", "Брат", "Бэтмен"],
@@ -964,13 +965,19 @@ function placeWall(wall, box, imgW, imgH, fx, fy, k, posX = .6, posY = .5) {
 }
 // рамка стоит на месте всегда; комната сдвигается и масштабируется так, чтобы стена оказалась под рамкой
 const HERO_AT = { d: { x: .69, y: .44 }, m: { x: .56, y: .45 } };
+// Рамка в честном масштабе к мебели. Чтобы A3 не терялась, комната приближается (кадр крупнее), а не рамка раздувается.
+// Приближение считаем по A3 и не меняем при переключении на A2 — так A2 честно больше на стене.
+const HERO_A3 = { d: .36, m: .34 };   // какую долю высоты первого экрана занимает A3
 function layoutHero() {
-  const m = narrow(), box = $("room"), cw = box.clientWidth, ch = box.clientHeight, W = m ? 960 : 2560, H = m ? 1200 : 1448;
+  const m = narrow(), box = $("room"), cw = box.clientWidth, ch = box.clientHeight, W = m ? 960 : 2560, H = m ? 1200 : 1440;
   const at = HERO_AT[m ? "m" : "d"], tx = at.x * cw, ty = at.y * ch;
+  let wallH = 0;
   roomImgs.forEach(im => { const R = ROOMS[im.dataset.r]; if (!R) return; const fx = m ? R.mx : R.fx, fy = m ? R.my : R.fy;
-    const sc = Math.max(cw / W, ch / H, tx / (fx * W), (cw - tx) / ((1 - fx) * W), ty / (fy * H), (ch - ty) / ((1 - fy) * H));
+    const k = m ? R.mcm : R.cm, zoom = HERO_A3[m ? "m" : "d"] * ch / (SIZES.a3.cm * k * H);
+    const sc = Math.max(zoom, cw / W, ch / H, tx / (fx * W), (cw - tx) / ((1 - fx) * W), ty / (fy * H), (ch - ty) / ((1 - fy) * H));
+    if (im.dataset.r === ROOM) wallH = SIZES[SIZE].cm * k * H * sc;
     Object.assign(im.style, { width: W * sc + "px", height: H * sc + "px", left: tx - fx * W * sc + "px", top: ty - fy * H * sc + "px" }); });
-  const w = $("heroWall"); w.style.left = tx + "px"; w.style.top = ty + "px"; w.style.height = SIZES[SIZE].k * ch * (m ? .76 : 1) + "px";
+  const w = $("heroWall"); w.style.left = tx + "px"; w.style.top = ty + "px"; w.style.height = (wallH || SIZES[SIZE].k * ch) + "px";
 }
 function setRoom(r) {
   if (r === ROOM && loadRoom(r).classList.contains("on")) return;
@@ -1184,7 +1191,7 @@ function layoutFinale() { const img = $("finImg"), box = $("finale"), w = $("fin
   const W = 2560, H = 1429, fx = .68, fy = .34, cw = box.clientWidth, ch = box.clientHeight, tx = .69 * cw, ty = .47 * ch;
   const sc = Math.max(cw / W, ch / H, tx / (fx * W), (cw - tx) / ((1 - fx) * W), ty / (fy * H), (ch - ty) / ((1 - fy) * H));
   Object.assign(img.style, { width: W * sc + "px", height: H * sc + "px", left: tx - fx * W * sc + "px", top: ty - fy * H * sc + "px", maxWidth: "none", objectFit: "fill" });
-  w.style.left = tx + "px"; w.style.top = ty + "px"; w.style.height = SIZES[SIZE].k * $("room").clientHeight + "px"; }
+  w.style.left = tx + "px"; w.style.top = ty + "px"; w.style.height = $("heroWall").style.height; }
 
 // ---------- шапка, появление, меню ----------
 { const hdr = $("hdr"); const on = () => { hdr.classList.toggle("solid", scrollY > 40); document.body.classList.toggle("past-hero", scrollY > innerHeight * .8); }; addEventListener("scroll", on, { passive: true }); on(); }
